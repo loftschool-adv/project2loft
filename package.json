@@ -1,7 +1,8 @@
 {
-  "name": "project2loft",
-  "version": "0.0.0",
-  "private": true,
+  "name": "photo-gallery",
+  "version": "0.0.1",
+  "description": "",
+  "main": "app.js",
   "scripts": {
     "start": "node ./bin/www"
   },
@@ -9,9 +10,21 @@
     "body-parser": "~1.15.1",
     "cookie-parser": "~1.4.3",
     "debug": "~2.2.0",
-    "express": "~4.13.4",
-    "jade": "~1.11.0",
+    "express": "^4.14.0",
+    "mongoose": "^4.6.5",
     "morgan": "~1.7.0",
-    "serve-favicon": "~2.3.0"
-  }
+    "pug": "^2.0.0-beta6",
+    "serve-favicon": "~2.3.0",
+    "winston": "^2.2.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/loftschool-adv/project2loft.git"
+  },
+  "author": "Eclerr",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/loftschool-adv/project2loft/issues"
+  },
+  "homepage": "https://github.com/loftschool-adv/project2loft#readme"
 }
