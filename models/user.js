@@ -3,7 +3,7 @@
 'use strict'
 
 let crypto = require('crypto');
-let mongoose = require('./../libs/mongoose.js');
+let mongoose = require('../libs/mongoose.js');
 let Schema = mongoose.Schema;
 
 
@@ -39,7 +39,7 @@ schema.virtual('password')
     })
     .get(function(){ return this._plainPassword; })
 
-schema.methods.checkPassword = function(password) {
+schema.methods.checkPassword = function(password){
     return this.encryptPassword(password) === this.hashedpassword;
 }
 
