@@ -2,7 +2,7 @@
 	"db": {
 		"host": "localhost",
 		"port": "27017",
-		"name": "gallery",
+		"name": "gallery-test",
 		"user": "",
 		"password": "" 
 	},
