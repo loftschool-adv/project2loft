@@ -6,7 +6,7 @@ let express = require('express');
 let pug = require('pug');
 let config = require('./config.json');
 let app = express();
-let mongoose = require('./mongoose.js');
+let mongoose = require('./libs/mongoose.js');
 let bodyParser = require('body-parser');
 
 // Лог , вместо console.log пишем log.info. Разница в том, что будет показан путь до файла из которого
