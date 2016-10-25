@@ -6,7 +6,7 @@ let pug = require('pug');
 let favicon = require('serve-favicon');
 let logger = require('morgan');
 let cookieParser = require('cookie-parser');
-//let mongoose = require('./mongoose.js');
+let mongoose = require('./libs/mongoose.js');
 let bodyParser = require('body-parser');
 
 let log = require('./libs/log')(module);

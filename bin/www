@@ -4,15 +4,17 @@
  * Module dependencies.
  */
 
-var app = require('../app');
-var debug = require('debug')('project2loft:server');
-var http = require('http');
+let config = require('./../config.json');
+let app = require('../app');
+let debug = require('debug')('project2loft:server');
+let http = require('http');
+
 
 /**
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT || '4000');
+let port = normalizePort(process.env.PORT || config.http.port);
 app.set('port', port);
 
 /**
