@@ -5,15 +5,15 @@ let ENV = process.env.NODE_ENV;
 let lastElelemts = 2;
 
 function getLogger (module) {
-	let path = module.filename.split('\\').slice(-lastElelemts).join('/');
-	return new winsote.Logger({
-		transports : [
-			new winsote.transports.Console({
-				colorize: true,
-				label : path
-			})
-		]
-	});
+  let path = module.filename.split('\\').slice(-lastElelemts).join('/');
+  return new winsote.Logger({
+    transports : [
+      new winsote.transports.Console({
+        colorize: true,
+        label : path
+      })
+    ]
+  });
 }
 
 module.exports = getLogger;

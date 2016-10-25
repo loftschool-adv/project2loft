@@ -1,83 +1,64 @@
-'use strict'
+'use strict';
 
-let fs = require('fs');
-let path = require('path');
 let express = require('express');
+let path = require('path');
 let pug = require('pug');
-let config = require('./config.json');
-let app = express();
+let favicon = require('serve-favicon');
+let logger = require('morgan');
+let cookieParser = require('cookie-parser');
 let mongoose = require('./libs/mongoose.js');
 let bodyParser = require('body-parser');
 
-// Лог , вместо console.log пишем log.info. Разница в том, что будет показан путь до файла из которого
-// вызываеться log. По умолчанию выводиться два последних элемента пути.
 let log = require('./libs/log')(module);
 
+let app = express();
 
-
-
-
-
-// Покдлючаем шаблонизатор
+// view engine setup
+app.set('views', path.join(__dirname, 'templates'));
 app.set('view engine', 'pug');
-// Указываем, откуда брать шаблоны
-app.set('views', path.resolve(config.http.templatesRoot + "/pages/"));
 
-
-app.use(express.static(path.resolve(config.http.publicRoot)));
-// Парсим запросы, лимит на загрузку файлов в MB, указываеться тут же
+// uncomment after placing your favicon in /public
+//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use(logger('dev'));
 app.use(bodyParser.json());
-
-
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use(express.static(path.join(__dirname, 'public')));
 
 //===маршруты===
 app.use('/', require('./routes/front.js'));
 //=============
 
+// catch 404 and forward to error handler
+app.use(function(req, res, next) {
+  var err = new Error('Not Found');
+  err.status = 404;
+  next(err);
+});
 
+// error handlers
 
-//===Проверка на ошибки (тестовый вариант нужно дорабатывать)===
+// development error handler
+// will print stacktrace
+if (app.get('env') === 'development') {
+  app.use(function(err, req, res, next) {
+    res.status(err.status || 500);
+    res.render('error', {
+      message: err.message,
+      error: err
+    });
+  });
+}
 
-app.use((req, res, next) => res.status(404).send('Не удается найти страницу!'));
-
-app.use((err,req,res,next) =>{
-	res.status(500);
-	res.render('error', {error : err.message});
-	console.error(err.message,err.stack);
-})
-
-//=============
-
-
-
-// Запускаем сервак на порту 4000 ( из конфига)
-app.listen(config.http.port,config.http.host, function () {
-  log.info('Example app listening on port ' + config.http.port);
+// production error handler
+// no stacktraces leaked to user
+app.use(function(err, req, res, next) {
+  res.status(err.status || 500);
+  res.render('error', {
+    message: err.message,
+    error: {}
+  });
 });
 
 
-/*
-===================================================
-================ Инструкция =======================
-===================================================
-=  1) Точка входа файл app.js , запускается       =
-=  классически 'node app.js'.                     =
-=                                                 =
-=  2) Все маршруты описываются в папке routers    =
-=                                                 =
-=  3) Все важные настройки вынесены в файл        =
-=  config.json , который лежит в корне.           =
-=                                                 =
-=  4) Схемы моделей описываются в папке models.   =
-=                                                 =
-=  5) Шаблоны pug лежат в папке templates         =
-=                                                 =
-=  6) Вся статика лежит в public и автоматически  =
-=  поддтягивается на серве                        =
-=                                                 =
-
-
-
-
-
-*/
+module.exports = app;
