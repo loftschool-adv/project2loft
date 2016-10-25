@@ -9,6 +9,13 @@ let app = express();
 let mongoose = require('./mongoose.js');
 let bodyParser = require('body-parser');
 
+// Лог , вместо console.log пишем log.info. Разница в том, что будет показан путь до файла из которого
+// вызываеться log. По умолчанию выводиться два последних элемента пути.
+let log = require('./libs/log')(module);
+
+
+
+
 
 
 // Покдлючаем шаблонизатор
@@ -45,7 +52,7 @@ app.use((err,req,res,next) =>{
 
 // Запускаем сервак на порту 4000 ( из конфига)
 app.listen(config.http.port,config.http.host, function () {
-  console.log('Example app listening on port ' + config.http.port);
+  log.info('Example app listening on port ' + config.http.port);
 });
 
 
