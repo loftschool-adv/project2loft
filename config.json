@@ -1,0 +1,15 @@
+{
+	"db": {
+		"host": "localhost",
+		"port": "27017",
+		"name": "gallery",
+		"user": "",
+		"password": "" 
+	},
+	"http" : {
+		"port": 4000,
+		"host": "localhost",
+		"publicRoot": "public",
+		"templatesRoot" : "templates"
+	}
+}

@@ -1,0 +1,25 @@
+{
+  "name": "photo-gallery",
+  "version": "0.0.1",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/loftschool-adv/project2loft.git"
+  },
+  "author": "Eclerr",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/loftschool-adv/project2loft/issues"
+  },
+  "homepage": "https://github.com/loftschool-adv/project2loft#readme",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "mongoose": "^4.6.5",
+    "pug": "^2.0.0-beta6"
+  }
+}
