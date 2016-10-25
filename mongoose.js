@@ -17,6 +17,8 @@ let host = config.db.host;
 let port = config.db.port;
 let db = config.db.name;
 
+mongoose.Promise = global.Promise; // Убирает в консоле предупреждение mongoose о старой библиотеке промисов
+
 
 mongoose.connect(`mongodb://${host}:${port}/${db}`, options)
 	.catch(e => {
