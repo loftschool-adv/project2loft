@@ -12,6 +12,9 @@ let route = require('express').Router();
 route.get('', (req,res) =>{
 	res.render('index',  { title: 'Express' });
 });
-
+// Обращаемся к странице USER , и рендерим шаблон из ./templates/pages/index.pug
+route.get('/user', (req,res) =>{
+	res.render('pages/user',  { title: 'Express' });
+});
 
 module.exports = route;
