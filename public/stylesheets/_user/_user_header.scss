@@ -4,6 +4,29 @@
   background: url("../img/user/user_header.png") no-repeat;
   background-size: cover;
 
+  @media screen and (max-width: 480px) {
+    .user__header__top {
+      flex-direction: column;
+      justify-content: center;
+      &__avatar {
+        width: 50px;
+        height: 50px;
+        min-width: 50px;
+      }
+      &__breef {
+        align-items: center;
+      }
+    }
+    .user__header__search {
+      justify-content: center;
+      align-items: center;
+      &__wrap {
+        &__input {
+          margin: 0;
+        }
+      }
+    }
+  }
   &__top {
     background: linear-gradient(to right, rgba(101, 101, 108, .5), rgba(246, 247, 252, .5));
     display: flex;
@@ -11,8 +34,8 @@
     height: 240px;
 
     &__avatar {
-      width: 120px;
-      height: 120px;
+      width: 7.5rem;
+      height: 7.5rem;
       border-radius: 50%;
       overflow: hidden;
       border: 2px solid #ffffff;
@@ -24,14 +47,13 @@
       display: flex;
       flex-direction: column;
       margin-left: 3%;
+
       &__title {
         font-size: 21px;
         font-family: "Panton";
         color: rgb(255, 255, 255);
         font-weight: bold;
         line-height: 1;
-        left: 258.921px;
-        top: 74.361px;
         z-index: 65;
       }
 
@@ -40,10 +62,6 @@
         font-family: "ProximaNova";
         color: rgba(255, 255, 255, 0.8);
         line-height: 1.5;
-        left: 259.514px;
-        top: 114.546px;
-        width: 396px;
-        height: 38px;
         z-index: 64;
       }
       &__social-buttons {

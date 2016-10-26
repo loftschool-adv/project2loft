@@ -3,14 +3,29 @@
   width: 100%;
   background: url("../img/user/user_header.png") no-repeat;
   background-size: cover; }
+  @media screen and (max-width: 480px) {
+    .user__header .user__header__top {
+      flex-direction: column;
+      justify-content: center; }
+      .user__header .user__header__top__avatar {
+        width: 50px;
+        height: 50px;
+        min-width: 50px; }
+      .user__header .user__header__top__breef {
+        align-items: center; }
+    .user__header .user__header__search {
+      justify-content: center;
+      align-items: center; }
+      .user__header .user__header__search__wrap__input {
+        margin: 0; } }
   .user__header__top {
     background: linear-gradient(to right, rgba(101, 101, 108, 0.5), rgba(246, 247, 252, 0.5));
     display: flex;
     align-items: center;
     height: 240px; }
     .user__header__top__avatar {
-      width: 120px;
-      height: 120px;
+      width: 7.5rem;
+      height: 7.5rem;
       border-radius: 50%;
       overflow: hidden;
       border: 2px solid #ffffff;
@@ -26,18 +41,12 @@
         color: white;
         font-weight: bold;
         line-height: 1;
-        left: 258.921px;
-        top: 74.361px;
         z-index: 65; }
       .user__header__top__breef__subtitle {
         font-size: 16px;
         font-family: "ProximaNova";
         color: rgba(255, 255, 255, 0.8);
         line-height: 1.5;
-        left: 259.514px;
-        top: 114.546px;
-        width: 396px;
-        height: 38px;
         z-index: 64; }
       .user__header__top__breef__social-buttons__link {
         text-decoration: none; }
