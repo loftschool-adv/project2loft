@@ -1,6 +1,6 @@
+'use strict';
 // Стандартный файл с описанием маршрута.
 // В данном файле описано обращение к корню сайта
-'use strict';
 
 let express = require('express');
 let route = require('express').Router();
