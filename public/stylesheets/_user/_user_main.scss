@@ -1,5 +1,5 @@
 .user__main {
-  padding: 60px;
+  padding: 60px 5%;
 
   &__title {
     font-size: 42px;
@@ -15,10 +15,12 @@
     flex-wrap: wrap;
 
     &__item {
-      width: 280px;
+      min-width: 220px;
+      width: 23%;
+      //max-width: 280px;
       height: 320px;
       overflow: hidden;
-      margin: 0 20px 20px 0;
+      margin: 0 2% 20px 0;
       border-radius: 2px;
       box-shadow: 1px 2px 2px 2px #eee;
       cursor: pointer;

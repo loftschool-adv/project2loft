@@ -3,3 +3,6 @@ node_modules
 source/
 /npm-debug.log
 npm-debug.log
+/public/stylesheets/.sass-cache/
+/public/stylesheets/_user.css.map
+/public/stylesheets/_user.css
