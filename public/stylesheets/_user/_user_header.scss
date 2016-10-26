@@ -17,10 +17,7 @@
       overflow: hidden;
       border: 2px solid #ffffff;
       margin: 0 0 0 6%;
-
-      &__img {
-
-      }
+      min-width: 120px;
     }
 
     &__breef {
@@ -50,15 +47,18 @@
         z-index: 64;
       }
       &__social-buttons {
-        svg {
-          cursor: pointer;
-          path {
-            fill: rgba(255, 255, 255, .7);
-          }
-          &:hover {
+        &__link {
+          text-decoration: none;
+          svg {
+            cursor: pointer;
             path {
-              transition: .5s;
-              fill: rgba(255, 255, 255, 1);
+              fill: rgba(255, 255, 255, .7);
+            }
+            &:hover {
+              path {
+                transition: .5s;
+                fill: rgba(255, 255, 255, 1);
+              }
             }
           }
         }
@@ -90,19 +90,29 @@
     display: flex;
     justify-content: flex-end;
     align-items: center;
-
-    &__input {
-      padding-left: 45px;
-      font-size: 16px;
-      margin-right: 60px;
-      font-family: "ProximaNova";
-      color: rgba(50, 50, 50, 0.6);
-      line-height: 1.313;
-      z-index: 53;
-      width: 335px;
-      height: 40px;
-      border: none;
-      border-radius: 20px;
+    &__wrap {
+      &::before {
+        content: ' ';
+        position: absolute;
+        width: 15px;
+        height: 15px;
+        background: url("../img/icons/search.svg") no-repeat;
+        margin: 15px 0 0 15px;
+        opacity: .8;
+      }
+      &__input {
+        padding-left: 45px;
+        font-size: 16px;
+        margin-right: 60px;
+        font-family: "ProximaNova";
+        color: rgba(50, 50, 50, 0.6);
+        line-height: 1.313;
+        z-index: 53;
+        width: 335px;
+        height: 40px;
+        border: none;
+        border-radius: 20px;
+      }
     }
   }
 }

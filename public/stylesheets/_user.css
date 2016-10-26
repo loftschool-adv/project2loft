@@ -14,7 +14,8 @@
       border-radius: 50%;
       overflow: hidden;
       border: 2px solid #ffffff;
-      margin: 0 0 0 6%; }
+      margin: 0 0 0 6%;
+      min-width: 120px; }
     .user__header__top__breef {
       display: flex;
       flex-direction: column;
@@ -38,13 +39,15 @@
         width: 396px;
         height: 38px;
         z-index: 64; }
-      .user__header__top__breef__social-buttons svg {
-        cursor: pointer; }
-        .user__header__top__breef__social-buttons svg path {
-          fill: rgba(255, 255, 255, 0.7); }
-        .user__header__top__breef__social-buttons svg:hover path {
-          transition: .5s;
-          fill: white; }
+      .user__header__top__breef__social-buttons__link {
+        text-decoration: none; }
+        .user__header__top__breef__social-buttons__link svg {
+          cursor: pointer; }
+          .user__header__top__breef__social-buttons__link svg path {
+            fill: rgba(255, 255, 255, 0.7); }
+          .user__header__top__breef__social-buttons__link svg:hover path {
+            transition: .5s;
+            fill: white; }
     .user__header__top__button-home {
       position: absolute;
       top: 20px;
@@ -66,7 +69,15 @@
     display: flex;
     justify-content: flex-end;
     align-items: center; }
-    .user__header__search__input {
+    .user__header__search__wrap::before {
+      content: ' ';
+      position: absolute;
+      width: 15px;
+      height: 15px;
+      background: url("../img/icons/search.svg") no-repeat;
+      margin: 15px 0 0 15px;
+      opacity: .8; }
+    .user__header__search__wrap__input {
       padding-left: 45px;
       font-size: 16px;
       margin-right: 60px;
