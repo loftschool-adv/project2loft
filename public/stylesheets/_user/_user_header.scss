@@ -16,19 +16,23 @@
       border-radius: 50%;
       overflow: hidden;
       border: 2px solid #ffffff;
+      margin: 0 0 0 6%;
+
       &__img {
 
       }
     }
 
     &__breef {
+      display: flex;
+      flex-direction: column;
+      margin-left: 3%;
       &__title {
         font-size: 21px;
         font-family: "Panton";
         color: rgb(255, 255, 255);
         font-weight: bold;
         line-height: 1;
-        position: absolute;
         left: 258.921px;
         top: 74.361px;
         z-index: 65;
@@ -39,7 +43,6 @@
         font-family: "ProximaNova";
         color: rgba(255, 255, 255, 0.8);
         line-height: 1.5;
-        position: absolute;
         left: 259.514px;
         top: 114.546px;
         width: 396px;
@@ -47,11 +50,38 @@
         z-index: 64;
       }
       &__social-buttons {
-
+        svg {
+          cursor: pointer;
+          path {
+            fill: rgba(255, 255, 255, .7);
+          }
+          &:hover {
+            path {
+              transition: .5s;
+              fill: rgba(255, 255, 255, 1);
+            }
+          }
+        }
       }
     }
     &__button-home {
-
+      position: absolute;
+      top: 20px;
+      right: 40px;
+      background: #fff;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      box-shadow: -1px 1px 2px 2px #d1d2d6;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      .header__home {
+        path {
+          fill:#a0a09f;
+        }
+      }
     }
   }
   &__search {

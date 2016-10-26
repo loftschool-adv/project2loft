@@ -13,28 +13,53 @@
       height: 120px;
       border-radius: 50%;
       overflow: hidden;
-      border: 2px solid #ffffff; }
-    .user__header__top__breef__title {
-      font-size: 21px;
-      font-family: "Panton";
-      color: white;
-      font-weight: bold;
-      line-height: 1;
+      border: 2px solid #ffffff;
+      margin: 0 0 0 6%; }
+    .user__header__top__breef {
+      display: flex;
+      flex-direction: column;
+      margin-left: 3%; }
+      .user__header__top__breef__title {
+        font-size: 21px;
+        font-family: "Panton";
+        color: white;
+        font-weight: bold;
+        line-height: 1;
+        left: 258.921px;
+        top: 74.361px;
+        z-index: 65; }
+      .user__header__top__breef__subtitle {
+        font-size: 16px;
+        font-family: "ProximaNova";
+        color: rgba(255, 255, 255, 0.8);
+        line-height: 1.5;
+        left: 259.514px;
+        top: 114.546px;
+        width: 396px;
+        height: 38px;
+        z-index: 64; }
+      .user__header__top__breef__social-buttons svg {
+        cursor: pointer; }
+        .user__header__top__breef__social-buttons svg path {
+          fill: rgba(255, 255, 255, 0.7); }
+        .user__header__top__breef__social-buttons svg:hover path {
+          transition: .5s;
+          fill: white; }
+    .user__header__top__button-home {
       position: absolute;
-      left: 258.921px;
-      top: 74.361px;
-      z-index: 65; }
-    .user__header__top__breef__subtitle {
-      font-size: 16px;
-      font-family: "ProximaNova";
-      color: rgba(255, 255, 255, 0.8);
-      line-height: 1.5;
-      position: absolute;
-      left: 259.514px;
-      top: 114.546px;
-      width: 396px;
-      height: 38px;
-      z-index: 64; }
+      top: 20px;
+      right: 40px;
+      background: #fff;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      box-shadow: -1px 1px 2px 2px #d1d2d6;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer; }
+      .user__header__top__button-home .header__home path {
+        fill: #a0a09f; }
   .user__header__search {
     height: 60px;
     background: rgba(229, 229, 229, 0.9);
