@@ -26,11 +26,14 @@ script(type='text/javascript').
 				xhr.open('POST', '/reg/');
 				xhr.setRequestHeader('Content-type','application/json');
 				xhr.send(JSON.stringify(sendObg));
-	      //$inputs.val('');
 	      xhr.onreadystatechange = function() {
 	      	if (xhr.readyState != 4) return;
 	      	if (xhr.status == 200){
+	      		if(!JSON.parse(xhr.responseText).status){
+	      			$inputs.val('');
+	      		}
 	      		alert(JSON.parse(xhr.responseText).message);
+
 	      	}
 	      }
 
