@@ -14,10 +14,18 @@
       color: rgb(255, 255, 255);
       line-height: 1.5;
       z-index: 6;
+      width: 40%;
     }
 
     &__arrow {
-
+      display: flex;
+      align-items: center;
+      width: 10%;
+      position: absolute;
+      left: 45%;
+      top: 9%;
+      opacity: 0.7;
+      cursor: pointer;
     }
     &__text-right {
       font-size: 16px;
@@ -26,6 +34,28 @@
       line-height: 1.5;
       text-align: right;
       z-index: 5;
+      width: 40%;
+      margin-left: 15%;
+
+    }
+  }
+}
+
+@media screen and (max-width: 480px){
+  .user__footer {
+    &__wrap {
+      padding-top: 10%;
+      flex-direction: column;
+      justify-content: center;
+      &__text-left {
+        text-align: center;
+        width: 100%;
+      }
+      &__text-right {
+        text-align: center;
+        width: 100%;
+        margin: 0;
+      }
     }
   }
 }

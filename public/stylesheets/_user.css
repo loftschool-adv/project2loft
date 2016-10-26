@@ -144,13 +144,38 @@
       font-family: "ProximaNova";
       color: white;
       line-height: 1.5;
-      z-index: 6; }
+      z-index: 6;
+      width: 40%; }
+    .user__footer__wrap__arrow {
+      display: flex;
+      align-items: center;
+      width: 10%;
+      position: absolute;
+      left: 45%;
+      top: 9%;
+      opacity: 0.7;
+      cursor: pointer; }
     .user__footer__wrap__text-right {
       font-size: 16px;
       font-family: "ProximaNova";
       color: rgba(255, 255, 255, 0.4);
       line-height: 1.5;
       text-align: right;
-      z-index: 5; }
+      z-index: 5;
+      width: 40%;
+      margin-left: 15%; }
+
+@media screen and (max-width: 480px) {
+  .user__footer__wrap {
+    padding-top: 10%;
+    flex-direction: column;
+    justify-content: center; }
+    .user__footer__wrap__text-left {
+      text-align: center;
+      width: 100%; }
+    .user__footer__wrap__text-right {
+      text-align: center;
+      width: 100%;
+      margin: 0; } }
 
 /*# sourceMappingURL=_user.css.map */
