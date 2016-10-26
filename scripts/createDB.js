@@ -44,9 +44,9 @@ function createUsers(callback){
 	
 
 	let users = [
-		{login : 'Вася', password: '123'},
-		{login : 'Вася', password: 'super'},
-		{login : 'Петя', password: 'super12'}
+		{login : 'Вася', password: '123', email: 'test123@mail.ru'},
+		{login : 'Маша', password: 'super', email: 'test@bk.com'},
+		{login : 'Петя', password: 'super12', email: 'petya@mail.net'}
 	]
 
 	async.each(users, (userData, callback) => {

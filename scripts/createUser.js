@@ -8,7 +8,8 @@ let User = require('../models/user.js').User;
 // Создаем экземпляр пользователя
 let user = new User({
     login : 'Tester',
-    password: 'secret'
+    password: 'secret',
+    email : "123@test.ru"
 })
 
 // Сохраняем пользователя в базу

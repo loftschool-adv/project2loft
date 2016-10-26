@@ -13,11 +13,15 @@ let schema = new Schema({
         unique: true,
         required: true
     },
-   salt : {
+    salt : {
        type: String,
        required: true
-   },
+    },
     hashedpassword : {
+        type: String,
+        required: true
+    },
+    email : {
         type: String,
         required: true
     },
