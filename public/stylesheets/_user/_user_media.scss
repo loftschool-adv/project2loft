@@ -1,0 +1,20 @@
+@media screen and (max-width: 1200px) { 
+  .user__header {
+    font-size: 16px;
+  }
+}
+@media screen and (max-width: 992px) {
+  .user__header {
+    font-size: 14px;
+  }
+}
+@media screen and (max-width: 768px) {
+  .user__header {
+    font-size: 12px;
+  }
+}
+@media screen and (max-width: 480px) {
+  .user__header {
+    font-size: 10px;
+  }
+}
