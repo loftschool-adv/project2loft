@@ -1,0 +1,139 @@
+@import "fonts.scss";
+// Сброс стилей
+.cf::before, .cf::after {
+    content: " ";
+    display: table;
+}
+.cf::after {
+   clear: both;
+}
+ul{
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+}
+p{
+	padding: 0;
+}
+a{
+	text-decoration: none;
+	color:#fff;
+}
+html{
+	height: 100%;
+	box-sizing:border-box;
+}
+*, *:before, *:after{
+	box-sizing:inherit;
+}
+body{
+	height: 100%;
+}
+
+// Главная страница
+.wrapper{
+	height:100%;
+	background: url(../img/bg-main.png) 50% 50% no-repeat;
+	background-size: cover;
+	position: relative;
+	color:#fff;
+	font-family: ProximaNova-Light, sans-serif;
+	font-family: 14px;
+}
+.welcome{
+	position: absolute;
+	width:580px;
+	top:67px;
+	left:50%;
+	margin-left: -290px;
+	text-align: center;	
+
+}
+.welcome__title{
+	font-family: Panton-Bold, sans-serif;
+	font-size: 42px;
+	margin-bottom: 15px;
+}
+.welcome__text{
+	font-size: 16px;
+	line-height: 1.5;
+}
+.popup{
+	border:1px solid;
+	border-radius:20px;
+	background-color: #fff;
+	width:280px;
+	position: relative;
+	top:50%;
+	left:50%;
+	transform:translate(-50%, -50%);
+	overflow:hidden;
+}
+.popup__form{
+}
+.popup__input-container{
+	position: relative;
+}
+.popup__label{
+	position: absolute;
+	display: block;
+	width:15px;
+	height:15px;
+	top:50%;
+	margin-top:-8px;
+	left:20px;
+}
+.popup__svg{
+	width:100%;
+	height:100%;
+	fill:#ccc;
+}
+.popup__input{
+	line-height:40px;
+	border:none;
+	border-bottom: 1px solid #e1e1e1;
+	display:inline-block;
+	width:100%;
+	padding-left: 45px;
+}
+.popup__link{
+	display:inline-block;
+	color:#28bbf0;
+	line-height:40px;
+	font-family: 'Proxima Nova Semibold', sans-serif;
+	transition: all 0.5s;
+}
+.popup__link_forget-pass{
+	padding-left: 20px;
+}
+.popup__link:hover{
+	color: #24b0e3;
+}
+.popup__submit{
+	display:block;
+	margin:0 auto;
+	background-color: #28bbf0;
+	border-radius:25px;
+	border:none;
+	line-height:40px;
+	color:#fff;
+	padding: 0 100px;
+	font-family: Panton-Bold, sans-serif;
+	cursor:pointer;
+	transition: all 0.5s;
+}
+.popup__submit:hover{
+	background-color: #24b0e3;
+}
+.popup__registration{
+	color: #323232;
+	text-align:center;
+}
+.main-footer{
+	position: absolute;
+	bottom: 0;
+	padding: 20px 0;
+	text-align: center;
+	width:100%;
+	opacity:0.8;
+}

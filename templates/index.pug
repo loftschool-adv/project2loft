@@ -8,10 +8,14 @@ block content
 			div.popup
 				form.popup__form(action="")
 					.popup__input-container
-						label.popup__label(for="mail") 
+						label.popup__label(for="mail")
+							svg.popup__svg
+								use(xlink:href='/img/sprite.svg#envelope') 
 						input.popup__input(type="email" name="mail" placeholder="Электронная почта")
 					.popup__input-container
-						label.popup__label(for="password") 
+						label.popup__label(for="password")
+							svg.popup__svg
+								use(xlink:href='/img/sprite.svg#password') 
 						input.popup__input(type="password" name="password" placeholder="Пароль")
 					a(href="#").popup__link.popup__link_forget-pass Забыли пароль?
 					input.popup__submit(type="submit" value = "Войти")
