@@ -13,9 +13,7 @@ let sendMasage = function(message, res, status = 0){
 			message: message,
 			status: status
 		})
-}
-
-
+};
 
 // Обращаемся к корню сайта , и рендерим шаблон из ./templates/pages/index.pug
 /*route.get('', (req,res) =>{
@@ -23,7 +21,7 @@ let sendMasage = function(message, res, status = 0){
 });*/
 
 route.get('', (req,res) =>{
-	res.render('reg');
+	res.render('index');
 });
 
 
@@ -34,7 +32,7 @@ route.post('/reg/', (req,res) =>{
 		if(!req.body[key]){
 			return sendMasage('Заполнены не все поля' , res, 1);
 			//return res.json({ message: 'Заполнены не все поля' });
-		};
+		}
 	}
 	User.findOne({'login' : req.body.login}).then((item) => {
 		if(item){
@@ -47,7 +45,7 @@ route.post('/reg/', (req,res) =>{
 			    login : req.body.login,
 			    password: req.body.pass,
 			    email : req.body.email
-			})
+			});
 			user.save(function( err, user, affected){
     		if (err) throw err;
     			return sendMasage('Вы успешно зарегистрированы' , res);

@@ -4,29 +4,6 @@
   background: url("../img/user/user_header.png") no-repeat;
   background-size: cover;
 
-  @media screen and (max-width: 480px) {
-    .user__header__top {
-      flex-direction: column;
-      justify-content: center;
-      &__avatar {
-        width: 50px;
-        height: 50px;
-        min-width: 50px;
-      }
-      &__breef {
-        align-items: center;
-      }
-    }
-    .user__header__search {
-      justify-content: center;
-      align-items: center;
-      &__wrap {
-        &__input {
-          margin: 0;
-        }
-      }
-    }
-  }
   &__top {
     background: linear-gradient(to right, rgba(101, 101, 108, .5), rgba(246, 247, 252, .5));
     display: flex;

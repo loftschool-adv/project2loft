@@ -1,0 +1,209 @@
+.user__header {
+  height: 300px;
+  width: 100%;
+  background: url("../img/user/user_header.png") no-repeat;
+  background-size: cover; }
+  .user__header__top {
+    background: linear-gradient(to right, rgba(101, 101, 108, 0.5), rgba(246, 247, 252, 0.5));
+    display: flex;
+    align-items: center;
+    height: 240px; }
+    .user__header__top__avatar {
+      width: 7.5rem;
+      height: 7.5rem;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 2px solid #ffffff;
+      margin: 0 0 0 6%;
+      min-width: 120px; }
+    .user__header__top__breef {
+      display: flex;
+      flex-direction: column;
+      margin-left: 3%; }
+      .user__header__top__breef__title {
+        font-size: 21px;
+        font-family: "Panton";
+        color: white;
+        font-weight: bold;
+        line-height: 1;
+        z-index: 65; }
+      .user__header__top__breef__subtitle {
+        font-size: 16px;
+        font-family: "ProximaNova";
+        color: rgba(255, 255, 255, 0.8);
+        line-height: 1.5;
+        z-index: 64; }
+      .user__header__top__breef__social-buttons__link {
+        text-decoration: none; }
+        .user__header__top__breef__social-buttons__link svg {
+          cursor: pointer; }
+          .user__header__top__breef__social-buttons__link svg path {
+            fill: rgba(255, 255, 255, 0.7); }
+          .user__header__top__breef__social-buttons__link svg:hover path {
+            transition: .5s;
+            fill: white; }
+    .user__header__top__button-home {
+      position: absolute;
+      top: 20px;
+      right: 40px;
+      background: #fff;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      box-shadow: -1px 1px 2px 2px #d1d2d6;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer; }
+      .user__header__top__button-home .header__home path {
+        fill: #a0a09f; }
+  .user__header__search {
+    height: 60px;
+    background: rgba(229, 229, 229, 0.9);
+    display: flex;
+    justify-content: flex-end;
+    align-items: center; }
+    .user__header__search__wrap::before {
+      content: ' ';
+      position: absolute;
+      width: 15px;
+      height: 15px;
+      background: url("../img/icons/search.svg") no-repeat;
+      margin: 15px 0 0 15px;
+      opacity: .8; }
+    .user__header__search__wrap__input {
+      padding-left: 45px;
+      font-size: 16px;
+      margin-right: 60px;
+      font-family: "ProximaNova";
+      color: rgba(50, 50, 50, 0.6);
+      line-height: 1.313;
+      z-index: 53;
+      width: 335px;
+      height: 40px;
+      border: none;
+      border-radius: 20px; }
+
+.user__main {
+  padding: 60px 5%; }
+  .user__main__title {
+    font-size: 42px;
+    font-family: "Panton";
+    color: #323232;
+    font-weight: bold;
+    line-height: 0.5;
+    z-index: 11; }
+  .user__main__albums {
+    display: flex;
+    flex-wrap: wrap; }
+    .user__main__albums__item {
+      min-width: 220px;
+      width: 23%;
+      height: 320px;
+      overflow: hidden;
+      margin: 0 2% 20px 0;
+      border-radius: 2px;
+      box-shadow: 1px 2px 2px 2px #eee;
+      cursor: pointer; }
+      .user__main__albums__item__name {
+        font-size: 16px;
+        font-family: "ProximaNova";
+        color: #323232;
+        z-index: 43;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        padding-right: 20px; }
+
+.user__footer {
+  background: url("../img/user/user_footer.png") no-repeat 50% 100%;
+  background-size: cover;
+  position: relative; }
+  .user__footer__wrap {
+    background: rgba(49, 48, 49, 0.9);
+    width: 100%;
+    height: 100%;
+    display: flex; }
+    .user__footer__wrap__text-left {
+      font-size: 16px;
+      font-family: "ProximaNova";
+      color: white;
+      line-height: 1.5;
+      z-index: 6;
+      width: 40%; }
+    .user__footer__wrap__arrow {
+      display: flex;
+      align-items: center;
+      width: 10%;
+      position: absolute;
+      left: 45%;
+      top: 9%;
+      opacity: 0.7;
+      cursor: pointer; }
+    .user__footer__wrap__text-right {
+      font-size: 16px;
+      font-family: "ProximaNova";
+      color: rgba(255, 255, 255, 0.4);
+      line-height: 1.5;
+      text-align: right;
+      z-index: 5;
+      width: 40%;
+      margin-left: 15%; }
+
+@media screen and (max-width: 1200px) {
+  .user__header {
+    font-size: 16px; } }
+@media screen and (max-width: 992px) {
+  .user__header {
+    font-size: 14px; } }
+@media screen and (max-width: 768px) {
+  .user__header {
+    font-size: 12px; } }
+@media screen and (max-width: 480px) {
+  .user__header {
+    font-size: 10px; } }
+@media screen and (max-width: 480px) {
+  .user__footer__wrap {
+    padding-top: 10%;
+    flex-direction: column;
+    justify-content: center; }
+    .user__footer__wrap__text-left {
+      text-align: center;
+      width: 100%; }
+    .user__footer__wrap__text-right {
+      text-align: center;
+      width: 100%;
+      margin: 0; } }
+@media screen and (max-width: 480px) {
+  .user__header__top {
+    flex-direction: column;
+    justify-content: center; }
+    .user__header__top__avatar {
+      width: 50px;
+      height: 50px;
+      min-width: 50px; }
+    .user__header__top__breef {
+      align-items: center; }
+
+  .user__header__search {
+    justify-content: center;
+    align-items: center; }
+    .user__header__search__wrap__input {
+      margin: 0; } }
+@media screen and (max-width: 480px) {
+  .user__main {
+    padding: 60px 2%; }
+    .user__main__title {
+      font-size: 42px; }
+    .user__main__albums {
+      display: flex;
+      flex-direction: column; }
+      .user__main__albums__item {
+        min-width: 90%;
+        width: 100%;
+        height: 320px; }
+        .user__main__albums__item__name {
+          font-size: 16px; } }
+
+/*# sourceMappingURL=_user.css.map */

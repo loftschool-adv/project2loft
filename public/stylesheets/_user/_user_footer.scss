@@ -40,22 +40,3 @@
     }
   }
 }
-
-@media screen and (max-width: 480px){
-  .user__footer {
-    &__wrap {
-      padding-top: 10%;
-      flex-direction: column;
-      justify-content: center;
-      &__text-left {
-        text-align: center;
-        width: 100%;
-      }
-      &__text-right {
-        text-align: center;
-        width: 100%;
-        margin: 0;
-      }
-    }
-  }
-}
