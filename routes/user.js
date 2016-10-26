@@ -9,8 +9,8 @@ let route = require('express').Router();
 
 
 // Обращаемся к корню сайта , и рендерим шаблон из ./templates/pages/index.pug
-route.get('', (req,res) =>{
-	res.render('index',  { title: 'Express' });
+route.get('/', (req,res) =>{
+	res.render('pages/user',  { title: 'Express' });
 });
 
 
