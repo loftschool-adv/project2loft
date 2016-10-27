@@ -1,6 +1,6 @@
 {
-  "name": "photo-gallery",
-  "version": "0.0.1",
+  "name": "photoGallery",
+  "version": "1.0.0",
   "description": "",
   "main": "app.js",
   "scripts": {
@@ -21,7 +21,7 @@
   },
   "devDependencies": {
     "browser-sync": "2.11.2",
-    "gulp": "git+https://git@github.com/gulpjs/gulp.git#4.0",
+    "gulp": "github:gulpjs/gulp#4.0",
     "gulp-autoprefixer": "3.1.0",
     "gulp-cheerio": "^0.6.2",
     "gulp-concat": "2.6.0",
@@ -43,7 +43,8 @@
     "type": "git",
     "url": "git+https://github.com/loftschool-adv/project2loft.git"
   },
-  "author": "Eclerr",
+  "keywords": [],
+  "author": "",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/loftschool-adv/project2loft/issues"

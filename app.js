@@ -15,11 +15,11 @@ let log = require('./libs/log')(module);
 let app = express();
 
 // view engine setup
-app.set('views', path.join(__dirname, 'templates'));
+app.set('views', path.join(__dirname, 'templates/pages'));
 app.set('view engine', 'pug');
 
 // uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -28,7 +28,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 //===маршруты===
 app.use('/', require('./routes/login.js'));
-app.use('/user', require('./routes/user.js'));
+//app.use('/user', require('./routes/user.js'));
 //=============
 
 // catch 404 and forward to error handler
