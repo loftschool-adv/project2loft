@@ -1,0 +1,90 @@
+.btn {
+	display: inline-block;
+	vertical-align: middle;
+	padding: .6075em 1.4em;
+	border: 1px solid transparent;
+	border-radius: 20px;
+	background: $blue;
+	color: $white;
+	font: bold 14px/1.5 Panton, sans-serif;
+	text-align: center;
+	text-decoration: none;
+	cursor: pointer;
+	transition:
+		width,
+		color,
+		border-color,
+		background-color;
+	transition-duration: .5s;
+	user-select: none;
+
+	&:hover {
+		background: darken($blue, 7%);
+		color: $white;
+	}
+}
+
+	.btn__icon {
+		position: relative;
+		top: -.05em;
+		display: inline-block;
+		vertical-align: middle;
+		width:  20px;
+		height: 20px;
+		fill: currentColor;
+
+		& + .btn__text,
+		.btn__text + & {
+			margin-left: .65em;
+		}
+	}
+
+	.btn__text {}
+
+	.btn__text--lg {
+		font-size: 16px;
+	}
+
+
+
+.btn--light {
+	background: $white;
+	color: $gray;
+}
+
+
+
+.btn--important {
+	background: $red;
+
+	&:hover {
+		background: darken($red, 7%);
+	}
+}
+
+
+
+.btn--clear {
+	background: transparent;
+	border-color: $blue;
+	color: $blue;
+
+	&:hover {
+		background: darken($blue, 7%);
+	}
+}
+
+
+
+.btn--expand {
+	width: 40px;
+	padding-left:  .67em;
+	padding-right: .67em;
+	box-shadow: 0 1px 1px rgba(0,0,0,.15);
+	white-space: nowrap;
+	overflow: hidden;
+
+	&:hover {
+		width: auto;
+	}
+}
