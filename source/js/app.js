@@ -49,7 +49,6 @@ var validateForm = function(form) {
 			 //pass = form.find('[type=password]'),
 			valid = true;
 
-	
 	$.each(elements, function(index, val){
 		var
 				element = $(val),
@@ -83,19 +82,25 @@ var clearForm = function(form) {
 validation.init();
 
 
-//Регистрация нового пользователя
-var registration = (function() {
+//Отпавка данных из формы
+var submitForm = (function() {
 	'use strict';
 
 	var init = function() {
 		_setUpListners();
 	};
-
+// Слушаем события
 	var _setUpListners = function() {
-		$('#registration').on('click', _submitForm);
+		// Регистрация пользователя
+		$('#registration').on('click', _submitFormRegistr);
+		// Вход
+		$('#login').on('click', _submitFormLogin);
+		// Восстановление пароля
+		$('#recover').on('click', _submitFormRecover);
 	};
 
-	var _submitForm = function(ev){
+	var _submitFormRegistr = function(ev){
+		console.log('reg');
 		ev.preventDefault();
 		var form = $(this).parent(),
 				url = '/reg/',
@@ -113,48 +118,11 @@ var registration = (function() {
 				})
 			}	
 	}
-	var _ajaxForm = function (form, url, data){
-		//если валидация прошла успешно, отправляем запрос на сервер
-		if (!validation.validateForm(form)){
-			return false;
-		} 
-		console.log('всё хорошо');
-		// готовим данные 
-	  data=JSON.stringify(data);
-	  console.log(data);
-	  // отправляем
-		return $.ajax({
-			url: '/reg/',
-			type: 'POST',
-			contentType: 'application/json',
-			data: data
-		});
-		//validation.clearForm(form);
-	}
-
-	return {
-
-		init: init
-	};
-})();
-registration.init();
-
-//Логин
-var login = (function() {
-	'use strict';
-
-	var init = function() {
-		_setUpListners();
-	};
-
-	var _setUpListners = function() {
-		$('#login').on('click', _submitForm);
-	};
-
-	var _submitForm = function(ev){
+	var _submitFormLogin = function(ev){
+		console.log('login');
 		ev.preventDefault();
 		var form = $(this).parent(),
-				url = ' ',
+				url = '',
 				data = 
 				{
 	    		email: form.find('input[name = "email"]').val(),
@@ -168,10 +136,27 @@ var login = (function() {
 				})
 			}	
 	}
+	var _submitFormRecover = function(ev){
+		console.log('recover');
+		ev.preventDefault();
+		var form = $(this).parent(),
+				url = ' ',
+				data = 
+				{
+	    		email: form.find('input[name = "email"]').val(),
+	   		},
+				servAns = _ajaxForm(form, url, data);
+				if(servAns){
+					console.log('выводим ответ от сервера');
+					servAns.done(function(ans) {
+					console.log(ans);
+				})
+			}	
+	}
 	var _ajaxForm = function (form, url, data){
 		//если валидация прошла успешно, отправляем запрос на сервер
 		if (!validation.validateForm(form)){
-			$('.popup__error').slideDown(300);
+			form.find('.popup__error').slideDown(300);
 			return false;
 		} 
 		console.log('всё хорошо');
@@ -179,7 +164,12 @@ var login = (function() {
 	  data=JSON.stringify(data);
 	  console.log(data);
 	  // отправляем
-		
+		return $.ajax({
+			url: url,
+			type: 'POST',
+			contentType: 'application/json',
+			data: data
+		});
 		//validation.clearForm(form);
 	}
 
@@ -188,7 +178,8 @@ var login = (function() {
 		init: init
 	};
 })();
-login.init();
+submitForm.init();
+
 
 //Логин
 var recover = (function() {
