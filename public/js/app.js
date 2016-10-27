@@ -79,9 +79,9 @@ var registration = (function() {
 				url = '/reg/',
 				data = 
 				{
-	    		login: form.find('input[name = "login"]').val(),
-	    		email: form.find('input[name = "email"]').val(),
-	    		pass: form.find('input[name = "pass"]').val(),
+	    		login: form.find('input[name = "user"]').val(),
+	    		email: form.find('input[name = "mail"]').val(),
+	    		pass: form.find('input[name = "password"]').val(),
 	   		},
 				servAns = _ajaxForm(form, url, data);
 				if(servAns){
