@@ -125,7 +125,7 @@ var submitForm = (function() {
 		console.log('login');
 		ev.preventDefault();
 		var form = $(this).parent(),
-				url = '',
+				url = '/login/',
 				data = 
 				{
 	    		email: form.find('input[name = "email"]').val(),
@@ -143,7 +143,7 @@ var submitForm = (function() {
 		console.log('recover');
 		ev.preventDefault();
 		var form = $(this).parent(),
-				url = ' ',
+				url = '',
 				data = 
 				{
 	    		email: form.find('input[name = "email"]').val(),
@@ -183,6 +183,3 @@ var submitForm = (function() {
 	};
 })();
 submitForm.init();
-
-
-
