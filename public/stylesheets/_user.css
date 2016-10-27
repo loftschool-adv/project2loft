@@ -122,9 +122,10 @@
   position: relative; }
   .user__footer__wrap {
     background: rgba(49, 48, 49, 0.9);
-    width: 100%;
+    width: 90%;
     height: 100%;
-    display: flex; }
+    display: flex;
+    padding: 0 5%; }
     .user__footer__wrap__text-left {
       font-size: 16px;
       font-family: "ProximaNova";
@@ -183,6 +184,8 @@
       width: 50px;
       height: 50px;
       min-width: 50px; }
+      .user__header__top__avatar__img {
+        width: 55px; }
     .user__header__top__breef {
       align-items: center; }
 
