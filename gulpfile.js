@@ -74,7 +74,7 @@ var path = {
 		js_file		: 		'app.js',								// Файл с нашими модулями js
 
 	}
-}
+};
 
 
 // СSS файлы библиоткек
@@ -110,7 +110,7 @@ var pugFolders = [
 var sassCompile = [
 	// Пример:  path.sourse  + '/' + path.sass + '/app.scss'
 	path.sourse.folder  + '/' + path.sourse.sass + '/main.scss',
-]
+];
 
 // JS модули для компиляции
 // Тут пишем пути к модулям js, чтобы они превратились в единый файл app.js (название файла береться из конфига)
@@ -119,7 +119,7 @@ var mainJs = [
 	// Пример:  path.sourse.folder  + '/' + path.sourse.js + '/app.js',
 	path.sourse.folder  + '/' + path.sourse.js + '/app.js',
 
-]
+];
 
 
 
@@ -217,7 +217,7 @@ gulp.task('svg-sprite', function(){
         }
       }))
       .pipe(gulp.dest(path.build.folder + '/' + path.build.svg))
-})
+});
 
 // Копируем файлы
 
@@ -233,7 +233,7 @@ gulp.task('copy', function(callback){
 
 	callback();
 
-})
+});
 
 
 // Склеиваем Js модули
@@ -250,7 +250,7 @@ gulp.task('concat', function(callback){
 	callback();
 
 
-})
+});
 
 
 
@@ -263,7 +263,8 @@ gulp.task('server',function(){
       proxy: proxy,
       notify: notifyBS
     });
-	};
+	}
+
 	if(start == 'front'){
 		browserSync.init({
       open: target,
@@ -286,7 +287,7 @@ gulp.task('watch',function(){
 gulp.task('reload',function(callback){
 	browserSync.reload();
 	callback();
-})
+});
 
 
 // =====================  Порядок выполнения тасков  =====================
