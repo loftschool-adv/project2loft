@@ -18,7 +18,11 @@ let sendMasage = function(message, res, status = 0){
 
 
 route.get('', (req,res) =>{
-	res.render('index');
+	if(!req.session.user){
+		res.render('index');
+	}else{
+		res.render('user');
+	}
 });
 
 
@@ -53,17 +57,28 @@ route.post('/reg/', (req,res) =>{
 
 // Вход на сайт 
 route.post('/login/', (req,res) =>{
-	let User = require('../models/user.js').User;
+let User = require('../models/user.js').User;
 	User.findOne({'email' : req.body.email}).then((item) =>{
 		if(item){
-			req.session.user = item._id;
-			res.send({});
+			req.session.user = req.body.email;
+			res.send({status: 'login'});
 		}else{
-			console.log("Такой пользователь НЕ найден")
+			console.log("Такой пользователь НЕ найден");
+			res.send({});
 		}
 	});
 
 })
+
+// Выход с сайта 
+route.post('/logout/', (req,res) =>{
+	if(req.body.req == 'logout'){
+		req.session.destroy();
+		res.send({status: 'logout'});
+	};
+
+})
+
 
 
 module.exports = route;
