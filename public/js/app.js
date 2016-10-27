@@ -132,11 +132,11 @@ var login = (function() {
 	var _submitForm = function(ev){
 		ev.preventDefault();
 		var form = $(this).parent(),
-				url = ' ',
+				url = '/login/',
 				data = 
 				{
-	    		email: $('input[name = "email"]').val(),
-	    		pass: $('input[name = "pass"]').val(),
+	    		email: $('input[name = "mail"]').val(),
+	    		pass: $('input[name = "password"]').val(),
 	   		},
 				servAns = _ajaxForm(form, url, data);
 				if(servAns){
@@ -154,7 +154,12 @@ var login = (function() {
 	  data=JSON.stringify(data);
 	  console.log(data);
 	  // отправляем
-		
+		return $.ajax({
+			url: '/login/',
+			type: 'POST',
+			contentType: 'application/json',
+			data: data
+		});
 		//validation.clearForm(form);
 	}
 
