@@ -29,6 +29,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 //===маршруты===
 app.use('/', require('./routes/login.js'));
 app.use('/user', require('./routes/user.js'));
+app.use('/components', require('./routes/components.js'));
 //=============
 
 // catch 404 and forward to error handler
