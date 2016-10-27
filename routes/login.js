@@ -60,8 +60,14 @@ route.post('/login/', (req,res) =>{
 let User = require('../models/user.js').User;
 	User.findOne({'email' : req.body.email}).then((item) =>{
 		if(item){
-			req.session.user = req.body.email;
-			res.send({status: 'login'});
+			if(item.checkPassword(req.body.pass)){
+				req.session.user = req.body.email;
+				res.send({status: 'login'});
+			}
+			else{
+				return sendMasage('Вы успешно зарегистрированы' , res);
+			}
+			
 		}else{
 			console.log("Такой пользователь НЕ найден");
 			res.send({});
