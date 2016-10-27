@@ -1,0 +1,25 @@
+script(src='https://code.jquery.com/jquery-3.1.1.js', integrity='sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA=', crossorigin='anonymous')
+
+
+button(type="button" class="logout") Выход
+
+script.
+		var obj = {
+			req: "logout"
+		}
+		var data = JSON.stringify(obj)
+
+		$('.logout').on('click', function(){
+			var xhr = new XMLHttpRequest;
+			xhr.open('POST', '/logout/',true);
+			xhr.setRequestHeader('Content-type','application/json');
+			xhr.send(data);
+			xhr.onreadystatechange = function() {
+				if (xhr.readyState != 4) return;
+				// Перезагрузка страницы
+				if(JSON.parse(xhr.responseText).status == "logout"){
+					window.location.reload(true);
+				}
+			}
+		})
+
