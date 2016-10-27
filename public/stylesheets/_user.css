@@ -47,16 +47,34 @@
       top: 20px;
       right: 40px;
       background: #fff;
-      width: 40px;
+      width: 30px;
       height: 40px;
-      border-radius: 50%;
+      border-radius: 20px;
       box-shadow: -1px 1px 2px 2px #d1d2d6;
       display: flex;
-      justify-content: center;
+      justify-content: flex-start;
+      padding-left: 10px;
       align-items: center;
-      cursor: pointer; }
-      .user__header__top__button-home .header__home path {
-        fill: #a0a09f; }
+      cursor: pointer;
+      transition: 1s; }
+      .user__header__top__button-home:hover {
+        width: 120px;
+        background: #28bbf0; }
+      .user__header__top__button-home__hover {
+        margin-left: 30px;
+        opacity: 0;
+        transition: 1s;
+        font-size: 14px;
+        font-family: "Panton";
+        color: white;
+        font-weight: bold;
+        line-height: 1.5;
+        z-index: 74;
+        width: 100px;
+        position: absolute; }
+      .user__header__top__button-home__inner__path {
+        fill: #a0a09f;
+        transition: 1s; }
   .user__header__search {
     height: 60px;
     background: rgba(229, 229, 229, 0.9);

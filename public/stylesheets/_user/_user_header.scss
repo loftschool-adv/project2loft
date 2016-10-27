@@ -64,17 +64,38 @@
       top: 20px;
       right: 40px;
       background: #fff;
-      width: 40px;
+      width: 30px;
       height: 40px;
-      border-radius: 50%;
+      border-radius: 20px;
       box-shadow: -1px 1px 2px 2px #d1d2d6;
       display: flex;
-      justify-content: center;
+      justify-content: flex-start;
+      padding-left: 10px;
       align-items: center;
       cursor: pointer;
-      .header__home {
-        path {
+      transition: 1s;
+
+      &:hover {
+        width: 120px;
+        background: #28bbf0;
+      }
+      &__hover {
+        margin-left: 30px;
+        opacity: 0;
+        transition: 1s;
+        font-size: 14px;
+        font-family: "Panton";
+        color: rgb(255, 255, 255);
+        font-weight: bold;
+        line-height: 1.5;
+        z-index: 74;
+        width: 100px;
+        position: absolute;
+      }
+      &__inner {
+        &__path {
           fill:#a0a09f;
+          transition: 1s;
         }
       }
     }
