@@ -183,6 +183,3 @@ var submitForm = (function() {
 	};
 })();
 submitForm.init();
-
-
-
