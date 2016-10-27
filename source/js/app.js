@@ -1,84 +1,166 @@
 (function(){
+		 $('.popup__link_registr').click(function(e){
+		 	e.preventDefault();
+	 	$('.flipper-container').addClass('flipp');
+	 });
+		 $('.popup__link_enter').click(function(e){
+		 	e.preventDefault();
+	 	$('.flipper-container').removeClass('flipp');
+	 });
+})();
 
 
-	$('.popup__link_registr').click(function(e){
-	 	e.preventDefault();
- 		$('.flipper-container').addClass('flipp');
- 	});
+// модуль валидации
+var validation = (function() {
+	'use strict';
+
+	var init = function() {
+		_setUpListners();
+	};
+	var _setUpListners = function() {
+		//$('input').on('keydown',function(){
+		//})
+	};
+
+// функция валидации формы
+var validateForm = function(form) {
+	var 
+			elements = form.find('input'),
+			valid = true;
+// Проверяем все input
+	$.each(elements, function(index, val){
+		var
+				element = $(val),
+				val = element.val();
+		if((val.length === 0)) {
+			console.log('не валидна');
+			valid = false;
+		}
+	})
+	return valid;
+};
+
+var clearForm = function(form) {
+	
+	var 
+			elements = form.find('input');
+
+	$.each(elements, function(index, val){
+		var
+				element = $(val),
+				val = element.val();
+		element.val('');
+		});
+	};
+	return {
+		init: init,
+		validateForm: validateForm,
+		clearForm: clearForm
+	};
+})();
+validation.init();
 
 
-	$('.popup__link_enter').click(function(e){
-	 	e.preventDefault();
- 		$('.flipper-container').removeClass('flipp');
- });
+//Регистрация нового пользователя
+var registration = (function() {
+	'use strict';
 
-// Пожалуйста адаптируйте эту функцию под паттерн модуль.
-// Можете не писать ajax запросы в своих скриптах, просто поставьте комментрай там,
-// где будут отправка на сервер.
-// Пример:
+	var init = function() {
+		_setUpListners();
+	};
 
-/* 	$button.on('click' , function(e){
-			e.preventDefault();
-			// Отправка на сервер 
-		})
+	var _setUpListners = function() {
+		$('#registration').on('click', _submitForm);
+	};
 
-*/
-
-// Все ajax запросы я беру на себя, чтобы не было путаницы.
-// Комментарии смело удаляйте. 
-
-
-
-
-
-
-	var regAjax = function(){
-		var $form = $(".popup__form-registration");
-		var $button = $form.find('.popup__submit');
-
-		$button.on('click', function(e){
-			e.preventDefault();
-			
-			$this = $(this);
-			$thisForm = $this.closest('.popup__form-registration');
-			$inputsWrap = $thisForm.find('.popup__input-container');
-			$user = $inputsWrap.find('input[name=user]');
-			$mail = $inputsWrap.find('input[name=mail]');
-			$password = $inputsWrap.find('input[name=password]');
-			$inputs = $inputsWrap.find('input');
-			
-			var sendObg = {
-				login : $user.val(),
-				email : $mail.val(),
-				pass : $password.val()
-			}
-
-			var xhr = new XMLHttpRequest();
-				xhr.open('POST', '/reg/');
-				xhr.setRequestHeader('Content-type','application/json');
-				xhr.send(JSON.stringify(sendObg));
-	      xhr.onreadystatechange = function() {
-	      	if (xhr.readyState != 4) return;
-	      	if (xhr.status == 200){
-	      		var message = JSON.parse(xhr.responseText).message;
-	      		var status = JSON.parse(xhr.responseText).status;
-
-	      		if(!status){
-	      			$inputs.val('');
-	      		}
-	      		// Вместо alert можно поставить функцию вызова pop окна.
-	      		alert(message);
-
-	      }
-	     }
-
-		})
-
+	var _submitForm = function(ev){
+		ev.preventDefault();
+		var form = $(this).parent(),
+				url = '/reg/',
+				data = 
+				{
+	    		login: form.find('input[name = "login"]').val(),
+	    		email: form.find('input[name = "email"]').val(),
+	    		pass: form.find('input[name = "pass"]').val(),
+	   		},
+				servAns = _ajaxForm(form, url, data);
+				if(servAns){
+					console.log('выводим ответ от сервера');
+					servAns.done(function(ans) {
+						console.log(ans);
+				})
+			}	
+	}
+	var _ajaxForm = function (form, url, data){
+		//если валидация прошла успешно, отправляем запрос на сервер
+		if (!validation.validateForm(form)) return false;
+		console.log('всё хорошо');
+		// готовим данные 
+	  data=JSON.stringify(data);
+	  console.log(data);
+	  // отправляем
+		return $.ajax({
+			url: '/reg/',
+			type: 'POST',
+			contentType: 'application/json',
+			data: data
+		});
+		//validation.clearForm(form);
 	}
 
-	regAjax();
-	
+	return {
 
-
-
+		init: init
+	};
 })();
+registration.init();
+
+
+
+//Логин
+var login = (function() {
+	'use strict';
+
+	var init = function() {
+		_setUpListners();
+	};
+
+	var _setUpListners = function() {
+		$('#login').on('click', _submitForm);
+	};
+
+	var _submitForm = function(ev){
+		ev.preventDefault();
+		var form = $(this).parent(),
+				url = ' ',
+				data = 
+				{
+	    		email: $('input[name = "email"]').val(),
+	    		pass: $('input[name = "pass"]').val(),
+	   		},
+				servAns = _ajaxForm(form, url, data);
+				if(servAns){
+					console.log('выводим ответ от сервера');
+					servAns.done(function(ans) {
+					console.log(ans);
+				})
+			}	
+	}
+	var _ajaxForm = function (form, url, data){
+		//если валидация прошла успешно, отправляем запрос на сервер
+		if (!validation.validateForm(form)) return false;
+		console.log('всё хорошо');
+		// готовим данные 
+	  data=JSON.stringify(data);
+	  console.log(data);
+	  // отправляем
+		
+		//validation.clearForm(form);
+	}
+
+	return {
+
+		init: init
+	};
+})();
+login.init();

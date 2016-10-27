@@ -9,22 +9,33 @@ let logger = require('morgan');
 let cookieParser = require('cookie-parser');
 let mongoose = require('./libs/mongoose.js');
 let bodyParser = require('body-parser');
-
+let session = require('express-session');
+let MongoStore = require('connect-mongo')(session);
 let log = require('./libs/log')(module);
-
 let app = express();
+
+// Create session
+app.use(session({
+  secret: 'photo',
+  saveUnitialized: false,
+  resave: false,
+  store : new MongoStore({mongooseConnection: mongoose.connection})
+}));
+
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'templates/pages/'));
 app.set('view engine', 'pug');
 
 // uncomment after placing your favicon in /public
-app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use(favicon(path.join(__dirname, 'public/img/', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
 
 //===маршруты===
 app.use('/user', require('./routes/user.js'));

@@ -9,7 +9,7 @@ block content
 							div.welcome__title Добро пожаловать
 							div.welcome__text Перед вами сервис, который поможет вам организовать свои фотографии в альбомы и поделиться ими со всем миром!
 						div.popup
-							form.popup__form.popup__form-login(action="")
+							form.popup__form.popup__form-login(action="" method="POST")
 								.popup__input-container
 									label.popup__label(for="mail")
 										svg.popup__svg
@@ -22,7 +22,7 @@ block content
 									input.popup__input(type="password" name="password" placeholder="Пароль")
 								a(href="#").popup__link.popup__link_forget-pass Забыли пароль?
 								div.popup__error.hide  E-mail или пароль не верен
-								input.popup__submit(type="submit" value = "Войти")
+								input.popup__submit#login(type="submit" value = "Войти")
 								div.popup__registration Нет аккаунта? 
 									a(href="#").popup__link.popup__link_registr Зарегистрироваться
 					div.back
@@ -46,7 +46,7 @@ block content
 											use(xlink:href='/img/sprite.svg#password') 
 									input.popup__input(type="password" name="password" placeholder="Пароль")
 								div.popup__promt  Ваши данные остаются строго конфедициальны
-								input.popup__submit(type="submit" value = "Создать аккаунт")
+								input.popup__submit#registration(type="submit" value = "Создать аккаунт")
 								div.popup__registration Уже зарегистрированы? 
 									a(href="#").popup__link.popup__link_enter Войти
 			footer.main-footer 2016 создано командой профессианалов на продвинутом курсе по веб-разработке от Loftschool
