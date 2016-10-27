@@ -1,12 +1,13 @@
 // Сброс стилей
-.cf::before, .cf::after {
-    content: " ";
-    display: table;
+.cf::before,
+.cf::after {
+		content: " ";
+		display: table;
 }
 .cf::after {
-   clear: both;
+	 clear: both;
 }
-.hide{
+.hide {
 	display:none;
 }
 ul{
@@ -21,16 +22,57 @@ a{
 	text-decoration: none;
 	color:#fff;
 }
-html{
+
+*,
+*:before,
+*:after {
+	box-sizing: inherit;
+}
+
+html {
+	box-sizing: border-box;
 	height: 100%;
-	box-sizing:border-box;
+	font: 300 16px/1.5 ProximaNova, sans-serif;
 }
-*, *:before, *:after{
-	box-sizing:inherit;
-}
-body{
+
+body {
 	height: 100%;
 }
+
+
+::selection {
+	background: rgba($blue, .7);
+	color: rgba(255,255,255,.9);
+	text-shadow: 0 0 1px rgba(0,0,0,.25);
+}
+
+
+::placeholder {
+	color: $gray;
+	text-indent: 0;
+	transition:
+		opacity .75s;
+}
+	:focus::placeholder {
+		text-indent: 100%;
+		opacity: 0;
+		transition:
+			opacity .5s,
+			text-indent 1s;
+	}
+
+
+
+	.width--md {
+		width: 100%;
+		max-width: 380px;
+	}
+
+	.width--full {
+		width: 100%;
+	}
+
+
 
 // Главная страница
 .wrapper{
@@ -40,24 +82,21 @@ body{
 	background-size: cover;
 	position: relative;
 	color:#fff;
-	font-family: ProximaNova-Light, sans-serif;
-	font-family: 14px;
+	font-size: 14px;
 }
 .welcome{
 	position: absolute;
 	width:580px;
 	top:100px;
-	text-align: center;	
+	text-align: center;
 }
 .welcome__title{
-	font-family: Panton-Bold, sans-serif;
+	font-family: Panton, sans-serif;
 	font-size: 42px;
+	font-weight: bold;
 	margin-bottom: 15px;
 }
-.welcome__text{
-	font-size: 16px;
-	line-height: 1.5;
-}
+.welcome__text{}
 
 .popup{
 	background-color: #fff;
@@ -101,7 +140,7 @@ body{
 	display:inline-block;
 	color:#28bbf0;
 	line-height:40px;
-	font-family: 'Proxima Nova Semibold', sans-serif;
+	font-weight: 600;
 	transition: all 0.5s;
 }
 .popup__link_forget-pass{
@@ -121,7 +160,8 @@ body{
 	line-height:40px;
 	color:#fff;
 	width:240px;
-	font-family: Panton-Bold, sans-serif;
+	font-family: Panton, sans-serif;
+	font-weight: bold;
 	cursor:pointer;
 	transition: all 0.5s;
 	outline:none;
@@ -133,21 +173,21 @@ body{
 	color: #323232;
 }
  .popup__error{
- 	font-family: 'Proxima Nova Semibold', sans-serif;
- 	color: rgba(50,50,50, 0.6);
- 	line-height:40px;
- 	background-color: rgba(255,224,224, 0.8);
- 	border-radius:5px;
- 	width:240px;
- 	margin: 0 auto;
- 	margin-bottom: 20px;
- 	text-align:left;
- 	padding-left: 10px;
+	font-weight: 600;
+	color: rgba(50,50,50, 0.6);
+	line-height:40px;
+	background-color: rgba(255,224,224, 0.8);
+	border-radius:5px;
+	width:240px;
+	margin: 0 auto;
+	margin-bottom: 20px;
+	text-align:left;
+	padding-left: 10px;
  }
  .popup__promt{
- 	color: rgba(50,50,50, 0.8);
- 	text-align: left;
- 	padding: 10px 20px;
+	color: rgba(50,50,50, 0.8);
+	text-align: left;
+	padding: 10px 20px;
  }
  .flipper-container{
 	position: relative;

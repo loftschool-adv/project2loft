@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta charset="UTF-8">
+	<title>Components library</title>
+</head>
+
+
+<body>
+
+	input.field(type="text")
+	textarea.field
+
+	.btn Button
+	.btn.btn--clear Button
+	.btn.btn--important Button
+	.btn.btn--light Button
+
+	.btn.btn--important
+		span.btn__text Button
+		svg.btn__icon
+				use(xlink:href='/img/sprite.svg#envelope')
+
+	.btn.btn--light
+		svg.btn__icon
+				use(xlink:href='/img/sprite.svg#envelope')
+		span.btn__text Button
+
+	.btn.btn--light.btn--expand
+		svg.btn__icon
+				use(xlink:href='/img/sprite.svg#envelope')
+		span.btn__text Button
+
+</body>
+</html>
