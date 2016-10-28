@@ -46,6 +46,7 @@ scrollTop.init();
 // Загрузка обложек альбомов с сервера
 
 var downloadIMGUserPage = (function () {
+    if (!document.querySelector('.user__main__albums')) { return };
     let listOfImg = [
         {
             'title': 'Поход в горы',
