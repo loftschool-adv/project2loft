@@ -7,7 +7,7 @@
 'use strict';
 
 let mongoose = require('mongoose');
-let config = require('./../config.json');
+let config = require('../../config.json');
 let options = {
 	user: config.db.user,
 	pass: config.db.password

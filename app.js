@@ -7,11 +7,11 @@ let pug = require('pug');
 let favicon = require('serve-favicon');
 let logger = require('morgan');
 let cookieParser = require('cookie-parser');
-let mongoose = require('./libs/mongoose.js');
+let mongoose = require('./modules/libs/mongoose.js');
 let bodyParser = require('body-parser');
 let session = require('express-session');
 let MongoStore = require('connect-mongo')(session);
-let log = require('./libs/log')(module);
+let log = require('./modules/libs/log')(module);
 
 let app = express();
 
@@ -26,7 +26,7 @@ app.use(session({
 
 
 // view engine setup
-app.set('views', path.join(__dirname, 'templates'));
+app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
 // uncomment after placing your favicon in /public

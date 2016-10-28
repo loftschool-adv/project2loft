@@ -2,8 +2,8 @@
 // Скрипт создан в целях тестирования
 
 // Подключаем файл с моделью юзеров
-let mongoose = require('./../libs/mongoose.js');
-let User = require('../models/user.js').User;
+let mongoose = require('././mongoose.js');
+let User = require('./user.js').User;
 
 // Создаем экземпляр пользователя
 let user = new User({
