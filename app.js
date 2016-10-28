@@ -7,11 +7,11 @@ let pug = require('pug');
 let favicon = require('serve-favicon');
 let logger = require('morgan');
 let cookieParser = require('cookie-parser');
-let mongoose = require('./libs/mongoose.js');
+let mongoose = require('./models/libs/mongoose.js');
 let bodyParser = require('body-parser');
 let session = require('express-session');
 let MongoStore = require('connect-mongo')(session);
-let log = require('./libs/log')(module);
+let log = require('./models/libs/log')(module);
 
 let app = express();
 
@@ -39,8 +39,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 //===маршруты===
 app.use('/', require('./routes/login.js'));
-app.use('/user', require('./routes/user.js'));
-app.use('/components', require('./routes/components.js'));
+//app.use('/components', require('./routes/components.js'));
 //=============
 
 // catch 404 and forward to error handler

@@ -1,4 +1,4 @@
-let mongoose = require('./../libs/mongoose.js');
+let mongoose = require('././mongoose.js');
 //mongoose.set('debug', true);
 let async = require('async');
 

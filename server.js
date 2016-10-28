@@ -5,7 +5,7 @@
  */
 
 let config = require('./config.json');
-let app = require('./app');
+let app = require('./app.js');
 let debug = require('debug')('project2loft:server');
 let http = require('http');
 

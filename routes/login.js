@@ -57,15 +57,19 @@ route.post('/reg/', (req,res) =>{
 
 // Вход на сайт 
 route.post('/login/', (req,res) =>{
-let User = require('../models/user.js').User;
+	let User = require('../models/user.js').User;
+	
+
 	User.findOne({'email' : req.body.email}).then((item) =>{
+		console.log(req.body);
 		if(item){
+			console.log(item);
 			if(item.checkPassword(req.body.pass)){
 				req.session.user = req.body.email;
 				res.send({status: 'login'});
 			}
 			else{
-				return sendMasage('Вы успешно зарегистрированы' , res);
+				return sendMasage('Не верный пароль' , res);
 			}
 			
 		}else{

@@ -3,7 +3,7 @@
 'use strict'
 
 let crypto = require('crypto');
-let mongoose = require('../libs/mongoose.js');
+let mongoose = require('./libs/mongoose.js');
 let Schema = mongoose.Schema;
 
 
