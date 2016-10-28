@@ -1,6 +1,6 @@
 // Описание схемы пользователей.
 
-'use strict'
+'use strict';
 
 let crypto = require('crypto');
 let mongoose = require('libs/mongoose.js');
@@ -33,7 +33,7 @@ let schema = new Schema({
 
 schema.methods.encryptPassword = function(password) {
     return crypto.createHmac('sha1', this.salt).update(password).digest('hex');
-}
+};
 
 schema.virtual('password')
     .set(function(password){
@@ -45,6 +45,6 @@ schema.virtual('password')
 
 schema.methods.checkPassword = function(password){
     return this.encryptPassword(password) === this.hashedpassword;
-}
+};
 
 exports.User = mongoose.model('User', schema);
