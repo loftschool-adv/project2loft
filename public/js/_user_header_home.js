@@ -8,6 +8,7 @@ var buttonHomeAnimate = (function () {
     let homeSVG = document.querySelector('.user__header__top__button-home__inner__path');
     return {
         'init': function () {
+            if ( !button ) { return }
             button.addEventListener('mouseenter', function (e) {
                 homeSVG.style.fill = '#ffffff';
                 hoverElem.style.opacity = '1';
