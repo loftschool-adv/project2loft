@@ -28,7 +28,7 @@ route.get('', (req,res) =>{
 
 // Регистрация новых пользоватей
 route.post('/reg/', (req,res) =>{
-	let User = require('../models/user.js').User;
+	let User = require('../modules/models/user.js').User;
 	for(let key in req.body){
 		if(!req.body[key]){
 			return sendMasage('Заполнены не все поля' , res, 1);
@@ -57,7 +57,7 @@ route.post('/reg/', (req,res) =>{
 
 // Вход на сайт 
 route.post('/login/', (req,res) =>{
-	let User = require('../models/user.js').User;
+	let User = require('../modules/models/user.js').User;
 
 
 	User.findOne({'email' : req.body.email}).then((item) =>{
