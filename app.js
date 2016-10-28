@@ -7,11 +7,11 @@ let pug = require('pug');
 let favicon = require('serve-favicon');
 let logger = require('morgan');
 let cookieParser = require('cookie-parser');
-let mongoose = require('./models/libs/mongoose.js');
+let mongoose = require('./modules/libs/mongoose.js');
 let bodyParser = require('body-parser');
 let session = require('express-session');
 let MongoStore = require('connect-mongo')(session);
-let log = require('./models/libs/log')(module);
+let log = require('./modules/libs/log')(module);
 
 let app = express();
 
