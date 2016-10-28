@@ -7,6 +7,7 @@ let route = require('express').Router();
 let mongoose = require('mongoose');
 
 
+
 let sendMasage = function(message, res, status = 0){
 	res.json(
 		{ 
@@ -15,23 +16,22 @@ let sendMasage = function(message, res, status = 0){
 		})
 };
 
-// Обращаемся к корню сайта , и рендерим шаблон из ./templates/pages/index.pug
-/*route.get('', (req,res) =>{
-	res.render('index',  { title: 'Express' });
-});*/
 
 route.get('', (req,res) =>{
-	res.render('index');
+	if(!req.session.user){
+		res.render('index');
+	}else{
+		res.render('user');
+	}
 });
 
 
 // Регистрация новых пользоватей
 route.post('/reg/', (req,res) =>{
-	let User = require('../models/user.js').User;
+	let User = require('./user.js').User;
 	for(let key in req.body){
 		if(!req.body[key]){
 			return sendMasage('Заполнены не все поля' , res, 1);
-			//return res.json({ message: 'Заполнены не все поля' });
 		}
 	}
 	User.findOne({'login' : req.body.login}).then((item) => {
@@ -52,6 +52,37 @@ route.post('/reg/', (req,res) =>{
 			});
 		}
 	})
+});
+
+
+// Вход на сайт 
+route.post('/login/', (req,res) =>{
+let User = require('./user.js').User;
+	User.findOne({'email' : req.body.email}).then((item) =>{
+		if(item){
+			if(item.checkPassword(req.body.pass)){
+				req.session.user = req.body.email;
+				res.send({status: 'login'});
+			}
+			else{
+				return sendMasage('Вы успешно зарегистрированы' , res);
+			}
+			
+		}else{
+			console.log("Такой пользователь НЕ найден");
+			res.send({});
+		}
+	});
+
+});
+
+// Выход с сайта 
+route.post('/logout/', (req,res) =>{
+	if(req.body.req == 'logout'){
+		req.session.destroy();
+		res.send({status: 'logout'});
+	}
+
 });
 
 

@@ -9,8 +9,6 @@
     display: flex;
 
     &__text-left {
-      font-size: 16px;
-      font-family: "ProximaNova";
       color: rgb(255, 255, 255);
       line-height: 1.5;
       z-index: 6;
@@ -28,10 +26,7 @@
       cursor: pointer;
     }
     &__text-right {
-      font-size: 16px;
-      font-family: "ProximaNova";
       color: rgba(255, 255, 255, 0.4);
-      line-height: 1.5;
       text-align: right;
       z-index: 5;
       width: 40%;

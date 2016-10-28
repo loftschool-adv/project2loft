@@ -1,5 +1,12 @@
+@import "variables";
+@import "mixins";
+
 @import "fonts";
 @import "index";
+
+// components
+@import "base/inputs";
+@import "base/buttons";
 
 @import "_user/_user_footer";
 @import "_user/_user_header";
