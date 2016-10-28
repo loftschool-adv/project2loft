@@ -49,7 +49,7 @@ var path = {
 	sourse : {		// Пути исходников
 
 		folder 	: 	'source',       		// Папка где лежат исходника
-		pug 		:  	'templates', 	// Папка с шаблонами
+		pug 		:  	'views', 	// Папка с шаблонами
 		sass 		: 	'style',					 	// Папка со стилями
 		libs 		: 	'node_modules',			// Папка с библиотеками
 		js 			: 	'js',								// Папка с модулями js

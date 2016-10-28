@@ -4,8 +4,8 @@
  * Module dependencies.
  */
 
-let config = require('./../config.json');
-let app = require('../app');
+let config = require('./config.json');
+let app = require('./app');
 let debug = require('debug')('project2loft:server');
 let http = require('http');
 
