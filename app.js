@@ -27,7 +27,7 @@ app.use(session({
 
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname, 'views/pages'));
 app.set('view engine', 'pug');
 
 // uncomment after placing your favicon in /public
@@ -40,8 +40,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 //===маршруты===
 app.use('/', require('./routes/login.js'));
-app.use('/user', require('./routes/user.js'));
-app.use('/components', require('./routes/components.js'));
+//app.use('/components', require('./routes/components.js'));
 //=============
 
 // catch 404 and forward to error handler
