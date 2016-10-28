@@ -164,6 +164,7 @@ var submitForm = (function() {
 		} 
 
 		console.log('всё хорошо');
+		console.log('запрос на '+url);
 		// готовим данные 
 	  data=JSON.stringify(data);
 	  console.log(data);

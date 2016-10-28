@@ -104,6 +104,7 @@ var submitForm = (function() {
 
 	var _submitFormRegistr = function(ev){
 		console.log('reg');
+
 		ev.preventDefault();
 		var form = $(this).parent(),
 				url = '/reg/',
@@ -162,7 +163,7 @@ var submitForm = (function() {
 			form.find('.popup__error').slideDown(300);
 			return false;
 		} 
-
+		console.log('запрос на '+url);
 		console.log('всё хорошо');
 		// готовим данные 
 	  data=JSON.stringify(data);
