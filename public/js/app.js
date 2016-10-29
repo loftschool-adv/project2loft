@@ -128,7 +128,9 @@ var submitForm = (function() {
 				if(servAns){
 					console.log('выводим ответ от сервера');
 					servAns.done(function(ans) {
-					console.log(ans);
+					if(ans.status == 'login'){
+             window.location.reload(true);
+            };
 				})
 			}	
 	}
