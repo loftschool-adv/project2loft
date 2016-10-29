@@ -122,17 +122,46 @@
       margin: 0 2% 20px 0;
       border-radius: 2px;
       box-shadow: 1px 2px 2px 2px #eee;
-      cursor: pointer; }
+      cursor: pointer;
+      position: relative; }
+      .user__main__albums__item__hover {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+        opacity: 0; }
+        .user__main__albums__item__hover__comment {
+          font-size: 16px;
+          font-family: "ProximaNova";
+          color: white;
+          line-height: 1.5;
+          z-index: 17;
+          margin: 150px 0 0 20px; }
+        .user__main__albums__item__hover__count {
+          font-size: 16px;
+          font-family: "ProximaNova";
+          color: white;
+          line-height: 1.5;
+          z-index: 18;
+          margin-left: 20px; }
+        .user__main__albums__item__hover:hover {
+          background: rgba(0, 0, 0, 0.5);
+          transition: .5s;
+          opacity: 1; }
       .user__main__albums__item__name {
         font-size: 16px;
         font-family: "ProximaNova";
         color: #323232;
         z-index: 43;
         height: 50px;
+        position: absolute;
         display: flex;
         align-items: center;
         justify-content: flex-end;
-        padding-right: 20px; }
+        padding-right: 10%;
+        bottom: 0;
+        width: 90%;
+        background: #ffffff; }
 
 .user__footer {
   background: url("../img/user/user_footer.png") no-repeat 50% 100%;
