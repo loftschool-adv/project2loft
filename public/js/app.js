@@ -1,7 +1,6 @@
 (function(){
 		 
 
-
 			// анимация popup
 			// при нажатии на "зарегистрироваться"
 		 $('.popup__link_registr').click(function(e){
