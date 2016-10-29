@@ -1,0 +1,30 @@
+extends ../layout
+
+block content
+    div.page-container
+        div.page-content
+            header.header-album(style="background: url(../img/album/bg-album.png) center center no-repeat; background-size:cover;")
+                div.black-over
+                div.header-album__content
+                    div.header-album__user
+                        div.header-album__user-avatar
+                            img.header-album__user-photo(src="../img/album/album-user.png", alt="фото пользователя")
+                        div.header-album__user-name Антон Черепов
+                    div.header-album__buttons
+                        div.btn.btn--light.btn--expand.btn_album
+                            svg.btn__icon
+                                use(xlink:href='/img/sprite.svg#home')
+                            span.btn__text На главную
+                        div.btn.btn--light.btn--expand.btn_album
+                            svg.btn__icon
+                                use(xlink:href='/img/sprite.svg#edit')
+                            span.btn__text Редактировать
+
+                    div.header-album__description
+                        div.header-album__title-description Лесные прогулки
+                        div.header-album__text-description  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum vero ab repudiandae veniam officia, aliquid similique aspernatur, id repellendus laudantium architecto eligendi ipsum, consequuntur cupiditate. Minima vero suscipit, molestiae distinctio.
+                ul.header-album__about-list
+                    li.header-album__about-item 18 фотографий
+                    li.header-album__about-item 12 лайков
+                    li.header-album__about-item 4 комментария
+        include  ../commons/footer

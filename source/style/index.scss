@@ -61,8 +61,6 @@ body {
 			text-indent 1s;
 	}
 
-
-
 	.width--md {
 		width: 100%;
 		max-width: 380px;
@@ -71,19 +69,21 @@ body {
 	.width--full {
 		width: 100%;
 	}
-
-
-
 // Главная страница
 .wrapper{
 	height:100vh;
 	min-height:650px;
 	background: url(../img/bg-main.png) 50% 50% no-repeat;
 	background-size: cover;
-	position: relative;
+	display:flex;
+	flex-direction:column;
 	color:#fff;
 	font-family: ProximaNova, sans-serif;
 	font-size: 14px;
+}
+.content-main{
+	flex:1;
+	display:flex;
 }
 .welcome{
 	width:580px;
@@ -101,9 +101,6 @@ body {
 	font-size: 16px;
 	line-height: 1.5;
 }
-
-
-
 .popup{
 	background-color: #fff;
 	overflow:hidden;
@@ -203,10 +200,7 @@ body {
 	padding: 10px 20px;
  }
  .flipper-container{
-	position: relative;
-	left:50%;
-	top:50%;
-	transform:translate(-50%, -50%);
+ 	margin:auto;
 	text-align:center;
 	perspective: 1000;
 }
@@ -236,11 +230,8 @@ body {
 	transform: rotateY(180deg);
 }
 .main-footer{
-	position: absolute;
-	bottom: 0;
 	padding: 20px 0;
 	text-align: center;
-	width:100%;
 	opacity:0.8;
 	font-size: 16px;
 }

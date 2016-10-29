@@ -1,0 +1,76 @@
+.page-container{
+	display:flex;
+	flex-direction:column;
+	overflow:hidden;
+	min-height:100vh;
+}
+.page-content{
+	flex:1;
+}
+.header-album{
+	min-height: 300px;
+	display:flex;
+	flex-direction: column;
+	box-shadow: inset 100vw 0px 0px 0px rgba(0, 0, 0, 0.55);
+}
+.header-album__content{
+	flex:1;
+	position:relative;
+	display:flex;
+}
+.header-album__user{
+	display: flex;
+	color:#fff;
+	align-items:center;
+	position:absolute;
+	top:20px;
+	left:85px;
+}
+.header-album__user-avatar{
+	border: 3px solid #fff;
+	border-radius: 50%;
+	width:56px;
+	height:56px;
+	margin-right: 20px;
+}
+.header-album__user-photo{
+	width:100%;
+}
+.header-album__user-name{
+	font-family: Panton, sans-serif;
+}
+.header-album__buttons{
+	position:absolute;
+	display:flex;
+	flex-direction: column;
+	right:40px;
+	top:20px;
+	align-items: flex-end;
+}
+.btn_album{
+	margin-bottom: 10px;
+}
+.header-album__description{
+	margin:auto;
+	text-align:center;
+	flex-basis: 780px;
+	color:#fff;
+	font-size: 16px;
+}
+.header-album__text-description{
+	opacity:0.8;
+}
+.header-album__title-description{
+	font: 600 21px ProximaNova, sans-serif;
+	margin-bottom: 20px;
+}
+.header-album__about-list{
+	display:flex;
+	justify-content:center;
+	align-items:center;
+	height:60px;
+	background-color: rgba(255, 255, 255, 0.85);
+}
+.header-album__about-item{
+	margin-right: 40px;
+}
