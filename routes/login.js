@@ -82,7 +82,6 @@ route.post('/logout/', (req,res) =>{
 		req.session.destroy();
 		res.send({status: 'logout'});
 	}
-
 });
 
 
