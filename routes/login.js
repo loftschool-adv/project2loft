@@ -5,6 +5,7 @@
 let express = require('express');
 let route = require('express').Router();
 let mongoose = require('mongoose');
+let sendMail = require('../modules/send-mail.js');
 
 
 let sendMasage = function (message, res, status = 0) {
@@ -93,5 +94,12 @@ route.post('/logout/', (req, res) => {
 
 });
 
+// Выход с сайта
+route.post('/recover/', (req, res) => {
+  if (req.body.email !== '') {
+    sendMail(req.body.email, 'Восстановление пароля', 'Новый пароль: 123');
+    res.send({status: 'send mail'});
+  }
+});
 
 module.exports = route;
