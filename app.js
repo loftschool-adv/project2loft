@@ -42,6 +42,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 //===маршруты===
 app.use('/', require('./routes/login.js'));
 app.use('/album', require('./routes/album.js'));
+app.use('/upload', require('./routes/upload.js'));
 app.use('/components', require('./routes/components.js'));
 //=============
 
