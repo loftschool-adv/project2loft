@@ -283,8 +283,8 @@ gulp.task('reload', function (callback) {
 // =====================  Порядок выполнения тасков  =====================
 
 
-gulp.task('default',
-  gulp.series('clean',
+gulp.task('build', gulp.series(
+    'clean',
     gulp.parallel(
       'sass',
       'pug',
@@ -293,7 +293,20 @@ gulp.task('default',
       'concat',
       'svg-sprite',
       'copy'
-    ),
-    gulp.parallel('watch', 'server')
+    )
   )
+);
+
+gulp.task('dev', gulp.series(
+    'build',
+    'watch'
+  )
+);
+
+gulp.task('default', gulp.series(
+  'build',
+  gulp.parallel(
+    'watch',
+    'server'
+  ))
 );

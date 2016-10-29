@@ -5,8 +5,17 @@
 @import "index";
 
 // components
+@import "base/grid";
+
 @import "base/inputs";
 @import "base/buttons";
+@import "base/social";
+@import "base/drop";
+@import "base/info";
+@import "base/search";
+
+@import "base/form";
+@import "base/album-card";
 
 @import "_user/_user_footer";
 @import "_user/_user_header";

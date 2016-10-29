@@ -2,25 +2,231 @@ extends layout
 
 block content
 
-	input.field(type="text")
-	textarea.field
+	.components(
+		style="min-height: 100%; padding: 50px; background: lightBlue;"
+	)
 
-	.btn Button
-	.btn.btn--clear Button
-	.btn.btn--important Button
-	.btn.btn--light Button
+		input.field(
+			type="text"
+			placeholder="placeholder"
+		)
 
-	.btn.btn--important
-		span.btn__text Button
-		svg.btn__icon
+		br
+		br
+
+		.input-complex.input-complex--search.width--md
+			input.field.input-complex__field(
+				type="text"
+				name="text"
+				placeholder="Placeholder"
+			)
+			.input-complex__side
+				svg.input-complex__icon
+					use(xlink:href='/img/sprite.svg#envelope')
+
+		br
+
+		form.search
+			input.field.search__field(
+				type="text"
+				name="text"
+				placeholder="Найти..."
+			)
+			button.search__btn
+				svg.input-complex__icon
+					use(xlink:href='/img/sprite.svg#search')
+
+		br
+
+		textarea.field(
+			placeholder="textarea"
+		)
+
+		br
+		br
+
+		ul.social
+			li.social__item
+				a.social__btn(href="#404"  title="Вконтакте")
+					svg.social__icon
+						use(xlink:href='/img/sprite.svg#soc_vk')
+			li.social__item
+				a.social__btn(href="#404"  title="Facebook")
+					svg.social__icon
+						use(xlink:href='/img/sprite.svg#soc_fb')
+			li.social__item
+				a.social__btn(href="#404"  title="Twitter")
+					svg.social__icon
+						use(xlink:href='/img/sprite.svg#soc_tw')
+			li.social__item
+				a.social__btn(href="#404"  title="Google+")
+					svg.social__icon
+						use(xlink:href='/img/sprite.svg#soc_g+')
+			li.social__item
+				.drop.drop--hover.drop--def
+					.drop__trigger
+						a.social__btn(href="#404"  title="Email")
+							svg.social__icon
+								use(xlink:href='/img/sprite.svg#soc_email')
+					.drop__main.drop__main--md
+						form.form
+							.form__row
+								input.field.field--bordered.width--full(
+									type="email"
+									placeholder="email"
+								)
+							.form__row
+								button.btn.btn--clear
+									.btn__text Сохранить
+								button.btn.btn--text(type="button")
+									.btn__text Отменить
+
+		span < has drop
+
+		br
+		br
+
+		.btn btn
+		.btn.btn--clear btn--clear
+		.btn.btn--important btn--important
+		.btn.btn--light btn--light
+
+		.btn.btn--important
+			span.btn__text text
+			svg.btn__icon
 				use(xlink:href='/img/sprite.svg#envelope')
 
-	.btn.btn--light
-		svg.btn__icon
-				use(xlink:href='/img/sprite.svg#envelope')
-		span.btn__text Button
+		.btn.btn--text
+			span.btn__text btn--text
 
-	.btn.btn--light.btn--expand
-		svg.btn__icon
+		.btn.btn--light
+			svg.btn__icon
 				use(xlink:href='/img/sprite.svg#envelope')
-		span.btn__text Button
+			span.btn__text btn--light
+
+		br
+
+		.btn.btn--text
+			span.btn__text btn--text
+
+		.btn.btn--text-important
+			span.btn__text btn--text-important
+
+		br
+
+		.btn.btn--icon(title="Редактировать")
+			svg.btn__icon
+				use(xlink:href='/img/sprite.svg#edit')
+
+		.btn.btn--light.btn--expand
+			svg.btn__icon
+				use(xlink:href='/img/sprite.svg#edit')
+			span.btn__text btn--expand
+
+		.btn.btn--light.btn--expand
+			svg.btn__icon
+				use(xlink:href='/img/sprite.svg#off')
+			span.btn__text Выйти
+
+		br
+		br
+
+		.grid.grid--4
+			.grid__item
+				.album-card
+					a.album-card__head(href="#404")
+						.album-card__info
+							.album-card__title Фотографии природы леса, енотов и оленей...
+							.album-card__cnt 18 фотографий
+
+
+					.album-card__foot
+						.album-card__foot-part
+							a.btn.btn--icon(href="#404"  title="Редактировать")
+								svg.btn__icon
+									use(xlink:href='/img/sprite.svg#edit')
+
+
+						.album-card__foot-part
+							a.album-card__link(href="#404") Название альбома
+
+
+			.grid__item
+				.album-card
+					a.album-card__head(href="#404")
+						.album-card__details
+							.info
+								.info__item
+									svg.info__icon
+										use(xlink:href='/img/sprite.svg#comments')
+									span.info__text 2
+
+								.info__item
+									svg.info__icon
+										use(xlink:href='/img/sprite.svg#like')
+									span.info__text 10
+
+
+					.album-card__foot
+						.album-card__foot-part
+							a.btn.btn--icon(href="#404"  title="Редактировать")
+								svg.btn__icon
+									use(xlink:href='/img/sprite.svg#edit')
+
+
+						.album-card__foot-part
+							a.album-card__link(href="#404") Название альбома
+
+
+			.grid__item
+				.album-card
+					a.album-card__head(href="#404")
+						.album-card__details
+							.info
+								.info__item
+									svg.info__icon
+										use(xlink:href='/img/sprite.svg#comments')
+									span.info__text 2
+
+								.info__item
+									svg.info__icon
+										use(xlink:href='/img/sprite.svg#like')
+									span.info__text 10
+
+
+					.album-card__foot
+						.album-card__foot-part
+							a.btn.btn--icon(href="#404"  title="Редактировать")
+								svg.btn__icon
+									use(xlink:href='/img/sprite.svg#edit')
+
+
+						.album-card__foot-part
+							a.album-card__link(href="#404") Название альбома
+
+
+			.grid__item
+				.album-card
+					a.album-card__head(href="#404")
+						.album-card__details
+							.info
+								.info__item
+									svg.info__icon
+										use(xlink:href='/img/sprite.svg#comments')
+									span.info__text 2
+
+								.info__item
+									svg.info__icon
+										use(xlink:href='/img/sprite.svg#like')
+									span.info__text 10
+
+
+					.album-card__foot
+						.album-card__foot-part
+							a.btn.btn--icon(href="#404"  title="Редактировать")
+								svg.btn__icon
+									use(xlink:href='/img/sprite.svg#edit')
+
+
+						.album-card__foot-part
+							a.album-card__link(href="#404") Название альбома

@@ -24,7 +24,7 @@ var validation = (function() {
 
 // функция валидации формы
 var validateForm = function(form) {
-	var 
+	var
 			elements = form.find('input'),
 			valid = true;
 // Проверяем все input
@@ -41,8 +41,8 @@ var validateForm = function(form) {
 };
 
 var clearForm = function(form) {
-	
-	var 
+
+	var
 			elements = form.find('input');
 
 	$.each(elements, function(index, val){
@@ -77,7 +77,7 @@ var registration = (function() {
 		ev.preventDefault();
 		var form = $(this).parent(),
 				url = '/reg/',
-				data = 
+				data =
 				{
 	    		login: form.find('input[name = "user"]').val(),
 	    		email: form.find('input[name = "mail"]').val(),
@@ -89,13 +89,13 @@ var registration = (function() {
 					servAns.done(function(ans) {
 						console.log(ans);
 				})
-			}	
+			}
 	}
 	var _ajaxForm = function (form, url, data){
 		//если валидация прошла успешно, отправляем запрос на сервер
 		if (!validation.validateForm(form)) return false;
 		console.log('всё хорошо');
-		// готовим данные 
+		// готовим данные
 	  data=JSON.stringify(data);
 	  console.log(data);
 	  // отправляем
@@ -133,7 +133,7 @@ var login = (function() {
 		ev.preventDefault();
 		var form = $(this).parent(),
 				url = '/login/',
-				data = 
+				data =
 				{
 	    		email: $('input[name = "mail"]').val(),
 	    		pass: $('input[name = "password"]').val(),
@@ -146,13 +146,13 @@ var login = (function() {
 						window.location.reload(true);
 					};
 				})
-			}	
+			}
 	}
 	var _ajaxForm = function (form, url, data){
 		//если валидация прошла успешно, отправляем запрос на сервер
 		if (!validation.validateForm(form)) return false;
 		console.log('всё хорошо');
-		// готовим данные 
+		// готовим данные
 	  data=JSON.stringify(data);
 	  console.log(data);
 	  // отправляем
@@ -171,3 +171,27 @@ var login = (function() {
 	};
 })();
 login.init();
+
+
+
+
+
+$( document ).ready(function() {
+
+	// drop - элемент с выпадающим блоком
+	(function() {
+		$(document).on('click', '.drop__trigger', function(e) {
+			e.preventDefault();
+
+			var trigger     = $(this);
+			var container   = trigger.closest('.drop');
+			var content     = container.find('.drop__main');
+			var classActive = 'drop--open';
+
+			if(container.hasClass('drop--hover')) return;
+
+			container.toggleClass( classActive );
+		});
+	})();
+
+});
