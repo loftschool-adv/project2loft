@@ -16,6 +16,7 @@
     "jquery": "^3.1.1",
     "mongoose": "^4.6.5",
     "morgan": "~1.7.0",
+    "nodemailer": "^2.6.4",
     "normalize.css": "^5.0.0",
     "pug": "^2.0.0-beta6",
     "serve-favicon": "~2.3.0",
