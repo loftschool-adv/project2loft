@@ -12,19 +12,9 @@ let bodyParser = require('body-parser');
 let session = require('express-session');
 let MongoStore = require('connect-mongo')(session);
 let log = require('./modules/libs/log')(module);
-//let nodemailer = require('nodemailer');
+
 
 let app = express();
-
-// mail test //////
-
-//var transporter = nodemailer.createTransport('smtps://user%40gmail.com:pass@smtp.gmail.com');
-
-
-
-
-//////////////////
-
 
 // Create session
 app.use(session({

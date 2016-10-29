@@ -1,0 +1,31 @@
+.info {}
+
+	.info__item {
+		display: inline-block;
+		vertical-align: middle;
+		margin-right: 15px;
+		text-shadow: 1px 1px 0 rgba(0,0,0,.1);
+
+		&:last-child {
+			margin-right: 0;
+		}
+	}
+
+		.info__icon {
+			display: inline-block;
+			vertical-align: middle;
+			width:  20px;
+			height: 20px;
+			fill: currentColor;
+			opacity: .4;
+		}
+
+		.info__text {
+			display: inline-block;
+			vertical-align: middle;
+
+			& + .info__icon,
+			.info__icon + & {
+				margin-left: 10px;
+			}
+		}

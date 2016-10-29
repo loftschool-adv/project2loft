@@ -1,0 +1,25 @@
+.grid {
+	display: flex;
+	flex-flow: row wrap;
+	margin-left: -20px;
+}
+
+	.grid__item {
+		min-width: 250px;
+		margin-bottom: 20px;
+		padding-left: 20px;
+	}
+
+
+
+.grid--3 {
+	& .grid__item {
+		width: 33.333%;
+	}
+}
+
+.grid--4 {
+	& .grid__item {
+		width: 25%;
+	}
+}
