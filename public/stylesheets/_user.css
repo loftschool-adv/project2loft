@@ -1,14 +1,14 @@
-.user__header {
+.header {
   height: 300px;
   width: 100%;
   background: url("../img/user/user_header.png") no-repeat;
   background-size: cover; }
-  .user__header__top {
+  .header__top {
     background: linear-gradient(to right, rgba(101, 101, 108, 0.5), rgba(246, 247, 252, 0.5));
     display: flex;
     align-items: center;
     height: 240px; }
-    .user__header__top__avatar {
+    .header__top__avatar {
       width: 7.5rem;
       height: 7.5rem;
       border-radius: 50%;
@@ -16,91 +16,94 @@
       border: 2px solid #ffffff;
       margin: 0 0 0 6%;
       min-width: 120px; }
-    .user__header__top__breef {
+    .header__top__breef {
       display: flex;
       flex-direction: column;
       margin-left: 3%; }
-      .user__header__top__breef__title {
+      .header__top__breef__title {
         font-size: 21px;
         font-family: "Panton";
         color: white;
         font-weight: bold;
         line-height: 1;
         z-index: 65; }
-      .user__header__top__breef__subtitle {
+      .header__top__breef__subtitle {
         font-size: 16px;
         font-family: "ProximaNova";
         color: rgba(255, 255, 255, 0.8);
         line-height: 1.5;
         z-index: 64; }
-      .user__header__top__breef__social-buttons__link {
-        text-decoration: none; }
-        .user__header__top__breef__social-buttons__link svg {
-          cursor: pointer; }
-          .user__header__top__breef__social-buttons__link svg path {
-            fill: rgba(255, 255, 255, 0.7); }
-          .user__header__top__breef__social-buttons__link svg:hover path {
-            transition: .5s;
-            fill: white; }
-    .user__header__top__button-home {
-      position: absolute;
-      top: 20px;
-      right: 40px;
-      background: #fff;
-      width: 30px;
-      height: 40px;
-      border-radius: 20px;
-      box-shadow: -1px 1px 2px 2px #d1d2d6;
-      display: flex;
-      justify-content: flex-start;
-      padding-left: 10px;
-      align-items: center;
-      cursor: pointer;
-      transition: 1s; }
-      .user__header__top__button-home:hover {
-        width: 120px;
-        background: #28bbf0; }
-      .user__header__top__button-home__hover {
-        margin-left: 30px;
-        opacity: 0;
-        transition: 1s;
-        font-size: 14px;
-        font-family: "Panton";
-        color: white;
-        font-weight: bold;
-        line-height: 1.5;
-        z-index: 74;
-        width: 100px;
-        position: absolute; }
-      .user__header__top__button-home__inner__path {
-        fill: #a0a09f;
-        transition: 1s; }
-  .user__header__search {
-    height: 60px;
-    background: rgba(229, 229, 229, 0.9);
-    display: flex;
-    justify-content: flex-end;
-    align-items: center; }
-    .user__header__search__wrap::before {
-      content: ' ';
-      position: absolute;
-      width: 15px;
-      height: 15px;
-      background: url("../img/icons/search.svg") no-repeat;
-      margin: 15px 0 0 15px;
-      opacity: .8; }
-    .user__header__search__wrap__input {
-      padding-left: 45px;
-      font-size: 16px;
-      margin-right: 60px;
-      font-family: "ProximaNova";
-      color: rgba(50, 50, 50, 0.6);
-      line-height: 1.313;
-      z-index: 53;
-      width: 335px;
-      height: 40px;
-      border: none;
-      border-radius: 20px; }
+
+.header__search {
+  height: 60px;
+  background: rgba(229, 229, 229, 0.9);
+  display: flex;
+  justify-content: flex-end;
+  align-items: center; }
+  .header__search__wrap::before {
+    content: ' ';
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    background: url("../img/icons/search.svg") no-repeat;
+    margin: 15px 0 0 15px;
+    opacity: .8; }
+  .header__search__wrap__input {
+    padding-left: 45px;
+    font-size: 16px;
+    margin-right: 60px;
+    font-family: "ProximaNova";
+    color: rgba(50, 50, 50, 0.6);
+    line-height: 1.313;
+    z-index: 53;
+    width: 335px;
+    height: 40px;
+    border: none;
+    border-radius: 20px; }
+
+.button-home {
+  position: absolute;
+  top: 20px;
+  right: 40px;
+  background: #fff;
+  width: 30px;
+  height: 40px;
+  border-radius: 20px;
+  box-shadow: -1px 1px 2px 2px #d1d2d6;
+  display: flex;
+  justify-content: flex-start;
+  padding-left: 10px;
+  align-items: center;
+  cursor: pointer;
+  transition: 1s; }
+  .button-home:hover {
+    width: 120px;
+    background: #28bbf0; }
+  .button-home__hover {
+    margin-left: 30px;
+    opacity: 0;
+    transition: 1s;
+    font-size: 14px;
+    font-family: "Panton";
+    color: white;
+    font-weight: bold;
+    line-height: 1.5;
+    z-index: 74;
+    width: 100px;
+    position: absolute; }
+  .button-home__inner__path {
+    fill: #a0a09f;
+    transition: 1s; }
+
+.social-buttons__link {
+  text-decoration: none; }
+  .social-buttons__link svg {
+    cursor: pointer; }
+    .social-buttons__link svg path {
+      fill: rgba(255, 255, 255, 0.7); }
+    .social-buttons__link svg:hover path {
+      transition: .5s;
+      fill: white; }
 
 .user__main {
   padding: 60px 5%; }

@@ -1,4 +1,5 @@
-.user__header {
+//Block header content start
+.header {
   height: 300px;
   width: 100%;
   background: url("../img/user/user_header.png") no-repeat;
@@ -41,94 +42,104 @@
         line-height: 1.5;
         z-index: 64;
       }
-      &__social-buttons {
-        &__link {
-          text-decoration: none;
-          svg {
-            cursor: pointer;
-            path {
-              fill: rgba(255, 255, 255, .7);
-            }
-            &:hover {
-              path {
-                transition: .5s;
-                fill: rgba(255, 255, 255, 1);
-              }
-            }
-          }
-        }
-      }
-    }
-    &__button-home {
-      position: absolute;
-      top: 20px;
-      right: 40px;
-      background: #fff;
-      width: 30px;
-      height: 40px;
-      border-radius: 20px;
-      box-shadow: -1px 1px 2px 2px #d1d2d6;
-      display: flex;
-      justify-content: flex-start;
-      padding-left: 10px;
-      align-items: center;
-      cursor: pointer;
-      transition: 1s;
-
-      &:hover {
-        width: 120px;
-        background: #28bbf0;
-      }
-      &__hover {
-        margin-left: 30px;
-        opacity: 0;
-        transition: 1s;
-        font-size: 14px;
-        font-family: "Panton";
-        color: rgb(255, 255, 255);
-        font-weight: bold;
-        line-height: 1.5;
-        z-index: 74;
-        width: 100px;
-        position: absolute;
-      }
-      &__inner {
-        &__path {
-          fill:#a0a09f;
-          transition: 1s;
-        }
-      }
     }
   }
-  &__search {
-    height: 60px;
-    background: rgba(229,229,229, .9);
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    &__wrap {
-      &::before {
-        content: ' ';
-        position: absolute;
-        width: 15px;
-        height: 15px;
-        background: url("../img/icons/search.svg") no-repeat;
-        margin: 15px 0 0 15px;
-        opacity: .8;
+}
+
+//Block header content end
+// Block search in the header start
+.header__search {
+  height: 60px;
+  background: rgba(229,229,229, .9);
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  &__wrap {
+    &::before {
+      content: ' ';
+      position: absolute;
+      width: 15px;
+      height: 15px;
+      background: url("../img/icons/search.svg") no-repeat;
+      margin: 15px 0 0 15px;
+      opacity: .8;
+    }
+    &__input {
+      padding-left: 45px;
+      font-size: 16px;
+      margin-right: 60px;
+      font-family: "ProximaNova";
+      color: rgba(50, 50, 50, 0.6);
+      line-height: 1.313;
+      z-index: 53;
+      width: 335px;
+      height: 40px;
+      border: none;
+      border-radius: 20px;
+    }
+  }
+}
+// Block search in the header end
+// Block Button home in the header start
+.button-home {
+  position: absolute;
+  top: 20px;
+  right: 40px;
+  background: #fff;
+  width: 30px;
+  height: 40px;
+  border-radius: 20px;
+  box-shadow: -1px 1px 2px 2px #d1d2d6;
+  display: flex;
+  justify-content: flex-start;
+  padding-left: 10px;
+  align-items: center;
+  cursor: pointer;
+  transition: 1s;
+
+  &:hover {
+    width: 120px;
+    background: #28bbf0;
+  }
+
+  &__hover {
+    margin-left: 30px;
+    opacity: 0;
+    transition: 1s;
+    font-size: 14px;
+    font-family: "Panton";
+    color: rgb(255, 255, 255);
+    font-weight: bold;
+    line-height: 1.5;
+    z-index: 74;
+    width: 100px;
+    position: absolute;
+  }
+
+  &__inner {
+    &__path {
+      fill:#a0a09f;
+      transition: 1s;
+    }
+  }
+}
+// Block Button home in the header end
+// Social buttons start
+.social-buttons {
+  &__link {
+    text-decoration: none;
+    svg {
+      cursor: pointer;
+      path {
+        fill: rgba(255, 255, 255, .7);
       }
-      &__input {
-        padding-left: 45px;
-        font-size: 16px;
-        margin-right: 60px;
-        font-family: "ProximaNova";
-        color: rgba(50, 50, 50, 0.6);
-        line-height: 1.313;
-        z-index: 53;
-        width: 335px;
-        height: 40px;
-        border: none;
-        border-radius: 20px;
+      &:hover {
+        path {
+          transition: .5s;
+          fill: rgba(255, 255, 255, 1);
+        }
       }
     }
   }
 }
+// Social buttons end

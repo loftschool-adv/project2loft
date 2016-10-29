@@ -3,10 +3,10 @@
 // Анимация конпки Домой на странице user
 "use strict";
 var buttonHomeAnimate = (function () {
-    if (!document.querySelector('.user__header__top__button-home')) { return }
-    let button = document.querySelector('.user__header__top__button-home');
-    let hoverElem = document.querySelector('.user__header__top__button-home__hover');
-    let homeSVG = document.querySelector('.user__header__top__button-home__inner__path');
+    if (!document.querySelector('.button-home')) { return }
+    let button = document.querySelector('.button-home');
+    let hoverElem = document.querySelector('.button-home__hover');
+    let homeSVG = document.querySelector('.button-home__inner__path');
     return {
         'init': function () {
             if ( !button ) { return }
