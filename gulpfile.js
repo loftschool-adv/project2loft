@@ -220,7 +220,7 @@ gulp.task('copy', function (callback) {
   // Переносим картинки
 
   gulp.src(path.sourse.folder + '/' + path.sourse.img + '/**/*')
-    .pipe(gulp.dest(path.build.folder + "/" + path.build.img));
+    .pipe(gulp.dest(path.build.folder + "/" + path.build.img))
 
   callback();
 
@@ -234,7 +234,7 @@ gulp.task('concat', function (callback) {
   // main.js
   gulp.src(mainJs)
     .pipe(concat(path.build.js_file))
-    .pipe(gulp.dest(path.build.folder + '/' + path.build.js));
+    .pipe(gulp.dest(path.build.folder + '/' + path.build.js))
 
   // Тут можно продолжить таск, если нужно чтобы было несколько склееных файлов js
 

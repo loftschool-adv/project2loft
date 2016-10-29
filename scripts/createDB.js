@@ -33,7 +33,7 @@ function dropDatabase(callback){
 
 // Функция не работает как хотелось бы, пока только устанавливает соединение с моделью user
 function requireModels(callback){
-	let User = require('./user.js').User;
+	let User = require('../models/user.js').User;
 	User.on('index', callback);
 }
 
