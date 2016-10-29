@@ -98,17 +98,15 @@ var submitForm = (function() {
 	var _submitFormRegistr = function(ev){
 		console.log('reg');
 		ev.preventDefault();
-		
 		var form = $(this).parent(),
 				url = '/reg/',
 				data = 
 				{
-	    		login: form.find('input[name = "user"]').val(),
-	    		email: form.find('input[name = "mail"]').val(),
-	    		pass: form.find('input[name = "password"]').val(),
+	    		login: form.find('input[name = "login"]').val(),
+	    		email: form.find('input[name = "email"]').val(),
+	    		pass: form.find('input[name = "pass"]').val(),
 	   		},
 				servAns = _ajaxForm(form, url, data);
-				console.log(form.find('input'))
 				if(servAns){
 					console.log('выводим ответ от сервера');
 					servAns.done(function(ans) {
@@ -123,23 +121,17 @@ var submitForm = (function() {
 				url = '/login/',
 				data = 
 				{
-	    		email: form.find('input[name = "mail"]').val(),
-	    		pass: form.find('input[name = "password"]').val(),
+	    		email: form.find('input[name = "email"]').val(),
+	    		pass: form.find('input[name = "pass"]').val(),
 	   		},
 				servAns = _ajaxForm(form, url, data);
 				if(servAns){
 					console.log('выводим ответ от сервера');
 					servAns.done(function(ans) {
 					if(ans.status == 'login'){
-<<<<<<< HEAD
              window.location.reload(true);
             }
 				});
-=======
-						window.location.reload(true);
-					};
-				})
->>>>>>> 8b6db503f1a71240002b32e49b2991c374397bf1
 			}	
 	};
 	var _submitFormRecover = function(ev){

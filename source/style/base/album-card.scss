@@ -8,7 +8,7 @@
 	.album-card__head {
 		position: relative;
 		display: block;
-		background: #eee;
+		background: #eee  url('../img/no_photo.jpg') no-repeat  center / cover;
 		color: $white;
 		overflow: hidden;
 
@@ -50,12 +50,6 @@
 			}
 
 
-		.album-card__details {
-			position: absolute;
-			left: 20px;  bottom: 20px;
-		}
-
-
 	.album-card__foot {
 		display: flex;
 		padding: 15px 20px;
@@ -72,5 +66,10 @@
 		.album-card__link {
 			color: inherit;
 			font-weight: 600;
+			transition: color .5s;
+
+			&:hover {
+				color: $blue;
+			}
 		}
 

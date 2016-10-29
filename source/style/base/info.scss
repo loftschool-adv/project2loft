@@ -1,10 +1,13 @@
-.info {}
+.info {
+	user-select: none;
+}
 
 	.info__item {
 		display: inline-block;
 		vertical-align: middle;
 		margin-right: 15px;
 		text-shadow: 1px 1px 0 rgba(0,0,0,.1);
+		color: inherit;
 
 		&:last-child {
 			margin-right: 0;
@@ -17,7 +20,11 @@
 			width:  20px;
 			height: 20px;
 			fill: currentColor;
-			opacity: .4;
+			opacity: .2;
+			transition:
+				fill,
+				opacity;
+			transition-duration: .5s
 		}
 
 		.info__text {
@@ -29,3 +36,13 @@
 				margin-left: 10px;
 			}
 		}
+
+
+
+.info--light {
+	color: $white;
+}
+
+	.info--light  .info__icon {
+		opacity: .4;
+	}
