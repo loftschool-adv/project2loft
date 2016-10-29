@@ -18,9 +18,10 @@ let app = express();
 // Create session
 app.use(session({
   secret: 'photo',
+  store : new MongoStore({mongooseConnection: mongoose.connection}),
   saveUnitialized: false,
   resave: false,
-  store : new MongoStore({mongooseConnection: mongoose.connection})
+  saveUninitialized: false
 }));
 
 
