@@ -1,5 +1,5 @@
 (function(){
-		 
+
 			 // устанавливаем высоту для flipp
 			$('.flipper').height($('.front').height());
 
@@ -24,6 +24,7 @@
 		 	$('.flipper-container').addClass('flipp');
 	 });
 })();
+
 
 // модуль валидации
 var validation = (function() {
@@ -134,14 +135,14 @@ var submitForm = (function() {
 					servAns.done(function(ans) {
 					console.log(ans);
 				})
-			}	
+			}
 	}
 	var _submitFormRecover = function(ev){
 		console.log('recover');
 		ev.preventDefault();
 		var form = $(this).parent(),
 				url = '',
-				data = 
+				data =
 				{
 	    		email: form.find('input[name = "email"]').val(),
 	   		},
@@ -158,11 +159,11 @@ var submitForm = (function() {
 		if (!validation.validateForm(form)){
 			form.find('.popup__error').slideDown(300);
 			return false;
-		} 
+		}
 
 		console.log('всё хорошо');
 		console.log('запрос на '+url);
-		// готовим данные 
+		// готовим данные
 	  data=JSON.stringify(data);
 	  console.log(data);
 	  // отправляем
@@ -181,3 +182,27 @@ var submitForm = (function() {
 	};
 })();
 submitForm.init();
+
+
+
+
+
+$( document ).ready(function() {
+
+	// drop - элемент с выпадающим блоком
+	(function() {
+		$(document).on('click', '.drop__trigger', function(e) {
+			e.preventDefault();
+
+			var trigger     = $(this);
+			var container   = trigger.closest('.drop');
+			var content     = container.find('.drop__main');
+			var classActive = 'drop--open';
+
+			if(container.hasClass('drop--hover')) return;
+
+			container.toggleClass( classActive );
+		});
+	})();
+
+});

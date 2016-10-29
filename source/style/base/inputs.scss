@@ -1,9 +1,11 @@
 .field {
-	padding: .8em 1.35em;
+	padding: .625em 1.35em;
 	border: 1px solid transparent;
 	border-radius: 20px;
 	outline: none;
 	background: #fff;
+	font: inherit;
+	line-height: 1;
 	transition:
 		color .5s,
 		border-color .5s;
@@ -21,9 +23,14 @@
 
 textarea.field {
 	vertical-align: top;
-	min-height: 8.8em;
-	max-height: 12em;
+	min-height: 90px;
+	font: inherit;
 	resize: none;
+}
+
+
+.field--bordered {
+	border-color: $gray;
 }
 
 
