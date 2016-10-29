@@ -179,3 +179,27 @@ var submitForm = (function() {
 	};
 })();
 submitForm.init();
+
+
+
+
+
+$( document ).ready(function() {
+
+	// drop - элемент с выпадающим блоком
+	(function() {
+		$(document).on('click', '.drop__trigger', function(e) {
+			e.preventDefault();
+
+			var trigger     = $(this);
+			var container   = trigger.closest('.drop');
+			var content     = container.find('.drop__main');
+			var classActive = 'drop--open';
+
+			if(container.hasClass('drop--hover')) return;
+
+			container.toggleClass( classActive );
+		});
+	})();
+
+});
