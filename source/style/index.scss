@@ -40,6 +40,33 @@ body {
 }
 
 
+.link {
+	display: inline-flex;
+
+	&:hover {
+		& .link__icon {
+			opacity: 1;
+		}
+	}
+}
+
+	.link__icon {
+		flex-shrink: 0;
+		width:  20px;
+		height: 20px;
+		fill: currentColor;
+		opacity: .4;
+		transition: opacity .5s;
+
+		& + .link__text,
+		.link__text + & {
+			margin-left: .65em;
+		}
+	}
+
+	.link__text {}
+
+
 ::selection {
 	background: rgba($blue, .7);
 	color: rgba(255,255,255,.9);
@@ -61,6 +88,7 @@ body {
 			text-indent 1s;
 	}
 
+
 	.width--md {
 		width: 100%;
 		max-width: 380px;
@@ -69,6 +97,9 @@ body {
 	.width--full {
 		width: 100%;
 	}
+
+
+
 // Главная страница
 .wrapper{
 	height:100vh;
@@ -87,7 +118,7 @@ body {
 }
 .welcome{
 	width:580px;
-	text-align: center;	
+	text-align: center;
 	margin-bottom: 20px;
 }
 .welcome__title{
