@@ -6,6 +6,7 @@ let express = require('express');
 let route = require('express').Router();
 let mongoose = require('mongoose');
 let sendMail = require('../modules/send-mail.js');
+let creatPassword = require('../modules/creat-password.js');
 
 
 let sendMasage = function (message, res, status = 0) {
@@ -94,13 +95,16 @@ route.post('/logout/', (req, res) => {
 
 // Выход с сайта
 route.post('/recover/', (req, res) => {
-  if (req.body.email !== '') {
+  let User = require('../modules/models/user.js').User;
+  User.findOne({'email': req.body.email}).then((item) => {
+    creatPassword(item);
 
-    let pass =  Math.floor(Math.random() * (999999 - 1)) + 1;
 
-      sendMail(req.body.email, 'Восстановление пароля', 'Новый пароль: ' + pass);
+    let pass = Math.floor(Math.random() * (999999 - 1)) + 1;
+
+    //sendMail(req.body.email, 'Восстановление пароля', 'Новый пароль: ' + pass);
     res.send({status: 'new pass: ' + pass});
-  }
+  });
 
 });
 
