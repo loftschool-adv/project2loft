@@ -13,20 +13,22 @@ let session = require('express-session');
 let MongoStore = require('connect-mongo')(session);
 let log = require('./models/libs/log')(module);
 
+
 let app = express();
 
 // Create session
 app.use(session({
   secret: 'photo',
+  store : new MongoStore({mongooseConnection: mongoose.connection}),
   saveUnitialized: false,
   resave: false,
-  store : new MongoStore({mongooseConnection: mongoose.connection})
+  saveUninitialized: false
 }));
 
 
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname, 'views/pages'));
 app.set('view engine', 'pug');
 
 // uncomment after placing your favicon in /public
@@ -39,7 +41,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 //===маршруты===
 app.use('/', require('./routes/login.js'));
-app.use('/user', require('./routes/user.js'));
+app.use('/album', require('./routes/album.js'));
 app.use('/components', require('./routes/components.js'));
 //=============
 

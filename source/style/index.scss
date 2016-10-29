@@ -40,6 +40,33 @@ body {
 }
 
 
+.link {
+	display: inline-flex;
+
+	&:hover {
+		& .link__icon {
+			opacity: 1;
+		}
+	}
+}
+
+	.link__icon {
+		flex-shrink: 0;
+		width:  20px;
+		height: 20px;
+		fill: currentColor;
+		opacity: .4;
+		transition: opacity .5s;
+
+		& + .link__text,
+		.link__text + & {
+			margin-left: .65em;
+		}
+	}
+
+	.link__text {}
+
+
 ::selection {
 	background: rgba($blue, .7);
 	color: rgba(255,255,255,.9);
@@ -62,7 +89,6 @@ body {
 	}
 
 
-
 	.width--md {
 		width: 100%;
 		max-width: 380px;
@@ -80,14 +106,19 @@ body {
 	min-height:650px;
 	background: url(../img/bg-main.png) 50% 50% no-repeat;
 	background-size: cover;
-	position: relative;
+	display:flex;
+	flex-direction:column;
 	color:#fff;
 	font-family: ProximaNova, sans-serif;
 	font-size: 14px;
 }
+.content-main{
+	flex:1;
+	display:flex;
+}
 .welcome{
 	width:580px;
-	text-align: center;	
+	text-align: center;
 	margin-bottom: 20px;
 }
 .welcome__title{
@@ -101,9 +132,6 @@ body {
 	font-size: 16px;
 	line-height: 1.5;
 }
-
-
-
 .popup{
 	background-color: #fff;
 	overflow:hidden;
@@ -203,10 +231,7 @@ body {
 	padding: 10px 20px;
  }
  .flipper-container{
-	position: relative;
-	left:50%;
-	top:50%;
-	transform:translate(-50%, -50%);
+ 	margin:auto;
 	text-align:center;
 	perspective: 1000;
 }
@@ -214,6 +239,7 @@ body {
 		transform: rotateY(180deg);
 	}
 .flipper {
+	min-height:354px;
 	transform: rotateX(-90deg);
 	transition: transform 0.7s;
 	transform-style: preserve-3d;
@@ -236,11 +262,8 @@ body {
 	transform: rotateY(180deg);
 }
 .main-footer{
-	position: absolute;
-	bottom: 0;
 	padding: 20px 0;
 	text-align: center;
-	width:100%;
 	opacity:0.8;
 	font-size: 16px;
 }

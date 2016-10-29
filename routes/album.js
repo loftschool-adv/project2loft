@@ -10,7 +10,7 @@ let route = require('express').Router();
 
 // Обращаемся к корню сайта , и рендерим шаблон из ./views/pages/index.pug
 route.get('/', (req,res) =>{
-  res.render('pages/user',  { title: 'Express' });
+  res.render('album',  { title: 'Альбомы' });
 });
 
 

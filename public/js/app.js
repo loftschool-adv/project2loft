@@ -1,11 +1,4 @@
 (function(){
-		 
-			 // устанавливаем высоту для flipp
-			$('.flipper').height($('.front').height());
-			// центрируем popup
-			var trY = ($('.welcome').height()+$('.flipper-container').height())/2;
-			$('.flipper-container').css('transform','translate(-50%, -' +trY+'px)');
-
 			// анимация popup
 			// при нажатии на "зарегистрироваться"
 		 $('.popup__link_registr').click(function(e){
@@ -136,15 +129,17 @@ var submitForm = (function() {
 				if(servAns){
 					console.log('выводим ответ от сервера');
 					servAns.done(function(ans) {
-					console.log(ans);
-				})
+					if(ans.status == 'login'){
+             window.location.reload(true);
+            }
+				});
 			}	
-	}
+	};
 	var _submitFormRecover = function(ev){
 		console.log('recover');
 		ev.preventDefault();
 		var form = $(this).parent(),
-				url = '',
+				url = '/recover/',
 				data = 
 				{
 	    		email: form.find('input[name = "email"]').val(),
@@ -184,3 +179,27 @@ var submitForm = (function() {
 	};
 })();
 submitForm.init();
+
+
+
+
+
+$( document ).ready(function() {
+
+	// drop - элемент с выпадающим блоком
+	(function() {
+		$(document).on('click', '.drop__trigger', function(e) {
+			e.preventDefault();
+
+			var trigger     = $(this);
+			var container   = trigger.closest('.drop');
+			var content     = container.find('.drop__main');
+			var classActive = 'drop--open';
+
+			if(container.hasClass('drop--hover')) return;
+
+			container.toggleClass( classActive );
+		});
+	})();
+
+});
