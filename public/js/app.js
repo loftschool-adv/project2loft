@@ -130,15 +130,15 @@ var submitForm = (function() {
 					servAns.done(function(ans) {
 					if(ans.status == 'login'){
              window.location.reload(true);
-            };
-				})
+            }
+				});
 			}	
-	}
+	};
 	var _submitFormRecover = function(ev){
 		console.log('recover');
 		ev.preventDefault();
 		var form = $(this).parent(),
-				url = '',
+				url = '/recover/',
 				data = 
 				{
 	    		email: form.find('input[name = "email"]').val(),

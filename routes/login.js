@@ -97,9 +97,13 @@ route.post('/logout/', (req, res) => {
 // Выход с сайта
 route.post('/recover/', (req, res) => {
   if (req.body.email !== '') {
-    sendMail(req.body.email, 'Восстановление пароля', 'Новый пароль: 123');
-    res.send({status: 'send mail'});
+
+    let pass =  Math.floor(Math.random() * (999999 - 1)) + 1;
+
+      sendMail(req.body.email, 'Восстановление пароля', 'Новый пароль: ' + pass);
+    res.send({status: 'new pass: ' + pass});
   }
+
 });
 
 module.exports = route;
