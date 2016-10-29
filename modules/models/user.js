@@ -28,6 +28,16 @@ let schema = new Schema({
     created : {
         type : Date,
         default: Date.now
+    },
+    name: {
+        type: String,
+        required: false,
+        default: "Пользователь"
+    },
+    about: {
+        type: String,
+        required: false,
+        default: "Обо мне"
     }
 });
 
@@ -41,7 +51,7 @@ schema.virtual('password')
         this.salt = Math.random() + '';
         this.hashedpassword = this.encryptPassword(password);
     })
-    .get(function(){ return this._plainPassword; })
+    .get(function(){ return this._plainPassword; });
 
 schema.methods.checkPassword = function(password){
     return this.encryptPassword(password) === this.hashedpassword;
