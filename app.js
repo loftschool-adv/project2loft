@@ -12,13 +12,12 @@ let bodyParser = require('body-parser');
 let session = require('express-session');
 let MongoStore = require('connect-mongo')(session);
 let log = require('./modules/libs/log')(module);
-let resetpass = require('./modules/resetpass');
+let sendMail = require('./modules/send-mail.js');
 
 
 let app = express();
 
-//app.use(resetpass());
-
+sendMail('gboyur@gmail.com', 'Test Mail', 'Hello World!');
 // Create session
 app.use(session({
   secret: 'photo',
