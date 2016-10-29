@@ -3,8 +3,8 @@
 			 // устанавливаем высоту для flipp
 			$('.flipper').height($('.front').height());
 			// центрируем popup
-			var trY = ($('.welcome').height()+$('.flipper-container').height())/2;
-			$('.flipper-container').css('transform','translate(-50%, -' +trY+'px)');
+			//var trY = ($('.welcome').height()+$('.flipper-container').height())/2;
+			//$('.flipper-container').css('transform','translate(-50%, -' +trY+'px)');
 
 			// анимация popup
 			// при нажатии на "зарегистрироваться"
