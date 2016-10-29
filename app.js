@@ -12,8 +12,19 @@ let bodyParser = require('body-parser');
 let session = require('express-session');
 let MongoStore = require('connect-mongo')(session);
 let log = require('./modules/libs/log')(module);
+//let nodemailer = require('nodemailer');
 
 let app = express();
+
+// mail test //////
+
+//var transporter = nodemailer.createTransport('smtps://user%40gmail.com:pass@smtp.gmail.com');
+
+
+
+
+//////////////////
+
 
 // Create session
 app.use(session({
@@ -27,7 +38,7 @@ app.use(session({
 
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname, 'views/pages'));
 app.set('view engine', 'pug');
 
 // uncomment after placing your favicon in /public
@@ -40,7 +51,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 //===маршруты===
 app.use('/', require('./routes/login.js'));
-app.use('/user', require('./routes/user.js'));
 app.use('/album', require('./routes/album.js'));
 app.use('/components', require('./routes/components.js'));
 //=============
