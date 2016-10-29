@@ -208,6 +208,7 @@ body {
 		transform: rotateY(180deg);
 	}
 .flipper {
+	min-height:354px;
 	transform: rotateX(-90deg);
 	transition: transform 0.7s;
 	transform-style: preserve-3d;

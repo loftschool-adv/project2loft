@@ -1,8 +1,4 @@
 (function(){
-
-			 // устанавливаем высоту для flipp
-			$('.flipper').height($('.front').height());
-
 			// анимация popup
 			// при нажатии на "зарегистрироваться"
 		 $('.popup__link_registr').click(function(e){
@@ -24,7 +20,6 @@
 		 	$('.flipper-container').addClass('flipp');
 	 });
 })();
-
 
 // модуль валидации
 var validation = (function() {
@@ -133,16 +128,18 @@ var submitForm = (function() {
 				if(servAns){
 					console.log('выводим ответ от сервера');
 					servAns.done(function(ans) {
-					console.log(ans);
+					if(ans.status == 'login'){
+             window.location.reload(true);
+            };
 				})
-			}
+			}	
 	}
 	var _submitFormRecover = function(ev){
 		console.log('recover');
 		ev.preventDefault();
 		var form = $(this).parent(),
 				url = '',
-				data =
+				data = 
 				{
 	    		email: form.find('input[name = "email"]').val(),
 	   		},
@@ -159,11 +156,11 @@ var submitForm = (function() {
 		if (!validation.validateForm(form)){
 			form.find('.popup__error').slideDown(300);
 			return false;
-		}
+		} 
 
 		console.log('всё хорошо');
 		console.log('запрос на '+url);
-		// готовим данные
+		// готовим данные 
 	  data=JSON.stringify(data);
 	  console.log(data);
 	  // отправляем

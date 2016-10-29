@@ -64,10 +64,12 @@ route.post('/login/', (req, res) => {
     if (item) {
       console.log(item);
       if (item.checkPassword(req.body.pass)) {
+
         req.session._id = item._id;
         req.session.email = item.email;
         req.session.name = item.name;
         req.session.about = item.about;
+
         res.send({status: 'login'});
       }
       else {
