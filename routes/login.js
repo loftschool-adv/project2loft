@@ -28,7 +28,8 @@ route.get('', (req,res) =>{
 
 // Регистрация новых пользоватей
 route.post('/reg/', (req,res) =>{
-	let User = require('../models/user.js').User;
+	console.log(req.body)
+	let User = require('../modules/user.js').User;
 	for(let key in req.body){
 		if(!req.body[key]){
 			return sendMasage('Заполнены не все поля' , res, 1);
@@ -57,11 +58,8 @@ route.post('/reg/', (req,res) =>{
 
 // Вход на сайт 
 route.post('/login/', (req,res) =>{
-	let User = require('../models/user.js').User;
-	
-
+	let User = require('../modules/user.js').User;
 	User.findOne({'email' : req.body.email}).then((item) =>{
-		console.log(req.body);
 		if(item){
 			console.log(item);
 			if(item.checkPassword(req.body.pass)){
@@ -78,16 +76,16 @@ route.post('/login/', (req,res) =>{
 		}
 	});
 
-})
+});
 
 // Выход с сайта 
 route.post('/logout/', (req,res) =>{
 	if(req.body.req == 'logout'){
 		req.session.destroy();
 		res.send({status: 'logout'});
-	};
+	}
 
-})
+});
 
 
 

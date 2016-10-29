@@ -76,19 +76,19 @@ body {
 
 // Главная страница
 .wrapper{
-	height:100%;
+	height:100vh;
 	min-height:650px;
 	background: url(../img/bg-main.png) 50% 50% no-repeat;
 	background-size: cover;
 	position: relative;
 	color:#fff;
+	font-family: ProximaNova, sans-serif;
 	font-size: 14px;
 }
 .welcome{
-	position: absolute;
 	width:580px;
-	top:100px;
-	text-align: center;
+	text-align: center;	
+	margin-bottom: 20px;
 }
 .welcome__title{
 	font-family: Panton, sans-serif;
@@ -96,7 +96,13 @@ body {
 	font-weight: bold;
 	margin-bottom: 15px;
 }
-.welcome__text{}
+
+.welcome__text{
+	font-size: 16px;
+	line-height: 1.5;
+}
+
+
 
 .popup{
 	background-color: #fff;
@@ -105,8 +111,6 @@ body {
 	width:280px;
 	margin: 0 auto;
 	position:relative;
-	top:50%;
-	transform:translateY(-50%);
 }
 .popup__form{
 	text-align:center;
@@ -135,6 +139,15 @@ body {
 	width:100%;
 	padding-left: 45px;
 	outline:none;
+}
+.popup__input_forget-password{
+	border-top: 1px solid #e1e1e1;
+}
+.popup__input-container_forget{
+	margin-bottom: 20px;
+}
+.popup__promt_forget{
+	font-family: 'Proxima Nova Semibold', sans-serif;
 }
 .popup__link{
 	display:inline-block;
@@ -192,15 +205,11 @@ body {
  .flipper-container{
 	position: relative;
 	left:50%;
-	transform:translateX(-50%);
+	top:50%;
+	transform:translate(-50%, -50%);
 	text-align:center;
 	perspective: 1000;
-	height:100%;
 }
-.flipper, .front, .back{
-	height:100%;
-}
-
 .flipper-container.flipp .flipper {
 		transform: rotateY(180deg);
 	}
@@ -211,7 +220,6 @@ body {
 	position: relative;
 	transform: rotateX(0deg);
 }
-
 .flipper-container, .front, .back {
 	width: 580px;
 }
@@ -234,4 +242,5 @@ body {
 	text-align: center;
 	width:100%;
 	opacity:0.8;
+	font-size: 16px;
 }
