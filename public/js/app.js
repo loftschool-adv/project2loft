@@ -24,46 +24,67 @@
 // модуль валидации
 var validation = (function() {
 	'use strict';
-
+	var _regMail = /^([0-9a-zA-Z_-]+\.)*[0-9a-zA-Z_-]+@[0-9a-zA-Z_-]+(\.[0-9a-zA-Z_-]+)*\.[a-z]{2,6}$/;
 	var init = function() {
 		_setUpListners();
 	};
 	var _setUpListners = function() {
-		//$('input').on('keydown',function(){
-		//})
+		$('input').on('keydown',function(){
+			$('.popup__error').addClass('hide');
+		})
 	};
 
 // функция валидации формы
 var validateForm = function(form) {
-	var 
-			elements = form.find('input'),
-
-			 //pass = form.find('[type=password]'),
-			valid = true;
-
+	// находим нужные input
+	var elements = form.find('input[type="email"], input[type="password"], input[type="text"]'),
+			validFlag = true,
+			errorObj ={
+				empty: false,
+				smallPass: false,
+				incorMail: false,
+			};
+	// проверка на пустые значения
+	
 	$.each(elements, function(index, val){
-		var
-				element = $(val),
+		var element = $(val),
 				val = element.val();
+
 		if((val.length === 0)) {
-
-			console.log('есть пустые поля');
-
-			valid = false;
+			validFlag = false;
+			errorObj.empty = true;
 		}
 	})
-	return valid;
+	// проверяем, есть ли в форме поле password
+	// если есть, проверяем его длину
+	
+		if(elements.is('input[type="password"]')) {
+				if(form.find('input[type="password"]').val().length<8){
+					validFlag = false;
+					errorObj.smallPass = true;
+			}
+		}
+	// проверяем, есть ли в форме поле email
+	// если есть, проверяем его корректность
+	if(!_regMail.test((form.find('input[type="email"]')).val())) {
+					validFlag = false;
+					errorObj.incorMail = true;
+			}
+
+	return {
+		validFlag: validFlag,
+		errorObj: errorObj
+	}
+		
 };
 
 var clearForm = function(form) {
-	
-	var 
-			elements = form.find('input');
-
+	// находим нужные input
+	var elements = form.find('input[type="email"], input[type="password"], input[type="text"]');
 	$.each(elements, function(index, val){
-		var
-				element = $(val),
+		var element = $(val),
 				val = element.val();
+		// чистим   
 		element.val('');
 		});
 	};
@@ -73,9 +94,8 @@ var clearForm = function(form) {
 		clearForm: clearForm
 	};
 })();
+
 validation.init();
-
-
 
 //Отпавка данных из формы
 var submitForm = (function() {
@@ -94,7 +114,7 @@ var submitForm = (function() {
 		// Восстановление пароля
 		$('#recover').on('click', _submitFormRecover);
 	};
-
+// Регистрация нового пользоваеля
 	var _submitFormRegistr = function(ev){
 		console.log('reg');
 		ev.preventDefault();
@@ -110,10 +130,14 @@ var submitForm = (function() {
 				if(servAns){
 					console.log('выводим ответ от сервера');
 					servAns.done(function(ans) {
-						console.log(ans);
+						alert(ans.message);
+						// очищаем поля
+					validation.clearForm(form);
 				})
 			}	
 	}
+
+// Авторизация пользователя
 	var _submitFormLogin = function(ev){
 		console.log('login');
 		ev.preventDefault();
@@ -126,7 +150,7 @@ var submitForm = (function() {
 	   		},
 				servAns = _ajaxForm(form, url, data);
 				if(servAns){
-					console.log('выводим ответ от сервера');
+					console.log('выводим ответ от сервера:');
 					servAns.done(function(ans) {
 					if(ans.status == 'login'){
              window.location.reload(true);
@@ -134,6 +158,7 @@ var submitForm = (function() {
 				});
 			}	
 	};
+// Врсстановление пароля
 	var _submitFormRecover = function(ev){
 		console.log('recover');
 		ev.preventDefault();
@@ -145,19 +170,37 @@ var submitForm = (function() {
 	   		},
 				servAns = _ajaxForm(form, url, data);
 				if(servAns){
-					console.log('выводим ответ от сервера');
+					console.log('выводим ответ от сервера:');
 					servAns.done(function(ans) {
-					console.log(ans);
+					alert(ans.message);
+					// очищаем поля
+					validation.clearForm(form);
 				})
 			}	
 	}
+// Функция для отправки ajax запроса 
 	var _ajaxForm = function (form, url, data){
+		// для начала проверим, вылидна ли форма
 		//если валидация прошла успешно, отправляем запрос на сервер
-		if (!validation.validateForm(form)){
-			form.find('.popup__error').slideDown(300);
+		//если нет - выводим сообщения об ошибках
+		var validForm = validation.validateForm(form); 
+		console.log(validForm.validFlag);
+		if (!validForm.validFlag){
+			//если найдены пустые поля, выводим сообщене о пустых полях
+			if(validForm.errorObj.empty){
+				form.find('.popup__error-empty').removeClass('hide');
+			}
+			//если пароль короткий
+			if(validForm.errorObj.smallPass){
+				form.find('.popup__error-pass').removeClass('hide');
+			}
+			//если email некорректный
+			if(validForm.errorObj.incorMail){
+				form.find('.popup__error-email').removeClass('hide');
+			}
 			return false;
 		} 
-
+		// валидация прошла успешно
 		console.log('всё хорошо');
 		console.log('запрос на '+url);
 		// готовим данные 
@@ -170,7 +213,7 @@ var submitForm = (function() {
 			contentType: 'application/json',
 			data: data
 		});
-		//validation.clearForm(form);
+		
 	}
 
 	return {
