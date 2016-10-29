@@ -6,6 +6,7 @@ let express = require('express');
 let route = require('express').Router();
 let mongoose = require('mongoose');
 let sendMail = require('../modules/send-mail.js');
+let createPassword = require('../modules/creat-password.js');
 
 
 let sendMasage = function (message, res, status = 0) {
@@ -35,7 +36,6 @@ route.post('/reg/', (req, res) => {
     }
   }
   User.findOne({'email': req.body.email}).then((item) => {
-    console.log(item);
     if (item) {
       return sendMasage('Такой email уже зарегитрирован', res, 2);
     } else {
@@ -61,7 +61,7 @@ route.post('/login/', (req, res) => {
   User.findOne({'email': req.body.email}).then((item) => {
     console.log(req.body);
     if (item) {
-      console.log(item);
+      console.log(item.checkPassword(req.body.pass));
       if (item.checkPassword(req.body.pass)) {
 
         req.session._id = item._id;
@@ -94,14 +94,15 @@ route.post('/logout/', (req, res) => {
 
 // Выход с сайта
 route.post('/recover/', (req, res) => {
-  if (req.body.email !== '') {
-
-    let pass =  Math.floor(Math.random() * (999999 - 1)) + 1;
-
-      sendMail(req.body.email, 'Восстановление пароля', 'Новый пароль: ' + pass);
-    res.send({status: 'new pass: ' + pass});
-  }
-
+  let User = require('../modules/models/user.js').User;
+  let pass =  "" + Math.floor(Math.random() * (999999 - 1)) + 1;
+  User.findOne({'email': req.body.email}).then((user) => {
+    user.update({
+      hashedpassword : user.encryptPassword(pass)
+    },(err) => {if (err) throw err ;})
+    sendMail(req.body.email, 'Восстановление пароля', 'Новый пароль: ' + pass)
+    res.send({});
+  })
 });
 
 module.exports = route;
