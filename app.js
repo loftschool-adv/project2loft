@@ -12,13 +12,38 @@ let bodyParser = require('body-parser');
 let session = require('express-session');
 let MongoStore = require('connect-mongo')(session);
 let log = require('./modules/libs/log')(module);
-//let nodemailer = require('nodemailer');
+let nodemailer = require('nodemailer');
 
 let app = express();
 
 // mail test //////
 
-//var transporter = nodemailer.createTransport('smtps://user%40gmail.com:pass@smtp.gmail.com');
+// Создаем транспорт, через который будем отправлять сообщения
+var transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: 'mail.loftgallery@gmail.com',
+    pass: 'rtlhjdrf',
+  },
+});
+
+// Определяем настройки письма
+var mailOptions = {
+  from: 'Most friendly guys <mail.loftgallery@gmail.com>', // sender address
+  to: 'gboyur@gmail.com', // list of receivers
+  subject: 'Message', // Subject line
+  text: 'Hello from nodemailer!', // plaintext body
+  html: '<b>Hello from nodemailer!</b>' // html body
+};
+
+// Отправляем сообщение
+transporter.sendMail(mailOptions, function(error, info){
+  if (error)
+    throw error;
+
+  console.log('Message info: ', info.response);
+  console.log('Full info: ', info);
+});
 
 
 
