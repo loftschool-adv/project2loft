@@ -45,7 +45,7 @@ var validateForm = function(form) {
 				incorMail: false,
 			};
 	// проверка на пустые значения
-	
+
 	$.each(elements, function(index, val){
 		var element = $(val),
 				val = element.val();
@@ -57,7 +57,7 @@ var validateForm = function(form) {
 	})
 	// проверяем, есть ли в форме поле password
 	// если есть, проверяем его длину
-	
+
 		if(elements.is('input[type="password"]')) {
 				if(form.find('input[type="password"]').val().length<8){
 					validFlag = false;
@@ -75,7 +75,7 @@ var validateForm = function(form) {
 		validFlag: validFlag,
 		errorObj: errorObj
 	}
-		
+
 };
 
 var clearForm = function(form) {
@@ -84,7 +84,7 @@ var clearForm = function(form) {
 	$.each(elements, function(index, val){
 		var element = $(val),
 				val = element.val();
-		// чистим   
+		// чистим
 		element.val('');
 		});
 	};
@@ -120,12 +120,12 @@ var submitForm = (function() {
 		ev.preventDefault();
 		var form = $(this).parent(),
 				url = '/reg/',
-				data = 
+				data =
 				{
-	    		login: form.find('input[name = "login"]').val(),
-	    		email: form.find('input[name = "email"]').val(),
-	    		pass: form.find('input[name = "pass"]').val(),
-	   		},
+					login: form.find('input[name = "login"]').val(),
+					email: form.find('input[name = "email"]').val(),
+					pass: form.find('input[name = "pass"]').val(),
+				},
 				servAns = _ajaxForm(form, url, data);
 				if(servAns){
 					console.log('выводим ответ от сервера');
@@ -134,7 +134,7 @@ var submitForm = (function() {
 						// очищаем поля
 					validation.clearForm(form);
 				})
-			}	
+			}
 	}
 
 // Авторизация пользователя
@@ -145,18 +145,18 @@ var submitForm = (function() {
 				url = '/login/',
 				data = 
 				{
-	    		email: form.find('input[name = "email"]').val(),
-	    		pass: form.find('input[name = "pass"]').val(),
-	   		},
+					email: form.find('input[name = "email"]').val(),
+					pass: form.find('input[name = "pass"]').val(),
+				},
 				servAns = _ajaxForm(form, url, data);
 				if(servAns){
 					console.log('выводим ответ от сервера:');
 					servAns.done(function(ans) {
 					if(ans.status == 'login'){
-             window.location.reload(true);
-            }
+						 window.location.reload(true);
+						}
 				});
-			}	
+			}
 	};
 // Врсстановление пароля
 	var _submitFormRecover = function(ev){
@@ -166,8 +166,8 @@ var submitForm = (function() {
 				url = '/recover/',
 				data = 
 				{
-	    		email: form.find('input[name = "email"]').val(),
-	   		},
+					email: form.find('input[name = "email"]').val(),
+				},
 				servAns = _ajaxForm(form, url, data);
 				if(servAns){
 					console.log('выводим ответ от сервера:');
@@ -176,14 +176,14 @@ var submitForm = (function() {
 					// очищаем поля
 					validation.clearForm(form);
 				})
-			}	
+			}
 	}
-// Функция для отправки ajax запроса 
+// Функция для отправки ajax запроса
 	var _ajaxForm = function (form, url, data){
 		// для начала проверим, вылидна ли форма
 		//если валидация прошла успешно, отправляем запрос на сервер
 		//если нет - выводим сообщения об ошибках
-		var validForm = validation.validateForm(form); 
+		var validForm = validation.validateForm(form);
 		console.log(validForm.validFlag);
 		if (!validForm.validFlag){
 			//если найдены пустые поля, выводим сообщене о пустых полях
@@ -199,21 +199,22 @@ var submitForm = (function() {
 				form.find('.popup__error-email').removeClass('hide');
 			}
 			return false;
-		} 
+		}
+
 		// валидация прошла успешно
 		console.log('всё хорошо');
 		console.log('запрос на '+url);
-		// готовим данные 
-	  data=JSON.stringify(data);
-	  console.log(data);
-	  // отправляем
+		// готовим данные
+		data=JSON.stringify(data);
+		console.log(data);
+		// отправляем
 		return $.ajax({
 			url: url,
 			type: 'POST',
 			contentType: 'application/json',
 			data: data
 		});
-		
+
 	}
 
 	return {
@@ -229,6 +230,37 @@ submitForm.init();
 
 $( document ).ready(function() {
 
+	// Прокрутить страницу до ...
+	(function() {
+
+		$(document).on('click', '[data-go]', function(e) {
+			e.preventDefault();
+
+			var btn        = $(this);
+			var target     = btn.attr('data-go');
+			var container  = null;
+
+
+			function scrollToPosition(position, duration) {
+				var position = position || 0;
+				var duration = duration || 1000;
+
+
+				$("body, html").animate({
+					scrollTop: position
+				}, duration);
+			}
+
+
+			if (target == 'top') {
+				scrollToPosition();
+			}
+		});
+
+	})();
+
+
+
 	// drop - элемент с выпадающим блоком
 	(function() {
 		$(document).on('click', '.drop__trigger', function(e) {
@@ -242,6 +274,22 @@ $( document ).ready(function() {
 			if(container.hasClass('drop--hover')) return;
 
 			container.toggleClass( classActive );
+		});
+	})();
+
+
+
+	// Кастомный вид для загрузки файлов
+	(function() {
+		var el = $('.upload');
+
+		if(el.length === 0) return;
+
+		$(document).on('click', '.upload', function(e) {
+			var el    = $(this);
+			var input = el.children('[type=file]');
+
+			input[0].click();
 		});
 	})();
 

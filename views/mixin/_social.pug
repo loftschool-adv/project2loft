@@ -1,0 +1,127 @@
+mixin social(mode)
+
+	if mode == 'edit'
+		ul.social
+			li.social__item
+				.drop.drop--hover.drop--def
+					.drop__trigger
+						a.social__btn(href="#404"  title="Вконтакте")
+							svg.social__icon
+								use(xlink:href='/img/sprite.svg#soc_vk')
+					.drop__main.drop__main--md
+						.form
+							.form__row
+								input.field.field--bordered.width--full(
+									type="text"
+									placeholder="text"
+								)
+							.form__row
+								a.btn.btn--clear(href="#404")
+									.btn__text Сохранить
+								a.btn.btn--text(href="#404")
+									.btn__text Отменить
+
+			li.social__item
+				.drop.drop--hover.drop--def
+					.drop__trigger
+						a.social__btn(href="#404"  title="Facebook")
+							svg.social__icon
+								use(xlink:href='/img/sprite.svg#soc_fb')
+					.drop__main.drop__main--md
+						.form
+							.form__row
+								input.field.field--bordered.width--full(
+									type="text"
+									placeholder="text"
+								)
+							.form__row
+								a.btn.btn--clear(href="#404")
+									.btn__text Сохранить
+								a.btn.btn--text(href="#404")
+									.btn__text Отменить
+
+			li.social__item
+				.drop.drop--hover.drop--def
+					.drop__trigger
+						a.social__btn(href="#404"  title="Twitter")
+							svg.social__icon
+								use(xlink:href='/img/sprite.svg#soc_tw')
+					.drop__main.drop__main--md
+						.form
+							.form__row
+								input.field.field--bordered.width--full(
+									type="text"
+									placeholder="text"
+								)
+							.form__row
+								a.btn.btn--clear(href="#404")
+									.btn__text Сохранить
+								a.btn.btn--text(href="#404")
+									.btn__text Отменить
+
+			li.social__item
+				.drop.drop--hover.drop--def
+					.drop__trigger
+						a.social__btn(href="#404"  title="Google+")
+							svg.social__icon
+								use(xlink:href='/img/sprite.svg#soc_g+')
+					.drop__main.drop__main--md
+						.form
+							.form__row
+								input.field.field--bordered.width--full(
+									type="text"
+									placeholder="text"
+								)
+							.form__row
+								a.btn.btn--clear(href="#404")
+									.btn__text Сохранить
+								a.btn.btn--text(href="#404")
+									.btn__text Отменить
+
+			li.social__item
+				.drop.drop--hover.drop--def
+					.drop__trigger
+						a.social__btn(href="#404"  title="Email")
+							svg.social__icon
+								use(xlink:href='/img/sprite.svg#soc_email')
+					.drop__main.drop__main--md
+						.form
+							.form__row
+								input.field.field--bordered.width--full(
+									type="email"
+									placeholder="email"
+								)
+							.form__row
+								a.btn.btn--clear(href="#404")
+									.btn__text Сохранить
+								a.btn.btn--text(href="#404")
+									.btn__text Отменить
+
+
+
+	else
+		ul.social
+			li.social__item
+				a.social__btn(href="#404"  title="Вконтакте")
+					svg.social__icon
+						use(xlink:href='/img/sprite.svg#soc_vk')
+
+			li.social__item
+				a.social__btn(href="#404"  title="Facebook")
+					svg.social__icon
+						use(xlink:href='/img/sprite.svg#soc_fb')
+
+			li.social__item
+				a.social__btn(href="#404"  title="Twitter")
+					svg.social__icon
+						use(xlink:href='/img/sprite.svg#soc_tw')
+
+			li.social__item
+				a.social__btn(href="#404"  title="Google+")
+					svg.social__icon
+						use(xlink:href='/img/sprite.svg#soc_g+')
+
+			li.social__item
+				a.social__btn(href="#404"  title="Email")
+					svg.social__icon
+						use(xlink:href='/img/sprite.svg#soc_email')
