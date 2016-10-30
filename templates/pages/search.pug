@@ -1,0 +1,89 @@
+include ../layout
+
+block content
+    header.search__header
+        h1.search__header__title.
+            Исследуй мир
+        a(href="#").button-home
+            include ../../public/img/icons/home.svg
+            span.button-home__hover На главную
+        section.search__header__search
+            div.search__header__search__avatar
+                img(src="" alt="avatar").search__header__search__avatar__img
+            p.search__header__search__user-name
+            div.header__search__wrap
+                input.header__search__wrap__input(type='text' placeholder="Исследовать мир")
+            button.search__header__search__show-more.
+                Показать новые
+    main.search__main
+        h2.search__main__title.
+            По запросу "Природа" найдено 6 результатов
+        div.search__main__albums
+            div.search__main__albums__container
+                img.search__main__albums__container__img
+                div.search__main__albums__container__comment
+                    div.search__main__albums__container__comment__avatar
+                    div.search__main__albums__container__coment__content
+                        p.search__main__albums__container__coment__content__title Путешествие на лодке по озеру
+                        p.search__main__albums__container__coment__content__count 9
+                        p.search__main__albums__container__coment__content__like 15
+                div.search__main__albums__container__album-title
+                    p.search__main__albums__container__album-title__text.
+                        Прогулки по воде
+            div.search__main__albums__container
+                img.search__main__albums__container__img
+                div.search__main__albums__container__comment
+                    div.search__main__albums__container__comment__avatar
+                    div.search__main__albums__container__coment__content
+                        p.search__main__albums__container__coment__content__title Отдых в палатке
+                        p.search__main__albums__container__coment__content__count 2
+                        p.search__main__albums__container__coment__content__like 22
+                div.search__main__albums__container__album-title
+                    p.search__main__albums__container__album-title__text.
+                        Палаточный лагерь
+            div.search__main__albums__container
+                img.search__main__albums__container__img
+                div.search__main__albums__container__comment
+                    div.search__main__albums__container__comment__avatar
+                    div.search__main__albums__container__coment__content
+                        p.search__main__albums__container__coment__content__title Любимые лошадки
+                        p.search__main__albums__container__coment__content__count 4
+                        p.search__main__albums__container__coment__content__like 32
+                div.search__main__albums__container__album-title
+                    p.search__main__albums__container__album-title__text.
+                        Животные
+            div.search__main__albums__container
+                img.search__main__albums__container__img
+                div.search__main__albums__container__comment
+                    div.search__main__albums__container__comment__avatar
+                    div.search__main__albums__container__coment__content
+                        p.search__main__albums__container__coment__content__title Мечтательный взгляд вдаль
+                        p.search__main__albums__container__coment__content__count 9
+                        p.search__main__albums__container__coment__content__like 21
+                div.search__main__albums__container__album-title
+                    p.search__main__albums__container__album-title__text.
+                        Пустыня
+            div.search__main__albums__container
+                img.search__main__albums__container__img
+                div.search__main__albums__container__comment
+                    div.search__main__albums__container__comment__avatar
+                    div.search__main__albums__container__coment__content
+                        p.search__main__albums__container__coment__content__title Я лежу в гамаке, как это прекрасно
+                        p.search__main__albums__container__coment__content__count 4
+                        p.search__main__albums__container__coment__content__like 14
+                div.search__main__albums__container__album-title
+                    p.search__main__albums__container__album-title__text.
+                        Отдых
+            div.search__main__albums__container
+                img.search__main__albums__container__img
+                div.search__main__albums__container__comment
+                    div.search__main__albums__container__comment__avatar
+                    div.search__main__albums__container__coment__content
+                        p.search__main__albums__container__coment__content__title Велопутешествие
+                        p.search__main__albums__container__coment__content__count 2
+                        p.search__main__albums__container__coment__content__like 26
+                div.search__main__albums__container__album-title
+                    p.search__main__albums__container__album-title__text.
+                        Дорога
+
+    include  ../commons/footer

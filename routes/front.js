@@ -14,7 +14,12 @@ route.get('', (req,res) =>{
 });
 // Обращаемся к странице USER , и рендерим шаблон из ./templates/pages/index.pug
 route.get('/user', (req,res) =>{
-	res.render('pages/user',  { title: 'Express' });
+	res.render('pages/user',  { title: 'User' });
+});
+
+// Обращаемся к странице SEARCH , и рендерим шаблон из ./templates/pages/index.pug
+route.get('/search', (req,res) =>{
+	res.render('pages/search',  { title: 'Search' });
 });
 
 module.exports = route;

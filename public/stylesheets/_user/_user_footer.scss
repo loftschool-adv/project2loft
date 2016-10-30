@@ -25,8 +25,13 @@
       position: absolute;
       left: 45%;
       top: 9%;
-      opacity: 0.7;
+      opacity: .6;
       cursor: pointer;
+
+      &:hover {
+        opacity: 0.9;
+        transition: .5s;
+      }
     }
     &__text-right {
       font-size: 16px;
@@ -37,7 +42,6 @@
       z-index: 5;
       width: 40%;
       margin-left: 15%;
-
     }
   }
 }

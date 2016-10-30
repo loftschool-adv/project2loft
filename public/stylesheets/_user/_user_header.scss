@@ -50,35 +50,36 @@
 // Block search in the header start
 .header__search {
   height: 60px;
-  background: rgba(229,229,229, .9);
+  background: rgba(229, 229, 229, .9);
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  &__wrap {
-    &::before {
-      content: ' ';
-      position: absolute;
-      width: 15px;
-      height: 15px;
-      background: url("../img/icons/search.svg") no-repeat;
-      margin: 15px 0 0 15px;
-      opacity: .8;
-    }
-    &__input {
-      padding-left: 45px;
-      font-size: 16px;
-      margin-right: 60px;
-      font-family: "ProximaNova";
-      color: rgba(50, 50, 50, 0.6);
-      line-height: 1.313;
-      z-index: 53;
-      width: 335px;
-      height: 40px;
-      border: none;
-      border-radius: 20px;
-    }
+}
+.header__search__wrap {
+  &::before {
+    content: ' ';
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    background: url("../img/icons/search.svg") no-repeat;
+    margin: 15px 0 0 15px;
+    opacity: .8;
+  }
+  &__input {
+    padding-left: 45px;
+    font-size: 16px;
+    margin-right: 60px;
+    font-family: "ProximaNova";
+    color: rgba(50, 50, 50, 0.6);
+    line-height: 1.313;
+    z-index: 53;
+    width: 335px;
+    height: 40px;
+    border: none;
+    border-radius: 20px;
   }
 }
+
 // Block search in the header end
 // Block Button home in the header start
 .button-home {
