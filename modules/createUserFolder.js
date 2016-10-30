@@ -10,15 +10,14 @@ let User = require('../modules/models/user.js').User;
 let BaseModule = require('../modules/libs/_base.js');
 let async = require('async');
 let base = new BaseModule;
-let folder = './users'  // Папка с пользователями
-
+let folder = './users';  // Папка с пользователями
 
 let createDirUsers = function(callback){
 	base.checkDirectory(folder, function(err){
 		if(err){
 			fs.mkdir(folder, () => {})
 		}
-	})
+	});
 	callback();
 };
 
@@ -27,7 +26,7 @@ let createFolder = function(callback){
 		items.forEach((item) =>{
 			fs.mkdir(folder + '/' + item.email, () => {});
 		})
-	})
+	});
 	callback();
 };
 
@@ -40,7 +39,7 @@ let clear = function(callback){
 		})
 	});
 	callback();
-}
+};
 
 let init = function(){
 	async.series([
@@ -48,7 +47,7 @@ let init = function(){
 		clear,
 		createFolder
 	], (err) => {});
-}
+};
 
 module.exports = init();
 	
