@@ -5,19 +5,19 @@
 			e.preventDefault();
 			$('.back-pass').addClass('hide');
 			$('.back-reg').removeClass('hide');
-		 	$('.flipper-container').addClass('flipp');
+			$('.flipper-container').addClass('flipp');
 	 });
 		 // при нажатии на "войти"
 		 $('.popup__link_enter').click(function(e){
-		 	e.preventDefault();
-	 		$('.flipper-container').removeClass('flipp');
+			e.preventDefault();
+			$('.flipper-container').removeClass('flipp');
 	 });
 		 // при нажатии на "забыли пароль"
 		 $('.popup__link_forget-pass').click(function(e){
 			 e.preventDefault();
 			 $('.back-pass').removeClass('hide');
 			 $('.back-reg').addClass('hide');
-		 	$('.flipper-container').addClass('flipp');
+			$('.flipper-container').addClass('flipp');
 	 });
 })();
 
@@ -35,7 +35,7 @@ var validation = (function() {
 
 // функция валидации формы
 var validateForm = function(form) {
-	var 
+	var
 			elements = form.find('input'),
 
 			 //pass = form.find('[type=password]'),
@@ -56,8 +56,8 @@ var validateForm = function(form) {
 };
 
 var clearForm = function(form) {
-	
-	var 
+
+	var
 			elements = form.find('input');
 
 	$.each(elements, function(index, val){
@@ -100,70 +100,70 @@ var submitForm = (function() {
 		ev.preventDefault();
 		var form = $(this).parent(),
 				url = '/reg/',
-				data = 
+				data =
 				{
-	    		login: form.find('input[name = "login"]').val(),
-	    		email: form.find('input[name = "email"]').val(),
-	    		pass: form.find('input[name = "pass"]').val(),
-	   		},
+					login: form.find('input[name = "login"]').val(),
+					email: form.find('input[name = "email"]').val(),
+					pass: form.find('input[name = "pass"]').val(),
+				},
 				servAns = _ajaxForm(form, url, data);
 				if(servAns){
 					console.log('выводим ответ от сервера');
 					servAns.done(function(ans) {
 						console.log(ans);
 				})
-			}	
+			}
 	}
 	var _submitFormLogin = function(ev){
 		console.log('login');
 		ev.preventDefault();
 		var form = $(this).parent(),
 				url = '/login/',
-				data = 
+				data =
 				{
-	    		email: form.find('input[name = "email"]').val(),
-	    		pass: form.find('input[name = "pass"]').val(),
-	   		},
+					email: form.find('input[name = "email"]').val(),
+					pass: form.find('input[name = "pass"]').val(),
+				},
 				servAns = _ajaxForm(form, url, data);
 				if(servAns){
 					console.log('выводим ответ от сервера');
 					servAns.done(function(ans) {
 					if(ans.status == 'login'){
-             window.location.reload(true);
-            }
+						 window.location.reload(true);
+						}
 				});
-			}	
+			}
 	};
 	var _submitFormRecover = function(ev){
 		console.log('recover');
 		ev.preventDefault();
 		var form = $(this).parent(),
 				url = '/recover/',
-				data = 
+				data =
 				{
-	    		email: form.find('input[name = "email"]').val(),
-	   		},
+					email: form.find('input[name = "email"]').val(),
+				},
 				servAns = _ajaxForm(form, url, data);
 				if(servAns){
 					console.log('выводим ответ от сервера');
 					servAns.done(function(ans) {
 					console.log(ans);
 				})
-			}	
+			}
 	}
 	var _ajaxForm = function (form, url, data){
 		//если валидация прошла успешно, отправляем запрос на сервер
 		if (!validation.validateForm(form)){
 			form.find('.popup__error').slideDown(300);
 			return false;
-		} 
+		}
 
 		console.log('всё хорошо');
 		console.log('запрос на '+url);
-		// готовим данные 
-	  data=JSON.stringify(data);
-	  console.log(data);
-	  // отправляем
+		// готовим данные
+		data=JSON.stringify(data);
+		console.log(data);
+		// отправляем
 		return $.ajax({
 			url: url,
 			type: 'POST',
@@ -186,6 +186,37 @@ submitForm.init();
 
 $( document ).ready(function() {
 
+	// Прокрутить страницу до ...
+	(function() {
+
+		$(document).on('click', '[data-go]', function(e) {
+			e.preventDefault();
+
+			var btn        = $(this);
+			var target     = btn.attr('data-go');
+			var container  = null;
+
+
+			function scrollToPosition(position, duration) {
+				var position = position || 0;
+				var duration = duration || 1000;
+
+
+				$("body, html").animate({
+					scrollTop: position
+				}, duration);
+			}
+
+
+			if (target == 'top') {
+				scrollToPosition();
+			}
+		});
+
+	})();
+
+
+
 	// drop - элемент с выпадающим блоком
 	(function() {
 		$(document).on('click', '.drop__trigger', function(e) {
@@ -199,6 +230,22 @@ $( document ).ready(function() {
 			if(container.hasClass('drop--hover')) return;
 
 			container.toggleClass( classActive );
+		});
+	})();
+
+
+
+	// Кастомный вид для загрузки файлов
+	(function() {
+		var el = $('.upload');
+
+		if(el.length === 0) return;
+
+		$(document).on('click', '.upload', function(e) {
+			var el    = $(this);
+			var input = el.children('[type=file]');
+
+			input[0].click();
 		});
 	})();
 

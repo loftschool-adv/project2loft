@@ -1,8 +1,16 @@
-footer.user__footer
-    div.user__footer__wrap
-        p.user__footer__wrap__text-left.
-            Перед вами сервис, который поможет вам организовать свои фотографии в альбомы и поделиться со всем миром!
-        div.user__footer__wrap__arrow
-            include ../../public/img/icons/top.svg
-        p.user__footer__wrap__text-right.
-            2016 | Создано командой профессионалов на продвинутом курсе по веб разработке от Loftschool
+footer.footer
+	.footer__in.section
+		.footer__part.footer__desc.
+			Перед вами сервис, который поможет вам организовать свои фотографии в альбомы и поделиться со всем миром!
+
+		.footer__part.footer__part--zip
+			a.btn.btn--icon.footer__btn-top(
+				href="#top"
+				data-go="top"
+				title="К началу страницы"
+			)
+				svg.btn__icon
+					use(xlink:href='/img/sprite.svg#top')
+
+		.footer__part.footer__copyright.
+			2016 | Создано командой профессионалов на продвинутом курсе по веб разработке от Loftschool

@@ -1,26 +1,41 @@
-@import "variables";
-@import "mixins";
+// base
+@import "base/variables";
+@import "base/mixins";
+@import "base/fonts";
 
-@import "fonts";
-@import "index";
+
 
 // components
-@import "base/grid";
+@import "index";
 
-@import "base/inputs";
-@import "base/buttons";
-@import "base/social";
-@import "base/drop";
-@import "base/info";
-@import "base/search";
+@import "components/grid";
 
-@import "base/form";
-@import "base/album-card";
-@import "base/photo-card";
+@import "components/inputs";
+@import "components/buttons";
+@import "components/social";
+@import "components/drop";
+@import "components/info";
+@import "components/search";
+
+@import "components/form";
+@import "components/album-card";
+@import "components/photo-card";
+@import "components/user";
+@import "components/upload";
 
 @import "_user/_user_footer";
 @import "_user/_user_header";
 @import "_user/_user_main";
 @import "_user/_user_media";
 
+
+@import "components/_header";
+@import "components/_footer";
+
+
+
+// pages
 @import "album";
+
+
+@import "_ui";

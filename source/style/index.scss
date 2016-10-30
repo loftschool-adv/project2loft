@@ -94,9 +94,21 @@ body {
 		max-width: 380px;
 	}
 
+	.width--lg {
+		width: 100%;
+		max-width: 480px;
+	}
+
 	.width--full {
 		width: 100%;
 	}
+
+
+
+.section {
+	max-width: 1580px;
+	padding: 0 60px;
+}
 
 
 
