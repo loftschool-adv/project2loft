@@ -2,10 +2,14 @@
 // В данном файле описано обращение к корню сайта
 'use strict';
 
+let fs = require('fs');
 let express = require('express');
 let route = require('express').Router();
 let mongoose = require('mongoose');
 let sendMail = require('../modules/send-mail.js');
+let BaseModule = require('../modules/libs/_base.js');
+let base = new BaseModule;
+let folder = './users'  // Папка с пользователями
 
 
 let sendMasage = function (message, res, status = 0) {
@@ -45,6 +49,12 @@ route.post('/reg/', (req, res) => {
       });
       user.save(function (err, user, affected) {
         if (err) throw err;
+        // Создание папки пользователя
+        base.checkDirectory(folder + "/" + user.email, function(err){
+          if(err){
+            fs.mkdir(folder + '/' + user.email, () => {});
+          }
+        });
         return sendMasage('Вы успешно зарегистрированы', res);
       });
     }
