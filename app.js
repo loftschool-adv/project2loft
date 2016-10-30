@@ -12,6 +12,9 @@ let bodyParser = require('body-parser');
 let session = require('express-session');
 let MongoStore = require('connect-mongo')(session);
 let log = require('./models/libs/log')(module);
+let log = require('./modules/libs/log')(module);
+let creatUsersFolder = require('./modules/createUserFolder.js');
+
 
 
 let app = express();
@@ -42,6 +45,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 //===маршруты===
 app.use('/', require('./routes/login.js'));
 app.use('/album', require('./routes/album.js'));
+app.use('/upload', require('./routes/upload.js'));
 app.use('/components', require('./routes/components.js'));
 //=============
 

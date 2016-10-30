@@ -23,7 +23,10 @@ block content
 												use(xlink:href='/img/sprite.svg#password') 
 										input.popup__input(type="password" name="pass" placeholder="Пароль")
 									a(href="#").popup__link.popup__link_forget-pass Забыли пароль?
-									div.popup__error.hide  E-mail или пароль не верен
+									div.popup__error.popup__error-login.hide  E-mail или пароль не верен
+									div.popup__error.popup__error-empty.hide  Заполните все поля
+									div.popup__error.popup__error-pass.hide  Длина пароля меньше 8 символов
+									div.popup__error.popup__error-email.hide  Введите корректный e-mail
 									input.popup__submit#login(type="submit" value = "Войти")
 									div.popup__registration Нет аккаунта? 
 										a(href="#").popup__link.popup__link_registr Зарегистрироваться
@@ -36,7 +39,7 @@ block content
 										label.popup__label(for="login")
 											svg.popup__svg
 												use(xlink:href='/img/sprite.svg#name') 
-										input.popup__input(type="email" name="login" placeholder="Имя")
+										input.popup__input(type="text" name="login" placeholder="Имя")
 
 									.popup__input-container
 										label.popup__label(for="email")
@@ -50,6 +53,9 @@ block content
 												use(xlink:href='/img/sprite.svg#password') 
 										input.popup__input(type="password" name="pass" placeholder="Пароль")
 									div.popup__promt  Ваши данные остаются строго конфедициальны
+									div.popup__error.popup__error-empty.hide  Заполните все поля
+									div.popup__error.popup__error-pass.hide  Длина пароля меньше 8 символов
+									div.popup__error.popup__error-email.hide  Введите корректный e-mail
 									input.popup__submit#registration(type="submit" value = "Создать аккаунт")
 									div.popup__registration Уже зарегистрированы? 
 
@@ -66,6 +72,7 @@ block content
 											svg.popup__svg
 												use(xlink:href='/img/sprite.svg#envelope') 
 										input.popup__input.popup__input_forget-password(type="email" name="email" placeholder="Электронная почта")
+									div.popup__error.popup__error-email.hide  Введите корректный e-mail
 									input.popup__submit#recover(type="submit" value = "Восстановить пароль")
 									div.popup__registration Вспомнили пароль? 
 										a(href="#").popup__link.popup__link_enter Войти

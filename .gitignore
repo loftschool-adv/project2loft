@@ -34,3 +34,4 @@ _materials
 .svn
 node_modules
 public
+users/*
