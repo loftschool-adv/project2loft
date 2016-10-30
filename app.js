@@ -12,6 +12,7 @@ let bodyParser = require('body-parser');
 let session = require('express-session');
 let MongoStore = require('connect-mongo')(session);
 let log = require('./modules/libs/log')(module);
+let creatUsersFolder = require('./modules/createUserFolder.js');
 
 
 let app = express();

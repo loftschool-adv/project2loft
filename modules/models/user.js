@@ -10,7 +10,6 @@ let Schema = mongoose.Schema;
 let schema = new Schema({
     login: {
         type: String,
-        unique: true,
         required: true
     },
     salt : {
@@ -23,6 +22,7 @@ let schema = new Schema({
     },
     email : {
         type: String,
+        unique: true,
         required: true
     },
     created : {
