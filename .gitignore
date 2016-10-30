@@ -6,3 +6,5 @@ npm-debug.log
 /public/stylesheets/.sass-cache/
 /public/stylesheets/_user.css.map
 /public/stylesheets/_user.css
+/public/stylesheets/_search.css.map
+/public/stylesheets/_search.css
