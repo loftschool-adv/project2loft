@@ -224,6 +224,44 @@ var submitForm = (function() {
 submitForm.init();
 
 
+// Фиксирование кнопки добавить в альбомах
+var scrollAlbum = function(){
+	'use strict';
+	
+	var init = function() {
+		_setUpListners();
+	};
+
+	// Слушаем событие скролла
+	var _setUpListners = function() {
+		$(window).on('scroll', _fixedAdd);
+	};
+	// Функция при скролле
+	var _fixedAdd = function() {
+		if(($('html').scrollTop()>=$('.header-album__content').height()) || ($('body').scrollTop()>=$('.header-album__content').height())){
+
+			if (!($('.btn_album-add').hasClass('fixed'))){
+	    		$('.btn_album-add').addClass('fixed');
+	    	}
+	    $('.header-album__about-side_back').removeClass('hide').addClass('fixedHeader');
+	    $('.header-album__about-side_front').addClass('hide');
+  }
+  else{
+    		if ($('.btn_album-add').hasClass('fixed')){
+	    		$('.btn_album-add').removeClass('fixed');
+	    	}
+	    	$('.header-album__about-side_back').addClass('hide').removeClass('fixedHeader');
+	    	$('.header-album__about-side_front').removeClass('hide');
+
+    	}
+	};
+	return {
+		init: init
+	};
+	
+}();
+scrollAlbum.init();
+
 
 
 
