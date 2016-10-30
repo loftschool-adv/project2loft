@@ -16,7 +16,7 @@
 
   &__search {
     padding: 0 5%;
-    width: 97.5%;
+    width: 93%;
     height: 60px;
     opacity: 0.85;
     display: flex;
@@ -30,12 +30,12 @@
       height: 50px;
       border-radius: 50%;
       overflow: hidden;
-      margin-right: 30px;
+      margin-right: 2.5%;
       border: 3px solid #ffffff;
 
       &__img {
         height: 100%;
-        margin-left: -30%;
+        margin-left: -35%;
       }
     }
 
@@ -45,10 +45,11 @@
       color: rgb(50, 50, 50);
       font-weight: bold;
       line-height: 1.313;
-      margin-right: 185px;
+      margin-right: 13%;
     }
 
     &__show-more {
+      margin-left: 10%;
       cursor: pointer;
       text-decoration: none;
       font-size: 16px;

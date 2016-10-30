@@ -13,7 +13,7 @@
     align-items: center; }
   .search__header__search {
     padding: 0 5%;
-    width: 97.5%;
+    width: 93%;
     height: 60px;
     opacity: 0.85;
     display: flex;
@@ -26,19 +26,20 @@
       height: 50px;
       border-radius: 50%;
       overflow: hidden;
-      margin-right: 30px;
+      margin-right: 2.5%;
       border: 3px solid #ffffff; }
       .search__header__search__avatar__img {
         height: 100%;
-        margin-left: -30%; }
+        margin-left: -35%; }
     .search__header__search__user-name {
       font-size: 16px;
       font-family: "Panton";
       color: #323232;
       font-weight: bold;
       line-height: 1.313;
-      margin-right: 185px; }
+      margin-right: 13%; }
     .search__header__search__show-more {
+      margin-left: 10%;
       cursor: pointer;
       text-decoration: none;
       font-size: 16px;
@@ -206,5 +207,42 @@
       z-index: 5;
       width: 40%;
       margin-left: 15%; }
+
+@media screen and (max-width: 768px) {
+  .search__header__search {
+    padding-left: 2.5%; }
+  .search__header__search__user-name {
+    margin-right: 7%; }
+  .search__header .button-home {
+    display: none; }
+
+  .search__main {
+    padding-bottom: 60px; }
+    .search__main__albums__container {
+      width: 46%; } }
+@media screen and (max-width: 460px) {
+  .search__header {
+    margin-bottom: 30px; }
+    .search__header__search {
+      height: 85px;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center; }
+    .search__header__search__avatar {
+      display: none; }
+    .search__header__search__user-name {
+      display: none; }
+    .search__header .header__search__wrap__input {
+      margin: 0 0 10px 0; }
+    .search__header__search__show-more {
+      margin-left: 0; }
+
+  .search__main {
+    padding-bottom: 60px; }
+    .search__main__title {
+      display: none; }
+    .search__main__albums__container {
+      width: 100%;
+      max-width: 95%; } }
 
 /*# sourceMappingURL=_search.css.map */
