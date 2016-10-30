@@ -51,7 +51,7 @@ block content
                     span.btn__text Добавить
 
                     
-                .grid.grid--3
+                .grid.grid--lg
                     .grid__item
                         .photo-card
                             a.photo-card__head(href="#404")
@@ -206,9 +206,29 @@ block content
                                             use(xlink:href='/img/sprite.svg#edit')
                                 .photo-card__foot-part
                                     .photo-card__link(href="#404") Название фотографии          
-        div.modal 
-            form(enctype="multipart/form-data" method="post")
-                input(type="file" name="loadImg")
-                input(type="submit" value="Отправить")
-        div.modal-overlay
+        
+        div.modal-container.hide
+            div.modal-overlay
+                div.modal 
+                    div.modal__header
+                        div.modal__header-title Добавить фотографии
+                        div.modal__header-close
+                            svg.modal__header-svg
+                                use(xlink:href='/img/sprite.svg#close') 
+                    div.modal__title Название
+                    div.modal__content
+                        .header__part.header__part--zip.modal__load-container
+                            .upload.modal__load-img(title="Выбрать изображение")
+                                svg.upload__icon
+                                    use(xlink:href='/img/sprite.svg#cam')
+                                .upload__text Перетащите фото сюда или 
+                                    span.modal__link-load выберите файл
+                                input.upload__input(type="file"  name="bg")
+                    div.modal__footer
+                        div.modal__buttons
+                            a.btn(href="#ok") Сохранить
+                            a.btn.btn--text(href="#cancel")
+                                span.btn__text Отменить
+
+                            
         include  ../commons/footer

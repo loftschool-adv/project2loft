@@ -263,6 +263,17 @@ var scrollAlbum = function(){
 }();
 scrollAlbum.init();
 
+// Открыть/закрыть окно для загрузки изображений
+(function(){
+	$('.btn_album-add').on('click', function() {
+	$('.modal-container').removeClass('hide');
+
+	})
+$('.modal__header-close').on('click', function() {
+	$('.modal-container').addClass('hide');
+})
+})();
+
 
 
 
