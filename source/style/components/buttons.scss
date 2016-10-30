@@ -5,6 +5,7 @@
 	padding: .6075em 1.4em;
 	border: 1px solid transparent;
 	border-radius: 20px;
+	outline: none;
 	background: $blue;
 	color: $white;
 	font: bold 14px/1.5 Panton, sans-serif;
@@ -25,9 +26,9 @@
 		color: $white;
 	}
 
-	&:last-child {
-		margin-right: 0;
-	}
+	//&:last-child {
+	//	margin-right: 0;
+	//}
 }
 
 	.btn__icon {

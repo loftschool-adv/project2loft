@@ -21,6 +21,8 @@ let sendMasage = function (message, res, status = 0) {
 };
 
 
+
+
 route.get('', (req, res) => {
   if (!req.session.email) {
     res.render('index');
@@ -68,7 +70,6 @@ route.post('/login/', (req, res) => {
 
 
   User.findOne({'email': req.body.email}).then((item) => {
-    console.log(req.body);
     if (item) {
       console.log(item.checkPassword(req.body.pass));
       if (item.checkPassword(req.body.pass)) {
@@ -104,11 +105,12 @@ route.post('/logout/', (req, res) => {
 // Васстоновление пароля
 route.post('/recover/', (req, res) => {
   let User = require('../modules/models/user.js').User;
-  let pass =  "" + Math.floor(Math.random() * (999999 - 1)) + 1;
+  let pass =  "" + base.passGenerate(8);
   User.findOne({'email': req.body.email}).then((user) => {
     user.update({
       hashedpassword : user.encryptPassword(pass)
     },(err) => {if (err) throw err ;})
+    
     sendMail(req.body.email, 'Восстановление пароля', 'Новый пароль: ' + pass)
     res.send({});
   })

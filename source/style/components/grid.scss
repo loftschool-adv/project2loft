@@ -12,14 +12,18 @@
 
 
 
-.grid--3 {
+.grid--lg {
 	& .grid__item {
 		width: 33.333%;
+		max-width: 400px;
 	}
 }
 
-.grid--4 {
+
+
+.grid--md {
 	& .grid__item {
 		width: 25%;
+		max-width: 300px;
 	}
 }

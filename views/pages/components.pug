@@ -2,350 +2,311 @@ extends ../layout
 
 block content
 
-	//- Icons
-	.ui-section
-	//
-		svg.icon
-			use(xlink:href='/img/sprite.svg#add')
-
-		svg.icon
-			use(xlink:href='/img/sprite.svg#album')
-
-		svg.icon
-			use(xlink:href='/img/sprite.svg#arrow_left')
-
-		svg.icon
-			use(xlink:href='/img/sprite.svg#arrow_right')
-
-		svg.icon
-			use(xlink:href='/img/sprite.svg#cam')
-
-		svg.icon
-			use(xlink:href='/img/sprite.svg#close')
-
-		svg.icon
-			use(xlink:href='/img/sprite.svg#comments')
-
-		svg.icon
-			use(xlink:href='/img/sprite.svg#delete')
-
-		svg.icon
-			use(xlink:href='/img/sprite.svg#edit')
-
-		svg.icon
-			use(xlink:href='/img/sprite.svg#envelope')
-
-		svg.icon
-			use(xlink:href='/img/sprite.svg#heart')
-
-		svg.icon
-			use(xlink:href='/img/sprite.svg#home')
-
-		svg.icon
-			use(xlink:href='/img/sprite.svg#like')
-
-		svg.icon
-			use(xlink:href='/img/sprite.svg#loupe')
-
-		svg.icon
-			use(xlink:href='/img/sprite.svg#more')
-
-		svg.icon
-			use(xlink:href='/img/sprite.svg#name')
-
-		svg.icon
-			use(xlink:href='/img/sprite.svg#no_like')
-
-		svg.icon
-			use(xlink:href='/img/sprite.svg#off')
-
-		svg.icon
-			use(xlink:href='/img/sprite.svg#password')
-
-		svg.icon
-			use(xlink:href='/img/sprite.svg#search')
-
-		svg.icon
-			use(xlink:href='/img/sprite.svg#top')
+	//- include ../commons/header
+	include ../commons/_header
+	include ../commons/header--edit
 
 
-	.components(
-		style="min-height: 100%; padding: 50px; background: lightBlue;"
-	)
+	.ui-components
 
-		input.field(
-			type="text"
-			placeholder="placeholder"
-		)
+		//- User block
+		.ui-section
+			.ui-title Карточка пользователя
 
-		br
-		br
+			.user-block
+				.user-block__photo
 
-		.input-complex.input-complex--search.width--md
-			input.field.input-complex__field(
+				.user-block__main
+					.user-block__name Александра Соколова
+					.user-block__desc.
+						Я веб разработчик разработчик. Мне 24 года. Люблю путешествия, кодинг, фриланс, и активный отдых.
+					.user-block__social
+						+social
+
+			br
+			br
+
+			.user-block.user-block--sm
+				.user-block__photo
+
+				.user-block__main
+					.user-block__name Александра Соколова
+
+
+
+
+
+		//- Icons
+		.ui-section
+			.ui-title Иконки
+
+		//
+			svg.icon
+				use(xlink:href='/img/sprite.svg#add')
+
+			svg.icon
+				use(xlink:href='/img/sprite.svg#album')
+
+			svg.icon
+				use(xlink:href='/img/sprite.svg#arrow_left')
+
+			svg.icon
+				use(xlink:href='/img/sprite.svg#arrow_right')
+
+			svg.icon
+				use(xlink:href='/img/sprite.svg#cam')
+
+			svg.icon
+				use(xlink:href='/img/sprite.svg#close')
+
+			svg.icon
+				use(xlink:href='/img/sprite.svg#comments')
+
+			svg.icon
+				use(xlink:href='/img/sprite.svg#delete')
+
+			svg.icon
+				use(xlink:href='/img/sprite.svg#edit')
+
+			svg.icon
+				use(xlink:href='/img/sprite.svg#envelope')
+
+			svg.icon
+				use(xlink:href='/img/sprite.svg#heart')
+
+			svg.icon
+				use(xlink:href='/img/sprite.svg#home')
+
+			svg.icon
+				use(xlink:href='/img/sprite.svg#like')
+
+			svg.icon
+				use(xlink:href='/img/sprite.svg#loupe')
+
+			svg.icon
+				use(xlink:href='/img/sprite.svg#more')
+
+			svg.icon
+				use(xlink:href='/img/sprite.svg#name')
+
+			svg.icon
+				use(xlink:href='/img/sprite.svg#no_like')
+
+			svg.icon
+				use(xlink:href='/img/sprite.svg#off')
+
+			svg.icon
+				use(xlink:href='/img/sprite.svg#password')
+
+			svg.icon
+				use(xlink:href='/img/sprite.svg#search')
+
+			svg.icon
+				use(xlink:href='/img/sprite.svg#top')
+
+
+
+		.ui-section
+			.ui-title Поля формы
+
+			input.field(
 				type="text"
-				name="text"
-				placeholder="Placeholder"
+				placeholder="placeholder"
 			)
-			.input-complex__side
-				svg.input-complex__icon
+
+			br
+			br
+
+			.input-complex.input-complex--search.width--md
+				input.field.input-complex__field(
+					type="text"
+					name="text"
+					placeholder="Placeholder"
+				)
+				.input-complex__side
+					svg.input-complex__icon
+						use(xlink:href='/img/sprite.svg#envelope')
+
+			br
+
+			form.search
+				input.field.search__field(
+					type="text"
+					name="text"
+					placeholder="Найти..."
+				)
+				button.search__btn
+					svg.input-complex__icon
+						use(xlink:href='/img/sprite.svg#search')
+
+			br
+
+			textarea.field(
+				placeholder="textarea"
+			)
+
+
+
+
+
+		.ui-section
+			.ui-title Социальный кнопки
+
+			+social
+			span < has drop
+
+
+
+
+
+		.ui-section
+			.ui-title Кнопки
+
+			.btn btn
+			.btn.btn--clear btn--clear
+			.btn.btn--important btn--important
+			.btn.btn--light btn--light
+
+			.btn.btn--important
+				span.btn__text text
+				svg.btn__icon
 					use(xlink:href='/img/sprite.svg#envelope')
 
-		br
+			.btn.btn--text
+				span.btn__text btn--text
 
-		form.search
-			input.field.search__field(
-				type="text"
-				name="text"
-				placeholder="Найти..."
-			)
-			button.search__btn
-				svg.input-complex__icon
-					use(xlink:href='/img/sprite.svg#search')
+			.btn.btn--light
+				svg.btn__icon
+					use(xlink:href='/img/sprite.svg#envelope')
+				span.btn__text btn--light
 
-		br
+			br
 
-		textarea.field(
-			placeholder="textarea"
-		)
+			.btn.btn--text
+				span.btn__text btn--text
 
-		br
-		br
+			.btn.btn--text-important
+				span.btn__text btn--text-important
 
-		ul.social
-			li.social__item
-				a.social__btn(href="#404"  title="Вконтакте")
-					svg.social__icon
-						use(xlink:href='/img/sprite.svg#soc_vk')
-			li.social__item
-				a.social__btn(href="#404"  title="Facebook")
-					svg.social__icon
-						use(xlink:href='/img/sprite.svg#soc_fb')
-			li.social__item
-				a.social__btn(href="#404"  title="Twitter")
-					svg.social__icon
-						use(xlink:href='/img/sprite.svg#soc_tw')
-			li.social__item
-				a.social__btn(href="#404"  title="Google+")
-					svg.social__icon
-						use(xlink:href='/img/sprite.svg#soc_g+')
-			li.social__item
-				.drop.drop--hover.drop--def
-					.drop__trigger
-						a.social__btn(href="#404"  title="Email")
-							svg.social__icon
-								use(xlink:href='/img/sprite.svg#soc_email')
-					.drop__main.drop__main--md
-						form.form
-							.form__row
-								input.field.field--bordered.width--full(
-									type="email"
-									placeholder="email"
-								)
-							.form__row
-								button.btn.btn--clear
-									.btn__text Сохранить
-								button.btn.btn--text(type="button")
-									.btn__text Отменить
+			br
 
-		span < has drop
+			.btn.btn--icon(title="Редактировать")
+				svg.btn__icon
+					use(xlink:href='/img/sprite.svg#edit')
 
-		br
-		br
+			.btn.btn--light.btn--expand
+				svg.btn__icon
+					use(xlink:href='/img/sprite.svg#edit')
+				span.btn__text btn--expand
 
-		.btn btn
-		.btn.btn--clear btn--clear
-		.btn.btn--important btn--important
-		.btn.btn--light btn--light
-
-		.btn.btn--important
-			span.btn__text text
-			svg.btn__icon
-				use(xlink:href='/img/sprite.svg#envelope')
-
-		.btn.btn--text
-			span.btn__text btn--text
-
-		.btn.btn--light
-			svg.btn__icon
-				use(xlink:href='/img/sprite.svg#envelope')
-			span.btn__text btn--light
-
-		br
-
-		.btn.btn--text
-			span.btn__text btn--text
-
-		.btn.btn--text-important
-			span.btn__text btn--text-important
-
-		br
-
-		.btn.btn--icon(title="Редактировать")
-			svg.btn__icon
-				use(xlink:href='/img/sprite.svg#edit')
-
-		.btn.btn--light.btn--expand
-			svg.btn__icon
-				use(xlink:href='/img/sprite.svg#edit')
-			span.btn__text btn--expand
-
-		.btn.btn--light.btn--expand
-			svg.btn__icon
-				use(xlink:href='/img/sprite.svg#off')
-			span.btn__text Выйти
-
-		br
-		br
-
-		.grid.grid--4
-			.grid__item
-				.album-card
-					a.album-card__head(href="#404")
-						.album-card__info
-							.album-card__title Фотографии природы леса, енотов и оленей...
-							.album-card__cnt 18 фотографий
-
-					.album-card__foot
-						.album-card__foot-part
-							a.btn.btn--icon(href="#404"  title="Редактировать")
-								svg.btn__icon
-									use(xlink:href='/img/sprite.svg#edit')
-
-						.album-card__foot-part
-							a.album-card__link(href="#404") Название альбома
-
-
-			.grid__item
-				.album-card
-					a.album-card__head(href="#404")
-						.album-card__info
-							.album-card__title Описание альбома ...
-							.album-card__cnt Количество фотографий
-
-					.album-card__foot
-						.album-card__foot-part
-							a.btn.btn--icon(href="#404"  title="Редактировать")
-								svg.btn__icon
-									use(xlink:href='/img/sprite.svg#edit')
-
-						.album-card__foot-part
-							a.album-card__link(href="#404") Название альбома
-
-
-			.grid__item
-				.album-card
-					a.album-card__head(href="#404")
-						.album-card__info
-							.album-card__title Описание альбома ...
-							.album-card__cnt Количество фотографий
-
-					.album-card__foot
-						.album-card__foot-part
-							a.btn.btn--icon(href="#404"  title="Редактировать")
-								svg.btn__icon
-									use(xlink:href='/img/sprite.svg#edit')
-
-						.album-card__foot-part
-							a.album-card__link(href="#404") Название альбома
-
-
-			.grid__item
-				.album-card
-					a.album-card__head(href="#404")
-						.album-card__info
-							.album-card__title Описание альбома ...
-							.album-card__cnt Количество фотографий
-
-					.album-card__foot
-						.album-card__foot-part
-							a.btn.btn--icon(href="#404"  title="Редактировать")
-								svg.btn__icon
-									use(xlink:href='/img/sprite.svg#edit')
-
-						.album-card__foot-part
-							a.album-card__link(href="#404") Название альбома
+			.btn.btn--light.btn--expand
+				svg.btn__icon
+					use(xlink:href='/img/sprite.svg#off')
+				span.btn__text Выйти
 
 
 
-		//-
-		//- Сетка на 3 элемента в ряд
-		//-
-		.grid.grid--3
-			.grid__item
-				.photo-card
-					a.photo-card__head(href="#404")
-						.photo-card__details
-							.info.info--light
-								.info__item
-									svg.info__icon
-										use(xlink:href='/img/sprite.svg#comments')
-									span.info__text 2
-								.info__item
-									svg.info__icon
-										use(xlink:href='/img/sprite.svg#like')
-									span.info__text 10
-
-					.photo-card__foot
-						.photo-card__foot-part
-							a.btn.btn--icon(href="#404"  title="Редактировать")
-								svg.btn__icon
-									use(xlink:href='/img/sprite.svg#edit')
-						.photo-card__foot-part
-							.photo-card__link(href="#404") Название фотографии
 
 
+		.ui-section
+			.ui-title Сетка с карточками
 
-			.grid__item
-				.photo-card
-					a.photo-card__head(href="#404")
-						.photo-card__details
-							.info.info--light
-								.info__item
-									svg.info__icon
-										use(xlink:href='/img/sprite.svg#comments')
-									span.info__text 2
-								.info__item
-									svg.info__icon
-										use(xlink:href='/img/sprite.svg#like')
-									span.info__text 10
+			.grid.grid--md
+				.grid__item
+					.album-card
+						a.album-card__head(href="#404")
+							.album-card__info
+								.album-card__title Фотографии природы леса, енотов и оленей...
+								.album-card__cnt 18 фотографий
 
-					.photo-card__foot
-						.photo-card__foot-part
-							a.btn.btn--icon(href="#404"  title="Редактировать")
-								svg.btn__icon
-									use(xlink:href='/img/sprite.svg#edit')
-						.photo-card__foot-part
-							.photo-card__link(href="#404") Название фотографии
+						.album-card__foot
+							.album-card__foot-part
+								a.btn.btn--icon(href="#404"  title="Редактировать")
+									svg.btn__icon
+										use(xlink:href='/img/sprite.svg#edit')
+
+							.album-card__foot-part
+								a.album-card__link(href="#404") Название альбома
+
+
+				each i in Array(3)
+					.grid__item
+						.album-card
+							a.album-card__head(href="#404")
+								.album-card__info
+									.album-card__title Описание альбома ...
+									.album-card__cnt Количество фотографий
+
+							.album-card__foot
+								.album-card__foot-part
+									a.btn.btn--icon(href="#404"  title="Редактировать")
+										svg.btn__icon
+											use(xlink:href='/img/sprite.svg#edit')
+
+								.album-card__foot-part
+									a.album-card__link(href="#404") Название альбома
 
 
 
-			.grid__item
-				.photo-card
-					a.photo-card__head(href="#404")
+			.grid.grid--lg
+				each i in Array(2)
+					.grid__item
+						.photo-card
+							a.photo-card__head(href="#404")
+								.photo-card__details
+									.info.info--light
+										.info__item
+											svg.info__icon
+												use(xlink:href='/img/sprite.svg#comments')
+											span.info__text 2
+										.info__item
+											svg.info__icon
+												use(xlink:href='/img/sprite.svg#like')
+											span.info__text 10
 
-					.photo-card__body
-						.photo-details
-							.photo-details__side
-								a.photo-details__ava(href="#user")
+							.photo-card__foot
+								.photo-card__foot-part
+									a.btn.btn--icon(href="#404"  title="Редактировать")
+										svg.btn__icon
+											use(xlink:href='/img/sprite.svg#edit')
+								.photo-card__foot-part
+									.photo-card__link(href="#404") Название фотографии
 
-							.photo-details__main
-								.photo-details__title Название фотографии
-								.photo-details__info.info
-									.info__item
-										svg.info__icon
-											use(xlink:href='/img/sprite.svg#comments')
-										span.info__text 2
-									.info__item
-										svg.info__icon
-											use(xlink:href='/img/sprite.svg#like')
-										span.info__text 10
 
-					.photo-card__foot
-						.photo-card__foot-part
 
-						.photo-card__foot-part
-							a.link.photo-card__link-album(href="#404")
-								svg.link__icon
-										use(xlink:href='/img/sprite.svg#album')
-								.link__text Название альбома
+
+				.grid__item
+					.photo-card
+						a.photo-card__head(href="#404")
+
+						.photo-card__body
+							.photo-details
+								.photo-details__side
+									a.photo-details__ava(href="#user")
+
+								.photo-details__main
+									.photo-details__title Название фотографии
+									.photo-details__info.info
+										.info__item
+											svg.info__icon
+												use(xlink:href='/img/sprite.svg#comments')
+											span.info__text 2
+										.info__item
+											svg.info__icon
+												use(xlink:href='/img/sprite.svg#like')
+											span.info__text 10
+
+						.photo-card__foot
+							.photo-card__foot-part
+
+							.photo-card__foot-part
+								a.link.photo-card__link-album(href="#404")
+									svg.link__icon
+											use(xlink:href='/img/sprite.svg#album')
+									.link__text Название альбома
+
+
+
+
+
+	include ../commons/footer
