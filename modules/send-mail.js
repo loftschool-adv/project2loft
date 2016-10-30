@@ -25,9 +25,6 @@ function sendMail(email, title, text) {
   transporter.sendMail(mailOptions, function(error, info){
     if (error)
       throw error;
-
-    console.log('Message info: ', info.response);
-    console.log('Full info: ', info);
   });
 }
 
