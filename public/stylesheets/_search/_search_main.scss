@@ -1,0 +1,220 @@
+.search__header {
+  width: 100%;
+
+  &__title {
+    width: 100%;
+    height: 80px;
+    font-family: "Panton";
+    font-size: 42px;
+    font-weight: bold;
+    line-height: 0.5;
+    color: rgb(50, 50, 50);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__search {
+    padding: 0 5%;
+    width: 97.5%;
+    height: 60px;
+    opacity: 0.85;
+    display: flex;
+    background-color: #f6f6f6;
+    display: flex;
+    align-items: center;
+
+    &__avatar {
+      min-width: 50px;
+      max-width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      overflow: hidden;
+      margin-right: 30px;
+      border: 3px solid #ffffff;
+
+      &__img {
+        height: 100%;
+        margin-left: -30%;
+      }
+    }
+
+    &__user-name {
+      font-size: 16px;
+      font-family: "Panton";
+      color: rgb(50, 50, 50);
+      font-weight: bold;
+      line-height: 1.313;
+      margin-right: 185px;
+    }
+
+    &__show-more {
+      cursor: pointer;
+      text-decoration: none;
+      font-size: 16px;
+      font-family: "ProximaNova";
+      color: rgba(40, 187, 240, 0.8);
+      line-height: 1.313;
+      border: none;
+      background: none;
+    }
+  }
+}
+.search__main {
+  &__title {
+    font-size: 21px;
+    font-family: "ProximaNova";
+    font-weight: 600;
+    line-height: 1;
+    color: rgb(50, 50, 50);
+    margin: 60px 0 40px 2.5%;
+  }
+
+  &__albums {
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+
+    &__container {
+      border-radius: 2px;
+      overflow: hidden;
+      margin: 0 0 2% 2.5%;
+      max-width: 380px;
+      width: 30%;
+      height: 380px;
+      border-radius: 1.5px;
+      background-color: #ffffff;
+      box-shadow: 0 0.5px 2px 0 rgba(0, 0, 0, 0.15);
+      position: relative;
+
+      &__wrap-img {
+        height: 250px;
+        width: 100%;
+        position: relative;
+        z-index: 10;
+        overflow: hidden;
+
+        &::before {
+          width: 100%;
+          content: '';
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          transition: .5s;
+          background-position: 50% 50%;
+        }
+
+        &:hover::before {
+          background: rgba(0, 0, 0, .5) url("../img/icons/loupe.svg") no-repeat;
+          background-position: 50% 50%;
+        }
+
+        &__img {
+          height: 100%;
+          cursor: pointer;
+          width: 100%;
+          z-index: 0;
+        }
+      }
+
+      &__comment {
+        display: flex;
+        padding: 5%;
+
+        &__avatar {
+          cursor: pointer;
+          min-width: 50px;
+          max-width: 50px;
+          overflow: hidden;
+          height: 50px;
+          margin-right: 5%;
+          background: url("../img/search/search_avat_01.png") no-repeat;
+          background-size: cover;
+          border-radius: 50%;
+          position: relative;
+
+          &::before {
+            width: 100%;
+            content: '...';
+            font-size: 20px;
+            color: transparent;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            transition: .5s;
+            background-position: 50% 50%;
+          }
+
+          &:hover::before {
+            color: #ffffff;
+            background: rgba(0, 0, 0, .5);
+          }
+        }
+
+        &__content {
+          display: flex;
+          flex-wrap: wrap;
+          height: 90px;
+
+          &__title {
+            margin: 0;
+            width: 100%;
+            font-size: 16px;
+            font-family: "ProximaNova";
+            color: rgb(50, 50, 50);
+          }
+
+          .search__comments,
+          .search__like {
+            cursor: pointer;
+            margin-top: 5px;
+
+            path {
+              fill: #d6d6d6;
+            }
+          }
+
+          &__count,
+          &__like {
+            margin-top: 0;
+            margin-left: 5%;
+            width: 10%;
+            font-size: 16px;
+            font-family: "Panton";
+            color: rgba(50, 50, 50, 0.8);
+            line-height: 1.5;
+          }
+        }
+      }
+
+      &__album-title {
+        width: 100%;
+        height: 40px;
+        background-color: #f6f6f6;
+        position: absolute;
+        bottom: 0;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+
+        &__text {
+          margin: 0 21px 0 0;
+          font-size: 16px;
+          font-family: "ProximaNova";
+          color: rgba(50, 50, 50, 0.8);
+          line-height: 1.5;
+        }
+
+        &__albums {
+          cursor: pointer;
+          margin-right: 3%;
+          fill: #c5c5c5;
+        }
+      }
+    }
+  }
+}
