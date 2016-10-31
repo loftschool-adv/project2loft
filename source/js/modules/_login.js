@@ -75,6 +75,7 @@ var loginModule = (function() {
 	  		var $thisForm = $(this).closest('form');
 	  		// Параметры для popup
 	  		var errorArray = base.validateForm($thisForm); // Проверяем текущую форму и выдаем массив индексов ошибок
+	  		console.log(errorArray);
 	  		var $errorContainer = $thisForm.find('.popup__error');
 	  		if(errorArray.length > 0){	// Если в массиве есть ошибки, значит выдаем окно, с номером ошибки
 	  			errorArray.forEach(function(index){
@@ -85,9 +86,13 @@ var loginModule = (function() {
 	  			servAns = base.ajax($thisForm,'/recover/');
 	  			servAns.done(function(ans){
 	  				if(!ans.status){
-	  					base.showError(ans.message,$errorContainer, popupTime);
+	  					console.log(ans.status);
+	  					return base.showError(ans.message,$errorContainer, popupTime);
 	  				}else{
-	  					window.location.reload(true);
+	  					console.log("Сообщение вот тут");
+	  					base.clearInputs($thisForm);
+	  					return base.showError(ans.message,$errorContainer, popupTime);
+	  					
 	  				}
 	  			});
 	  		}
