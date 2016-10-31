@@ -13,7 +13,7 @@
 
 
 $( document ).ready(function() {
-    var base = new BaseModule; // Инициализируем библиотеку. (Пока не нужно)
+    //var base = new BaseModule; // Инициализируем библиотеку. (Пока не нужно)
     // Подключаем модуль для работы с аторизацией, регистрацией и тд. Все что связанно со входом пользователя на сайт
     loginModule.init(); 
 })
@@ -21,7 +21,7 @@ $( document ).ready(function() {
 // Фиксирование кнопки добавить в альбомах
 var scrollAlbum = function(){
 	'use strict';
-	
+
 	var init = function() {
 		_setUpListners();
 	};
@@ -52,7 +52,7 @@ var scrollAlbum = function(){
 	return {
 		init: init
 	};
-	
+
 }();
 scrollAlbum.init();
 
@@ -136,4 +136,3 @@ $( document ).ready(function() {
 	})();
 
 });
-
