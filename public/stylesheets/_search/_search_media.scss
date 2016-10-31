@@ -1,54 +1,19 @@
 @media screen and (max-width: 768px){
-  .search__header {
-    &__search {
-      padding-left: 2.5%;
-    }
-    &__search__user-name {
-      margin-right: 7%;
-    }
-    .button-home {
-      display: none;
-    }
-    &__search__show-more {
-      //margin-left: -6%;
-    }
-  }
-  .search__main {
-    padding-bottom: 60px;
-    &__albums__container {
+  .search {
+    padding: 60px 0;
+    .container {
       width: 46%;
     }
   }
 }
 
 @media screen and (max-width: 460px){
-  .search__header {
-    margin-bottom: 30px;
-    &__search {
-      height: 85px;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-    }
-    &__search__avatar {
+  .search {
+    padding: 60px 0;
+    .title {
       display: none;
     }
-    &__search__user-name {
-      display: none;
-    }
-    .header__search__wrap__input {
-      margin: 0 0 10px 0;
-    }
-    &__search__show-more {
-      margin-left: 0;
-    }
-  }
-  .search__main {
-    padding-bottom: 60px;
-    &__title {
-      display: none;
-    }
-    &__albums__container {
+    .container {
       width: 100%;
       max-width: 95%;
     }

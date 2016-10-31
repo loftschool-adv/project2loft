@@ -1,173 +1,123 @@
-.search__header {
-  width: 100%; }
-  .search__header__title {
-    width: 100%;
-    height: 80px;
-    font-family: "Panton";
-    font-size: 42px;
-    font-weight: bold;
-    line-height: 0.5;
-    color: #323232;
-    display: flex;
-    justify-content: center;
-    align-items: center; }
-  .search__header__search {
-    padding: 0 5%;
-    width: 93%;
-    height: 60px;
-    opacity: 0.85;
-    display: flex;
-    background-color: #f6f6f6;
-    display: flex;
-    align-items: center; }
-    .search__header__search__avatar {
-      min-width: 50px;
-      max-width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      overflow: hidden;
-      margin-right: 2.5%;
-      border: 3px solid #ffffff; }
-      .search__header__search__avatar__img {
-        height: 100%;
-        margin-left: -35%; }
-    .search__header__search__user-name {
-      font-size: 16px;
-      font-family: "Panton";
-      color: #323232;
-      font-weight: bold;
-      line-height: 1.313;
-      margin-right: 13%; }
-    .search__header__search__show-more {
-      margin-left: 10%;
-      cursor: pointer;
-      text-decoration: none;
-      font-size: 16px;
-      font-family: "ProximaNova";
-      color: rgba(40, 187, 240, 0.8);
-      line-height: 1.313;
-      border: none;
-      background: none; }
-
-.search__main__title {
+.search .title {
   font-size: 21px;
   font-family: "ProximaNova";
   font-weight: 600;
   line-height: 1;
   color: #323232;
   margin: 60px 0 40px 2.5%; }
-.search__main__albums {
+.search .albums {
   width: 100%;
   margin: 0 auto;
   display: flex;
   flex-wrap: wrap; }
-  .search__main__albums__container {
-    border-radius: 2px;
+.search .container {
+  border-radius: 2px;
+  overflow: hidden;
+  margin: 0 0 2% 2.5%;
+  max-width: 380px;
+  width: 30%;
+  height: 380px;
+  border-radius: 1.5px;
+  background-color: #ffffff;
+  box-shadow: 0 0.5px 2px 0 rgba(0, 0, 0, 0.15);
+  position: relative; }
+.search .img-box {
+  height: 250px;
+  width: 100%;
+  position: relative;
+  z-index: 10;
+  overflow: hidden; }
+  .search .img-box::before {
+    width: 100%;
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transition: .5s;
+    background-position: 50% 50%; }
+  .search .img-box:hover::before {
+    background: rgba(0, 0, 0, 0.5) url("../img/icons/loupe.svg") no-repeat;
+    background-position: 50% 50%; }
+  .search .img-box__img {
+    height: 100%;
+    cursor: pointer;
+    width: 100%;
+    z-index: 0; }
+.search .comment {
+  display: flex;
+  padding: 5%; }
+  .search .comment__avatar {
+    cursor: pointer;
+    min-width: 50px;
+    max-width: 50px;
     overflow: hidden;
-    margin: 0 0 2% 2.5%;
-    max-width: 380px;
-    width: 30%;
-    height: 380px;
-    border-radius: 1.5px;
-    background-color: #ffffff;
-    box-shadow: 0 0.5px 2px 0 rgba(0, 0, 0, 0.15);
+    height: 50px;
+    margin-right: 5%;
+    background: url("../img/search/search_avat_01.png") no-repeat;
+    background-size: cover;
+    border-radius: 50%;
     position: relative; }
-    .search__main__albums__container__wrap-img {
-      height: 250px;
+    .search .comment__avatar::before {
       width: 100%;
-      position: relative;
-      z-index: 10;
-      overflow: hidden; }
-      .search__main__albums__container__wrap-img::before {
-        width: 100%;
-        content: '';
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        transition: .5s;
-        background-position: 50% 50%; }
-      .search__main__albums__container__wrap-img:hover::before {
-        background: rgba(0, 0, 0, 0.5) url("../img/icons/loupe.svg") no-repeat;
-        background-position: 50% 50%; }
-      .search__main__albums__container__wrap-img__img {
-        height: 100%;
-        cursor: pointer;
-        width: 100%;
-        z-index: 0; }
-    .search__main__albums__container__comment {
+      content: '...';
+      font-size: 20px;
+      color: transparent;
       display: flex;
-      padding: 5%; }
-      .search__main__albums__container__comment__avatar {
-        cursor: pointer;
-        min-width: 50px;
-        max-width: 50px;
-        overflow: hidden;
-        height: 50px;
-        margin-right: 5%;
-        background: url("../img/search/search_avat_01.png") no-repeat;
-        background-size: cover;
-        border-radius: 50%;
-        position: relative; }
-        .search__main__albums__container__comment__avatar::before {
-          width: 100%;
-          content: '...';
-          font-size: 20px;
-          color: transparent;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          position: absolute;
-          width: 100%;
-          height: 100%;
-          transition: .5s;
-          background-position: 50% 50%; }
-        .search__main__albums__container__comment__avatar:hover::before {
-          color: #ffffff;
-          background: rgba(0, 0, 0, 0.5); }
-      .search__main__albums__container__comment__content {
-        display: flex;
-        flex-wrap: wrap;
-        height: 90px; }
-        .search__main__albums__container__comment__content__title {
-          margin: 0;
-          width: 100%;
-          font-size: 16px;
-          font-family: "ProximaNova";
-          color: #323232; }
-        .search__main__albums__container__comment__content .search__comments,
-        .search__main__albums__container__comment__content .search__like {
-          cursor: pointer;
-          margin-top: 5px; }
-          .search__main__albums__container__comment__content .search__comments path,
-          .search__main__albums__container__comment__content .search__like path {
-            fill: #d6d6d6; }
-        .search__main__albums__container__comment__content__count, .search__main__albums__container__comment__content__like {
-          margin-top: 0;
-          margin-left: 5%;
-          width: 10%;
-          font-size: 16px;
-          font-family: "Panton";
-          color: rgba(50, 50, 50, 0.8);
-          line-height: 1.5; }
-    .search__main__albums__container__album-title {
-      width: 100%;
-      height: 40px;
-      background-color: #f6f6f6;
+      justify-content: center;
+      align-items: center;
       position: absolute;
-      bottom: 0;
-      display: flex;
-      justify-content: flex-end;
-      align-items: center; }
-      .search__main__albums__container__album-title__text {
-        margin: 0 21px 0 0;
-        font-size: 16px;
-        font-family: "ProximaNova";
-        color: rgba(50, 50, 50, 0.8);
-        line-height: 1.5; }
-      .search__main__albums__container__album-title__albums {
-        cursor: pointer;
-        margin-right: 3%;
-        fill: #c5c5c5; }
+      width: 100%;
+      height: 100%;
+      transition: .5s;
+      background-position: 50% 50%; }
+    .search .comment__avatar:hover::before {
+      color: #ffffff;
+      background: rgba(0, 0, 0, 0.5); }
+.search .comment__content {
+  display: flex;
+  flex-wrap: wrap;
+  height: 90px; }
+  .search .comment__content__title {
+    margin: 0;
+    width: 100%;
+    font-size: 16px;
+    font-family: "ProximaNova";
+    color: #323232; }
+.search .search__comments,
+.search .search__like {
+  cursor: pointer;
+  margin-top: 5px; }
+  .search .search__comments path,
+  .search .search__like path {
+    fill: #d6d6d6; }
+.search .comment__count,
+.search .comment__like {
+  margin-top: 0;
+  margin-left: 5%;
+  width: 10%;
+  font-size: 16px;
+  font-family: "Panton";
+  color: rgba(50, 50, 50, 0.8);
+  line-height: 1.5; }
+.search .album-title {
+  width: 100%;
+  height: 40px;
+  background-color: #f6f6f6;
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center; }
+  .search .album-title__text {
+    margin: 0 21px 0 0;
+    font-size: 16px;
+    font-family: "ProximaNova";
+    color: rgba(50, 50, 50, 0.8);
+    line-height: 1.5; }
+  .search .album-title__albums {
+    cursor: pointer;
+    margin-right: 3%;
+    fill: #c5c5c5; }
 
 .user__footer {
   background: url("../img/user/user_footer.png") no-repeat 50% 100%;
@@ -209,39 +159,16 @@
       margin-left: 15%; }
 
 @media screen and (max-width: 768px) {
-  .search__header__search {
-    padding-left: 2.5%; }
-  .search__header__search__user-name {
-    margin-right: 7%; }
-  .search__header .button-home {
-    display: none; }
-
-  .search__main {
-    padding-bottom: 60px; }
-    .search__main__albums__container {
+  .search {
+    padding: 60px 0; }
+    .search .container {
       width: 46%; } }
 @media screen and (max-width: 460px) {
-  .search__header {
-    margin-bottom: 30px; }
-    .search__header__search {
-      height: 85px;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center; }
-    .search__header__search__avatar {
+  .search {
+    padding: 60px 0; }
+    .search .title {
       display: none; }
-    .search__header__search__user-name {
-      display: none; }
-    .search__header .header__search__wrap__input {
-      margin: 0 0 10px 0; }
-    .search__header__search__show-more {
-      margin-left: 0; }
-
-  .search__main {
-    padding-bottom: 60px; }
-    .search__main__title {
-      display: none; }
-    .search__main__albums__container {
+    .search .container {
       width: 100%;
       max-width: 95%; } }
 
