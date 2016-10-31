@@ -108,20 +108,20 @@
       transition: .5s;
       fill: white; }
 
-.user__main {
-  padding: 60px 5%; }
-  .user__main__title {
+.user {
+  padding: 60px 0 60px 2%; }
+  .user .title {
     font-size: 42px;
     font-family: "Panton";
     color: #323232;
     font-weight: bold;
     line-height: 0.5;
     z-index: 11; }
-  .user__main__albums {
+  .user .albums {
     display: flex;
-    flex-wrap: wrap; }
-    .user__main__albums__item {
-      min-width: 220px;
+    flex-wrap: wrap;
+    margin: 0 auto; }
+    .user .albums__item {
       width: 23%;
       height: 320px;
       overflow: hidden;
@@ -130,44 +130,46 @@
       box-shadow: 1px 2px 2px 2px #eee;
       cursor: pointer;
       position: relative; }
-      .user__main__albums__item__hover {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        z-index: 0;
-        opacity: 0; }
-        .user__main__albums__item__hover__comment {
-          font-size: 16px;
-          font-family: "ProximaNova";
-          color: white;
-          line-height: 1.5;
-          z-index: 17;
-          margin: 150px 0 0 20px; }
-        .user__main__albums__item__hover__count {
-          font-size: 16px;
-          font-family: "ProximaNova";
-          color: white;
-          line-height: 1.5;
-          z-index: 18;
-          margin-left: 20px; }
-        .user__main__albums__item__hover:hover {
-          background: rgba(0, 0, 0, 0.5);
-          transition: .5s;
-          opacity: 1; }
-      .user__main__albums__item__name {
-        font-size: 16px;
-        font-family: "ProximaNova";
-        color: #323232;
-        z-index: 43;
-        height: 50px;
-        position: absolute;
-        display: flex;
-        align-items: center;
-        justify-content: flex-end;
-        padding-right: 10%;
-        bottom: 0;
-        width: 90%;
-        background: #ffffff; }
+      .user .albums__item__img {
+        height: 100%; }
+  .user .hover {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    opacity: 0; }
+    .user .hover__comment {
+      font-size: 16px;
+      font-family: "ProximaNova";
+      color: white;
+      line-height: 1.5;
+      z-index: 17;
+      margin: 150px 0 0 20px; }
+    .user .hover__count {
+      font-size: 16px;
+      font-family: "ProximaNova";
+      color: white;
+      line-height: 1.5;
+      z-index: 18;
+      margin-left: 20px; }
+    .user .hover:hover {
+      background: rgba(0, 0, 0, 0.5);
+      transition: .5s;
+      opacity: 1; }
+  .user .name {
+    font-size: 16px;
+    font-family: "ProximaNova";
+    color: #323232;
+    z-index: 43;
+    height: 50px;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 10%;
+    bottom: 0;
+    width: 90%;
+    background: #ffffff; }
 
 .user__footer {
   background: url("../img/user/user_footer.png") no-repeat 50% 100%;
@@ -208,64 +210,28 @@
       width: 40%;
       margin-left: 15%; }
 
-@media screen and (max-width: 1200px) {
-  .user__header {
-    font-size: 16px; } }
-@media screen and (max-width: 992px) {
-  .user__header {
-    font-size: 14px; } }
 @media screen and (max-width: 768px) {
-  .user__header {
-    font-size: 12px; } }
+  .user {
+    padding: 60px 0 60px 2%; }
+    .user .albums__item {
+      min-width: 31%;
+      width: 31%;
+      height: 320px; }
+      .user .albums__item .albums__name {
+        font-size: 16px; } }
 @media screen and (max-width: 480px) {
-  .user__header {
-    font-size: 10px; } }
-@media screen and (max-width: 480px) {
-  .user__footer__wrap {
-    padding-top: 10%;
-    flex-direction: column;
-    justify-content: center; }
-    .user__footer__wrap__text-left {
-      text-align: center;
-      width: 100%; }
-    .user__footer__wrap__text-right {
-      text-align: center;
-      width: 100%;
-      margin: 0; } }
-@media screen and (max-width: 480px) {
-  .user__header__top {
-    flex-direction: column;
-    justify-content: center; }
-    .user__header__top__avatar {
-      width: 50px;
-      height: 50px;
-      min-width: 50px; }
-      .user__header__top__avatar__img {
-        width: 55px; }
-    .user__header__top__breef {
-      align-items: center; }
-
-  .user__header__search {
-    justify-content: center;
-    align-items: center; }
-    .user__header__search__wrap {
-      width: 90%; }
-      .user__header__search__wrap__input {
-        width: 100%;
-        margin: 0; } }
-@media screen and (max-width: 480px) {
-  .user__main {
+  .user {
     padding: 60px 2%; }
-    .user__main__title {
+    .user .title {
       font-size: 42px; }
-    .user__main__albums {
+    .user .albums {
       display: flex;
       flex-direction: column; }
-      .user__main__albums__item {
+      .user .albums__item {
         min-width: 90%;
         width: 100%;
         height: 320px; }
-        .user__main__albums__item__name {
+        .user .albums__item__name {
           font-size: 16px; } }
 
 /*# sourceMappingURL=_user.css.map */

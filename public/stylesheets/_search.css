@@ -26,7 +26,8 @@
   width: 100%;
   position: relative;
   z-index: 10;
-  overflow: hidden; }
+  overflow: hidden;
+  cursor: pointer; }
   .search .img-box::before {
     width: 100%;
     content: '';

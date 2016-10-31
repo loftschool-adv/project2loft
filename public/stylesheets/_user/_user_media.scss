@@ -1,80 +1,40 @@
-@media screen and (max-width: 1200px) { 
-  .user__header {
-    font-size: 16px;
-  }
-}
-@media screen and (max-width: 992px) {
-  .user__header {
-    font-size: 14px;
-  }
-}
+//@media screen and (max-width: 1200px) {
+//  .user {
+//    .albums__item {
+//      min-width: 24%;
+//      width: 24%;
+//      height: 320px;
+//
+//      .albums__name {
+//        font-size: 16px;
+//      }
+//    }
+//  }
+//}
 @media screen and (max-width: 768px) {
-  .user__header {
-    font-size: 12px;
+  .user {
+    padding: 60px 0 60px 2%;
+
+    .albums__item {
+        min-width: 31%;
+        width: 31%;
+        height: 320px;
+
+    .albums__name {
+        font-size: 16px;
+      }
+    }
   }
 }
 @media screen and (max-width: 480px) {
-  .user__header {
-    font-size: 10px;
-  }
-}
-
-@media screen and (max-width: 480px){
-  .user__footer {
-    &__wrap {
-      padding-top: 10%;
-      flex-direction: column;
-      justify-content: center;
-      &__text-left {
-        text-align: center;
-        width: 100%;
-      }
-      &__text-right {
-        text-align: center;
-        width: 100%;
-        margin: 0;
-      }
-    }
-  }
-}
-
-@media screen and (max-width: 480px) {
-  .user__header__top {
-    flex-direction: column;
-    justify-content: center;
-    &__avatar {
-      width: 50px;
-      height: 50px;
-      min-width: 50px;
-      &__img {
-
-        width: 55px;
-      }
-    }
-    &__breef {
-      align-items: center;
-    }
-  }
-  .user__header__search {
-    justify-content: center;
-    align-items: center;
-    &__wrap {
-      &__input {
-        margin: 0;
-      }
-    }
-  }
-}
-
-@media screen and (max-width: 480px) {
-  .user__main {
+  .user {
     padding: 60px 2%;
 
-    &__title {
+    .title {
       font-size: 42px;
     }
 
-    &__albums {
+    .albums {
       display: flex;
       flex-direction: column;
 
