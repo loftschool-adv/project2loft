@@ -6,6 +6,8 @@ let util       = require('util');
 let formidable = require('formidable');
 let BaseModule = require('../modules/libs/_base.js');
 let base = new BaseModule;
+let mongoose = require('../modules/libs/mongoose.js');
+let Image = require('../modules/models/image.js').Image;
 
 function uploadImg(req, res) {
   console.log("Пришел запрос с картинкой");
@@ -24,25 +26,46 @@ function uploadImg(req, res) {
 
     if (part) {
       var fileType = part.mime.split('/').pop();
-      filename = base.passGenerate(12) + '.' + fileType;
+      filename = 'IMG' + base.passGenerate(10) + '.' + fileType;
       console.log(filename);
     }
   };
 
 
-  File.parse(req, function(err, fields) {
-    console.log(fields);
+  File
+    .on('field', function(name, field) {
 
-    fs.writeFile('tmp/' + filename, fields, 'binary', function(err){
+    fs.writeFile('upload/' + filename, field, 'binary', function(err){
       if (err) throw err;
       console.log('File saved.');
       //console.log(req.headers);
     });
 
     console.log('Upload completed!');
-    res.end('upload');
-  });
+  })
+  .on('end', function() {
+        console.log('-> upload done');
+        addImgDB(filename);
+        res.end('upload');
+      });
 
+  File.parse(req);
+
+
+
+}
+
+function addImgDB(filename) {
+
+  // Создаем экземпляр пользователя
+  let image = new Image({
+    src: 'upload/' + filename
+  });
+  // Сохраняем картинку в базу
+  image.save(function( err, image, affected){
+    if (err) throw err;
+    console.log('Сохранена картинка в базу')
+  });
 }
 
 module.exports = uploadImg;

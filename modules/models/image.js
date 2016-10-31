@@ -9,27 +9,27 @@ let schema = new Schema({
   name: {
     type: String,
     unique: false,
-    required: true,
+    required: false,
     default: "Изображение"
   },
   src: {
     type: String,
     unique: false,
-    required: true,
+    required: false,
   },
   created : {
     type : Date,
     default: Date.now
   },
   album_id: {
-    type: objectId,
+    type: String,
     unique: false,
-    required: true
+    required: false
   },
   user_id: {
-    type: objectId,
+    type: String,
     unique: false,
-    required: true
+    required: false
   }
 });
 
