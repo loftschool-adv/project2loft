@@ -1,0 +1,21 @@
+@media screen and (max-width: 768px){
+  .search {
+    padding: 60px 0;
+    .container {
+      width: 46%;
+    }
+  }
+}
+
+@media screen and (max-width: 460px){
+  .search {
+    padding: 60px 0;
+    .title {
+      display: none;
+    }
+    .container {
+      width: 100%;
+      max-width: 95%;
+    }
+  }
+}
