@@ -28,7 +28,6 @@ var loginModule = (function() {
 	  				base.showError(index,$errorContainer, popupTime);
 	  			});
 	  		}else{ // Если массив пустой, выполняем дальше
-	  			base.hideError($errorContainer);
 	  			servAns = base.ajax($thisForm,'/login/');
 	  			servAns.done(function(ans){
 	  				if(!ans.status){
@@ -53,7 +52,6 @@ var loginModule = (function() {
 	  				base.showError(index,$errorContainer, popupTime);
 	  			});
 	  		}else{ // Если массив пустой, выполняем дальше
-	  			base.hideError($errorContainer);
 	  			servAns = base.ajax($thisForm,'/reg/');
 	  			servAns.done(function(ans){
 	  				if(!ans.status){
@@ -68,8 +66,6 @@ var loginModule = (function() {
 
   	// Отправляем ajax на recover
 
-  	// В РАЗРАБОТКЕ
-
   	$formRecover.find(button).on('click', function(e){
   		e.preventDefault();
 	  		var $thisForm = $(this).closest('form');
@@ -81,13 +77,14 @@ var loginModule = (function() {
 	  				base.showError(index,$errorContainer, popupTime);
 	  			});
 	  		}else{ // Если массив пустой, выполняем дальше
-	  			base.hideError($errorContainer);
 	  			servAns = base.ajax($thisForm,'/recover/');
 	  			servAns.done(function(ans){
 	  				if(!ans.status){
-	  					base.showError(ans.message,$errorContainer, popupTime);
+	  					return base.showError(ans.message,$errorContainer, popupTime);
 	  				}else{
-	  					window.location.reload(true);
+	  					base.clearInputs($thisForm);
+	  					return base.showError(ans.message,$errorContainer, popupTime);
+	  					
 	  				}
 	  			});
 	  		}

@@ -77,7 +77,7 @@ route.post('/login/', (req, res) => {
 
   User.findOne({'email': req.body.email}).then((item) => {
     if (item) {
-      console.log(item.checkPassword(req.body.pass));
+      
       if (item.checkPassword(req.body.pass)) {
 
         req.session._id = item._id;
@@ -88,14 +88,13 @@ route.post('/login/', (req, res) => {
         res.send({status: 'login'});
       }
       else {
-        return sendMasage('Данные не верные', res);
+        return sendMasage('Данные не верные', res, 0);
       }
 
     } else {
-      console.log("Такой пользователь НЕ найден");
-      res.send({});
+      return sendMasage('Данные не верные', res, 0);
     }
-  });
+  })
 
 });
 
@@ -113,12 +112,15 @@ route.post('/recover/', (req, res) => {
   let User = require('../modules/models/user.js').User;
   let pass =  "" + base.passGenerate(8);
   User.findOne({'email': req.body.email}).then((user) => {
+    if(!user){
+      return sendMasage('Такой пользователь не найден', res , 0);
+    }
     user.update({
       hashedpassword : user.encryptPassword(pass)
-    },(err) => {if (err) throw err ;})
+    },(err) => {if (err) throw err })
     
     sendMail(req.body.email, 'Восстановление пароля', 'Новый пароль: ' + pass)
-    res.send({});
+    return sendMasage('Сообщение отправленно', res , 1);
   })
 });
 
