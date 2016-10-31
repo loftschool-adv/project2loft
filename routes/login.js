@@ -37,18 +37,23 @@ route.post('/reg/', (req, res) => {
   let User = require('../modules/models/user.js').User;
   for (let key in req.body) {
     if (!req.body[key]) {
-      return sendMasage('Заполнены не все поля', res, 1);
+      return sendMasage('Заполнены не все поля', res, 0);
     }
   }
   User.findOne({'email': req.body.email}).then((item) => {
     if (item) {
-      return sendMasage('Такой email уже зарегитрирован', res, 2);
+      return sendMasage('Такой email уже зарегитрирован', res, 0);
     } else {
       let user = new User({
         login: req.body.login,
         password: req.body.pass,
         email: req.body.email
       });
+      // Под вопросом
+      req.session.email = req.body.email;
+      req.session._id = req.body._id;
+      req.session.name = req.body.name;
+      req.session.about = req.body.about;
       user.save(function (err, user, affected) {
         if (err) throw err;
         // Создание папки пользователя
@@ -57,7 +62,8 @@ route.post('/reg/', (req, res) => {
             fs.mkdir(folder + '/' + user.email, () => {});
           }
         });
-        return sendMasage('Вы успешно зарегистрированы', res);
+        
+        res.send({status: 'reg'});
       });
     }
   })
@@ -82,7 +88,7 @@ route.post('/login/', (req, res) => {
         res.send({status: 'login'});
       }
       else {
-        return sendMasage('Не верный пароль', res);
+        return sendMasage('Данные не верные', res);
       }
 
     } else {
