@@ -1,91 +1,57 @@
 include ../layout
 
 block content
-    main.search
-        h2.title.
-            По запросу "Природа" найдено 6 результатов
-        div.albums
-            div.container
-                div.img-box
-                    img(src="../img/search/search_img_01.png" alt="Lake").img-box__img
-                div.comment
-                    a(href="#").comment__avatar
-                    div.comment__content
-                        p.comment__content__title Путешествие на лодке по озеру
-                        include ../../source/images/icons/comments.svg
-                        p.comment__count 9
-                        include ../../source/images/icons/like.svg
-                        p.comment__like 15
-                div.album-title
-                    include ../../source/images/icons/album.svg
-                    p.album-title__text Прогулки по воде
-            div.container
-                div.img-box
-                    img(src="../img/search/search_img_02.png" alt="Camp").search__main__albums__container__wrap-img__img
-                div.comment
-                    a(href="#").comment__avatar
-                    div.comment__content
-                        p.comment__content__title Отдых в палатке
-                        include ../../source/images/icons/comments.svg
-                        p.comment__count 2
-                        include ../../source/images/icons/like.svg
-                        p.comment__like 22
-                div.album-title
-                    include ../../source/images/icons/album.svg
-                    p.album-title__text Палаточный лагерь
-            div.container
-                div.img-box
-                    img(src="../img/search/search_img_03.png" alt="Horse").search__main__albums__container__wrap-img__img
-                div.comment
-                    a(href="#").comment__avatar
-                    div.comment__content
-                        p.comment__content__title Любимые лошадки
-                        include ../../source/images/icons/comments.svg
-                        p.comment__count 4
-                        include ../../source/images/icons/like.svg
-                        p.comment__like 32
-                div.album-title
-                    include ../../source/images/icons/album.svg
-                    p.album-title__text Животные
-            div.container
-                div.img-box
-                    img(src="../img/search/search_img_04.png" alt="Mount sea").search__main__albums__container__wrap-img__img
-                div.comment
-                    a(href="#").comment__avatar
-                    div.comment__content
-                        p.comment__content__title Мечтательный взгляд вдаль
-                        include ../../source/images/icons/comments.svg
-                        p.comment__count 9
-                        include ../../source/images/icons/like.svg
-                        p.comment__like 21
-                div.album-title
-                    include ../../source/images/icons/album.svg
-                    p.album-title__text Пустыня
-            div.container
-                div.img-box
-                    img(src="../img/search/search_img_05.png" alt="Hammock").search__main__albums__container__wrap-img__img
-                div.comment
-                    a(href="#").comment__avatar
-                    div.comment__content
-                        p.comment__content__title Я лежу в гамаке, как это прекрасно
-                        include ../../source/images/icons/comments.svg
-                        p.comment__count 4
-                        include ../../source/images/icons/like.svg
-                        p.comment__like 14
-                div.album-title
-                    include ../../source/images/icons/album.svg
-                    p.album-title__text Отдых
-            div.container
-                div.img-box
-                    img(src="../img/search/search_img_06.png" alt="Bicycle").search__main__albums__container__wrap-img__img
-                div.comment
-                    a(href="#").comment__avatar
-                    div.comment__content
-                        p.comment__content__title Велопутешествие
-                        include ../../source/images/icons/comments.svg
-                        p.comment__count 2
-                        include ../../source/images/icons/like.svg
-                        p.comment__like 26
-                div.album-title
-                    include ../../source/images/icons/album.svg
-                    p.album-title__text Дорога
+    -var userAva = "ava"
+    .search-wrap
+        header.search-page__header
+            h1.title Исследуй мир
+            a.btn-home
+                svg.input-complex__icon
+                    use(xlink:href='/img/sprite.svg#search')
+            .bottom
+                .user-block.user-block--sm
+                    .user-block__photo(href="#404" style="background-image: url(../img/search/"+userAva+".png), url(../img/album/no_photo.jpg)")
+
+                    .user-block__main
+                        .user-block__name Антон Черепов
+                form.search
+                    input.field.search__field(
+                    type="text"
+                    name="text"
+                    placeholder="Найти..."
+                    )
+                    button.search__btn
+                        svg.input-complex__icon
+                            use(xlink:href='/img/sprite.svg#search')
+                a.show-new(href="#404") Показать новые
+        .search__main
+            .title По запросу Природа найдено 6 результатов
+            .grid.grid--lg
+                - var images = [{"image":"01", "avatar":"a01", "count": "10", "like": "3"}, {"image":"02", "avatar":"a02", "count": "10", "like": "3"}, {"image":"03", "avatar":"a03", "count": "10", "like": "3"}, {"image":"04", "avatar":"a04", "count": "10", "like": "3"}, {"image":"05", "avatar":"a05", "count": "10", "like": "3"}, {"image":"06", "avatar":"a06", "count": "10", "like": "3"}];
+                for i in images
+                    .grid__item
+                        .photo-card
+                            a.photo-card__head(href="#404" style="background-image: url(../img/search/"+i["image"]+".png), url(../img/album/no_photo.jpg)")
+                            .photo-card__body
+                                .photo-details
+                                    .photo-details__side
+                                        a.photo-details__ava(href="#user" style="background-image: url(../img/search/"+i["avatar"]+".png), url(../img/album/no_photo.jpg)")
+                                    .photo-details__main
+                                        .photo-details__title Название фотографии
+                                        .photo-details__info.info
+                                            .info__item
+                                                svg.info__icon
+                                                    use(xlink:href='/img/sprite.svg#comments')
+                                                span.info__text #{i["count"]}
+                                            .info__item
+                                                svg.info__icon
+                                                    use(xlink:href='/img/sprite.svg#like')
+                                                span.info__text #{i["like"]}
+                            .photo-card__foot
+                                .photo-card__foot-part
+                                .photo-card__foot-part
+                                    a.link.photo-card__link-album(href="#404")
+                                        svg.link__icon
+                                            use(xlink:href='/img/sprite.svg#album')
+                                        .link__text Название альбома
+        include ../commons/footer
