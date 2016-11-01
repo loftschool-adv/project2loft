@@ -132,7 +132,7 @@ var BaseModule = function(){
 						return true;
 				}
 			})
-		};
+		}
 
 		return output;
 	};
@@ -144,4 +144,4 @@ var BaseModule = function(){
 
 	
 
-}
+};

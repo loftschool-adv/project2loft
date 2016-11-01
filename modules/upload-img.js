@@ -8,6 +8,7 @@ let BaseModule = require('../modules/libs/_base.js');
 let base = new BaseModule;
 let mongoose = require('../modules/libs/mongoose.js');
 let Image = require('../modules/models/image.js').Image;
+let Album = require('../modules/models/album.js').Album;
 
 function uploadImg(req, res) {
   console.log("Пришел запрос с картинкой");
@@ -15,6 +16,7 @@ function uploadImg(req, res) {
   var Header = new formidable.IncomingForm();
   var File = new formidable.IncomingForm();
   var filename;
+  var imgSrc;
 
   File.maxFieldsSize = 8 * 1024 * 1024;
   File.multiples = true;
@@ -35,9 +37,12 @@ function uploadImg(req, res) {
   File
     .on('field', function(name, field) {
 
-    fs.writeFile('upload/' + filename, field, 'binary', function(err){
+      imgSrc = 'users/' + req.session.email + '/' + filename;
+
+    fs.writeFile(imgSrc, field, 'binary', function(err){
       if (err) throw err;
       console.log('File saved.');
+      console.log(req.session.email);
       //console.log(req.headers);
     });
 
@@ -45,21 +50,20 @@ function uploadImg(req, res) {
   })
   .on('end', function() {
         console.log('-> upload done');
-        addImgDB(filename);
+
+        addImgDB(imgSrc);
         res.end('upload');
       });
 
   File.parse(req);
 
-
-
 }
 
-function addImgDB(filename) {
+function addImgDB(imgSrc) {
 
   // Создаем экземпляр пользователя
   let image = new Image({
-    src: 'upload/' + filename
+    src: imgSrc
   });
   // Сохраняем картинку в базу
   image.save(function( err, image, affected){
