@@ -116,7 +116,9 @@ var sassCompile = [
 var mainJs = [
   // Пример:  path.sourse.folder  + '/' + path.sourse.js + '/app.js',
   path.sourse.folder + '/' + path.sourse.js + '/modules/_base.js',
+  path.sourse.folder + '/' + path.sourse.js + '/modules/_common.js',
   path.sourse.folder + '/' + path.sourse.js + '/modules/_login.js',
+  path.sourse.folder + '/' + path.sourse.js + '/modules/_album.js',
   path.sourse.folder + '/' + path.sourse.js + '/app.js',
 
 ];
