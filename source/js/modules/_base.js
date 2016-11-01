@@ -75,16 +75,10 @@ var BaseModule = function(){
 	}
 
 	this.validEmail = function(input, patter){
-		// Функция проверяет корректность email по регулярному выражению
-		// Принимает два аргумента:
-		// 1) input в виде массива (jquery).
-		// 2) шаблон для проверка.
-		// Возвращает true или false
 		return patter.test(input.val());
 	};
 
 	this.validPass = function(input,length){
-		// Функция проверяет длинну пароля
 		var len = length || 8;
 		if(!(input.val().length < len)){
 			return true;
@@ -92,10 +86,6 @@ var BaseModule = function(){
 	};
 	
 	this.validateForm = function(form) {
-		// Функция проверяет форму на валидность пароля
-		// При ошибках возвращает массив с номерами ошибок,
-		// который описан выше.(this.errors)
-		// Возвращает пустой массив если все в порядке.
 		var thisModule = this;
 		var pattern = thisModule.RegPatterns.email;
 		var $thisForm = form;
@@ -141,6 +131,31 @@ var BaseModule = function(){
 		var elem = form.find('input[type != submit],textarea');
 		elem.val('');
 	}
+
+	this.scrollToPosition = function(position, duration){
+  	var position = position || 0;
+		var duration = duration || 1000;
+
+
+		$("body, html").animate({
+				scrollTop: position
+		}, duration)
+  };
+
+  this.changeClass = function(parent,className,type){
+  	if(typeof(parent) == 'string'){
+  		var parent = $(parent);
+  	}
+  	switch(type){
+  		case 'add':
+  			parent.addClass(className);
+  			break;
+  		case 'del':
+  			parent.removeClass(className);
+  			break;
+
+  	}
+  };
 
 	
 
