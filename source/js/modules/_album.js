@@ -45,8 +45,30 @@ var albumModule = (function() {
 	    	}
 	};
 
+	// Анимация для редактирования футера на странице альбома
+	var editAlbum = function() {
+
+		$('.header-album__content_back, .header-edit-bottom').css('transform','translateY(0)');
+		$('.header-album__content_front').fadeOut(500);
+		$('.header-edit-overlay').fadeIn(500);
+		$('.header-album__about-side_front').fadeOut(500);
+		};
+
+	var editHeader = function(ev) {
+		ev.preventDefault();
+		$('.header-album__content_back').css('transform','translateY(-100%)');
+		$('.header-edit-bottom').css('transform','translateY(100%)');
+		$('.header-album__content_front').fadeIn(500);
+		$('.header-edit-overlay').fadeOut(500);
+		$('.header-album__about-side_front').fadeIn(500);
+
+	};
+
+
 
 	var _setUpListners = function() {
+		$('#btn_album_edit').on('click', editAlbum);
+		$('#cancel_edit_header').on('click', editHeader);
 		$('.btn_album-add').on('click', openUpload);
 		$('.modal__header-close').on('click', closeUpload);
 		$(window).on('scroll', _fixedAdd);
