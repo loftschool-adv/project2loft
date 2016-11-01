@@ -110,9 +110,6 @@ body {
 	max-width: 1580px;
 	padding: 0 60px;
 }
-
-
-
 // Главная страница
 .wrapper{
 	height:100vh;
@@ -124,6 +121,7 @@ body {
 	color:#fff;
 	font-family: ProximaNova, sans-serif;
 	font-size: 14px;
+	box-shadow: inset 100vw 0px 0px 0px rgba(0, 0, 0, 0.15);
 }
 .content-main{
 	flex:1;
