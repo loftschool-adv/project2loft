@@ -62,8 +62,11 @@ scrollAlbum.init();
 	$('.modal-container').removeClass('hide');
 
 	})
-$('.modal__header-close').on('click', function() {
+$('.modal__header-close,  .btn-cancelLoad').on('click', function(ev) {
+	ev.preventDefault();
 	$('.modal-container').addClass('hide');
+	$(".img-list").empty();
+	$('.modal__load-img').show();
 })
 })();
 

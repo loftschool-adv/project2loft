@@ -112,15 +112,15 @@ block content
 					span.modal__title-title Название
 					span.modal__title-text Как я провёл лето
 				.modal__load-container#img-container
-					.upload.modal__load-img.hide(title="Выбрать изображение")
+					.upload.modal__load-img(title="Выбрать изображение")
 						svg.upload__icon
 							use(xlink:href='/img/sprite.svg#cam')
 						.upload__text Перетащите фото сюда или 
 							span.modal__link-load выберите файл
-						input.upload__input(type="file"  name="bg")#file-field
+						input.upload__input(type="file"  name="bg" multiple)#file-field
 					ul.img-list#img-list
 				div.modal__footer
 					div.modal__buttons
 						a.btn(href="#")#upload Сохранить
-						a.btn.btn--text(href="#cancel")
+						a.btn.btn--text.btn-cancelLoad(href="#cancel")
 							span.btn__text Отменить                       		
