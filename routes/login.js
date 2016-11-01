@@ -5,11 +5,12 @@
 let fs = require('fs');
 let express = require('express');
 let route = require('express').Router();
-let mongoose = require('mongoose');
 let sendMail = require('../modules/send-mail.js');
 let BaseModule = require('../modules/libs/_base.js');
 let base = new BaseModule;
 let folder = './users';  // Папка с пользователями
+
+let mongoose = require('../modules/libs/mongoose.js');
 
 
 let sendMasage = function (message, res, status = 0) {
@@ -22,7 +23,7 @@ let sendMasage = function (message, res, status = 0) {
 
 
 
-
+// Отображение главной страницы
 route.get('', (req, res) => {
   if (!req.session.email) {
     res.render('index');
