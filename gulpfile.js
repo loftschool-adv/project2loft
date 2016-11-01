@@ -238,7 +238,9 @@ gulp.task('concat', function (callback) {
 
   // main.js
   gulp.src(mainJs)
+    .pipe(sourcemaps.init())
     .pipe(concat(path.build.js_file))
+    .pipe(sourcemaps.write())
     .pipe(gulp.dest(path.build.folder + '/' + path.build.js));
 
   // Тут можно продолжить таск, если нужно чтобы было несколько склееных файлов js
