@@ -51,7 +51,7 @@ function updateProgress(bar, value) {
     // Создаем элемент li и помещаем в него название, миниатюру и progress bar,
     // а также создаем ему свойство file, куда помещаем объект File (при загрузке понадобится)
     var li = $('<li/>').appendTo(imgList);
-    $('<div/>').text(file.name).appendTo(li);
+   // $('<div/>').text(file.name).appendTo(li);
     var img = $('<img/>').appendTo(li);
     $('<div/>').addClass('progress').text('0%').appendTo(li);
     li.get(0).file = file;

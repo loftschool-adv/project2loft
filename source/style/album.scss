@@ -241,10 +241,6 @@
 	min-height:320px;
 }
 
-.highlighted {
-	border: 3px dashed #9b9b9b;
-}
-
 .modal__load-img{
 	margin: auto;
 	opacity:0.6;
@@ -280,4 +276,8 @@
 	img {
 		border-radius: 5px;
 	}
+}
+
+.highlighted {
+	border: 3px dashed #9b9b9b;
 }

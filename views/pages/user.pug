@@ -29,9 +29,25 @@ block content
                         type="text"
                         name="text"
                         placeholder="Исследовать мир"
-                        )
+                )
 
         main.user__main
+            // Test
+            div.popup
+                form.popup__form.popup__form-add-album(action="")
+                    .popup__input-container
+                        h3 Временная форма
+                        label.popup__label(for="name")
+                            svg.popup__svg
+                                use(xlink:href='/img/sprite.svg#name')
+                        input.popup__input(type="text" name="name" placeholder="Название")
+
+                    .popup__input-container
+                        label.popup__label(for="about")
+                        textarea.popup__input(name="about" placeholder="Описаниe")
+                    div.popup__error.hide
+                    input.popup__submit#registration(type="submit" value = "Создать Альбом")
+            // Test
             .title Альбомы
             - var item1 =  {"album":"Поход в горы", "src":"01", "description": "Фотографии природы леса, енотов и оленей","count": "18"};
             - var item2 =  {"album":"Животные", "src":"02", "description": "Фотографии природы леса, енотов и оленей","count": "17"};
