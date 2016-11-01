@@ -9,7 +9,7 @@ let mongoose = require('mongoose');
 let sendMail = require('../modules/send-mail.js');
 let BaseModule = require('../modules/libs/_base.js');
 let base = new BaseModule;
-let folder = './users'  // Папка с пользователями
+let folder = './users';  // Папка с пользователями
 
 
 let sendMasage = function (message, res, status = 0) {
@@ -19,6 +19,8 @@ let sendMasage = function (message, res, status = 0) {
       status: status
     })
 };
+
+
 
 
 route.get('', (req, res) => {
@@ -35,18 +37,23 @@ route.post('/reg/', (req, res) => {
   let User = require('../modules/models/user.js').User;
   for (let key in req.body) {
     if (!req.body[key]) {
-      return sendMasage('Заполнены не все поля', res, 1);
+      return sendMasage('Заполнены не все поля', res, 0);
     }
   }
   User.findOne({'email': req.body.email}).then((item) => {
     if (item) {
-      return sendMasage('Такой email уже зарегитрирован', res, 2);
+      return sendMasage('Такой email уже зарегитрирован', res, 0);
     } else {
       let user = new User({
         login: req.body.login,
         password: req.body.pass,
         email: req.body.email
       });
+      // Под вопросом
+      req.session.email = req.body.email;
+      req.session._id = req.body._id;
+      req.session.name = req.body.name;
+      req.session.about = req.body.about;
       user.save(function (err, user, affected) {
         if (err) throw err;
         // Создание папки пользователя
@@ -55,7 +62,8 @@ route.post('/reg/', (req, res) => {
             fs.mkdir(folder + '/' + user.email, () => {});
           }
         });
-        return sendMasage('Вы успешно зарегистрированы', res);
+        
+        res.send({status: 'reg'});
       });
     }
   })
@@ -68,9 +76,8 @@ route.post('/login/', (req, res) => {
 
 
   User.findOne({'email': req.body.email}).then((item) => {
-    console.log(req.body);
     if (item) {
-      console.log(item.checkPassword(req.body.pass));
+
       if (item.checkPassword(req.body.pass)) {
 
         req.session._id = item._id;
@@ -81,7 +88,7 @@ route.post('/login/', (req, res) => {
         res.send({status: 'login'});
       }
       else {
-        return sendMasage('Не верный пароль', res);
+        return sendMasage('Данные не верные', res, 0);
       }
 
     } else {
@@ -104,13 +111,17 @@ route.post('/logout/', (req, res) => {
 // Васстоновление пароля
 route.post('/recover/', (req, res) => {
   let User = require('../modules/models/user.js').User;
-  let pass =  "" + Math.floor(Math.random() * (999999 - 1)) + 1;
+  let pass =  "" + base.passGenerate(8);
   User.findOne({'email': req.body.email}).then((user) => {
+    if(!user){
+      return sendMasage('Такой пользователь не найден', res , 0);
+    }
     user.update({
       hashedpassword : user.encryptPassword(pass)
-    },(err) => {if (err) throw err ;})
+    },(err) => {if (err) throw err })
+    
     sendMail(req.body.email, 'Восстановление пароля', 'Новый пароль: ' + pass)
-    res.send({});
+    return sendMasage('Сообщение отправленно', res , 1);
   })
 });
 

@@ -23,10 +23,7 @@ block content
 												use(xlink:href='/img/sprite.svg#password') 
 										input.popup__input(type="password" name="pass" placeholder="Пароль")
 									a(href="#").popup__link.popup__link_forget-pass Забыли пароль?
-									div.popup__error.popup__error-login.hide  E-mail или пароль не верен
-									div.popup__error.popup__error-empty.hide  Заполните все поля
-									div.popup__error.popup__error-pass.hide  Длина пароля меньше 8 символов
-									div.popup__error.popup__error-email.hide  Введите корректный e-mail
+									div.popup__error.hide
 									input.popup__submit#login(type="submit" value = "Войти")
 									div.popup__registration Нет аккаунта? 
 										a(href="#").popup__link.popup__link_registr Зарегистрироваться
@@ -53,9 +50,7 @@ block content
 												use(xlink:href='/img/sprite.svg#password') 
 										input.popup__input(type="password" name="pass" placeholder="Пароль")
 									div.popup__promt  Ваши данные остаются строго конфедициальны
-									div.popup__error.popup__error-empty.hide  Заполните все поля
-									div.popup__error.popup__error-pass.hide  Длина пароля меньше 8 символов
-									div.popup__error.popup__error-email.hide  Введите корректный e-mail
+									div.popup__error.hide
 									input.popup__submit#registration(type="submit" value = "Создать аккаунт")
 									div.popup__registration Уже зарегистрированы? 
 
@@ -64,7 +59,7 @@ block content
 							div.welcome
 									div.welcome__title Восстановление пароля
 							div.popup
-								form.popup__form.popup__form-registration(action="")
+								form.popup__form.popup__form-recover(action="")
 									div.popup__promt.popup__promt_forget Забыли пароль?
 									div.popup__promt  Ничего страшного, введите свой e-mail и мы вышлем вам инсрукции по восстановлению пароля
 									.popup__input-container.popup__input-container_forget

@@ -115,6 +115,12 @@ var sassCompile = [
 // Важен порядок файлов
 var mainJs = [
   // Пример:  path.sourse.folder  + '/' + path.sourse.js + '/app.js',
+  path.sourse.folder + '/' + path.sourse.js + '/modules/_base.js',
+  path.sourse.folder + '/' + path.sourse.js + '/modules/_common.js',
+  path.sourse.folder + '/' + path.sourse.js + '/modules/_login.js',
+  path.sourse.folder + '/' + path.sourse.js + '/upload.js',
+  path.sourse.folder + '/' + path.sourse.js + '/uploaderObject.js',
+  path.sourse.folder + '/' + path.sourse.js + '/modules/_album.js',
   path.sourse.folder + '/' + path.sourse.js + '/app.js',
 
 ];
@@ -221,7 +227,7 @@ gulp.task('copy', function (callback) {
   // Переносим картинки
 
   gulp.src(path.sourse.folder + '/' + path.sourse.img + '/**/*')
-    .pipe(gulp.dest(path.build.folder + "/" + path.build.img))
+    .pipe(gulp.dest(path.build.folder + "/" + path.build.img));
 
   callback();
 
@@ -234,8 +240,10 @@ gulp.task('concat', function (callback) {
 
   // main.js
   gulp.src(mainJs)
+    .pipe(sourcemaps.init())
     .pipe(concat(path.build.js_file))
-    .pipe(gulp.dest(path.build.folder + '/' + path.build.js))
+    .pipe(sourcemaps.write())
+    .pipe(gulp.dest(path.build.folder + '/' + path.build.js));
 
   // Тут можно продолжить таск, если нужно чтобы было несколько склееных файлов js
 

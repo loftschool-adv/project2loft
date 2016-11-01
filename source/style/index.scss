@@ -95,23 +95,33 @@ body {
 		max-width: 380px;
 	}
 
+	.width--lg {
+		width: 100%;
+		max-width: 480px;
+	}
+
 	.width--full {
 		width: 100%;
 	}
 
 
 
+.section {
+	max-width: 1580px;
+	padding: 0 60px;
+}
 // Главная страница
 .wrapper{
 	height:100vh;
-	min-height:650px;
-	background: url(../img/bg-main.png) 50% 50% no-repeat;
+	min-height:700px;
+	background: url(../img/bg-main.jpg) 50% 50% no-repeat;
 	background-size: cover;
 	display:flex;
 	flex-direction:column;
 	color:#fff;
 	font-family: ProximaNova, sans-serif;
 	font-size: 14px;
+	box-shadow: inset 100vw 0px 0px 0px rgba(0, 0, 0, 0.15);
 }
 .content-main{
 	flex:1;
@@ -222,7 +232,7 @@ body {
 	border-radius:5px;
 	width:240px;
 	margin: 0 auto;
-	margin-bottom: 20px;
+	margin-bottom: 10px;
 	text-align:left;
 	padding-left: 10px;
  }

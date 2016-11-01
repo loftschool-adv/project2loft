@@ -1,8 +1,8 @@
 {
 	"db": {
-		"host": "ds053080.mlab.com",
-		"port": "53080",
-		"name": "project2loft-test",
+		"host": "ds015939.mlab.com",
+		"port": "15939",
+		"name": "project2loft",
 		"user": "user",
 		"password": "user"
 	},

@@ -1,39 +1,46 @@
-.user__main {
-  padding: 60px 5%;
+.user-page__header {
+  padding: 50px 0 0 0;
+  position: relative;
 
-  &__title {
+  &::before {
+    position: absolute;
+    content: "";
+    top:0;
+    bottom:0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to right, rgba(110,110,110,.5), transparent);
+  }
+
+  .user-block__name,
+  .user-block__desc {
+    color: #ffffff;
+    text-align: center;
+  }
+  .user-block__social {
+    text-align: center;
+  }
+
+  .btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+  }
+
+  .user-block {
+    margin: 0 0 50px 80px;
+  }
+}
+
+.user__main {
+  padding: 60px 2.5%;
+
+  .title {
     font-size: 42px;
     font-family: "Panton";
     color: rgb(50, 50, 50);
     font-weight: bold;
-    line-height: 0.5;
-    z-index: 11;
+    margin-bottom:40px;
   }
 
-  &__albums {
-    display: flex;
-    flex-wrap: wrap;
-
-    &__item {
-      min-width: 220px;
-      width: 23%;
-      //max-width: 280px;
-      height: 320px;
-      overflow: hidden;
-      margin: 0 2% 20px 0;
-      border-radius: 2px;
-      box-shadow: 1px 2px 2px 2px #eee;
-      cursor: pointer;
-
-      &__name {
-        color: rgb(50, 50, 50);
-        z-index: 43;
-        height: 50px;
-        display: flex;
-        align-items: center;
-        justify-content: flex-end;
-        padding-right: 20px;
-      }
-    }
-  }
 }

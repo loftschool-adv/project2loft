@@ -1,0 +1,29 @@
+.grid {
+	display: flex;
+	flex-flow: row wrap;
+	margin-left: -20px;
+}
+
+	.grid__item {
+		min-width: 250px;
+		margin-bottom: 20px;
+		padding-left: 20px;
+	}
+
+
+
+.grid--lg {
+	& .grid__item {
+		width: 33.333%;
+		max-width: 400px;
+	}
+}
+
+
+
+.grid--md {
+	& .grid__item {
+		width: 25%;
+		max-width: 300px;
+	}
+}
