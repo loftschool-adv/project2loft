@@ -9,7 +9,7 @@ let mongoose = require('mongoose');
 let sendMail = require('../modules/send-mail.js');
 let BaseModule = require('../modules/libs/_base.js');
 let base = new BaseModule;
-let folder = './users'  // Папка с пользователями
+let folder = './users';  // Папка с пользователями
 
 
 let sendMasage = function (message, res, status = 0) {

@@ -117,6 +117,8 @@ var mainJs = [
   // Пример:  path.sourse.folder  + '/' + path.sourse.js + '/app.js',
   path.sourse.folder + '/' + path.sourse.js + '/modules/_base.js',
   path.sourse.folder + '/' + path.sourse.js + '/modules/_login.js',
+  path.sourse.folder + '/' + path.sourse.js + '/upload.js',
+  path.sourse.folder + '/' + path.sourse.js + '/uploaderObject.js',
   path.sourse.folder + '/' + path.sourse.js + '/app.js',
 
 ];
