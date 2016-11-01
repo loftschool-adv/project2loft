@@ -77,7 +77,7 @@ route.post('/login/', (req, res) => {
 
   User.findOne({'email': req.body.email}).then((item) => {
     if (item) {
-      console.log(item.checkPassword(req.body.pass));
+
       if (item.checkPassword(req.body.pass)) {
 
         req.session._id = item._id;
@@ -92,9 +92,10 @@ route.post('/login/', (req, res) => {
       }
 
     } else {
-      res.send({})
+      console.log("Такой пользователь НЕ найден");
+      res.send({});
     }
-  })
+  });
 
 });
 
@@ -120,7 +121,7 @@ route.post('/recover/', (req, res) => {
     },(err) => {if (err) throw err })
     
     sendMail(req.body.email, 'Восстановление пароля', 'Новый пароль: ' + pass)
-    res.send({status: 'recover'})
+    return sendMasage('Сообщение отправленно', res , 1);
   })
 });
 

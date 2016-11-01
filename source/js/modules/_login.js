@@ -28,7 +28,6 @@ var loginModule = (function() {
 	  				base.showError(index,$errorContainer, popupTime);
 	  			});
 	  		}else{ // Если массив пустой, выполняем дальше
-	  			base.hideError($errorContainer);
 	  			servAns = base.ajax($thisForm,'/login/');
 	  			servAns.done(function(ans){
 	  				if(!ans.status){
@@ -53,7 +52,6 @@ var loginModule = (function() {
 	  				base.showError(index,$errorContainer, popupTime);
 	  			});
 	  		}else{ // Если массив пустой, выполняем дальше
-	  			base.hideError($errorContainer);
 	  			servAns = base.ajax($thisForm,'/reg/');
 	  			servAns.done(function(ans){
 	  				if(!ans.status){
@@ -68,28 +66,22 @@ var loginModule = (function() {
 
   	// Отправляем ajax на recover
 
-  	// В РАЗРАБОТКЕ
-
   	$formRecover.find(button).on('click', function(e){
   		e.preventDefault();
 	  		var $thisForm = $(this).closest('form');
 	  		// Параметры для popup
 	  		var errorArray = base.validateForm($thisForm); // Проверяем текущую форму и выдаем массив индексов ошибок
-	  		console.log(errorArray);
 	  		var $errorContainer = $thisForm.find('.popup__error');
 	  		if(errorArray.length > 0){	// Если в массиве есть ошибки, значит выдаем окно, с номером ошибки
 	  			errorArray.forEach(function(index){
 	  				base.showError(index,$errorContainer, popupTime);
 	  			});
 	  		}else{ // Если массив пустой, выполняем дальше
-	  			base.hideError($errorContainer);
 	  			servAns = base.ajax($thisForm,'/recover/');
 	  			servAns.done(function(ans){
 	  				if(!ans.status){
-	  					console.log(ans.status);
 	  					return base.showError(ans.message,$errorContainer, popupTime);
 	  				}else{
-	  					console.log("Сообщение вот тут");
 	  					base.clearInputs($thisForm);
 	  					return base.showError(ans.message,$errorContainer, popupTime);
 	  					
