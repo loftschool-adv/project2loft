@@ -111,15 +111,14 @@ block content
 				div.modal__title
 					span.modal__title-title Название
 					span.modal__title-text Как я провёл лето
-				div.modal__content
-					.header__part.header__part--zip.modal__load-container#img-container
-						.upload.modal__load-img(title="Выбрать изображение")
-							svg.upload__icon
-								use(xlink:href='/img/sprite.svg#cam')
-							.upload__text Перетащите фото сюда или 
-								span.modal__link-load выберите файл
-							input.upload__input(type="file"  name="bg")#file-field
-							ul.img-list#img-list
+				.modal__load-container#img-container
+					.upload.modal__load-img.hide(title="Выбрать изображение")
+						svg.upload__icon
+							use(xlink:href='/img/sprite.svg#cam')
+						.upload__text Перетащите фото сюда или 
+							span.modal__link-load выберите файл
+						input.upload__input(type="file"  name="bg")#file-field
+					ul.img-list#img-list
 				div.modal__footer
 					div.modal__buttons
 						a.btn(href="#")#upload Сохранить
