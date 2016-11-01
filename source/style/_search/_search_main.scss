@@ -1,0 +1,51 @@
+.search-page__header {
+  .title {
+      font-size: 42px;
+      font-family: "Panton";
+      color: rgb(50, 50, 50);
+      font-weight: bold;
+      text-align: center;
+      z-index: 123;
+  }
+
+  .btn-home {
+    box-shadow: 0 1px 2px 2px #eee;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  .bottom {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #f7f7f7;
+    padding: 5px 7%;
+  }
+  .show-new {
+    font-size: 16px;
+    font-family: "ProximaNova";
+    color: rgba(40, 187, 240, 0.8);
+    z-index: 104;
+    margin-left: 2%;
+    text-decoration: none;
+  }
+}
+
+.search__main {
+  padding: 60px 2%;
+
+  .title {
+    font-size: 21px;
+    font-family: "ProximaNova";
+    color: rgb(50, 50, 50);
+    z-index: 100;
+    margin-bottom: 40px;
+  }
+}

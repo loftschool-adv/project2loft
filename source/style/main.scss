@@ -23,12 +23,6 @@
 @import "components/user";
 @import "components/upload";
 
-@import "_user/_user_footer";
-@import "_user/_user_header";
-@import "_user/_user_main";
-@import "_user/_user_media";
-
-
 @import "components/_header";
 @import "components/_footer";
 
@@ -36,6 +30,6 @@
 
 // pages
 @import "album";
-
-
+@import "_user";
+@import "_search";
 @import "_ui";

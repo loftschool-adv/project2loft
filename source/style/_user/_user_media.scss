@@ -1,89 +1,49 @@
-@media screen and (max-width: 1200px) { 
-  .user__header {
-    font-size: 16px;
-  }
-}
-@media screen and (max-width: 992px) {
-  .user__header {
-    font-size: 14px;
-  }
-}
-@media screen and (max-width: 768px) {
-  .user__header {
-    font-size: 12px;
-  }
-}
-@media screen and (max-width: 480px) {
-  .user__header {
-    font-size: 10px;
-  }
-}
-
 @media screen and (max-width: 480px){
-  .user__footer {
-    &__wrap {
-      padding-top: 10%;
-      flex-direction: column;
-      justify-content: center;
-      &__text-left {
-        text-align: center;
-        width: 100%;
-      }
-      &__text-right {
-        text-align: center;
-        width: 100%;
-        margin: 0;
-      }
-    }
-  }
-}
+  .user-wrap {
+    .user-page__header {
+      .user-block {
+        flex-direction: column !important;
+        margin-left: 0 !important;
 
-@media screen and (max-width: 480px) {
-  .user__header__top {
-    flex-direction: column;
-    justify-content: center;
-    &__avatar {
-      width: 50px;
-      height: 50px;
-      min-width: 50px;
-    }
-    &__breef {
-      align-items: center;
-    }
-  }
-  .user__header__search {
-    justify-content: center;
-    align-items: center;
-    &__wrap {
-      &__input {
-        margin: 0;
-      }
-    }
-  }
-}
-
-@media screen and (max-width: 480px) {
-  .user__main {
-    padding: 60px 2%;
-
-    &__title {
-      font-size: 42px;
-    }
-
-    &__albums {
-      display: flex;
-      flex-direction: column;
-
-      &__item {
-        min-width: 90%;
-        width: 100%;
-        height: 320px;
-
-        &__name {
-          font-size: 16px;
+        .user-block__photo {
+          width: 55px;
+          height: 55px;
+          margin-bottom: 10px;
+        }
+        .user-block__main {
+          padding: 0 20px;
         }
       }
+
+      .user-block {
+        margin: 0 0 50px 80px;
+      }
+
+      .header__bottom {
+        padding: 10px 5px;
+      }
+    }
+    .album-card {
+      width: 95vw !important;
+    }
+
+    .footer__in {
+      padding-top: 70px;
+      flex-direction: column;
+      position: relative;
+
+      .footer__btn-top {
+        position: absolute;
+        top: 0;
+      }
+      .footer__part,
+      .footer__copyright{
+        margin-top: 10px;
+        padding: 0;
+        text-align: center !important;
+      }
     }
   }
 }
+
 
