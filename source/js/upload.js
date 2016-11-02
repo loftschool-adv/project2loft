@@ -53,7 +53,7 @@ function updateProgress(bar, value) {
     $('.modal__load-img').hide();
     var li = $('<li/>').addClass('img-item').appendTo(imgList);
     //$('<div/>').text(file.name).appendTo(li);
-    var cont = $('<div/>').addClass('img-cont').appendTo(li);
+    var cont = $('<canvas/>').addClass('img-cont').appendTo(li);
     //var img = $('<img/>').appendTo(cont);
     $('<div/>').addClass('progress').text('0%').appendTo(li);
     li.get(0).file = file;
@@ -64,7 +64,9 @@ function updateProgress(bar, value) {
     reader.onload = (function(aImg) {
       return function(e) {
         //aImg.attr('src', e.target.result);
-        aImg.css('background-image', 'url('+e.target.result+')');
+        //aImg.css('background-image', 'url('+e.target.result+')');
+        let src = render(e.target.result, i);
+        aImg.attr('src', src);
         /* ... обновляем инфу о выбранных файлах ... */
       };
     })(cont);
@@ -111,4 +113,23 @@ $("#upload").click(function() {
 // Проверка поддержки File API в браузере
 if(window.FileReader == null) {
   log('Ваш браузер не поддерживает File API!');
+}
+
+// Resize preload
+var MAX_HEIGHT = 100;
+function render(src, i){
+  var image = new Image();
+  image.onload = function(){
+    var canvas = document.getElementsByClassName("img-cont");
+    if(image.height > MAX_HEIGHT) {
+      image.width *= MAX_HEIGHT / image.height;
+      image.height = MAX_HEIGHT;
+    }
+    var ctx = canvas[i].getContext("2d");
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    canvas[i].width = image.width;
+    canvas[i].height = image.height;
+    ctx.drawImage(image, 0, 0, image.width, image.height);
+  };
+  image.src = src;
 }

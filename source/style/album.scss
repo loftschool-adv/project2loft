@@ -293,13 +293,7 @@
 	overflow:hidden;
 	border-radius:5px;
 	background-color: #FFF;
-	background-repeat: no-repeat;
-	background-position: center center;
-	background-size: cover;
-}
-.img-cont img{
-	//display: block;
-	//width:100%;
+    object-fit: cover;
 }
 
 .highlighted {
