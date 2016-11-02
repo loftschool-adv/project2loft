@@ -238,7 +238,7 @@ gulp.task('copy', function (callback) {
 
 gulp.task('concat', function (callback) {
 
-  // main.js
+  // main-page.js
   gulp.src(mainJs)
     .pipe(sourcemaps.init())
     .pipe(concat(path.build.js_file))
