@@ -45,10 +45,14 @@
 .header-edit-bottom{
 	transition: transform 0.5s;
 	transform:translateY(100%);
+	padding: 0;
+	align-items:center;
+	height: 100%;
+	max-width:100%;
 }
 .header-edit-overlay{
 	position:absolute;
-	top: -60px;
+	top: 0;
 	bottom: 0;
 	width:200%;
 	background-color: rgba(255,255,255,0.8);
@@ -95,8 +99,9 @@
 }
 .btn_album-add{
 	position: absolute;
-	top:-40px;
-	right:-20px;
+	top:20px;
+	right:40px;
+	z-index:900;
 }
 .header-album__description{
 	margin:auto;
@@ -164,7 +169,7 @@
 	margin-right: 40px;
 }
 .album-cards{
-	margin:60px;
+	padding:60px;
 	position:relative;
 }
 .photo-card__img{
@@ -183,6 +188,7 @@
 	background-color: #fff;
 	width:680px;
 	max-width:100%;
+	min-height: 600px;
 }
 .modal__header{
 	background-color: #f1f1f1;
@@ -227,20 +233,62 @@
 	display:flex;
 	align-items: center;
 }
-.modal__content{
-	display:flex;
-	padding:0 20px;
-	margin-bottom: 40px;
-}
 .modal__load-container{
-	border:2px dashed #f1f1f1;
-	flex-grow:1;
+	margin: 40px 15px;
 	background-color: #f9f9f9;
 	border-radius:10px;
+	border:2px dashed #f1f1f1;
 	display:flex;
-	min-height:320px;
+	height:320px;
+	overflow:auto;
+	flex-wrap: wrap;
+}
+.img-list{
+	display: flex;
+	flex-wrap: wrap;
+	padding:20px;
+}
+.img-list li{
+	margin-right: 20px;
+	position: relative;
+
+}
+.img-list li:before{
+	content: '';
+	display: block;
+	width: 28px;
+	height: 28px;
+	border: 4px solid #fff;
+	border-radius:50%;
+	background-color:#ee4634;
+	position:absolute;
+	right: -14px;
+	top:-14px;
+	background: #ee4634 url(../img/album/close.svg) center center no-repeat;
+	background-size: 50%;
+	cursor:pointer;
+}
+.img-list li:nth-child(4n){
+	//margin-right: 0;
+}
+.img-cont{
+	width:135px;
+	height:135px;
+	overflow:hidden;
+	border-radius:5px;
+	background-color: #FFF;
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: cover;
+}
+.img-cont img{
+	display: block;
+	//width:100%;
 }
 
+.highlighted {
+	border: 3px dashed #9b9b9b;
+}
 .modal__load-img{
 	margin: auto;
 	opacity:0.6;
@@ -258,26 +306,13 @@
 	top:0;
 	left:0;
 	width: 100%;
-	height: 100%;
-	width: 100%;
-	height: 100%;
+	min-height: 100%;
 }
 .modal-container{
 	z-index:1001;
-	position:fixed;
+	position:absolute;
 	top:0;
 	left:0;
-	width: 100%;
-	height: 100%;
-}
-
-.img-list {
-	display: flex;
-	img {
-		border-radius: 5px;
-	}
-}
-
-.highlighted {
-	border: 3px dashed #9b9b9b;
+	bottom:0;
+	right:0;
 }
