@@ -51,7 +51,7 @@ function updateProgress(bar, value) {
     // Создаем элемент li и помещаем в него название, миниатюру и progress bar,
     // а также создаем ему свойство file, куда помещаем объект File (при загрузке понадобится)
     $('.modal__load-img').hide();
-    var li = $('<li/>').appendTo(imgList);
+    var li = $('<li/>').addClass('img-item').appendTo(imgList);
     //$('<div/>').text(file.name).appendTo(li);
     var cont = $('<div/>').addClass('img-cont').appendTo(li);
     //var img = $('<img/>').appendTo(cont);
@@ -82,7 +82,6 @@ $("#upload").click(function() {
   imgList.find('li').each(function() {
 
     var uploadItem = this;
-    console.log(uploadItem.file.name);
     var pBar = $(uploadItem).find('.progress');
     console.log('Начинаем загрузку `'+uploadItem.file.name+'`...');
 

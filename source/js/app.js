@@ -59,18 +59,18 @@ scrollAlbum.init();
 // Открыть/закрыть окно для загрузки изображений
 (function(){
 	$('.btn_album-add').on('click', function() {
-	$('.modal-container').removeClass('hide');
+	$('.modal, .modal-overlay').removeClass('hide');
 
 	})
 $('.modal__header-close,  .btn-cancelLoad').on('click', function(ev) {
 	ev.preventDefault();
-	$('.modal-container').addClass('hide');
+	$('.modal, .modal-overlay').addClass('hide');
 	$(".img-list").empty();
 	$('.modal__load-img').show();
 })
 })();
 
-// Анимация для редактирования футера на странице альбома
+// Анимация для редактирования хедера на странице альбома
 (function(){
 	$('#btn_album_edit').on('click', function() {
 
@@ -88,10 +88,13 @@ $('.modal__header-close,  .btn-cancelLoad').on('click', function(ev) {
 		$('.header-edit-overlay').fadeOut(500);
 		$('.header-album__about-side_front').fadeIn(500);
 	})
-
 })();
 
-
+// Отменить загрузку для одной картинки
+$('body').on('click','.img-item',function(e){
+		alert("Отменить загрузку?");
+		$(this).remove();
+});
 
 $( document ).ready(function() {
 
