@@ -8,7 +8,6 @@ let BaseModule = require('../modules/libs/_base.js');
 let base = new BaseModule;
 let mongoose = require('../modules/libs/mongoose.js');
 let Image = require('../modules/models/image.js').Image;
-let Album = require('../modules/models/album.js').Album;
 
 function uploadImg(req, res) {
   console.log("Пришел запрос с картинкой");
@@ -37,7 +36,7 @@ function uploadImg(req, res) {
   File
     .on('field', function(name, field) {
 
-      imgSrc = 'users/' + req.session.email + '/' + filename;
+      imgSrc = 'users/' + req.session.email + '/' + req.session.album + '/' + filename;
 
     fs.writeFile(imgSrc, field, 'binary', function(err){
       if (err) throw err;
@@ -51,7 +50,7 @@ function uploadImg(req, res) {
   .on('end', function() {
         console.log('-> upload done');
 
-        addImgDB(imgSrc);
+        addImgDB(req, imgSrc);
         res.end('upload');
       });
 
@@ -59,11 +58,13 @@ function uploadImg(req, res) {
 
 }
 
-function addImgDB(imgSrc) {
+function addImgDB(req, imgSrc) {
 
   // Создаем экземпляр пользователя
   let image = new Image({
-    src: imgSrc
+    src: imgSrc,
+    album: req.session.album,
+    user_id: req.session._id
   });
   // Сохраняем картинку в базу
   image.save(function( err, image, affected){

@@ -12,6 +12,11 @@ let async = require('async');
 let base = new BaseModule;
 let folder = './users';  // Папка с пользователями
 
+
+
+	
+
+
 let createDirUsers = function(callback){
 	base.checkDirectory(folder, function(err){
 		if(err){
@@ -26,8 +31,10 @@ let createFolder = function(callback){
 		items.forEach((item) =>{
 			fs.mkdir(folder + '/' + item.email, () => {});
 		})
+	}).then(() => {
+		callback();
 	});
-	callback();
+	
 };
 
 let clear = function(callback){
@@ -35,19 +42,18 @@ let clear = function(callback){
 		User.find({email:UserFolder},(err,item) => {
 			if(item.length == 0) { 
 				fs.rmdirSync(folder + '/' + UserFolder);
+				callback();
 			}
 		})
-	});
-	callback();
+	});	
 };
 
-let init = function(){
-	async.series([
+
+
+module.exports = async.series([
 		createDirUsers,
-		clear,
-		createFolder
-	], (err) => {});
-};
-
-module.exports = init();
+		createFolder,
+		clear
+	], function(err,result){
+});
 	

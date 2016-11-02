@@ -45,6 +45,9 @@ app.use('/', require('./routes/login.js'));
 app.use('/album', require('./routes/album.js'));
 app.use('/upload', require('./routes/upload.js'));
 app.use('/components', require('./routes/components.js'));
+app.use('/search', require('./routes/search.js'));
+app.use('/user', require('./routes/user.js'));
+app.use('/main-page', require('./routes/main-page.js'));
 //=============
 
 // catch 404 and forward to error handler

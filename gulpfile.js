@@ -116,9 +116,11 @@ var sassCompile = [
 var mainJs = [
   // Пример:  path.sourse.folder  + '/' + path.sourse.js + '/app.js',
   path.sourse.folder + '/' + path.sourse.js + '/modules/_base.js',
+  path.sourse.folder + '/' + path.sourse.js + '/modules/_common.js',
   path.sourse.folder + '/' + path.sourse.js + '/modules/_login.js',
   path.sourse.folder + '/' + path.sourse.js + '/upload.js',
   path.sourse.folder + '/' + path.sourse.js + '/uploaderObject.js',
+  path.sourse.folder + '/' + path.sourse.js + '/modules/_album.js',
   path.sourse.folder + '/' + path.sourse.js + '/app.js',
 
 ];
@@ -236,9 +238,11 @@ gulp.task('copy', function (callback) {
 
 gulp.task('concat', function (callback) {
 
-  // main.js
+  // main-page.js
   gulp.src(mainJs)
+    .pipe(sourcemaps.init())
     .pipe(concat(path.build.js_file))
+    .pipe(sourcemaps.write())
     .pipe(gulp.dest(path.build.folder + '/' + path.build.js));
 
   // Тут можно продолжить таск, если нужно чтобы было несколько склееных файлов js

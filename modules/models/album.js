@@ -24,7 +24,7 @@ let schema = new Schema({
   user_id: {
     type: String,
     unique: false,
-    required: true
+    required: false
   }
 });
 

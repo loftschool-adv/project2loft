@@ -21,7 +21,7 @@ let schema = new Schema({
     type : Date,
     default: Date.now
   },
-  album_id: {
+  album: {
     type: String,
     unique: false,
     required: false
