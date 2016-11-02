@@ -1,0 +1,76 @@
+
+extends ../layout
+block content
+    // Пожалуйста удалите этот include, когда сделаете кнопку "Выход с сайта"
+    //include  ../commons/test-logout
+    //include ../commons/_header
+    -var user = 'Александра Соколова';
+    -var avatar = "user_avatar";
+    -var description = "Я веб разработчик разработчик. Мне 24 года. Люблю путешествия, кодинг, фриланс, и активный отдых.";
+    -var BG = "user_header";
+    .user-wrap
+        header.user-page__header(style="background-image: url(../img/user/"+BG+".png), url(../img/album/no_photo.jpg)")
+            .user-block
+                .user-block__photo(style="background-image: url(../img/user/"+avatar+".png), url(../img/album/no_photo.jpg)")
+
+                .user-block__main
+                    .user-block__name #{user}
+                    .user-block__desc #{description}
+                    .user-block__social
+                        +social
+            div.btn.btn--light.btn--expand
+                svg.btn__icon
+                    use(xlink:href='/img/sprite.svg#home')
+                span.btn__text На главную
+            .header__section.header__bottom.section
+                .header__part.header__right
+                    form.search
+                        input.field.search__field(
+                        type="text"
+                        name="text"
+                        placeholder="Исследовать мир"
+                )
+
+        main.user__main
+            .title Альбомы
+            - var item1 =  {"album":"Поход в горы", "src":"01", "description": "Фотографии природы леса, енотов и оленей","count": "18"};
+            - var item2 =  {"album":"Животные", "src":"02", "description": "Фотографии природы леса, енотов и оленей","count": "17"};
+            - var item3 =  {"album":"Прогулки на воде", "src":"03", "description": "Фотографии природы леса, енотов и оленей","count": "15"};
+            - var item4 =  {"album":"Море и серфинг", "src":"04", "description": "Фотографии природы леса, енотов и оленей","count": "10"};
+            - var item5 =  {"album":"Ущелье и горные хребты", "src":"05", "description": "Фотографии природы леса, енотов и оленей","count": "10"};
+            - var item6 =  {"album":"Лесной въезд", "src":"06", "description": "Фотографии природы леса, енотов и оленей","count": "2"};
+            - var images = [item1, item2, item3, item4, item5, item6];
+            .grid.grid--md
+                for i in images
+                    .grid__item
+                        .album-card
+                            a.album-card__head(href="#404" style="background-image: url(../img/search/"+i["src"]+".png), url(../img/album/no_photo.jpg)")
+                                .album-card__info
+                                    .album-card__title #{i["description"]}
+                                    .album-card__cnt #{i["count"]} фотографий
+
+                            .album-card__foot
+                                .album-card__foot-part
+                                    a.btn.btn--icon(href="#404"  title="Редактировать")
+                                        svg.btn__icon
+                                            use(xlink:href='/img/sprite.svg#edit')
+
+                                .album-card__foot-part
+                                    a.album-card__link(href="#404") #{i["album"]}
+
+        footer.footer(style="background-image: url(../img/user/"+BG+".png), url(../img/album/no_photo.jpg)")
+            .footer__in.section
+                .footer__part.footer__desc.
+                    Перед вами сервис, который поможет вам организовать свои фотографии в альбомы и поделиться со всем миром!
+
+                .footer__part.footer__part--zip
+                    a.btn.btn--icon.footer__btn-top(
+                    href="#top"
+                    data-go="top"
+                    title="К началу страницы"
+                    )
+                        svg.btn__icon
+                            use(xlink:href='/img/sprite.svg#top')
+
+                .footer__part.footer__copyright.
+                    2016 | Создано командой профессионалов на продвинутом курсе по веб разработке от Loftschool
