@@ -251,6 +251,7 @@
 .img-list li{
 	margin-right: 20px;
 	position: relative;
+
 }
 .img-list li:before{
 	content: '';
@@ -275,6 +276,10 @@
 	height:135px;
 	overflow:hidden;
 	border-radius:5px;
+	background-color: #FFF;
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: cover;
 }
 .img-cont img{
 	display: block;
@@ -305,9 +310,9 @@
 }
 .modal-container{
 	z-index:1001;
-	position:fixed;
+	position:absolute;
 	top:0;
 	left:0;
-	width: 100%;
-	height: 100%;
+	bottom:0;
+	right:0;
 }

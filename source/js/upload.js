@@ -54,7 +54,7 @@ function updateProgress(bar, value) {
     var li = $('<li/>').appendTo(imgList);
     //$('<div/>').text(file.name).appendTo(li);
     var cont = $('<div/>').addClass('img-cont').appendTo(li);
-    var img = $('<img/>').appendTo(cont);
+    //var img = $('<img/>').appendTo(cont);
     $('<div/>').addClass('progress').text('0%').appendTo(li);
     li.get(0).file = file;
 
@@ -63,11 +63,11 @@ function updateProgress(bar, value) {
     var reader = new FileReader();
     reader.onload = (function(aImg) {
       return function(e) {
-        aImg.attr('src', e.target.result);
-        //aImg.attr('width', 100);
+        //aImg.attr('src', e.target.result);
+        aImg.css('background-image', 'url('+e.target.result+')');
         /* ... обновляем инфу о выбранных файлах ... */
       };
-    })(img);
+    })(cont);
 
     reader.readAsDataURL(file);
   });
@@ -82,6 +82,7 @@ $("#upload").click(function() {
   imgList.find('li').each(function() {
 
     var uploadItem = this;
+    console.log(uploadItem.file.name);
     var pBar = $(uploadItem).find('.progress');
     console.log('Начинаем загрузку `'+uploadItem.file.name+'`...');
 
