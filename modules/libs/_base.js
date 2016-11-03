@@ -31,6 +31,14 @@ function Base(){
     }
     return out.toUpperCase();
   }
+
+  // Поиск по базе
+  this.findDB = function(model,callback,find={}){
+    model.find(find,callback)
+  }
+  this.findOneDB = function(model,callback,find={}){
+    model.find(find,callback)
+  }
 } 
 
 module.exports = Base;

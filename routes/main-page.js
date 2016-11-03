@@ -4,14 +4,52 @@
 
 let express = require('express');
 let route = require('express').Router();
-//let mongoose = require('mongoose');
+let async = require('async');
+let User = require('../modules/models/user.js').User;
+let BaseModule = require('../modules/libs/_base.js');
+let base = new BaseModule;
+
+
+// Главная страница пользователя
+// Обращаемся к корню сайта , и рендерим шаблон из ./views/pages/main-page.pug
+
+
+// ========== Фунции ==========
 
 
 
-// Обращаемся к корню сайта , и рендерим шаблон из ./views/pages/index.pug
-route.get('/', (req,res) =>{
-  res.render('main-page',  { title: 'Главная' });
+// ========== Роуты ==========
+
+
+
+
+route.get('/', (req,res,next) =>{
+	if(req.baseUrl != '/id' + req.session.user_id){
+		next();
+	}else{
+		async.waterfall([
+	    function(callback){
+	    	// Ищем данного пользователя в базе
+	      base.findOneDB(User,callback,{email: req.session.email});
+	    },
+	    function(user,callback){
+	    	res.locals.userName = user[0].name
+	    	callback();
+	    }
+	  ],function(err,arg){
+	  	console.log('Пошел рендер');
+	  	res.render('main-page',  { title: 'Главная' })
+	  })
+	}
+	
+  //res.render('main-page',  { title: 'Главная' });
 });
+
+
+
+
+
+
 
 // Выход с сайта 
 route.post('/logout/', (req, res) => {
