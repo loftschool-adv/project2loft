@@ -49,12 +49,13 @@ app.use(express.static(path.join(__dirname, 'users')));
 
 //===маршруты===
 app.use('/', require('./routes/login.js'));
-app.use('/:id', require('./routes/user.js'));
+app.use('/:id', require('./routes/main-page.js'));
 app.use('/:id/album', require('./routes/album.js'));
 app.use('/:id/main', require('./routes/main-page.js'));
 app.use('/:id/upload', require('./routes/upload.js'));
 app.use('/:id/components', require('./routes/components.js'));
 app.use('/:id/search', require('./routes/search.js'));
+app.use('/:id/user', require('./routes/user.js'));
 //=============
 
 // catch 404 and forward to error handler

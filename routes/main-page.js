@@ -13,5 +13,12 @@ route.get('/', (req,res) =>{
   res.render('main-page',  { title: 'Главная' });
 });
 
+// Выход с сайта 
+route.post('/logout/', (req, res) => {
+  if (req.body.req == 'logout') {
+    req.session.destroy();
+    res.send({status: 'logout'});
+  }
 
+});
 module.exports = route;

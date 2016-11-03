@@ -24,7 +24,7 @@ let sendMasage = function (message, res, status = 0) {
 
 
 // Отображение главной страницы
-route.get('', (req, res) => {
+route.get('/', (req, res) => {
   if (!req.session.email) {
     res.render('index');
   } else {

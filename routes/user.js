@@ -11,13 +11,5 @@ route.get('/', (req,res) =>{
     res.render('user',  { title: 'Пользователь' });
 });
 
-// Выход с сайта 
-route.post('/logout/', (req, res) => {
-  if (req.body.req == 'logout') {
-    req.session.destroy();
-    res.send({status: 'logout'});
-  }
-
-});
 
 module.exports = route;
