@@ -1,16 +1,17 @@
 extends ../layout
 
+
 block content
 	div.page-container
 		div.page-content
-			header.header-album(style="background: url(../img/album/bg-album.png) center center no-repeat; background-size:cover;")
+			header.header-album(style="background: url(/img/album/bg-album.png) center center no-repeat; background-size:cover;")
 				div.header-album__content-cotainer
 					div.header-album__content.header-album__content_front
 						div.header-album__user-container
 							div.header-album__user
 								div.header-album__user-avatar
-									img.header-album__user-photo(src="../img/album/album-user.png", alt="фото пользователя")
-								div.header-album__user-name Антон Черепов 
+									img.header-album__user-photo(src="/img/album/album-user.png", alt="фото пользователя")
+								div.header-album__user-name= userName 
 						div.header-album__buttons
 							div.btn.btn--light.btn--expand.btn_album
 								svg.btn__icon
@@ -28,7 +29,7 @@ block content
 							div.header-album__user
 								div.header-album__user-avatar
 									img.header-album__user-photo(src="../img/album/album-user.png", alt="фото пользователя")  
-								div.header-album__user-name Антон Черепов        
+								div.header-album__user-name= userName        
 						div.header-album__description
 										div.form__row
 											input.field.field_header-edit(
@@ -63,7 +64,7 @@ block content
 									div.header-album__user
 										div.header-album__user-avatar
 											img.header-album__user-photo(src="../img/album/album-user.png", alt="фото пользователя")
-										div.header-album__user-name Антон Черепов
+										div.header-album__user-name= userName  
 								div.header-album__title-description Лесные прогулки
 								div.header-album__buttons.header-album__buttons_fix
 									div.btn.btn--light.btn--expand.btn_album
@@ -77,11 +78,11 @@ block content
 						use(xlink:href='/img/sprite.svg#add')
 					span.btn__text Добавить
 				.grid.grid--lg
-					- var imgs = ["im1", "im2", "im3", "im4", "im5", "im6", "im7"];
-					for im in imgs
+					- var photosArray = photos || ['img/album/no_photo.jpg']
+					each src in photosArray
 						.grid__item
 							.photo-card
-								a.photo-card__head(href="#404" style="background-image: url(../img/album/"+im+".png), url(../img/album/no_photo.jpg)")
+								a.photo-card__head(href="#404" style="background-image: url(/" + src + "), url(/img/album/no_photo.jpg)")
 									.photo-card__details
 										.info.info--light
 											.info__item

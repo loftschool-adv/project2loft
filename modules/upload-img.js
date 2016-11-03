@@ -36,12 +36,12 @@ function uploadImg(req, res) {
   File
     .on('field', function(name, field) {
 
-      imgSrc = 'users/' + req.session.email + '/' + req.session.album + '/' + filename;
+      imgSrc = 'users/id' + req.session.user_id + '/' + req.session.album + '/' + filename;
 
     fs.writeFile(imgSrc, field, 'binary', function(err){
       if (err) throw err;
       console.log('File saved.');
-      console.log(req.session.email);
+      console.log(req.session.user_id);
       //console.log(req.headers);
     });
 

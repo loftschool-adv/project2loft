@@ -11,11 +11,12 @@ autoIncrement.initialize(mongoose);
 
 
 let schema = new Schema({
-    login: {
+    name: {
         type: String,
-        required: true
+        required: true,
+        default: "Пользователь"
     },
-    UserId : {
+    user_id : {
         type: Number,
         unique: false,
     },
@@ -35,11 +36,6 @@ let schema = new Schema({
     created : {
         type : Date,
         default: Date.now
-    },
-    name: {
-        type: String,
-        required: false,
-        default: "Пользователь"
     },
     about: {
         type: String,
@@ -71,7 +67,7 @@ schema.methods.checkPassword = function(password){
 
 schema.plugin(autoIncrement.plugin, {
     model: 'User',
-    field: 'UserId',
+    field: 'user_id',
     startAt: 1,
 });
 
