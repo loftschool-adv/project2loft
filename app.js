@@ -43,9 +43,9 @@ app.use(express.static(path.join(__dirname, 'users')));
 
 
 // Генерируем id
-app.param('id', function (req, res, next, id) {
+/*app.param('id', function (req, res, next, id) {
   next();
-});
+});*/
 
 //===маршруты===
 app.use('/', require('./routes/login.js'));

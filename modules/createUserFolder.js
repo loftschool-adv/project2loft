@@ -17,7 +17,7 @@ let albumFolder = 'abums'; // Папка альбомов
 let commonFolder = 'commons'; // Папка с остальными файлами
 
 
-var debag = true;
+var debag = false;
 var clearStart = true;
 
 let info = function(text,flag) {
@@ -102,7 +102,7 @@ let clearFolder = function(callback){
 		User.find({user_id: userFolder.replace('id','')},(err,users) => {
 			if(!users || users.length == 0) {
 				del.sync([folder + '/' + userFolder]);
-				info(folder + '/' + userFolder + ' - удалено', true)
+				info(folder + '/' + userFolder + ' - удалено', debag)
 			}
 		}).exec(() =>{
 			folderCallback();

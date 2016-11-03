@@ -13,18 +13,27 @@ let Image = require('../modules/models/image.js').Image;
 let async = require('async');
 let path = require('path');
 
-// Обращаемся к корню сайта , и рендерим шаблон из ./views/pages/index.pug
-route.get('/', (req,res) =>{
+
+route.get('/:album', (req,res) =>{
   let title = req.url.split('/').pop();
+  console.log(12);
   req.session.album = title;
   res.render('album',  {
     userName: req.session.name 
   });
 });
 
+/*route.param('album', function (req, res, next, album) {
+  console.log('Tester');
+  album = 'Tester';
+  next();
+});*/
 
 
-route.get('/Tester', (req,res) =>{
+
+
+route.get('/:album', (req,res) =>{
+  console.log(req.session.album)
   async.waterfall([
     // Ищем все изображения в альбоме тестер
     function(callback){
