@@ -1,0 +1,40 @@
+.header
+	.header__section.section
+		.header__part
+			.user-block
+				.user-block__photo
+
+				.user-block__main
+					.user-block__name Александра Соколова
+					.user-block__desc.
+						Я веб разработчик разработчик. Мне 24 года. Люблю путешествия, кодинг, фриланс, и активный отдых.
+					.user-block__social
+						+social
+
+		.header__part.header__part--zip
+			.header__controls
+				.header__control
+					.btn.btn--light.btn--expand
+						svg.btn__icon
+							use(xlink:href='/img/sprite.svg#edit')
+						span.btn__text Редактировать
+
+				.header__control
+					.btn.btn--light.btn--expand.logout
+						svg.btn__icon
+							use(xlink:href='/img/sprite.svg#off')
+						span.btn__text Выйти
+
+
+
+	.header__section.header__bottom.section
+		.header__part.header__right
+			form.search
+				input.field.search__field(
+					type="text"
+					name="text"
+					placeholder="Найти..."
+				)
+				button.search__btn
+					svg.input-complex__icon
+						use(xlink:href='/img/sprite.svg#search')
