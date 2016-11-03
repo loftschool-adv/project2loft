@@ -17,45 +17,9 @@ $( document ).ready(function() {
     commonModule.init();
     loginModule.init();
     albumModule.init();
-})
+    albumModule.edit.init();
+});
 
-// Фиксирование кнопки добавить в альбомах
-var scrollAlbum = function(){
-	'use strict';
-	
-	var init = function() {
-		_setUpListners();
-	};
-
-	// Слушаем событие скролла
-	var _setUpListners = function() {
-		$(window).on('scroll', _fixedAdd);
-	};
-	// Функция при скролле
-	var _fixedAdd = function() {
-		if(($('html').scrollTop()>=$('.header-album__content').height()) || ($('body').scrollTop()>=$('.header-album__content').height())){
-
-			if (!($('.btn_album-add').hasClass('fixed'))){
-	    		$('.btn_album-add').addClass('fixed');
-	    	}
-	    $('.header-album__about-side_back').removeClass('hide').addClass('fixedHeader');
-	    $('.header-album__about-side_front').addClass('hide');
-  }
-  else{
-    		if ($('.btn_album-add').hasClass('fixed')){
-	    		$('.btn_album-add').removeClass('fixed');
-	    	}
-	    	$('.header-album__about-side_back').addClass('hide').removeClass('fixedHeader');
-	    	$('.header-album__about-side_front').removeClass('hide');
-
-    	}
-	};
-	return {
-		init: init
-	};
-	
-}();
-scrollAlbum.init();
 
 // Открыть/закрыть окно для загрузки изображений
 (function(){
@@ -69,26 +33,6 @@ $('.modal__header-close,  .btn-cancelLoad').on('click', function(ev) {
 	$(".img-list").empty();
 	$('.modal__load-img').show();
 })
-})();
-
-// Анимация для редактирования хедера на странице альбома
-(function(){
-	$('#btn_album_edit').on('click', function() {
-
-	$('.header-album__content_back, .header-edit-bottom').css('transform','translateY(0)');
-	$('.header-album__content_front').fadeOut(500);
-	$('.header-edit-overlay').fadeIn(500);
-	$('.header-album__about-side_front').fadeOut(500);
-	})
-
-	$('#cancel_edit_header').on('click', function(ev) {
-		ev.preventDefault();
-		$('.header-album__content_back').css('transform','translateY(-100%)');
-		$('.header-edit-bottom').css('transform','translateY(100%)');
-		$('.header-album__content_front').fadeIn(500);
-		$('.header-edit-overlay').fadeOut(500);
-		$('.header-album__about-side_front').fadeIn(500);
-	})
 })();
 
 // Отменить загрузку для одной картинки
