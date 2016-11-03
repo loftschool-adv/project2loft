@@ -39,15 +39,21 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'users')));
+
+
+// Генерируем id
+/*app.param('id', function (req, res, next, id) {
+  next();
+});*/
 
 //===маршруты===
 app.use('/', require('./routes/login.js'));
-app.use('/album', require('./routes/album.js'));
-app.use('/upload', require('./routes/upload.js'));
-app.use('/components', require('./routes/components.js'));
-app.use('/search', require('./routes/search.js'));
-app.use('/user', require('./routes/user.js'));
-app.use('/main-page', require('./routes/main-page.js'));
+app.use('/:id', require('./routes/user.js'));
+app.use('/:id/album', require('./routes/album.js'));
+app.use('/:id/upload', require('./routes/upload.js'));
+app.use('/:id/components', require('./routes/components.js'));
+app.use('/:id/search', require('./routes/search.js'));
 //=============
 
 // catch 404 and forward to error handler

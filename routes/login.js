@@ -5,11 +5,12 @@
 let fs = require('fs');
 let express = require('express');
 let route = require('express').Router();
-let mongoose = require('mongoose');
 let sendMail = require('../modules/send-mail.js');
 let BaseModule = require('../modules/libs/_base.js');
 let base = new BaseModule;
 let folder = './users';  // Папка с пользователями
+
+let mongoose = require('../modules/libs/mongoose.js');
 
 
 let sendMasage = function (message, res, status = 0) {
@@ -22,14 +23,17 @@ let sendMasage = function (message, res, status = 0) {
 
 
 
-
+// Отображение главной страницы
 route.get('', (req, res) => {
   if (!req.session.email) {
     res.render('index');
   } else {
-    res.render('user');
+    res.redirect(`/id${req.session.user_id}/`);
   }
 });
+
+
+
 
 
 // Регистрация новых пользоватей
@@ -45,21 +49,22 @@ route.post('/reg/', (req, res) => {
       return sendMasage('Такой email уже зарегитрирован', res, 0);
     } else {
       let user = new User({
-        login: req.body.login,
+        name: req.body.login,
         password: req.body.pass,
         email: req.body.email
       });
       // Под вопросом
-      req.session.email = req.body.email;
-      req.session._id = req.body._id;
-      req.session.name = req.body.name;
-      req.session.about = req.body.about;
+      
       user.save(function (err, user, affected) {
         if (err) throw err;
+        req.session.user_id = user.user_id;
+        req.session.email = user.email;
+        req.session.name = user.name;
+        req.session.about = user.about;
         // Создание папки пользователя
-        base.checkDirectory(folder + "/" + user.email, function(err){
+        base.checkDirectory(folder + "/" + user.user_id, function(err){
           if(err){
-            fs.mkdir(folder + '/' + user.email, () => {});
+            fs.mkdir(folder + '/id' + user.user_id, () => {});
           }
         });
         
@@ -80,7 +85,7 @@ route.post('/login/', (req, res) => {
 
       if (item.checkPassword(req.body.pass)) {
 
-        req.session._id = item._id;
+        req.session.user_id = item.user_id;
         req.session.email = item.email;
         req.session.name = item.name;
         req.session.about = item.about;
@@ -99,14 +104,7 @@ route.post('/login/', (req, res) => {
 
 });
 
-// Выход с сайта 
-route.post('/logout/', (req, res) => {
-  if (req.body.req == 'logout') {
-    req.session.destroy();
-    res.send({status: 'logout'});
-  }
 
-});
 
 // Васстоновление пароля
 route.post('/recover/', (req, res) => {

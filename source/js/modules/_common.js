@@ -51,8 +51,32 @@ var commonModule = (function() {
 			input[0].click();
 		});
 	}
-		
+	
 
+	// Разлогин пользователя
+	// Нужно доработать
+	var logoutUser = function(){
+		var obj = {
+			req: "logout"
+		}
+		var data = JSON.stringify(obj);
+
+			var xhr = new XMLHttpRequest;
+			var id = window.location.pathname;
+			xhr.open('POST', id + 'logout/',true);
+			xhr.setRequestHeader('Content-type','application/json');
+			xhr.send(data);
+			xhr.onreadystatechange = function() {
+				if (xhr.readyState != 4) return;
+				// Перезагрузка страницы
+				if(JSON.parse(xhr.responseText).status == "logout"){
+					//window.location.reload(true);
+					var site = window.location.protocol+ '//' + window.location.host + '/';
+					console.log(window.location.pathname);
+					window.location.href = site;
+				}
+			}
+}
 
 
 
@@ -60,6 +84,7 @@ var commonModule = (function() {
 	var _setUpListners = function() {
 			$(document).on('click', '[data-go]' , scrollTo);
 			$(document).on('click', '.drop__trigger', addDrop);
+			$('.logout').on('click', logoutUser)
 	};
 
 

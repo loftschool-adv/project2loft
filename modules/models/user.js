@@ -5,12 +5,20 @@
 let crypto = require('crypto');
 let mongoose = require('./../libs/mongoose.js');
 let Schema = mongoose.Schema;
+let autoIncrement = require('mongoose-auto-increment');
+autoIncrement.initialize(mongoose);
+
 
 
 let schema = new Schema({
-    login: {
+    name: {
         type: String,
-        required: true
+        required: true,
+        default: "Пользователь"
+    },
+    user_id : {
+        type: Number,
+        unique: false,
     },
     salt : {
        type: String,
@@ -29,11 +37,6 @@ let schema = new Schema({
         type : Date,
         default: Date.now
     },
-    name: {
-        type: String,
-        required: false,
-        default: "Пользователь"
-    },
     about: {
         type: String,
         required: false,
@@ -44,6 +47,11 @@ let schema = new Schema({
 schema.methods.encryptPassword = function(password) {
     return crypto.createHmac('sha1', this.salt).update(password).digest('hex');
 };
+
+schema.methods.createId = function(){
+    return Math.random();
+}
+
 
 schema.virtual('password')
     .set(function(password){
@@ -56,5 +64,13 @@ schema.virtual('password')
 schema.methods.checkPassword = function(password){
     return this.encryptPassword(password) === this.hashedpassword;
 };
+
+schema.plugin(autoIncrement.plugin, {
+    model: 'User',
+    field: 'user_id',
+    startAt: 1,
+});
+
+
 
 exports.User = mongoose.model('User', schema);

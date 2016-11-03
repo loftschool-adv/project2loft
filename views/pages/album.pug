@@ -3,9 +3,9 @@ extends ../layout
 block content
 	div.page-container
 		div.page-content
-			header.header-album(style="background: url(../img/album/bg-album.png) top no-repeat; background-size:cover;")
+			header.header-album(style="background: url(../img/album/bg-album.png) center center no-repeat; background-size:cover;")
 				div.header-album__content-cotainer
-					div.header__section.header-album__content.header-album__content_front
+					div.header-album__content.header-album__content_front
 						div.header-album__user-container
 							div.header-album__user
 								div.header-album__user-avatar
@@ -16,7 +16,7 @@ block content
 								svg.btn__icon
 									use(xlink:href='/img/sprite.svg#home')
 								span.btn__text На главную
-							div.btn.btn--light.btn--expand.btn_album.btn_edit-header
+							div.btn.btn--light.btn--expand.btn_album#btn_album_edit
 								svg.btn__icon
 									use(xlink:href='/img/sprite.svg#edit')
 								span.btn__text Редактировать            
@@ -47,29 +47,29 @@ block content
 								input.upload__input(type="file" name="bg")
     
 				div.header-album__about
-					.header__section.header__bottom.section.header-edit-bottom
-						.header__part.header__right
-							a.btn.btn--text#cancel_edit_header(href="#cancel")
-								span.btn__text Отменить
-							a.btn(href="#ok") Сохранить
-					div.header-album__about-side.header-album__about-side_front.header-bottom-front
-						ul.header-album__about-list
-							li.header-album__about-item 18 фотографий
-							li.header-album__about-item 12 лайков
-							li.header-album__about-item 4 комментария
-					div.header-album__about-side.header-album__about-side_back.hide
-						div.back-content
-							div.header-album__user-container.header-album__user_fix
-								div.header-album__user
-									div.header-album__user-avatar
-										img.header-album__user-photo(src="../img/album/album-user.png", alt="фото пользователя")
-									div.header-album__user-name Антон Черепов
-							div.header-album__title-description Лесные прогулки
-							div.header-album__buttons.header-album__buttons_fix
-								div.btn.btn--light.btn--expand.btn_album
-									svg.btn__icon
-										use(xlink:href='/img/sprite.svg#home')
-									span.btn__text На главную          
+						.header__section.header__bottom.section.header-edit-bottom
+							.header__part.header__right
+								a.btn.btn--text#cancel_edit_header(href="#cancel")
+									span.btn__text Отменить
+								a.btn(href="#ok") Сохранить
+						div.header-album__about-side.header-album__about-side_front
+							ul.header-album__about-list
+								li.header-album__about-item 18 фотографий
+								li.header-album__about-item 12 лайков
+								li.header-album__about-item 4 комментария
+						div.header-album__about-side.header-album__about-side_back.hide
+							div.back-content
+								div.header-album__user-container.header-album__user_fix
+									div.header-album__user
+										div.header-album__user-avatar
+											img.header-album__user-photo(src="../img/album/album-user.png", alt="фото пользователя")
+										div.header-album__user-name= userName
+								div.header-album__title-description Лесные прогулки
+								div.header-album__buttons.header-album__buttons_fix
+									div.btn.btn--light.btn--expand.btn_album
+										svg.btn__icon
+											use(xlink:href='/img/sprite.svg#home')
+										span.btn__text На главную          
 			div.album-cards
 				div.header-edit-overlay
 				div.btn.btn--light.btn--expand.btn_album.btn_album-add
@@ -77,11 +77,11 @@ block content
 						use(xlink:href='/img/sprite.svg#add')
 					span.btn__text Добавить
 				.grid.grid--lg
-					- var imgs = ["im1", "im2", "im3", "im4", "im5", "im6", "im7"];
-					for im in imgs
+					- var photosArray = photos || ['img/album/no_photo.jpg']
+					each src in photosArray
 						.grid__item
 							.photo-card
-								a.photo-card__head(href="#404" style="background-image: url(../img/album/"+im+".png), url(../img/album/no_photo.jpg)")
+								a.photo-card__head(href="#404" style="background-image: url(/" + src + "), url(/img/album/no_photo.jpg)")
 									.photo-card__details
 										.info.info--light
 											.info__item
@@ -100,27 +100,28 @@ block content
 									.photo-card__foot-part
 										.photo-card__link(href="#404") Название фотографии
 		include ../commons/footer
-	div.modal-overlay.hide
-	div.modal.hide
-		div.modal-content
-			div.modal__header
-				div.modal__header-title Добавить фотографии
-				div.modal__header-close
-					svg.modal__header-svg
-						use(xlink:href='/img/sprite.svg#close') 
-			div.modal__title
-				span.modal__title-title Название
-				span.modal__title-text Как я провёл лето
-			.modal__load-container#img-container
-				.upload.modal__load-img(title="Выбрать изображение")
-					svg.upload__icon
-						use(xlink:href='/img/sprite.svg#cam')
-					.upload__text Перетащите фото сюда или 
-						span.modal__link-load выберите файл
-					input.upload__input(type="file"  name="bg" multiple)#file-field
-				ul.img-list#img-list
-		div.modal__footer
-			div.modal__buttons
-				a.btn(href="#")#upload Сохранить
-				a.btn.btn--text.btn-cancelLoad(href="#cancel")
-					span.btn__text Отменить
+	div.modal-container.hide
+		div.modal-overlay
+			div.modal 
+				div.modal__header
+					div.modal__header-title Добавить фотографии
+					div.modal__header-close
+						svg.modal__header-svg
+							use(xlink:href='/img/sprite.svg#close') 
+				div.modal__title
+					span.modal__title-title Название
+					span.modal__title-text Как я провёл лето
+				div.modal__content
+					.header__part.header__part--zip.modal__load-container#img-container
+						.upload.modal__load-img(title="Выбрать изображение")
+							svg.upload__icon
+								use(xlink:href='/img/sprite.svg#cam')
+							.upload__text Перетащите фото сюда или 
+								span.modal__link-load выберите файл
+							input.upload__input(type="file"  name="bg")#file-field
+							ul.img-list#img-list
+				div.modal__footer
+					div.modal__buttons
+						a.btn(href="#")#upload Сохранить
+						a.btn.btn--text(href="#cancel")
+							span.btn__text Отменить                       		

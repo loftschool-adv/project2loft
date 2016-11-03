@@ -8,18 +8,63 @@ let route = require('express').Router();
 // Подключаем файл с моделью юзеров
 let mongoose = require('../modules/libs/mongoose.js');
 let Album = require('../modules/models/album.js').Album;
+let User = require('../modules/models/user.js').User;
 let Image = require('../modules/models/image.js').Image;
+let async = require('async');
+let path = require('path');
 
-// Обращаемся к корню сайта , и рендерим шаблон из ./views/pages/index.pug
-route.get('/*', (req,res) =>{
-  var title = req.url.split('/').pop();
+
+route.get('/:album', (req,res) =>{
+  let title = req.url.split('/').pop();
+  console.log(12);
   req.session.album = title;
+  res.render('album',  {
+    userName: req.session.name 
+  });
+});
 
-  console.log(req.session);
+/*route.param('album', function (req, res, next, album) {
+  console.log('Tester');
+  album = 'Tester';
+  next();
+});*/
 
 
 
-  res.render('album',  { title: title });
+
+route.get('/:album', (req,res) =>{
+  console.log(req.session.album)
+  async.waterfall([
+    // Ищем все изображения в альбоме тестер
+    function(callback){
+      Image.find({'album' : 'Tester'},callback);
+    },
+    // Получаем путь из каждого изображения
+    function(image,callback){
+      var arr = [];
+      if(image){
+        image.forEach(function(img){
+          arr.push(img.src.replace('users/',''));
+          callback(null,arr);
+        });
+      }
+    },
+    // 
+    function(src,callback){
+      let title = req.url.split('/').pop();
+      req.session.album = title;
+      res.render('album',  {
+        userName: req.session.name,
+        photos: src
+      });
+      callback
+    }
+
+    //render
+  ],function(err,arg){
+
+  })
+ 
 });
 
 // Обращаемся к корню сайта , и рендерим шаблон из ./views/pages/index.pug

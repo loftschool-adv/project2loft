@@ -8,7 +8,7 @@ let Album = require('../modules/models/album.js').Album;
 // Создаем экземпляр пользователя
 let album = new Album({
   name : 'Tester',
-  user_id: '5814492c3447a7e857388a3d'
+  user_id: '1'
 });
 
 // Сохраняем пользователя в базу
