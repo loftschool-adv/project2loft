@@ -13,12 +13,12 @@ let async = require('async');
 let base = new BaseModule;
 let del = require('del');
 let folder = './users';  // Папка с пользователями
-let albumFolder = 'abums'; // Папка альбомов
+let albumFolder = 'albums'; // Папка альбомов
 let commonFolder = 'commons'; // Папка с остальными файлами
 
 
-var debag = false;
-var clearStart = true;
+var debag = true;
+var clearStart = false;
 
 let info = function(text,flag) {
 	var debug = flag;

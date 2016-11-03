@@ -3,6 +3,7 @@
 let fs         = require('fs');
 let path       = require('path');
 let util       = require('util');
+let Jimp       = require("jimp");
 let formidable = require('formidable');
 let BaseModule = require('../modules/libs/_base.js');
 let base = new BaseModule;
@@ -36,10 +37,13 @@ function uploadImg(req, res) {
   File
     .on('field', function(name, field) {
 
-      imgSrc = 'users/id' + req.session.user_id + '/' + req.session.album + '/' + filename;
+      imgSrc = 'users/id' + req.session.user_id + '/albums/test/' + filename; //req.session.album
+
+      console.log(imgSrc);
 
     fs.writeFile(imgSrc, field, 'binary', function(err){
       if (err) throw err;
+
       console.log('File saved.');
       console.log(req.session.user_id);
       //console.log(req.headers);
@@ -48,11 +52,21 @@ function uploadImg(req, res) {
     console.log('Upload completed!');
   })
   .on('end', function() {
-        console.log('-> upload done');
 
-        addImgDB(req, imgSrc);
-        res.end('upload');
-      });
+    //Ресайз изображений
+    Jimp.read(imgSrc).then(function(image){
+
+      image.resize(500, Jimp.AUTO)
+      image.write(imgSrc);
+
+      console.log('resize');
+    });
+
+    console.log('-> upload done');
+    //Сохранени в БД
+    addImgDB(req, imgSrc);
+    res.end('upload');
+  });
 
   File.parse(req);
 

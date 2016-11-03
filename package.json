@@ -14,6 +14,7 @@
     "express": "^4.14.0",
     "express-session": "^1.14.1",
     "formidable": "^1.0.17",
+    "jimp": "^0.2.27",
     "jquery": "^3.1.1",
     "mongoose": "^4.6.5",
     "mongoose-auto-increment": "^5.0.1",
