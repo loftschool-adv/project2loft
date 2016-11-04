@@ -14,14 +14,14 @@ let async = require('async');
 let path = require('path');
 
 
-route.get('/:album', (req,res) =>{
-  let title = req.url.split('/').pop();
-  console.log(12);
-  req.session.album = title;
-  res.render('album',  {
-    userName: req.session.name 
-  });
-});
+// route.get('/:album', (req,res) =>{
+//   let title = req.url.split('/').pop();
+//   console.log(12);
+//   req.session.album = title;
+//   res.render('album',  {
+//     userName: req.session.name
+//   });
+// });
 
 /*route.param('album', function (req, res, next, album) {
   console.log('Tester');
@@ -33,35 +33,65 @@ route.get('/:album', (req,res) =>{
 
 
 route.get('/:album', (req,res) =>{
-  console.log(req.session.album)
+  //console.log(req.session.album);
+  let title = req.url.split('/').pop();
+  req.session.album = title;
+
+  console.log('Имя альбома: ');
+  console.log(title);
+
   async.waterfall([
     // Ищем все изображения в альбоме тестер
     function(callback){
-      Image.find({'album' : 'Tester'},callback);
+      Image.find({'album' : title}, callback);
     },
     // Получаем путь из каждого изображения
-    function(image,callback){
+    function(image, callback){
+
+      console.log(image);
+
       var arr = [];
-      if(image){
+      if(image[0]){
+
+        console.log('Картинки нашли');
+        //console.log(req.session);
+        console.log(image[0]);
+
+        console.log('Ищу');
         image.forEach(function(img){
-          arr.push(img.src.replace('users/',''));
-          callback(null,arr);
+          console.log('Итерация');
+          console.log(img);
+          arr.push(img.src); //.replace('users/')
         });
+        callback(null, arr);
+      } else {
+        callback(null, null);
       }
+
     },
     // 
-    function(src,callback){
-      let title = req.url.split('/').pop();
-      req.session.album = title;
-      res.render('album',  {
-        userName: req.session.name,
-        photos: src
-      });
-      callback
-    }
+    function(src, callback){
+      console.log('генерирую');
+      console.log(src);
+      //console.log(arr);
+      if (src !== null) {
+
+        res.render('album',  {
+          userName: req.session.name,
+          photos: src
+        }, callback(null));
+
+      } else {
+
+        res.render('album',  {
+          userName: req.session.name,
+        }, callback(null));
+
+      }
+    }],
 
     //render
-  ],function(err,arg){
+  function(err, result){
 
   })
  
