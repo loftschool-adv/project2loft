@@ -67,7 +67,7 @@ var albumModule = (function() {
 			headerBottom = front.parent().siblings().children('.header-bottom-front');
 			headerBottomEdit  = headerBottom.prev();
 
-			back.css('transform','translateY(0)');
+			back.css('top','0');
 			headerBottomEdit.css('transform','translateY(0)');
 			front.fadeOut(500);
 			$('.header-edit-overlay').fadeIn(500);
@@ -75,7 +75,7 @@ var albumModule = (function() {
 		}
 		var _returnHeader = function(ev) {
 			ev.preventDefault();
-			back.css('transform','translateY(-100%)');
+			back.css('top','-100%');
 			headerBottomEdit.css('transform','translateY(100%)');
 			front.fadeIn(500);
 			$('.header-edit-overlay').fadeOut(500);
