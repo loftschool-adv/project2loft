@@ -23,7 +23,7 @@
 .drop--hover {
 	&:hover .drop__main {
 		display: block;
-		z-index: 10;
+		z-index: 1000;
 	}
 }
 
