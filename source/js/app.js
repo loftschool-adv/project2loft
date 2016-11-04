@@ -16,6 +16,7 @@ $( document ).ready(function() {
     var base = new BaseModule; // Инициализируем библиотеку. (Пока не нужно)
     commonModule.init();
     loginModule.init();
+    mainPageModule.init();
     albumModule.init();
     albumModule.edit.init();
 });

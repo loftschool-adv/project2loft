@@ -34,20 +34,32 @@ route.get('/', (req,res,next) =>{
 	    },
 	    function(user,callback){
 	    	res.locals.userName = user[0].name
+	    	res.locals.userAbout = user[0].about
 	    	callback();
 	    }
 	  ],function(err,arg){
-	  	console.log('Пошел рендер');
 	  	res.render('main-page',  { title: 'Главная' })
 	  })
 	}
-	
-  //res.render('main-page',  { title: 'Главная' });
 });
 
 
+// Редактируем данные пользователя
+route.post('/editUserData/', (req, res) => {
+	User.findOneAndUpdate({user_id: req.session.user_id},
+	{$set : 
+		{
+			name: req.body.name,
+			about: req.body.about
+		}
+	}
+	,(err,user)=>{
+		if(err) throw err;
+		res.locals.userName = req.body.name
+		res.locals.userAbout = req.body.about
+	})
 
-
+});
 
 
 

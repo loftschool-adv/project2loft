@@ -31,7 +31,10 @@ route.get('/', (req,res,next) =>{
 	  },
 	    function(user,callback){
 	    	if(user.length != 0){
-	  			res.render('user',  { title: 'Главная' });
+	  			res.render('user',  {
+	  			 userNameOther: user[0].name,
+	  			 userAboutOther: user[0].about,
+	  			});
 	  		}else{
 	  			res.send('Пользователь не найден')
 	  		}

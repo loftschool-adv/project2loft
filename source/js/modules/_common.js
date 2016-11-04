@@ -78,6 +78,10 @@ var commonModule = (function() {
 			}
 }
 
+	var editUserData = function(){
+		console.log(12);
+	}
+
 
 
 	// Прослушка

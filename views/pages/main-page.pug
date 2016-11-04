@@ -14,7 +14,7 @@ block content
 								.user-block__photo(style="background-image: url(../img/user/"+avatar+".png), url(../img/album/no_photo.jpg)")
 								.user-block__main
 									.user-block__name!= userName
-									.user-block__desc
+									.user-block__desc!= userAbout
 									.user-block__social
 										+social()
 						.header__part.header__part--zip
@@ -47,8 +47,7 @@ block content
 											value= userName
 										)
 									.form__row
-										textarea.field.width--lg(name="desc").
-											Тут будет ваше описание
+										textarea.field.width--lg(name="desc")!= userAbout
 									.form__row
 										+social('edit')
 
@@ -64,7 +63,7 @@ block content
 						.header__part.header__right
 							a.btn.btn--text#cancel_edit_header(href="#cancel")
 								span.btn__text Отменить
-							a.btn(href="#ok") Сохранить
+							a.btn.btn--save(href="#ok") Сохранить
 					.header__section.header__bottom.header-bottom-front.header__bottom_main.section
 						.header__part.header__right
 							form.search

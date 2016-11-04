@@ -42,6 +42,17 @@ var BaseModule = function(){
 			});
 	}
 
+	this.ajaxDataObj = function(obj,url,method){
+		method = method || 'POST'
+		var data = JSON.stringify(obj);
+		return $.ajax({
+			url: url,
+			type: method,
+			contentType: 'application/json',
+			data: data
+		});
+	}
+
 	this.showError = function(errorIndex,elem,_ms){
 		var thisFrom = elem.closest('form');
 		var time = _ms || 2000;

@@ -122,6 +122,7 @@ var mainJs = [
   path.sourse.folder + '/' + path.sourse.js + '/modules/_login.js',
   path.sourse.folder + '/' + path.sourse.js + '/upload.js',
   path.sourse.folder + '/' + path.sourse.js + '/uploaderObject.js',
+  path.sourse.folder + '/' + path.sourse.js + '/modules/_main-page.js',
   path.sourse.folder + '/' + path.sourse.js + '/modules/_album.js',
   path.sourse.folder + '/' + path.sourse.js + '/app.js',
 
