@@ -3,7 +3,8 @@
 let fs         = require('fs');
 let path       = require('path');
 let util       = require('util');
-let Jimp       = require("jimp");
+let Jimp       = require('jimp');
+var async      = require('async');
 let formidable = require('formidable');
 let BaseModule = require('../modules/libs/_base.js');
 let base = new BaseModule;
@@ -17,6 +18,7 @@ function uploadImg(req, res) {
   var File = new formidable.IncomingForm();
   var filename;
   var imgSrc;
+  var tmp;
 
   File.maxFieldsSize = 8 * 1024 * 1024;
   File.multiples = true;
@@ -37,17 +39,18 @@ function uploadImg(req, res) {
   File
     .on('field', function(name, field) {
 
-      imgSrc = 'users/id' + req.session.user_id + '/albums/test/' + filename; //req.session.album
-
+      //imgSrc = 'users/id' + req.session.user_id + '/albums/test/' + filename; //req.session.album
+      tmp = 'tmp/' + filename;
       console.log(imgSrc);
 
-    fs.writeFile(imgSrc, field, 'binary', function(err){
-      if (err) throw err;
+    fs.writeFile(tmp, field, 'binary', function(err){
 
       console.log('File saved.');
       console.log(req.session.user_id);
       //console.log(req.headers);
     });
+
+      //db.getCollection('images').find({}).sort({img_id:-1}).limit(1)
 
     console.log('Upload completed!');
   })
@@ -63,8 +66,30 @@ function uploadImg(req, res) {
     });
 
     console.log('-> upload done');
-    //Сохранени в БД
+
+    async.series([
+      function(callback) {
+        // Получаем информацию о файле
+        console.log('1');
+        callback();
+      },
+      function(callback) {
+        // Получаем информацию о файле
+        console.log('2');
+        callback();
+      },
+      function() {
+        // Получаем информацию о файле
+        console.log('32');
+      },
+    ], function (err, result) {
+      // result now equals 'done'
+    });
+
     addImgDB(req, imgSrc);
+
+    //Сохранени в БД
+
     res.end('upload');
   });
 
@@ -72,7 +97,7 @@ function uploadImg(req, res) {
 
 }
 
-function addImgDB(req, imgSrc) {
+function addImgDB(req, imgSrc, callback) {
 
   // Создаем экземпляр пользователя
   let image = new Image({
@@ -83,8 +108,12 @@ function addImgDB(req, imgSrc) {
   // Сохраняем картинку в базу
   image.save(function( err, image, affected){
     if (err) throw err;
-    console.log('Сохранена картинка в базу')
+    console.log('Сохранена картинка в базу');
   });
+}
+
+function resize(callback) {
+  console.log("async");
 }
 
 module.exports = uploadImg;
