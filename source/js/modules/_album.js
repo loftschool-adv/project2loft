@@ -57,6 +57,7 @@ var albumModule = (function() {
 		var _setUpListners = function() {
 			$('.btn_edit-header').on('click', _editHeader);
 			$('#cancel_edit_header').on('click', _returnHeader);
+			$('.btn--save').on('click', _returnHeader);
 		};
 
 		var _editHeader = function() {
