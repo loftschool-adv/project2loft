@@ -31,75 +31,78 @@ let uploadImg = require('../modules/upload-img.js');
 });*/
 
 
-
-
 route.get('/:album', (req,res) =>{
   //console.log(req.session.album);
 
   console.log(req.url);
 
-  async.waterfall([
-      function(callback){
-        let title = req.url.split('/').pop();
-        req.session.album = title;
+  if (req.url != '/undefined') {
 
-        console.log('Имя альбома: ');
-        console.log(title);
-        callback(null, title);
-      },
-    // Ищем все изображения в альбоме тестер
-    function(title, callback){
-      Image.find({'album' : title}, callback);
-    },
-    // Получаем путь из каждого изображения
-    function(image, callback){
+    async.waterfall([
+        function(callback){
+          let title = req.url.split('/').pop();
+          req.session.album = title;
 
-      console.log(image);
+          console.log('Имя альбома: ');
+          console.log(title);
+          callback(null, title);
+        },
+        // Ищем все изображения в альбоме тестер
+        function(title, callback){
+          Image.find({'album' : title}, callback);
+        },
+        // Получаем путь из каждого изображения
+        function(image, callback){
 
-      var arr = [];
-      if(image[0]){
+          console.log(image);
 
-        console.log('Картинки нашли');
-        //console.log(req.session);
-        console.log(image[0]);
+          var arr = [];
+          if(image[0]){
 
-        console.log('Ищу');
-        image.forEach(function(img){
-          console.log('Итерация');
-          console.log(img);
-          arr.push(img.src); //.replace('users/')
-        });
-        callback(null, arr);
-      } else {
-        callback(null, null);
-      }
+            console.log('Картинки нашли');
+            //console.log(req.session);
+            console.log(image[0]);
 
-    },
-    // 
-    function(src, callback){
-      console.log('генерирую');
-      console.log(src);
-      //console.log(arr);
-      if (src !== null) {
+            console.log('Ищу');
+            image.forEach(function(img){
+              console.log('Итерация');
+              console.log(img);
+              arr.push(img.src); //.replace('users/')
+            });
+            callback(null, arr);
+          } else {
+            callback(null, null);
+          }
 
-        res.render('album',  {
-          userName: req.session.name,
-          photos: src
-        }, callback(null, 'done'));
+        },
+        //
+        function(src, callback){
+          console.log('генерирую');
+          console.log(src);
+          //console.log(arr);
+          if (src !== null) {
 
-      } else {
+            res.render('album',  {
+              userName: req.session.name,
+              photos: src
+            }, callback(null, 'done'));
 
-        res.render('album',  {
-          userName: req.session.name,
-        }, callback(null, 'done'));
+          } else {
 
-      }
-    }],
+            res.render('album',  {
+              userName: req.session.name,
+            }, callback(null, 'done'));
 
-    //render
-  function(err, result){
-    console.log(result);
-  })
+          }
+        }],
+
+      //render
+      function(err, result){
+        console.log(result);
+      })
+  }
+
+
  
 });
 
