@@ -28,16 +28,24 @@ var mainPageModule = (function() {
 
 	//======= Функции
 
-  var previeUserBackGround = function(){
-  	var maxSize = 2 * 1024 * 1024;
-  	var photo = $(this)[0].files[0];
-
-
-		var reader = new FileReader();
-		reader.readAsDataURL(photo);
+	var validateImg = function(photo){
+		var maxSize = 2 * 1024 * 1024;
+		if(!photo.type.match(/image\/(jpeg|jpg|png|gif)/) ) {
+      return alert('Фотография должна быть в формате jpg, png или gif');
+    }
 		if(photo.size > maxSize){
 			return alert("Фотография больше 2мб");
 		}
+	}
+
+  var previeUserBackGround = function(){
+  	
+  	var photo = $(this)[0].files[0];
+  	validateImg(photo);
+
+		var reader = new FileReader();
+		reader.readAsDataURL(photo);
+		
 		reader.onload = (function (photo) {
       return function (e) {
           $header.removeAttr('style').attr('style','background-image : url('+ e.target.result +')')
