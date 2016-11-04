@@ -7,6 +7,12 @@ var mainPageModule = (function() {
   var base = new BaseModule;
 
   //Общие переменные
+  var $form = $('.popup__form');
+  var $formAddAlbum = $form.filter('.popup__form-add-album');
+  var button = 'input[type = submit]';
+  var popupTime = 5000;
+
+
   var $header = $('.header-main');
   var $footer = $('.footer');
   var headerBg = $header.attr('style');
@@ -30,6 +36,33 @@ var mainPageModule = (function() {
   var btnSave = $header.find('.btn--save');
 
   
+
+
+  // Отправляем ajax на addalbum
+  $formAddAlbum.find(button).on('click', function(e){
+    e.preventDefault();
+    var $thisForm = $(this).closest('form');
+    // Параметры для popup
+    var errorArray = base.validateForm($thisForm); // Проверяем текущую форму и выдаем массив индексов ошибок
+    var $errorContainer = $thisForm.find('.popup__error');
+    if(errorArray.length > 0){	// Если в массиве есть ошибки, значит выдаем окно, с номером ошибки
+      errorArray.forEach(function(index){
+        base.showError(index,$errorContainer, popupTime);
+      });
+    }else{ // Если массив пустой, выполняем дальше
+      var id = window.location.pathname;
+      servAns = base.ajax($thisForm, id + 'addAlbum/');
+      servAns.done(function(ans){
+        if(!ans.status){
+          base.showError(ans.message,$errorContainer, popupTime);
+        }else{
+          window.location.reload(true);
+        }
+      });
+    }
+
+  });
+
 
 
 	//======= Функции

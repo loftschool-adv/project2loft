@@ -17,8 +17,10 @@ function uploadImg(req, res) {
   var Header = new formidable.IncomingForm();
   var File = new formidable.IncomingForm();
   var filename;
+  var imgType;
   var imgSrc;
   var tmp;
+  var counter = 0;
 
   File.maxFieldsSize = 8 * 1024 * 1024;
   File.multiples = true;
@@ -31,6 +33,7 @@ function uploadImg(req, res) {
     if (part) {
       var fileType = part.mime.split('/').pop();
       filename = 'IMG' + base.passGenerate(10) + '.' + fileType;
+      imgType = fileType;
       console.log(filename);
     }
   };
@@ -41,10 +44,14 @@ function uploadImg(req, res) {
 
       tmp = 'tmp/' + filename;
 
-      imgSrc = 'users/id' + req.session.user_id + '/albums/a5/' + filename; //req.session.album
-      console.log(imgSrc);
+      console.log(req.session.album);
 
-      console.log(req);
+      console.log(++counter);
+
+
+      //console.log(imgSrc);
+
+      //console.log(req);
 
     fs.writeFile(tmp, field, 'binary', function(err){
 
@@ -53,45 +60,36 @@ function uploadImg(req, res) {
       //console.log(req.headers);
     });
 
-      //db.getCollection('images').find({}).sort({img_id:-1}).limit(1)
-
     console.log('Upload completed!');
   })
   .on('end', function() {
 
-    //Ресайз изображений
-    Jimp.read(imgSrc).then(function(image){
+    async.waterfall([
+      function (callback) {
+        Image.find({}).sort({img_id:-1}).limit(1).then((item) => {
+          console.log(item[0].img_id);
+          imgSrc = 'users/id' + req.session.user_id + '/albums/' + req.session.album + '/img' + item[0].img_id + '.' + imgType;
+          callback(null, imgSrc);
+        });
+      },
+      function (imgSrc, callback) {
+        console.log(tmp);
+        console.log(imgSrc);
 
-      image.resize(500, Jimp.AUTO)
-      image.write(imgSrc);
+        //Ресайз изображений
+        Jimp.read(tmp).then(function(image){
 
-      console.log('resize');
+          image.resize(500, Jimp.AUTO);
+          image.write(imgSrc);
+
+          console.log('resize');
+          callback(null, 'finish');
+        });
+      }],
+      function (err, result) {
+        addImgDB(req, imgSrc);
+        console.log(result);
     });
-
-    console.log('-> upload done');
-
-    async.series([
-      function(callback) {
-        // Получаем информацию о файле
-        console.log('1');
-        callback();
-      },
-      function(callback) {
-        // Получаем информацию о файле
-        console.log('2');
-        callback();
-      },
-      function() {
-        // Получаем информацию о файле
-        console.log('32');
-      },
-    ], function (err, result) {
-      // result now equals 'done'
-    });
-
-    addImgDB(req, imgSrc);
-
-    //Сохранени в БД
 
     res.end('upload');
   });
@@ -100,23 +98,19 @@ function uploadImg(req, res) {
 
 }
 
-function addImgDB(req, imgSrc, callback) {
-
+function addImgDB(req, imgSrc) {
   // Создаем экземпляр пользователя
   let image = new Image({
     src: imgSrc,
     album: req.session.album,
     user_id: req.session._id
   });
+
   // Сохраняем картинку в базу
   image.save(function( err, image, affected){
     if (err) throw err;
     console.log('Сохранена картинка в базу');
   });
-}
-
-function resize(callback) {
-  console.log("async");
 }
 
 module.exports = uploadImg;
