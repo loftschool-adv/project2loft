@@ -39,9 +39,12 @@ function uploadImg(req, res) {
   File
     .on('field', function(name, field) {
 
-      //imgSrc = 'users/id' + req.session.user_id + '/albums/test/' + filename; //req.session.album
       tmp = 'tmp/' + filename;
+
+      imgSrc = 'users/id' + req.session.user_id + '/albums/a5/' + filename; //req.session.album
       console.log(imgSrc);
+
+      console.log(req);
 
     fs.writeFile(tmp, field, 'binary', function(err){
 

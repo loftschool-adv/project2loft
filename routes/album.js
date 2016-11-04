@@ -12,6 +12,7 @@ let User = require('../modules/models/user.js').User;
 let Image = require('../modules/models/image.js').Image;
 let async = require('async');
 let path = require('path');
+let uploadImg = require('../modules/upload-img.js');
 
 
 // route.get('/:album', (req,res) =>{
@@ -34,15 +35,20 @@ let path = require('path');
 
 route.get('/:album', (req,res) =>{
   //console.log(req.session.album);
-  let title = req.url.split('/').pop();
-  req.session.album = title;
 
-  console.log('Имя альбома: ');
-  console.log(title);
+  console.log(req.url);
 
   async.waterfall([
+      function(callback){
+        let title = req.url.split('/').pop();
+        req.session.album = title;
+
+        console.log('Имя альбома: ');
+        console.log(title);
+        callback(null, title);
+      },
     // Ищем все изображения в альбоме тестер
-    function(callback){
+    function(title, callback){
       Image.find({'album' : title}, callback);
     },
     // Получаем путь из каждого изображения
@@ -79,20 +85,20 @@ route.get('/:album', (req,res) =>{
         res.render('album',  {
           userName: req.session.name,
           photos: src
-        }, callback(null));
+        }, callback(null, 'done'));
 
       } else {
 
         res.render('album',  {
           userName: req.session.name,
-        }, callback(null));
+        }, callback(null, 'done'));
 
       }
     }],
 
     //render
   function(err, result){
-
+    console.log(result);
   })
  
 });
@@ -113,5 +119,7 @@ route.post('/add/', (req,res) =>{
     res.end('end');
   });
 });
+
+route.post('/:album/addImg/', (req, res) => uploadImg(req, res));
 
 module.exports = route;

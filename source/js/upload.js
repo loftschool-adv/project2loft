@@ -87,9 +87,11 @@ $("#upload").click(function() {
     var pBar = $(uploadItem).find('.progress');
     console.log('Начинаем загрузку `'+uploadItem.file.name+'`...');
 
+    var path = window.location.pathname;
+
     new uploaderObject({
       file:       uploadItem.file,
-      url:        '/upload/',
+      url:        path + '/addImg/',
       fieldName:  'my-pic',
 
       onprogress: function(percents) {
