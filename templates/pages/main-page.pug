@@ -26,7 +26,7 @@ block content
 											use(xlink:href='/img/sprite.svg#edit')
 										span.btn__text Редактировать
 								.header__control
-									.btn.btn--light.btn--expand
+									.btn.btn--light.btn--expand.logout
 										svg.btn__icon
 											use(xlink:href='/img/sprite.svg#off')
 										span.btn__text Выйти
@@ -65,7 +65,7 @@ block content
 						.header__part.header__right
 							a.btn.btn--text#cancel_edit_header(href="#cancel")
 								span.btn__text Отменить
-							a.btn(href="#ok") Сохранить
+							a.btn.btn--save(href="#ok") Сохранить
 					.header__section.header__bottom.header-bottom-front.header__bottom_main.section
 						.header__part.header__right
 							form.search
