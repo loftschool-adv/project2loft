@@ -1,6 +1,6 @@
 div.modal-container.hide
     div.modal-overlay
-        div.modal.modal__add-album
+        form.modal.modal__add-album.popup__form.popup__form-add-album
             .wrapper__modal
                 div.modal__header.add-albums__header
                     div.modal__header-title Добавить альбом
@@ -12,11 +12,13 @@ div.modal-container.hide
                         label.add-album__name Название
                         input.field.add-album__name-input(
                         type="text"
+                        name="name"
                         placeholder=""
                         )
                     .wrapper-input__description
                         label.add-album__description Описание
                         textarea.field.add-album__textarea(
+                        name="about"
                         placeholder=""
                         )
                     .wrapper-input__upload
@@ -26,7 +28,7 @@ div.modal-container.hide
                         span.wrapper-input__text (файл должен быть размером не более 1024 КБ)
             div.modal__footer.add-album__footer
                 div.modal__buttons.add-album__buttons
-                    a.btn.add-album__btn-save(href="#")#upload Сохранить
+                    input.btn.add-album__btn-save(type="submit" value = "Сохранить")
                     a.btn.btn--text.add-album__btn-cancel(href="#cancel")
                         span.btn__text Отменить
                     a.btn.btn--important.add-album__btn-delete
