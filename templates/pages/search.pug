@@ -2,56 +2,62 @@ include ../layout
 
 block content
     -var userAva = "ava"
-    .search-wrap
-        header.search-page__header
-            h1.title Исследуй мир
-            a.btn-home
-                svg.input-complex__icon
-                    use(xlink:href='/img/sprite.svg#search')
-            .bottom
-                .user-block.user-block--sm
-                    .user-block__photo(href="#404" style="background-image: url(../img/search/"+userAva+".png), url(../img/album/no_photo.jpg)")
+    div.page-container
+        div.page-content
+            header.header-search
+                .content-container
+                    h1.title Исследуй мир
+                    .header__part.header__part--zip
+                        .header__controls
+                            .header__control
+                                .btn.btn--light.btn--expand
+                                    svg.btn__icon
+                                        use(xlink:href='/img/sprite.svg#home')
+                                    span.btn__text На главную
+                    .bottom
+                        .user-block.user-block--sm
+                            .user-block__photo(href="#404" style="background-image: url(../img/search/"+userAva+".png), url(../img/album/no_photo.jpg)")
 
-                    .user-block__main
-                        .user-block__name Антон Черепов
-                form.search
-                    input.field.search__field(
-                    type="text"
-                    name="text"
-                    placeholder="Найти..."
-                    )
-                    button.search__btn
-                        svg.input-complex__icon
-                            use(xlink:href='/img/sprite.svg#search')
-                a.show-new(href="#404") Показать новые
-        .search__main
-            .title По запросу Природа найдено 6 результатов
-            .grid.grid--lg
-                - var images = [{"image":"01", "avatar":"a01", "count": "10", "like": "3"}, {"image":"02", "avatar":"a02", "count": "10", "like": "3"}, {"image":"03", "avatar":"a03", "count": "10", "like": "3"}, {"image":"04", "avatar":"a04", "count": "10", "like": "3"}, {"image":"05", "avatar":"a05", "count": "10", "like": "3"}, {"image":"06", "avatar":"a06", "count": "10", "like": "3"}];
-                for i in images
-                    .grid__item
-                        .photo-card
-                            a.photo-card__head(href="#404" style="background-image: url(../img/search/"+i["image"]+".png), url(../img/album/no_photo.jpg)")
-                            .photo-card__body
-                                .photo-details
-                                    .photo-details__side
-                                        a.photo-details__ava(href="#user" style="background-image: url(../img/search/"+i["avatar"]+".png), url(../img/album/no_photo.jpg)")
-                                    .photo-details__main
-                                        .photo-details__title Название фотографии
-                                        .photo-details__info.info
-                                            .info__item
-                                                svg.info__icon
-                                                    use(xlink:href='/img/sprite.svg#comments')
-                                                span.info__text #{i["count"]}
-                                            .info__item
-                                                svg.info__icon
-                                                    use(xlink:href='/img/sprite.svg#like')
-                                                span.info__text #{i["like"]}
-                            .photo-card__foot
-                                .photo-card__foot-part
-                                .photo-card__foot-part
-                                    a.link.photo-card__link-album(href="#404")
-                                        svg.link__icon
-                                            use(xlink:href='/img/sprite.svg#album')
-                                        .link__text Название альбома
+                            .user-block__main
+                                .user-block__name Антон Черепов
+                        form.search
+                            input.field.search__field(
+                            type="text"
+                            name="text"
+                            placeholder="Найти..."
+                            )
+                            button.search__btn
+                                svg.input-complex__icon
+                                    use(xlink:href='/img/sprite.svg#search')
+                        a.show-new(href="#404") Показать новые
+            .search__main
+                .title По запросу Природа найдено 6 результатов
+                .grid.grid--lg
+                    - var images = [{"image":"01", "avatar":"a01", "count": "10", "like": "3"}, {"image":"02", "avatar":"a02", "count": "10", "like": "3"}, {"image":"03", "avatar":"a03", "count": "10", "like": "3"}, {"image":"04", "avatar":"a04", "count": "10", "like": "3"}, {"image":"05", "avatar":"a05", "count": "10", "like": "3"}, {"image":"06", "avatar":"a06", "count": "10", "like": "3"}];
+                    for i in images
+                        .grid__item
+                            .photo-card.media-card
+                                a.photo-card__head(href="#404" style="background-image: url(../img/search/"+i["image"]+".png), url(../img/album/no_photo.jpg)")
+                                .photo-card__body
+                                    .photo-details
+                                        .photo-details__side
+                                            a.photo-details__ava(href="#user" style="background-image: url(../img/search/"+i["avatar"]+".png), url(../img/album/no_photo.jpg)")
+                                        .photo-details__main
+                                            .photo-details__title Название фотографии
+                                            .photo-details__info.info
+                                                .info__item
+                                                    svg.info__icon
+                                                        use(xlink:href='/img/sprite.svg#comments')
+                                                    span.info__text #{i["count"]}
+                                                .info__item
+                                                    svg.info__icon
+                                                        use(xlink:href='/img/sprite.svg#like')
+                                                    span.info__text #{i["like"]}
+                                .photo-card__foot
+                                    .photo-card__foot-part
+                                    .photo-card__foot-part
+                                        a.link.photo-card__link-album(href="#404")
+                                            svg.link__icon
+                                                use(xlink:href='/img/sprite.svg#album')
+                                            .link__text Название альбома
         include ../commons/footer

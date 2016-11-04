@@ -1,0 +1,125 @@
+.header-search {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  max-width: 100%;
+  margin: auto;
+
+  .content-cotainer {
+    flex: 1;
+    position: relative;
+  }
+
+  .title {
+    font-size: 42px;
+    font-family: "Panton";
+    color: rgb(50, 50, 50);
+    font-weight: bold;
+    text-align: center;
+    z-index: 123;
+  }
+
+  .bottom {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #f7f7f7;
+    padding: 5px 7%;
+  }
+  .show-new {
+    font-size: 16px;
+    font-family: "ProximaNova";
+    color: rgba(40, 187, 240, 0.8);
+    z-index: 104;
+    margin-left: 2%;
+    text-decoration: none;
+  }
+}
+
+.search__main {
+  margin: auto;
+  max-width: 1300px;
+  overflow: hidden;
+  padding: 60px 2%;
+
+  .title {
+    font-size: 21px;
+    font-family: "ProximaNova";
+    color: rgb(50, 50, 50);
+    z-index: 100;
+    margin-bottom: 40px;
+    display: none;
+    width: 100%;
+  }
+}
+
+// Блок медиа запросов
+
+@media screen and (max-width: 768px) {
+  .header-search {
+    flex-direction: column;
+    .header__part--zip {
+      display: none;
+    }
+    .bottom {
+      padding: 5px 3%;
+    }
+    .user-block__main {
+      margin-right: 20px;
+    }
+    .search__field {
+      width: 90%;
+    }
+
+    .search__main {
+      padding: 30px 2.5%;
+    }
+  }
+}
+
+@media screen and (max-width: 460px) {
+
+  .header-search {
+    .user-block {
+      display: none;
+    }
+
+    .bottom {
+      flex-direction: column;
+      padding: 10px;
+    }
+    .search__field {
+      width: 100%;
+    }
+    .show-new {
+      margin: 5px 0 0 0;
+      text-decoration: none;
+    }
+  }
+
+  .search__main {
+    padding: 30px 2.5%;
+
+    .title {
+      display: none;
+    }
+  }
+
+  .footer__in {
+    padding-top: 70px;
+    flex-direction: column;
+    position: relative;
+
+    .footer__btn-top {
+      position: absolute;
+      top: 0;
+    }
+    .footer__part,
+    .footer__copyright {
+      margin-top: 10px;
+      padding: 0;
+      text-align: center !important;
+    }
+  }
+}
