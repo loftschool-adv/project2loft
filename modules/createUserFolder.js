@@ -78,7 +78,7 @@ let albumGenerate = function(item,itemCallback){
 						itemCallback();
 					}
 				}else{
-					info('Создан альбом id' + item.user_id + '/' + album.name,debag);
+					info('Создан альбом id' + item.user_id + '/' + albumFolder + '/' + album.name,debag);
 					albumCallback();
 				}
 			});

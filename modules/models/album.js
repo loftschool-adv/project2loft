@@ -9,13 +9,9 @@ let schema = new Schema({
   name: {
     type: String,
     unique: false,
-    required: true,
-    default: "Альбом"
   },
   about: {
     type: String,
-    required: false,
-    default: "Об альбоме"
   },
   created : {
     type : Date,
@@ -24,7 +20,6 @@ let schema = new Schema({
   user_id: {
     type: String,
     unique: false,
-    required: false
   }
 });
 

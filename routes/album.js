@@ -69,10 +69,12 @@ route.get('/:album', (req,res) =>{
 
 // Обращаемся к корню сайта , и рендерим шаблон из ./views/pages/index.pug
 route.post('/add/', (req,res) =>{
+  //console.log(req);
   // Создаем экземпляр пользователя
   let album = new Album({
-    name : req.name,
-    about: req.about
+    name : req.body.name,
+    about: req.body.about,
+    user_id: req.session.user_id
   });
   // Сохраняем пользователя в базу
   album.save(function( err, album, affected){

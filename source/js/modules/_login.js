@@ -28,7 +28,8 @@ var loginModule = (function() {
           base.showError(index,$errorContainer, popupTime);
         });
       }else{ // Если массив пустой, выполняем дальше
-        servAns = base.ajax($thisForm,'/album/add/');
+				var id = window.location.pathname;
+        servAns = base.ajax($thisForm, id + 'album/add/');
         servAns.done(function(ans){
           if(!ans.status){
             base.showError(ans.message,$errorContainer, popupTime);
