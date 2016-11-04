@@ -6,6 +6,7 @@ let express = require('express');
 let route = require('express').Router();
 let async = require('async');
 let User = require('../modules/models/user.js').User;
+let Album = require('../modules/models/album.js').Album;
 let BaseModule = require('../modules/libs/_base.js');
 let multiparty = require('multiparty');
 let base = new BaseModule;
@@ -50,7 +51,7 @@ route.get('/', (req,res,next) =>{
 	    				res.locals.backgroundIamge = `/id${req.session.user_id}/commons/${file}`;
 	    				fileCalbak();
 	    			}
-	    		})
+	    		});
 	    		callback();
  	    	})
 	    	
@@ -68,7 +69,7 @@ route.post('/editUserData/', (req, res) => {
 	form.parse(req, function(err, fields, file){
 		if(err){
 			return res.json({ error: "Ошибка при загрузке"})
-		};
+		}
 		User.findOneAndUpdate({user_id: req.session.user_id},
 			{$set : 
 				{
@@ -106,7 +107,21 @@ route.post('/editUserData/', (req, res) => {
 
 });
 
-
+route.post('/addAlbum/', (req,res) =>{
+	//console.log(req.session);
+	// Создаем экземпляр пользователя
+	let album = new Album({
+		name : req.body.name,
+		about: req.body.about,
+		user_id: req.session.user_id
+	});
+	// Сохраняем пользователя в базу
+	album.save(function( err, album, affected){
+		if (err) throw err;
+		console.log('Создан альбом');
+		res.end('end');
+	});
+});
 
 // Выход с сайта 
 route.post('/logout/', (req, res) => {

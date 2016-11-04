@@ -34,8 +34,6 @@ route.get('/', (req, res) => {
 
 
 
-
-
 // Регистрация новых пользоватей
 route.post('/reg/', (req, res) => {
   let User = require('../modules/models/user.js').User;
