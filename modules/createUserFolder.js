@@ -18,7 +18,7 @@ let commonFolder = 'commons'; // Папка с остальными файлам
 
 
 var debag = true;
-var clearStart = false;
+var clearStart = true;
 
 let info = function(text,flag) {
 	var debug = flag;
@@ -172,9 +172,9 @@ let clear = function(callback){
 
 
 module.exports = async.series([
-		createDirUsers,
-		createFolder,
-		clear
+		//createDirUsers,
+		//createFolder,
+		//clear
 	], function(err,result){
 		info("Скрипт завершен",debag);
 });
