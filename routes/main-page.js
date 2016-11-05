@@ -81,7 +81,15 @@ route.post('/editUserData/', (req, res) => {
 				if(err) throw err;
 				res.locals.userName = fields.userName[0];
 				res.locals.userAbout = fields.userAbout[0];
-				//let newFilePath = path.join('upload', file.userBackGround[0].path);
+
+
+				/*base.checkDirectory(`users/id${req.session.user_id}/commons/`, function(err){
+					if(err){
+						console.log('Папки нет');
+					}
+				});*/
+
+
 				if (Object.keys(file).length != 0) {
 					let pictures = file.userBackGround.filter(f => f.size).map((file, key) => {
 					let newFilePath = 'background' + path.extname(file.path);
@@ -89,18 +97,6 @@ route.post('/editUserData/', (req, res) => {
 						res.send({});
 					})
 				}
-				
-
-
-				//console.log(newFilePath)
-				//fs.writeFileSync(path.resolve('users/id1/commons', file.path + ''), fs.readFileSync((file.path + '')));
-				/*let pictures = file.userBackGround.filter(f => f.size).map((file, key) => {
-				console.log(file)
-				let newFilePath = path.join('test', path.extname(file.path));
-				
-
-					return newFilePath;
-				})*/
 			})
 	})
 	

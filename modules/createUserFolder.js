@@ -15,11 +15,14 @@ let del = require('del');
 let folder = './users';  // Папка с пользователями
 let albumFolder = 'albums'; // Папка альбомов
 let commonFolder = 'commons'; // Папка с остальными файлами
+let tmpFolder = 'tmp'; // Папка с временными файлами
 
 
 var debag = true;
-var clearStart = true;
+var clearStart = false;
+var generateStart = true;
 
+// Информация при дебаге
 let info = function(text,flag) {
 	var debug = flag;
 	if(debug){
@@ -27,68 +30,163 @@ let info = function(text,flag) {
 	}
 }
 
+
+
 // Создаем корневую директорию, если ее нет
-let createDirUsers = function(callback){
-	base.checkDirectory(folder, function(err){
-		if(err){
-			info('Создаем папку ' + folder ,debag)
-			fs.mkdir(folder, () => {
-				info('Создали папку' + folder,debag)
-			})
+let createDirUsers = function(callback_1){
+	async.parallel([
+		function(callback_2){
+			base.folderGenerator(folder,callback_2);
 		}
-	});
-	return callback(null);
+	], (err,result) =>{
+		// Вызвать колбек по завершение создания папки
+		callback_1();
+	})
 };
 
+
+
+
 // Генерирем папки пользователей
-let createFolder = function(callback){
-	User.find({}, (err,items) => {
-		if(err) throw err;
-		info('Генерируем папки пользователей' + folder + '/',debag);
-		async.each(items,(item, itemCallback) =>{
-			fs.mkdir(folder + '/id' + item.user_id, (err) => {
-				createFolderAlbums(item,itemCallback);
-				//albumGenerate(item,itemCallback);
-			});
-			
+let createUserFolder = function(users,callback_1){
+		// Проходимся циклом по всем пользователям
+	async.each(users,(item, callback_2) =>{
+			// Если папка по id + user_id есть то проверяем дальше
+			let userDir = folder + '/id' + item.user_id;
+			async.parallel([
+      			function(callback_3){
+      				base.folderGenerator(userDir,callback_3);
+      			}
+					], (err,result) =>{
+						// Вызвать колбек по завершение создания папки
+						callback_2();
+					})
 		},()=>{
-			
-			callback();
+			// Вызываем коллбек чтобы перейти к следующий функции
+			callback_1(null,users);
 		})
-	})
 	
 };
 
-// Генерируем папку с альбомами и папку с разными файлами
-let createFolderAlbums = function(item,itemCallback){
-	fs.mkdir(folder + '/id' + item.user_id + '/' + commonFolder,(err) =>{});
-	fs.mkdir(folder + '/id' + item.user_id + '/' + albumFolder,(err) =>{
-		albumGenerate(item,itemCallback);
-	});
-}
 
-// Генерируем папки альбомов
-let albumGenerate = function(item,itemCallback){
-	Album.find({user_id : item.user_id},(err,albums) =>{
-		if(err) throw err;
-		async.each(albums, (album,albumCallback) =>{
-			fs.mkdir(folder + '/id' + item.user_id + '/' + albumFolder + '/' + album.name, (err) => {
-				if(err){
-					if(err.errno == -4075){
-						itemCallback();
-					}
-				}else{
-					info('Создан альбом id' + item.user_id + '/' + albumFolder + '/' + album.name,debag);
-					albumCallback();
-				}
-			});
-			
-		},() =>{
-			info('Папки юзеров созданы',debag);
-			itemCallback() 
+
+
+
+
+
+// Генерируем папку с альбомами , папку с разными файлами и папку tmp
+let createInnerFolder = function(users,callback_1){
+	// Проходимся циклом по всем пользователям
+	async.each(users,(user, callback_2) =>{
+		let userFolder = folder + '/id' + user.user_id + '/';
+		// Паралельно запускаем создание папкок
+		async.parallel([
+			function(callback_3){
+				// Создаем фременную папку в директории пользователя
+				base.folderGenerator(userFolder + tmpFolder,callback_3)
+			},
+			function(callback_3){
+				// Создаем папку для разных файлов в директории пользователя
+				base.folderGenerator(userFolder + commonFolder,callback_3)
+			},
+			function(callback_3){
+				// Создаем папку для альбомов в директории пользователя
+				base.folderGenerator(userFolder + albumFolder,callback_3)
+			}
+
+		],() =>{
+			callback_2();
 		})
+	},() =>{
+
+		callback_1();
 	})
 }
+
+
+// Генерируем папки самих альбомов
+let createAlbums = function(albums,callback_1){
+	async.parallel([
+			function(callback_2){
+				// Сканируем папку user
+				fs.readdir(folder,function(err,items){
+					// Проходимся циклом по всем папкам id
+					async.each(items,(item,callback_3) =>{
+						// Проходимся циклом по свем альбомам
+						async.each(albums,(album,callback_4) =>{
+							// Сравниваем папку с id альбома
+							if(item.replace('id','') == album.user_id){
+								// Если упешно, создаем папку альбома с папке users/id*/albums/
+								let albumDir = folder + '/' + item + '/' + albumFolder + '/' + album.name;
+								base.folderGenerator(albumDir,callback_4)
+							}else{
+								callback_4();
+							}
+						},()=>{ 
+							callback_3() 
+						})
+					},() =>{
+						callback_2();
+					})
+				})
+			}
+		],() =>{
+			callback_1();
+	})
+}
+
+
+
+
+
+
+// Последовательно выполняем фукнкции Генерации папок
+let generate = function(callback_1){
+	if(generateStart){
+		async.waterfall([
+
+			function(callback_2){
+				createDirUsers(callback_2);
+			},
+			function(callback_2){
+				User.find({},callback_2)
+			},
+			function(users,callback_2){
+				createUserFolder(users,callback_2);
+			},
+			function(users,callback_2){
+				createInnerFolder(users,callback_2);
+			},
+			function(callback_2){
+				Album.find({},callback_2)
+			},
+			function(albums,callback_2){
+				createAlbums(albums,callback_2);
+			}
+			
+
+		], (err,result) =>{
+			callback_1();
+		})
+	}else{
+		callback_1();
+	}
+	
+	
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -150,6 +248,12 @@ let clearAlbums = function(callback){
 	})
 };
 
+
+
+
+
+
+
 // Последовательно выполняем фукнкции очистки
 let clear = function(callback){
 	if(clearStart){
@@ -172,8 +276,7 @@ let clear = function(callback){
 
 
 module.exports = async.series([
-		//createDirUsers,
-		//createFolder,
+		generate
 		//clear
 	], function(err,result){
 		info("Скрипт завершен",debag);

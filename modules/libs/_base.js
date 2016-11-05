@@ -14,6 +14,20 @@ function Base(){
     })
   }
 
+  // Генератор папки
+  this.folderGenerator = function(folder,callback){
+    fs.stat(folder, function(err,stats){
+      if(!stats){
+        fs.mkdir(folder,(err) =>{
+          if(err) throw err;
+          callback();
+        })
+      }else{
+        callback();
+      }
+    })
+  }
+
   // Генерация пароля
   this.passGenerate = function(len){
     var ints =[0,1,2,3,4,5,6,7,8,9]; 
