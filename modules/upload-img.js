@@ -30,7 +30,7 @@ function uploadImg(req, res) {
   var counter = false;
 
   File.multiples = true;
-  File.uploadDir = "upload";
+  File.uploadDir = "users/id2/tmp";
 
   File
     .on('fileBegin', function(name, file) {
@@ -55,7 +55,7 @@ function uploadImg(req, res) {
 
       res.end('upload');
     });
-
+    res.end('upload');
     File.parse(req);
 
   }
@@ -88,9 +88,7 @@ function imgProcessing(req, files, counter) {
     newCounter++;
 
     console.log('Обрабатываем файл: ' + file);
-    console.log(file);
     let imgType = file[0].type.split('/').pop();
-
     async.waterfall([
         // Function 1 - Поиск в базе изображений и создание нового адреса изображения
         function (callback) {
@@ -103,8 +101,8 @@ function imgProcessing(req, files, counter) {
         // Function 2 - Ресайз и перезапись из tmp в папку пользователя
         function (imgSrc, file, callback) {
           //console.log(tmp);
-          console.log(imgSrc);
-          console.log(file[0].path);
+          //console.log(imgSrc);
+          //console.log(file[0].path);
 
           //Ресайз изображений
           Jimp.read(file[0].path).then(function(image){
@@ -125,8 +123,6 @@ function imgProcessing(req, files, counter) {
         console.log(result);
         callbackEach('Изображение обработанно');
       });
-
-  }, function (err) {
 
   });
 }
