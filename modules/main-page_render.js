@@ -26,6 +26,7 @@ let mainPageRender = function(req,res,next){
  		// Записываем данные пользователя в глобальный объект, для доступа ко всем шаблонам
  		res.locals.userName = user.name;
 	  res.locals.userAbout = user.about;
+	  res.locals.email = req.session.email;
 	  callback(null,user)
  	},
  	function(user,callback){
@@ -40,6 +41,10 @@ let mainPageRender = function(req,res,next){
  			if(fileName == 'background'){
  				// Если файл равен background, значит это фон шапки. Записываем его путь глобально
 				res.locals.backgroundIamge = `/id${req.session.user_id}/${commons}/${file}`;
+	    }
+	    if(fileName == 'avatar'){
+ 				// Если файл равен background, значит это фон шапки. Записываем его путь глобально
+				res.locals.avatar = `/id${req.session.user_id}/${commons}/${file}`;
 	    }
 	    callback_2();
  		},() =>{

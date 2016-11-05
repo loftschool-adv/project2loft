@@ -2,8 +2,8 @@ extends ../layout
 
 block content
 	-var user = 'Александра Соколова';
-	-var avatar = "user_avatar";
-	-var BG = "user_header";
+	-var ava = avatar || '../img/album/no_photo.jpg';
+	-var BG = backgroundIamge || '../img/album/no_photo.jpg';
 	div.page-container
 		div.page-content
 			.header.header-main(style="background-image: url(" + backgroundIamge + "), url(../img/album/no_photo.jpg)")
@@ -11,7 +11,7 @@ block content
 					.header__section.section.header__section_main.header__section_main-front
 						.header__part
 							.user-block
-								.user-block__photo(style="background-image: url(../img/user/"+avatar+".png), url(../img/album/no_photo.jpg)")
+								.user-block__photo(style="background-image: url("+ ava +"), url(../img/album/no_photo.jpg)")
 								.user-block__main
 									.user-block__name!= userName
 									.user-block__desc!= userAbout
@@ -32,7 +32,7 @@ block content
 					.header__section.section.header__section_main.header__section_main-back
 						.header__part
 							.user-block.user-block--edit
-								.user-block__photo
+								.user-block__photo(style="background-image: url("+ ava +"), url(../img/album/no_photo.jpg)")
 									.upload.user-block__photo-edit(title="Выбрать изображение")
 										svg.upload__icon
 											use(xlink:href='/img/sprite.svg#cam')

@@ -16,10 +16,11 @@ let commons = config.folder.commons;
 let editUserData = function(req,res){
 	let form = new multiparty.Form();
 	// Обрабатываем данные через multiparty
-	form.parse(req, function(error, fields, file){
+	form.parse(req, function(error, fields, files){
 		async.waterfall([
 	    function(callback){
 	    	// При ошибке form data Сразу выкидываем сообщение и прекращаем работу
+
 	    	if(error){
 					callback("Ошибка при загурзке");
 				}else{
@@ -40,36 +41,46 @@ let editUserData = function(req,res){
 
 	    },
 	    function(user,callback){
+
 	    	// Если папки commons нет, то создаем ее.
 	    	base.folderGenerator(`${folder}/id${req.session.user_id}/${commons}/`,callback);
 	    },
 	    function(callback){
 	    	// Перебираем объект файл если он не пустой
-	    	if (Object.keys(file).length != 0) {
-	    		file.userBackGround.map((file, key) =>{
-	    			callback(null,file)
-	    		});
+	    	let userPath = `${folder}/id${req.session.user_id}/commons/`;
+	    	if (Object.keys(files).length != 0) {
+	    		async.forEach(files,(file,callback_2)=>{
+	    			if(file[0].fieldName == "userBackGround"){
+						  let newFilePath = 'background' + path.extname(file[0].path);
+						  // Сохраняем файл
+					    Jimp.read(file[0].path).then(function(image){
+		            //image.resize(500, Jimp.AUTO);
+		            image.write(userPath + newFilePath);
+		            callback();
+				      });
+	    			}else if(file[0].fieldName == "userAvatar"){
+	    				let newFilePath = 'avatar' + path.extname(file[0].path);
+						  // Сохраняем файл
+					    Jimp.read(file[0].path).then(function(image){
+		            //image.resize(500, Jimp.AUTO);
+		            image.write(userPath + newFilePath);
+		            callback();
+				      });
+	    			}
+	    		})
 				}else{
 					// Отправляем файл для сохранения
 					callback(null,false);
 				}
-	    },
-	    function(file,callback){
-	    	let userPath = `users/id${req.session.user_id}/commons/`;
-	    	let newFilePath = 'background' + path.extname(file.path);
-	    	// Сохраняем файл
-	    	Jimp.read(file.path).then(function(image){
-            //image.resize(500, Jimp.AUTO);
-            image.write(userPath + newFilePath);
-            callback();
-        });
-	    },
+	    }
 
-    ],(err)=>{
+    ],(err,test)=>{
     	if(err){
     		res.json({ error: err})
     	}else{
-    		res.send({});
+    		res.json({
+    			avatar : 'users/id${req.session.user_id}/commons/'
+    		});
     	}
   	})
 
