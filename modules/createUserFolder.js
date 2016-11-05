@@ -6,16 +6,18 @@
 
 let fs = require('fs');
 let mongoose = require('mongoose');
+let config = require('../config.json');
 let User = require('../modules/models/user.js').User;
 let Album = require('../modules/models/album.js').Album;
 let BaseModule = require('../modules/libs/_base.js');
 let async = require('async');
 let base = new BaseModule;
 let del = require('del');
-let folder = './users';  // Папка с пользователями
-let albumFolder = 'albums'; // Папка альбомов
-let commonFolder = 'commons'; // Папка с остальными файлами
-let tmpFolder = 'tmp'; // Папка с временными файлами
+let folder = './' + config.folder.users;  // Папка с пользователями
+let albumFolder = config.folder.albums; // Папка альбомов
+let commonFolder = config.folder.commons; // Папка с остальными файлами
+let tmpFolder = config.folder.tmp; // Папка с временными файлами
+
 
 
 var debag = true;
