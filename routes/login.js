@@ -39,74 +39,11 @@ route.get('/', (req, res) => {
 
 // Регистрация новых пользоватей
 route.post('/reg/', (req, res) => {
-  async.waterfall([
-    // Запускаем функции
-    function(callback){
-      // Ищем пользователя по email
-      User.findOne({'email': req.body.email},callback)
-    },
-    function(user,callback){
-      // Если находим, выдаем ошибку
-      if(user){
-        callback('Такой email уже зарегитрирован')
-      }else{
-        // Если не находим, продолжаем работу
-        callback();
-      }
-    },
-    function(callback){
-      // Создаем модель пользователя для сохранения
-      let user = new User({
-        name: req.body.login,
-        password: req.body.pass,
-        email: req.body.email
-      });
-      req.session.user_id = user.user_id;
-      req.session.email = user.email;
-      // Сохраняем пользователя
-      user.save(callback)
-    },
-    function(user,affected,callback){
-      // Записываем данные сохраненного пользователя в сессию
-      req.session.user_id = user.user_id;
-      req.session.email = user.email;
-      callback(null,user);
-    },
-    function(user,callback){
-      // Создаем папку tmp
-      let userFolder = folder + '/id' + user.user_id;
-      async.parallel([
-        function(callback_2){
-          // Создаем папку пользователя
-          base.folderGenerator(userFolder,callback_2);
-        },
-        function(callback_2){
-          // Создаем папку tmp
-          base.folderGenerator(userFolder + '/' + config.folder.tmp,callback_2);
-        },
-        function(callback_2){
-          // Создаем папку albums
-          base.folderGenerator(userFolder + '/' + config.folder.albums,callback_2)
-        },
-        function(callback_2){
-          // Создаем папку commons
-          base.folderGenerator(userFolder + '/' + config.folder.commons,callback_2)
-        }
-      ], (err,result) =>{
-        // Вызвать колбек по завершение создания папок
-        callback();
-      })
-    }
-  ],(err)=>{
-    if(err){
-      sendMasage(err,res,0);
-    }else{
-      res.send({status: 'reg'});
-    }
-    
-    
-  })
+  // Передаем данные в модуль регистрации
+  require('../modules/registration.js')(req, res);
 });
+
+
 // Вход на сайт 
 route.post('/login/', (req, res) => {
   let User = require('../modules/models/user.js').User;
