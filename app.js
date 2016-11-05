@@ -60,7 +60,7 @@ app.use('/:id/user', require('./routes/user.js'));
 // app.use('/', require('./routes/login.js'));
 // app.use('/main', require('./routes/main-page.js'));
 // app.use('/album', require('./routes/album.js'));
-// app.use('/upload', require('./routes/upload.js'));
+// app.use('/upload', require('./routes/oldUpload.js'));
 // app.use('/components', require('./routes/components.js'));
 // app.use('/search', require('./routes/search.js'));
 // app.use('/user', require('./routes/user.js'));

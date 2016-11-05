@@ -357,3 +357,40 @@
 
 
 
+// new upload
+.box {
+	width: 100%;
+	height: 100%;
+	font-size: 1.25rem;
+	background-color: #c8dadf;
+	position: relative;
+	padding: 100px 20px;
+}
+
+.box__dragndrop,
+.box__uploading,
+.box__success,
+.box__error {
+	display: none;
+}
+
+.box.has-advanced-upload {
+	outline: 2px dashed #92b0b3;
+	outline-offset: -10px;
+
+	transition: outline-offset .15s ease-in-out, background-color .15s linear;
+}
+.box.has-advanced-upload .box__dragndrop {
+	display: inline;
+}
+
+.box.is-dragover {
+	background-color: grey;
+}
+
+.box.is-uploading .box__input {
+	visibility: hidden;
+}
+.box.is-uploading .box__uploading {
+	display: block;
+}

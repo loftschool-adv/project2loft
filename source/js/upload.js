@@ -1,137 +1,101 @@
-// Стандарный input для файлов
-var fileInput = $('#file-field');
+//Обрабатывем DragEndDrops
+var isAdvancedUpload = function() {
+  var div = document.createElement('div');
+  return (('draggable' in div) || ('ondragstart' in div && 'ondrop' in div)) && 'FormData' in window && 'FileReader' in window;
+}();
+// Читаем разметку и сохраняем форму
+var $form = $('#upload');
+var $input = $('#file');
 
-// ul-список, содержащий миниатюрки выбранных файлов
-var imgList = $('ul#img-list');
+// Если чтото закинули добавляем класс
+if (isAdvancedUpload) {
 
-// Контейнер, куда можно помещать файлы методом drag and drop
-var dropBox = $('#img-container');
+  var droppedFiles = false;
 
-// Обработка события выбора файлов в стандартном поле
-fileInput.bind({
-  change: function() {
-    displayFiles(this.files);
-  }
-});
+  $form.on('drag dragstart dragend dragover dragenter dragleave drop', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+  })
+    .on('dragover dragenter', function() {
+      $form.addClass('is-dragover');
+    })
+    .on('dragleave dragend drop', function() {
+      $form.removeClass('is-dragover');
+    })
+    .on('drop', function(e) {
+      droppedFiles = e.originalEvent.dataTransfer.files;
+      console.log(droppedFiles);
+      $form.trigger('submit');
+    });
 
-// Обработка событий drag and drop при перетаскивании файлов на элемент dropBox
-dropBox.bind({
-  dragenter: function() {
-    $(this).addClass('highlighted');
-    return false;
-  },
-  dragover: function() {
-    return false;
-  },
-  dragleave: function() {
-    $(this).removeClass('highlighted');
-    return false;
-  },
-  drop: function(e) {
-    var dt = e.originalEvent.dataTransfer;
-    displayFiles(dt.files);
-    return false;
-  }
-});
-
-// Обновление progress bar'а
-function updateProgress(bar, value) {
-  var width = bar.width();
-  var bgrValue = -width + (value * (width / 100));
-  bar.attr('rel', value).css('background-position', bgrValue+'px center').text(value+'%');
-}
-
-
-  function displayFiles(files) {
-  $.each(files, function(i, file) {
-    if (!file.type.match(/image.*/)) {
-      // Отсеиваем не картинки
-      return true;
-    }
-    // Создаем элемент li и помещаем в него название, миниатюру и progress bar,
-    // а также создаем ему свойство file, куда помещаем объект File (при загрузке понадобится)
-    $('.modal__load-img').hide();
-    var li = $('<li/>').addClass('img-item').appendTo(imgList);
-    //$('<div/>').text(file.name).appendTo(li);
-    var cont = $('<canvas/>').addClass('img-cont').appendTo(li);
-    //var img = $('<img/>').appendTo(cont);
-    $('<div/>').addClass('progress').text('0%').appendTo(li);
-    li.get(0).file = file;
-
-    // Создаем объект FileReader и по завершении чтения файла, отображаем миниатюру и обновляем
-    // инфу обо всех файлах
-    var reader = new FileReader();
-    reader.onload = (function(aImg) {
-      return function(e) {
-        //aImg.attr('src', e.target.result);
-        //aImg.css('background-image', 'url('+e.target.result+')');
-        let src = render(e.target.result, i);
-        aImg.attr('src', src);
-        /* ... обновляем инфу о выбранных файлах ... */
-      };
-    })(cont);
-
-    reader.readAsDataURL(file);
+  $input.on('change', function(e) { // drag & drop НЕ поддерживается
+    $form.trigger('submit');
   });
+
+  /////////////////
+
+
 }
 
-// Обаботка события нажатия на кнопку "Загрузить". Проходим по всем миниатюрам из списка,
-// читаем у каждой свойство file (добавленное при создании) и начинаем загрузку, создавая
-// экземпляры объекта uploaderObject. По мере загрузки, обновляем показания progress bar,
-// через обработчик onprogress, по завершении выводим информацию
-$("#upload").click(function() {
 
-  imgList.find('li').each(function() {
+// Ручная отправка
+$form.on('submit', function(e) {
+  if ($form.hasClass('is-uploading')) return false;
 
-    var uploadItem = this;
-    var pBar = $(uploadItem).find('.progress');
-    console.log('Начинаем загрузку `'+uploadItem.file.name+'`...');
+  //alert('Отправляем');
 
-    var path = window.location.pathname;
+  $form.addClass('is-uploading').removeClass('is-error');
 
-    new uploaderObject({
-      file:       uploadItem.file,
-      url:        path + '/addImg/',
-      fieldName:  'my-pic',
+  if (isAdvancedUpload) {
+    e.preventDefault();
 
-      onprogress: function(percents) {
-        updateProgress(pBar, percents);
+    var ajaxData = new FormData($form.get(0));
+
+    if (droppedFiles) {
+      $.each( droppedFiles, function(i, file) {
+        ajaxData.append( $input.attr('name'), file );
+      });
+    }
+
+    console.log($form.attr('action'));
+
+    $.ajax({
+      url: location.href + '/addImg/',
+      type: $form.attr('method'),
+      data: ajaxData,
+      dataType: 'json',
+      cache: false,
+      contentType: false,
+      processData: false,
+      complete: function() {
+        $form.removeClass('is-uploading');
       },
-
-      oncomplete: function(done, data) {
-        if(done) {
-          updateProgress(pBar, 100);
-          console.log('Файл `'+uploadItem.file.name+'` загружен, полученные данные:<br/>*****<br/>'+data+'<br/>*****');
-          console.log(uploadItem.file)
-        } else {
-          console.log('Ошибка при загрузке файла `'+uploadItem.file.name+'`:<br/>'+this.lastError.text);
-        }
+      success: function(data) {
+        $form.addClass( data.success == true ? 'is-success' : 'is-error' );
+        if (!data.success) $errorMsg.text(data.error);
+      },
+      error: function() {
+        // Log the error, show an alert, whatever works for you
       }
     });
-  });
+
+  } else {
+
+    var iframeName  = 'uploadiframe' + new Date().getTime();
+    $iframe   = $('<iframe name="' + iframeName + '" style="display: none;"></iframe>');
+
+    $('body').append($iframe);
+    $form.attr('target', iframeName);
+
+    $iframe.one('load', function() {
+      var data = JSON.parse($iframe.contents().find('body' ).text());
+      $form
+        .removeClass('is-uploading')
+        .addClass(data.success == true ? 'is-success' : 'is-error')
+        .removeAttr('target');
+      if (!data.success) $errorMsg.text(data.error);
+      $form.removeAttr('target');
+      $iframe.remove();
+    });
+  }
 });
-
-
-// Проверка поддержки File API в браузере
-if(window.FileReader == null) {
-  log('Ваш браузер не поддерживает File API!');
-}
-
-// Resize preload
-var MAX_HEIGHT = 100;
-function render(src, i){
-  var image = new Image();
-  image.onload = function(){
-    var canvas = document.getElementsByClassName("img-cont");
-    if(image.height > MAX_HEIGHT) {
-      image.width *= MAX_HEIGHT / image.height;
-      image.height = MAX_HEIGHT;
-    }
-    var ctx = canvas[i].getContext("2d");
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    canvas[i].width = image.width;
-    canvas[i].height = image.height;
-    ctx.drawImage(image, 0, 0, image.width, image.height);
-  };
-  image.src = src;
-}

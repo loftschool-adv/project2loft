@@ -100,27 +100,58 @@ block content
 									.photo-card__foot-part
 										.photo-card__link(href="#404") Название фотографии
 		include ../commons/footer
+
 	div.modal-overlay.hide
-	div.modal.hide
-		div.modal-content
-			div.modal__header
-				div.modal__header-title Добавить фотографии
-				div.modal__header-close
-					svg.modal__header-svg
-						use(xlink:href='/img/sprite.svg#close') 
-			div.modal__title
-				span.modal__title-title Название
-				span.modal__title-text Как я провёл лето
-			.modal__load-container#img-container
-				.upload.modal__load-img(title="Выбрать изображение")
-					svg.upload__icon
-						use(xlink:href='/img/sprite.svg#cam')
-					.upload__text Перетащите фото сюда или 
-						span.modal__link-load выберите файл
-					input.upload__input(type="file"  name="bg" multiple)#file-field
-				ul.img-list#img-list
-		div.modal__footer
-			div.modal__buttons
-				a.btn(href="#")#upload Сохранить
-				a.btn.btn--text.btn-cancelLoad(href="#cancel")
-					span.btn__text Отменить
+		div.modal.hide
+			form.modal-content(method='post', action='', enctype='multipart/form-data')#upload
+				div.modal__header
+					div.modal__header-title Добавить фотографии
+					div.modal__header-close
+						svg.modal__header-svg
+							use(xlink:href='/img/sprite.svg#close')
+				div.modal__title
+					span.modal__title-title Название
+					span.modal__title-text Как я провёл лето
+				.modal__load-container
+					.upload.modal__load-img(title="Выбрать изображение")
+						svg.upload__icon
+							use(xlink:href='/img/sprite.svg#cam')
+						.upload__text Перетащите фото сюда или
+							span.modal__link-load выберите файл
+						input#file.upload__input(type='file', name='files[]', data-multiple-caption='{count} files selected', multiple='')
+						label(for='file')
+							strong Choose a file
+							span.box__dragndrop  or drag it here
+							| .
+						//button.box__button(type='submit') Upload
+					.box__uploading Uploading…
+					.box__success Done!
+					.box__error
+						| Error!
+						span
+						| .
+
+	//div.modal-overlay.hide
+	//div.modal.hide
+	//	div.modal-content
+	//		div.modal__header
+	//			div.modal__header-title Добавить фотографии
+	//			div.modal__header-close
+	//				svg.modal__header-svg
+	//					use(xlink:href='/img/sprite.svg#close')
+	//		div.modal__title
+	//			span.modal__title-title Название
+	//			span.modal__title-text Как я провёл лето
+	//		.modal__load-container#img-container
+	//			.upload.modal__load-img(title="Выбрать изображение")
+	//				svg.upload__icon
+	//					use(xlink:href='/img/sprite.svg#cam')
+	//				.upload__text Перетащите фото сюда или
+	//					span.modal__link-load выберите файл
+	//				input.upload__input(type="file"  name="bg" multiple)#file-field
+	//			ul.img-list#img-list
+	//	div.modal__footer
+	//		div.modal__buttons
+	//			a.btn(href="#")#upload Сохранить
+	//			a.btn.btn--text.btn-cancelLoad(href="#cancel")
+	//				span.btn__text Отменить
