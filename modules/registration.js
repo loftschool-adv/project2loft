@@ -1,5 +1,4 @@
 let async = require('async');
-let sendMail = require('../modules/send-mail.js');
 let BaseModule = require('../modules/libs/_base.js');
 let base = new BaseModule;
 let config = require('../config.json');
@@ -74,7 +73,7 @@ let registration = function(req,res){
     }
   ],(err)=>{
     if(err){
-      sendMasage(err,res,0);
+      base.sendMasage(err,res,0);
     }else{
       res.send({status: 'reg'});
     }

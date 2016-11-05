@@ -120,10 +120,7 @@ route.post('/addAlbum/', (req,res) =>{
 
 // Выход с сайта 
 route.post('/logout/', (req, res) => {
-  if (req.body.req == 'logout') {
-    req.session.destroy();
-    res.send({status: 'logout'});
-  }
-
+  require('../modules/logout.js')(req,res);
 });
+
 module.exports = route;
