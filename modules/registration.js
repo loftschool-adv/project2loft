@@ -47,6 +47,10 @@ let registration = function(req,res){
       // Создаем папку tmp
       let userFolder = folder + '/id' + user.user_id;
       async.parallel([
+      	function(callback_2){
+          // Создаем папку пользователя
+          base.folderGenerator(folder,callback_2);
+        },
         function(callback_2){
           // Создаем папку пользователя
           base.folderGenerator(userFolder,callback_2);
