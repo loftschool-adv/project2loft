@@ -57,8 +57,10 @@ $form.on('submit', function(e) {
       });
     }
 
+    console.log($form.attr('action'));
+
     $.ajax({
-      url: $form.attr('action'),
+      url: location.href + '/addImg/',
       type: $form.attr('method'),
       data: ajaxData,
       dataType: 'json',

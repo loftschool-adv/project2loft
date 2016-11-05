@@ -14,102 +14,120 @@ let Image = require('../modules/models/image.js').Image;
 function uploadImg(req, res) {
   console.log("Пришел запрос с картинкой");
 
-  var Header = new formidable.IncomingForm();
-  var File = new formidable.IncomingForm();
-  var filename;
-  var imgType;
-  var imgSrc;
-  var tmp;
-  var counter = 0;
-
-  File.maxFieldsSize = 8 * 1024 * 1024;
-  File.multiples = true;
-
-  Header.parse(req);
-
-  // Parts are emitted when parsing the form
-  Header.onPart = function(part) {
-
-    if (part) {
-      var fileType = part.mime.split('/').pop();
-      filename = 'IMG' + base.passGenerate(10) + '.' + fileType;
-      imgType = fileType;
-      console.log(filename);
+  Image.find({}).sort({img_id:-1}).limit(1).then((item) => {
+    if (item > 0) {
+      counter = item + 1;
+    } else {
+      counter = 1;
     }
-  };
 
-
-  File
-    .on('field', function(name, field) {
-
-      tmp = 'tmp/' + filename;
-
-      console.log(req.session.album);
-
-      console.log(++counter);
-
-
-      //console.log(imgSrc);
-
-      //console.log(req);
-
-    fs.writeFile(tmp, field, 'binary', function(err){
-
-      console.log('File saved.');
-      console.log(req.session.user_id);
-      //console.log(req.headers);
-    });
-
-    console.log('Upload completed!');
-  })
-  .on('end', function() {
-
-    async.waterfall([
-      function (callback) {
-        Image.find({}).sort({img_id:-1}).limit(1).then((item) => {
-          console.log(item[0].img_id);
-          imgSrc = 'users/id' + req.session.user_id + '/albums/' + req.session.album + '/img' + item[0].img_id + '.' + imgType;
-          callback(null, imgSrc);
-        });
-      },
-      function (imgSrc, callback) {
-        console.log(tmp);
-        console.log(imgSrc);
-
-        //Ресайз изображений
-        Jimp.read(tmp).then(function(image){
-
-          image.resize(500, Jimp.AUTO);
-          image.write(imgSrc);
-
-          console.log('resize');
-          callback(null, 'finish');
-        });
-      }],
-      function (err, result) {
-        addImgDB(req, imgSrc);
-        console.log(result);
-    });
-
-    res.end('upload');
   });
 
-  File.parse(req);
+  //var Header = new formidable.IncomingForm();
+  var File = new formidable.IncomingForm();
+  var files = [];
+  var tmp;
+  var counter = false;
 
-}
+  File.multiples = true;
+  File.uploadDir = "upload";
+
+  File
+    .on('fileBegin', function(name, file) {
+
+      console.log('начинаем загрузку файлов');
+      //console.log('counter:', ++counter);
+
+    })
+    .on('progress', function(bytesReceived, bytesExpected) {
+
+      //console.log(bytesReceived / bytesExpected);
+
+    })
+    .on('file', function(name, file) {
+
+        files.push([file]);
+    })
+    .on('end', function() {
+      console.log('end');
+      //console.log(files);
+      imgProcessing(req, files, counter);
+
+      res.end('upload');
+    });
+
+    File.parse(req);
+
+  }
+
+
 
 function addImgDB(req, imgSrc) {
   // Создаем экземпляр пользователя
+  console.log(req.session);
+
   let image = new Image({
     src: imgSrc,
     album: req.session.album,
-    user_id: req.session._id
+    user_id: req.session.user_id
   });
 
   // Сохраняем картинку в базу
   image.save(function( err, image, affected){
     if (err) throw err;
     console.log('Сохранена картинка в базу');
+  });
+}
+
+function imgProcessing(req, files, counter) {
+  var imgSrc;
+  var newCounter = counter;
+
+  async.each(files, function (file, callbackEach) {
+
+    newCounter++;
+
+    console.log('Обрабатываем файл: ' + file);
+    console.log(file);
+    let imgType = file[0].type.split('/').pop();
+
+    async.waterfall([
+        // Function 1 - Поиск в базе изображений и создание нового адреса изображения
+        function (callback) {
+
+          imgSrc = 'users/id' + req.session.user_id + '/albums/' + req.session.album + '/img' + newCounter + '.' + imgType;
+          callback(null, imgSrc, file);
+
+        },
+
+        // Function 2 - Ресайз и перезапись из tmp в папку пользователя
+        function (imgSrc, file, callback) {
+          //console.log(tmp);
+          console.log(imgSrc);
+          console.log(file[0].path);
+
+          //Ресайз изображений
+          Jimp.read(file[0].path).then(function(image){
+
+            image.resize(500, Jimp.AUTO);
+            image.write(imgSrc);
+
+            console.log('resize');
+
+            //console.log(file._writeStream.closed);
+            callback(null, 'Изображение обработанно');
+          });
+        }],
+
+      // END - Запись в базу данных
+      function (err, result) {
+        addImgDB(req, imgSrc);
+        console.log(result);
+        callbackEach('Изображение обработанно');
+      });
+
+  }, function (err) {
+
   });
 }
 
