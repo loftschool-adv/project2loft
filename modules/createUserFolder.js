@@ -20,7 +20,7 @@ let tmpFolder = config.folder.tmp; // Папка с временными фай�
 
 
 
-var debag = true;
+var debag = false;
 var clearStart = false;
 var generateStart = true;
 

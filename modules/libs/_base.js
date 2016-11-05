@@ -14,7 +14,7 @@ function Base(){
     })
   }
 
-  // Генератор папки
+  // Генератор папки. Если папки нет, то создает ее
   this.folderGenerator = function(folder,callback){
     fs.stat(folder, function(err,stats){
       if(!stats){

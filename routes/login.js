@@ -5,10 +5,13 @@
 let fs = require('fs');
 let express = require('express');
 let route = require('express').Router();
+let async = require('async');
 let sendMail = require('../modules/send-mail.js');
 let BaseModule = require('../modules/libs/_base.js');
 let base = new BaseModule;
-let folder = './users';  // Папка с пользователями
+let config = require('../config.json');
+let folder = './' + config.folder.users;  // Папка с пользователями
+let User = require('../modules/models/user.js').User;
 
 let mongoose = require('../modules/libs/mongoose.js');
 
@@ -36,43 +39,74 @@ route.get('/', (req, res) => {
 
 // Регистрация новых пользоватей
 route.post('/reg/', (req, res) => {
-  let User = require('../modules/models/user.js').User;
-  for (let key in req.body) {
-    if (!req.body[key]) {
-      return sendMasage('Заполнены не все поля', res, 0);
-    }
-  }
-  User.findOne({'email': req.body.email}).then((item) => {
-    if (item) {
-      return sendMasage('Такой email уже зарегитрирован', res, 0);
-    } else {
+  async.waterfall([
+    // Запускаем функции
+    function(callback){
+      // Ищем пользователя по email
+      User.findOne({'email': req.body.email},callback)
+    },
+    function(user,callback){
+      // Если находим, выдаем ошибку
+      if(user){
+        callback('Такой email уже зарегитрирован')
+      }else{
+        // Если не находим, продолжаем работу
+        callback();
+      }
+    },
+    function(callback){
+      // Создаем модель пользователя для сохранения
       let user = new User({
         name: req.body.login,
         password: req.body.pass,
         email: req.body.email
       });
-      // Под вопросом
-      
-      user.save(function (err, user, affected) {
-        if (err) throw err;
-        req.session.user_id = user.user_id;
-        req.session.email = user.email;
-        req.session.name = user.name;
-        req.session.about = user.about;
-        // Создание папки пользователя
-        base.checkDirectory(folder + "/" + user.user_id, function(err){
-          if(err){
-            fs.mkdir(folder + '/id' + user.user_id, () => {});
-          }
-        });
-        
-        res.send({status: 'reg'});
-      });
+      req.session.user_id = user.user_id;
+      req.session.email = user.email;
+      // Сохраняем пользователя
+      user.save(callback)
+    },
+    function(user,affected,callback){
+      // Записываем данные сохраненного пользователя в сессию
+      req.session.user_id = user.user_id;
+      req.session.email = user.email;
+      callback(null,user);
+    },
+    function(user,callback){
+      // Создаем папку tmp
+      let userFolder = folder + '/id' + user.user_id;
+      async.parallel([
+        function(callback_2){
+          // Создаем папку пользователя
+          base.folderGenerator(userFolder,callback_2);
+        },
+        function(callback_2){
+          // Создаем папку tmp
+          base.folderGenerator(userFolder + '/' + config.folder.tmp,callback_2);
+        },
+        function(callback_2){
+          // Создаем папку albums
+          base.folderGenerator(userFolder + '/' + config.folder.albums,callback_2)
+        },
+        function(callback_2){
+          // Создаем папку commons
+          base.folderGenerator(userFolder + '/' + config.folder.commons,callback_2)
+        }
+      ], (err,result) =>{
+        // Вызвать колбек по завершение создания папок
+        callback();
+      })
     }
+  ],(err)=>{
+    if(err){
+      sendMasage(err,res,0);
+    }else{
+      res.send({status: 'reg'});
+    }
+    
+    
   })
 });
-
-
 // Вход на сайт 
 route.post('/login/', (req, res) => {
   let User = require('../modules/models/user.js').User;

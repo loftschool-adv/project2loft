@@ -34,12 +34,11 @@ route.get('/', (req,res,next) =>{
 		async.waterfall([
 	    function(callback){
 	    	// Ищем данного пользователя в базе
-	      base.findOneDB(User,callback,{email: req.session.email});
+	      User.find({email: req.session.email},callback)
 	    },
 	    function(user,callback){
-	    	res.locals.userName = user[0].name;
-	    	res.locals.userAbout = user[0].about;
-	    	//res.locals.backgroundIamge = `/id${req.session.user_id}/commons/background`;
+	    	//res.locals.userName = user[0].name;
+	    	//res.locals.userAbout = user[0].about;
 	    	callback();
 	    },
 	    function(callback){
