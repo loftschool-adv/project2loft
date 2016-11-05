@@ -18,17 +18,10 @@ let fs = require('fs');
 // Обращаемся к корню сайта , и рендерим шаблон из ./views/pages/main-page.pug
 
 
-// ========== Фунции ==========
-
-
-
-// ========== Роуты ==========
-
-
-
 
 route.get('/', (req,res,next) =>{
-	if(req.baseUrl != '/id' + req.session.user_id){
+	require('../modules/main-page_render.js')(req,res,next);
+	/*if(req.baseUrl != '/id' + req.session.user_id){
 		next();
 	}else{
 		async.waterfall([
@@ -58,7 +51,7 @@ route.get('/', (req,res,next) =>{
 	  ],function(err,arg){
 	  	res.render('main-page',  { title: 'Главная' })
 	  })
-	}
+	}*/
 });
 
 

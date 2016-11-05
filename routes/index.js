@@ -8,11 +8,8 @@ let route = require('express').Router();
 
 // Отображение главной страницы
 route.get('/', (req, res) => {
-  if (!req.session.email) {
-    res.render('index');
-  } else {
-    res.redirect(`/id${req.session.user_id}/`);
-  }
+// Передаем данные в модуль, который определяет авторизацию пользователя
+ require('../modules/index-page_render.js')(req, res);
 });
 
 

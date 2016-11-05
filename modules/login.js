@@ -42,7 +42,7 @@ let login = function(req,res){
       if(err){
         base.sendMasage(err, res, 0);
       }else{
-        // Если все хорошо, отображаем страницу пользователя
+        // Если все хорошо, отправляем ответ и перезагружаем страницу на /id*
         res.send({status: 'login'});
       }
   })
