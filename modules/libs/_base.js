@@ -14,6 +14,16 @@ function Base(){
     })
   }
 
+  // Отправляет ответ серверу в виде сообщение и статуса
+  this.sendMasage = function (message, res, status = 0) {
+  res.json(
+    {
+      message: message,
+      status: status
+    })
+  };
+
+
   // Генератор папки. Если папки нет, то создает ее
   this.folderGenerator = function(folder,callback){
     fs.stat(folder, function(err,stats){

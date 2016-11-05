@@ -48,7 +48,7 @@ app.use(express.static(path.join(__dirname, 'users')));
 });*/
 
 //===маршруты===
-app.use('/', require('./routes/login.js'));
+app.use('/', require('./routes/index.js'));
 app.use('/:id', require('./routes/main-page.js'));
 app.use('/:id', require('./routes/user.js'));
 app.use('/:id/album', require('./routes/album.js'));
