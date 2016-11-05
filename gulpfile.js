@@ -19,7 +19,7 @@ var notify = require('gulp-notify');
 // =====================  Настройки  =====================
 
 var
-  start = 'server';
+  start = 'front';
 /*
  1.) 'server' -  gulp запустится в режими с сервером, в этом варианте отключен
  pug, так как он компилируеться на сервере. Так же галп прилинкуется к запущенному серверу.
@@ -121,7 +121,7 @@ var mainJs = [
   path.sourse.folder + '/' + path.sourse.js + '/modules/_common.js',
   path.sourse.folder + '/' + path.sourse.js + '/modules/_login.js',
   path.sourse.folder + '/' + path.sourse.js + '/upload.js',
-  path.sourse.folder + '/' + path.sourse.js + '/uploaderObject.js',
+  //path.sourse.folder + '/' + path.sourse.js + '/oldUploaderObject.js',
   path.sourse.folder + '/' + path.sourse.js + '/modules/_main-page.js',
   path.sourse.folder + '/' + path.sourse.js + '/modules/_album.js',
   path.sourse.folder + '/' + path.sourse.js + '/app.js',
