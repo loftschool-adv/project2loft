@@ -220,9 +220,16 @@
 	overflow:hidden;
 	border-radius:5px;
 	//background-color: #FFF;
-  //  object-fit: cover;
+	//object-fit: cover;
+	background-image: url(../img/album/no_photo.jpg);
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: cover;
 }
-
+.img-cont img{
+	display:block;
+	width:100%;
+}
 .highlighted {
 	border: 3px dashed #9b9b9b;
 }
@@ -292,4 +299,32 @@
 }
 .box.is-uploading .box__uploading {
 	display: block;
+}
+// Модальное окно для редактирвания картинки
+.modal_edit-photo{
+	//height:400px;
+}
+.modal__form-container{
+	padding:40px;
+}
+.modal__form{
+	display:flex;
+	flex-direction:column;
+	width:100%;
+}
+.modal__form-row{
+	display:flex;
+	align-items:center;
+	margin-bottom: 30px;
+}
+.modal__form-label{
+	flex-basis:100px;
+	text-align:right;
+	margin-right: 20px;
+	color: #323232;
+	font: 600 16px ProximaNova, sans-serif;
+}
+.modal__form-input{
+	flex-grow:1;
+	border: 1px solid #d8d6d6;
 }

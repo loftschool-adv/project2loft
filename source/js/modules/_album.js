@@ -13,22 +13,47 @@ var albumModule = (function() {
   var albumCoverInput = $form.find('input[name="addAlbumCover"]');
   var loader = 'loader';
 
-
-
-	// Открыть окно для загрузки изображений
 	// Открыть окно для загрузки изображений
 	var openUpload = function(){
 		base.changeClass('.modal_add-photo, .modal-overlay','hide','del')
 	};
 
 	// Закрыть окно для загрузки изображений
-	var closeUpload = function(){
+	var closeUpload = function(e){
+		e.preventDefault();
 		var modal = $(this).closest('.modal');
 		base.changeClass(modal,'hide','add');
 		base.changeClass('.modal-overlay','hide','add');
 		$(".img-list").empty();
 		$('.modal__load-img').show();
 	};
+
+	// Открыть окно для редактирования фото и отправить ajax при сохранении редактирования
+
+	var openEditPhoto = function(){
+		// Открыть окно
+		base.changeClass('.modal_edit-photo, .modal-overlay','hide','del');
+
+		// Данные для ajax
+		var $formEditImg = $('.modal__form-edit');
+  	var button = 'input[type = submit]';
+  	var popupTime = 5000;
+	// Отправляем ajax на ????
+    $('.submit-edit').on('click', function(e){
+      e.preventDefault();
+      // Параметры для popup
+      var errorArray = base.validateForm($formEditImg); // Проверяем текущую форму и выдаем массив индексов ошибок
+      var $errorContainer = $formEditImg.find('.popup__error');
+      if(errorArray.length > 0){	// Если в массиве есть ошибки, значит выдаем окно, с номером ошибки
+        errorArray.forEach(function(index){
+          base.showError(index,$errorContainer, popupTime);
+        });
+      }else{ 
+      	// Если массив пустой, выполняем дальше
+        var servAns = base.ajax($formEditImg,'/album/???/');
+      }    
+	});
+};
 
 	// Отмена загрузки для одной картинки
 	var _cancelLoad = function(e){
@@ -202,6 +227,7 @@ var albumModule = (function() {
 
 	var _setUpListners = function() {
 		$('.btn_album-add').on('click', openUpload);
+		$('.btn_edit-photo').on('click', openEditPhoto);
 		$('.modal__header-close').on('click', closeUpload);
 		$(window).on('scroll', _fixedAdd);
 		$('body').on('click','.img-item',_cancelLoad);
