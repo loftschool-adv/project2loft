@@ -6,8 +6,8 @@ var commonModule = (function() {
 	// Объявление библиотеки
   var base = new BaseModule;
 
-	
-  
+
+
 // Прокрутить страницу до ...
 	var scrollTo = function(e){
 		e.preventDefault();
@@ -18,6 +18,24 @@ var commonModule = (function() {
 
 		if (target == 'top') {
 			base.scrollToPosition();
+		}
+	}
+
+
+// Сворачивание блока с комментариями
+	var commentsToggle = function(e){
+		e.preventDefault();
+
+		var btn       = $(this);
+		var container = btn.closest('.comments');
+		var comments  = container.find('.comments__list');
+
+		if(container.hasClass('comments--show')) {
+			container.removeClass('comments--show');
+			comments.slideUp();
+		} else {
+			container.addClass('comments--show');
+			comments.slideDown();
 		}
 	}
 
@@ -51,7 +69,7 @@ var commonModule = (function() {
 			input[0].click();
 		});
 	}
-	
+
 
 	// Разлогин пользователя
 	// Нужно доработать
@@ -86,6 +104,7 @@ var commonModule = (function() {
 
 	// Прослушка
 	var _setUpListners = function() {
+			$(document).on('click', '.comments__toggle' , commentsToggle);
 			$(document).on('click', '[data-go]' , scrollTo);
 			$(document).on('click', '.drop__trigger', addDrop);
 			$('.logout').on('click', logoutUser)

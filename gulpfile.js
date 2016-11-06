@@ -45,7 +45,7 @@ var path = {
 
   sourse: {		// Пути исходников
 
-  	
+
 		folder 	: 	'source',       		// Папка где лежат исходника
 		pug 		:  	'templates', 	      // Папка с шаблонами , только для фронт версии
     views   :   'views',            // Папка с шаблонами , только для серверной версии
@@ -124,6 +124,8 @@ var mainJs = [
   //path.sourse.folder + '/' + path.sourse.js + '/oldUploaderObject.js',
   path.sourse.folder + '/' + path.sourse.js + '/modules/_main-page.js',
   path.sourse.folder + '/' + path.sourse.js + '/modules/_album.js',
+  path.sourse.folder + '/' + path.sourse.js + '/modal.js',
+  path.sourse.folder + '/' + path.sourse.js + '/slider.js',
   path.sourse.folder + '/' + path.sourse.js + '/app.js',
 
 ];
