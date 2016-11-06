@@ -15,15 +15,37 @@ function uploadImg(req, res) {
 
   var count = 0;
   var form = new multiparty.Form();
-  form.uploadDir = 'tmp';
+  form.uploadDir = 'users/id' + req.session.user_id + '/tmp/';
   form.autoFiles = true;
 
-  form.on('progress', function (bytesReceived, bytesExpected) {
-    console.log(bytesReceived / bytesExpected * 100, '%');
-  });
+  // form.on('progress', function (bytesReceived, bytesExpected) {
+  //   console.log(bytesReceived / bytesExpected * 100, '%');
+  // });
 
   form.on('file', function (name, file) {
-    console.log(file);
+    console.log(file.path);
+    console.log('Запись в базу');
+
+    // Запись в базу
+
+    let image = new Image({
+      album: req.session.album,
+      user_id: req.session.user_id
+    });
+
+    // Сохраняем картинку в базу
+    image.save(function( err, image, affected){
+      if (err) throw err;
+      console.log('Сохранена картинка в базу');
+      console.log(image);
+      console.log(affected);
+
+      // Обрабатываем изображение
+      imgProcessing(req, file, image.img_id);
+
+    });
+
+    //imgProcessing(file);
   });
 
 // Close emitted after form parsed
@@ -35,6 +57,40 @@ function uploadImg(req, res) {
   form.parse(req);
 
   res.end('ok');
+
+}
+
+function imgProcessing(req, file, id) {
+
+  console.log(req.session);
+  let type = file.path.split('.').pop();
+
+  let newPath = 'users/id' + req.session.user_id + '/albums/'
+                           + req.session.album + '/img' + id + '.' + type;
+
+  let newPathSmall = 'users/id' + req.session.user_id + '/albums/'
+                                + req.session.album + '/small-img' + id + '.' + type;
+
+  //Ресайз изображений
+  Jimp.read(file.path).then(function(image){
+
+      console.log(file.path, '-> resize ->', newPath);
+
+      image.resize(1200, Jimp.AUTO);
+      image.write(newPath);
+
+  });
+
+  //Ресайз изображений
+  Jimp.read(file.path).then(function(image){
+
+    console.log(file.path, '-> resize ->', newPathSmall);
+
+    image.resize(380, Jimp.AUTO);
+    image.write(newPathSmall);
+
+  });
+
 
 }
 
@@ -91,12 +147,12 @@ function uploadImg(req, res) {
 
 
 
-function addImgDB(req, imgSrc) {
+function addImgDB(req) {
   // Создаем экземпляр пользователя
   console.log(req.session);
 
   let image = new Image({
-    src: imgSrc,
+    //src: imgSrc,
     album: req.session.album,
     user_id: req.session.user_id
   });
@@ -105,10 +161,12 @@ function addImgDB(req, imgSrc) {
   image.save(function( err, image, affected){
     if (err) throw err;
     console.log('Сохранена картинка в базу');
+    console.log(image);
+    console.log(affected);
   });
 }
 
-function imgProcessing(req, files, counter) {
+function imgProcessing2(req, files, counter) {
   var imgSrc;
   var newCounter = counter;
 
