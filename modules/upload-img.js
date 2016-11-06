@@ -17,12 +17,51 @@ function uploadImg(req, res) {
   var form = new multiparty.Form();
   form.uploadDir = 'users/id' + req.session.user_id + '/tmp/';
   form.autoFiles = true;
+  var files = [];
 
   // form.on('progress', function (bytesReceived, bytesExpected) {
   //   console.log(bytesReceived / bytesExpected * 100, '%');
   // });
 
   form.on('file', function (name, file) {
+
+    files.push(file);
+
+    console.log('Картинка загруженна');
+
+    let _thumb = file.path.split('.');
+    let thumb = _thumb[0] + '-small.' +  _thumb[1];
+    console.log(thumb);
+
+    Jimp.read(file.path).then(function(image){
+
+      console.log(file.path, '-> resize ->', thumb);
+
+      image.resize(100, Jimp.AUTO);
+      image.write(thumb);
+
+    });
+
+    //imgProcessing(file);
+  });
+
+// Close emitted after form parsed
+  form.on('close', function() {
+    console.log('Upload completed!');
+    //imgSave(req, files);
+  });
+
+// Parse req
+  form.parse(req);
+
+  res.end('ok');
+
+}
+
+function imgSave(req, files) {
+
+  files.map(function (file) {
+
     console.log(file.path);
     console.log('Запись в базу');
 
@@ -45,19 +84,7 @@ function uploadImg(req, res) {
 
     });
 
-    //imgProcessing(file);
   });
-
-// Close emitted after form parsed
-  form.on('close', function() {
-    console.log('Upload completed!');
-  });
-
-// Parse req
-  form.parse(req);
-
-  res.end('ok');
-
 }
 
 function imgProcessing(req, file, id) {
