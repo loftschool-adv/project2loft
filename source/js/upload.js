@@ -53,11 +53,11 @@ $form.on('submit', function(e) {
 
     if (droppedFiles) {
       $.each( droppedFiles, function(i, file) {
+
         ajaxData.append( $input.attr('name'), file );
+
       });
     }
-
-    console.log($form.attr('action'));
 
     $.ajax({
       url: location.href + '/addImg/',
@@ -78,6 +78,8 @@ $form.on('submit', function(e) {
         // Log the error, show an alert, whatever works for you
       }
     });
+
+    console.log($form.attr('action'));
 
   } else {
 
