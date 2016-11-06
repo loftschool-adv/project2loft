@@ -1,11 +1,16 @@
 let async = require('async');
 let User = require('./models/user.js');
 let Album = require('./models/album.js').Album;
-let Image = require('./models/album.js').Image;
+let Image = require('./models/image.js').Image;
 let multiparty = require('multiparty');
 let BaseModule = require('./libs/_base.js');
 let base = new BaseModule;
 let config = require('../config.json');
+let translit = require('translit-be2ascii');
+let slug = require('slug');
+let path = require('path');
+let Jimp = require('jimp');
+
 
 
 let folder = config.folder.users;
@@ -52,29 +57,84 @@ let addAlbum = function(req,res){
 				album.save(callback)
 			},
 			function(album,affected,callback){
-				// Проверяем есть ли папка albums, если нет то создаем
-				//base.checkDirectory(albumsPath,callback);
-				let newAlbumFolder =  albumsPath + '/' + fields.albumName[0] + '\\'; 
-				base.checkDirectory(newAlbumFolder,callback);
+				// Проверяем есть ли папка users, если нет то создаем
+				base.folderGenerator('./' + folder,callback);
+				
 			},
 			function(callback){
 				// Проверяем есть ли папка albums, если нет то создаем
+				base.folderGenerator(albumsPath,callback);
 				
-				//base.checkDirectory(newAlbumFolder,callback);
 			},
-		/*	function(callback){
-				// Зписываем фотографию в папку пользователя
-					async.forEach(files,(file)=>{
-					let newFilePath = 'img' + path.extname(file[0].path);
+			function(callback){
+				// Проверяем есть ли папка albums, если нет то создаем
+				let newAlbumName = slug(translit.toASCII(fields.albumName[0]));
+				let newAlbumFolder =  albumsPath + '/' + newAlbumName + '\\';
+				async.parallel(
+					[
+						function(callback_2){
+							base.folderGenerator(newAlbumFolder,callback_2);
+						}
+					],(err)=>{
+						if(err) throw err;
+						callback(null,newAlbumFolder,newAlbumName)
+				})
+				
+			},
+			function(imageName,newAlbumName,callback){
+				let image = new Image({
+	        name: "Обложка альбома",
+	        album: newAlbumName,
+	        user_id: req.session.user_id
+	      });
+				async.parallel(
+					[
+						function(callback_2){
+							// Сохраняем фоографию в базу
+							image.save(callback_2)
+						}
+
+					]
+					,(err,newImage)=>{
+						if(err) throw err;
+						callback(null,newImage,newAlbumName);
+				})
+			
+	      
+	      
+
+			},
+			function(newImage,newAlbumName,callback){
+				// Записываем новое изображение в базу
+
+				async.forEach(files,(file)=>{
+
+					let newImageName = 'img'+ newImage[0][0].img_id;
+					let newFilePath = newImageName + path.extname(file[0].path);
+					let newAlbumCoverPath = albumsPath + '/' + newAlbumName + '/' + newFilePath;
+
 					Jimp.read(file[0].path).then(function(image){
           	image.resize(500, Jimp.AUTO);
-	          image.write(userPath + newFilePath,()=>{
-	          	callback(null,newFilePath);
+	          image.write(newAlbumCoverPath,()=>{
+	          	callback(null,newImageName,newAlbumName);
 	          });
 	      	});
 				})
+			},
+			function(image,album,callback){
+				// Обновляем обложку облома в базе
+				Album.findOneAndUpdate(
+		    	{user_id: req.session.user_id,name : album},
+		    	{$set : 
+						{
+							cover: image,
+						}
+					},callback
+				)
 
-			}*/
+			}
+			
+
 
 
 
@@ -82,33 +142,14 @@ let addAlbum = function(req,res){
 
 		],(err)=>{
 			if(err){
-				throw err;
-				//res.send(err)
+				res.json({message: err})
 			}else{
-				res.json({})
+				res.json({message: 'Сохранено'})
 			}
 
 		})
 	});
 
-
-	
-
-
-
-
-
-	/*let album = new Album({
-		name : req.body.name,
-		about: req.body.about,
-		user_id: req.session.user_id
-	});*/
-	// Сохраняем пользователя в базу
-	/*album.save(function( err, album, affected){
-		if (err) throw err;
-		console.log('Создан альбом');
-		res.end('end');
-	});*/
 }
 
 

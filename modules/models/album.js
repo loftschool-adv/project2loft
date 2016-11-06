@@ -17,6 +17,9 @@ let schema = new Schema({
     type : Date,
     default: Date.now
   },
+  cover: {
+    type: String,
+  },
   user_id: {
     type: String,
     unique: false,

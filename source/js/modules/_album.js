@@ -127,9 +127,8 @@ var albumModule = (function() {
         if (xhr.readyState != 4) return;
 
         if (xhr.status == 200) {
-        	if ($.isEmptyObject(xhr.response)) {
-					  alert(xhr.response);
-					}
+        	var data = JSON.parse(xhr.response);
+        	alert(data.message);
         	
         }
       }
