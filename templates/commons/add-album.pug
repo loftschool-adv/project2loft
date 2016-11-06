@@ -9,20 +9,23 @@ div.modal-container.hide
                             use(xlink:href='/img/sprite.svg#close')
                 .wrapper-inputs
                     .wrapper-input__name
-                        label.add-album__name Название
+                        label.add-album__name(for='add-album-name') Название
                         input.field.add-album__name-input(
                         type="text"
                         placeholder=""
+                        id='add-album-name'
                         )
                     .wrapper-input__description
-                        label.add-album__description Описание
+                        label.add-album__description(for='add-album-description') Описание
                         textarea.field.add-album__textarea(
                         placeholder=""
+                        id='add-album-description'
                         )
                     .wrapper-input__upload
                         .user-block.user-block--sm.user-block__upload
                             .user-block__photo
-                        .btn.btn--clear.btn__upload Загрузить обложку
+                        label.btn.btn--clear.label__upload(for='upload-album') Выбрать файл
+                        input.btn__upload-album(type='file' id='upload-album' name='photo'  multiple  accept='image/*,image/jpeg')
                         span.wrapper-input__text (файл должен быть размером не более 1024 КБ)
             div.modal__footer.add-album__footer
                 div.modal__buttons.add-album__buttons
