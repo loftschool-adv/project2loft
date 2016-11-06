@@ -24,14 +24,14 @@ div.modal-container.hide
                     .wrapper-input__upload
                         .user-block.user-block--sm.user-block__upload
                             .user-block__photo
-                        .btn.btn--clear.btn__upload Загрузить обложку
+                        input.btn.btn--clear.btn__upload(
+                        type='file'
+                        name='addAlbumCover' 
+                        value=' Загрузить обложку'
+                        )
                         span.wrapper-input__text (файл должен быть размером не более 1024 КБ)
             div.modal__footer.add-album__footer
                 div.modal__buttons.add-album__buttons
                     input.btn.add-album__btn-save(type="submit" value = "Сохранить")
                     a.btn.btn--text.add-album__btn-cancel(href="#cancel")
                         span.btn__text Отменить
-                    a.btn.btn--important.add-album__btn-delete
-                        svg.btn__icon
-                            use(xlink:href='/img/sprite.svg#delete')
-                        span.btn__text Удалить

@@ -5,6 +5,15 @@ var albumModule = (function() {
 	// Объявление библиотеки
   var base = new BaseModule;
 
+  // Общиие переменные
+  var $form = $('.popup__form');
+  var $formAddAlbum = $form.filter('.popup__form-add-album');
+  var button = 'input[type = submit]';
+  var popupTime = 5000;
+  var albumCoverInput = $form.find('input[name="addAlbumCover"]');
+  var loader = 'loader';
+
+
 
 	// Открыть окно для загрузки изображений
 	var openUpload = function(){
@@ -44,6 +53,95 @@ var albumModule = (function() {
 
 	    	}
 	};
+
+
+	// Отправляем ajax на addAlbumCover
+
+	albumCoverInput.on('change',function(){
+		var $this = $(this);
+		var form = $this.closest('form');
+		var veiwCover = form.find('.user-block__photo');
+		var id = window.location.pathname;
+		var cover = $this[0].files[0];
+		var formData = new FormData();
+		var xhr = new XMLHttpRequest;
+
+		
+		formData.append("albumCover",cover);
+		xhr.open('POST', id + 'addAlbumCover/',true);
+    xhr.send(formData);
+    base.changeClass(veiwCover,loader,'add');
+    veiwCover.removeAttr('style');
+    if(!cover){
+    	base.changeClass(veiwCover,loader,'del');
+    	return;
+    }
+    
+    xhr.onreadystatechange = function() {
+
+      if (xhr.readyState != 4) return;
+
+      if (xhr.status == 200) {
+      	
+      	var data = JSON.parse(xhr.response);
+      	veiwCover.css({
+      		'background-image' : 'url('+ data.newAlbomCover.replace('./users','') +')'
+      	})
+      	base.changeClass(veiwCover,loader,'del');
+      }
+     }
+
+	})
+
+	// Добавление альбома
+  // Отправляем ajax на addlbum
+  $formAddAlbum.find(button).on('click', function(e){
+    e.preventDefault();
+    var $thisForm = $(this).closest('form');
+    var veiwCover = $thisForm.find('.user-block__photo');
+    if(veiwCover.hasClass(loader)){
+    	return;
+    }
+    // Параметры для popup
+    var errorArray = base.validateForm($thisForm); // Проверяем текущую форму и выдаем массив индексов ошибок
+    var $errorContainer = $thisForm.find('.popup__error');
+    if(errorArray.length > 0){	// Если в массиве есть ошибки, значит выдаем окно, с номером ошибки
+      errorArray.forEach(function(index){
+        //base.showError(index,$errorContainer, popupTime);
+        alert(base.errors[index]);
+        return false;
+      });
+    }else{ // Если массив пустой, выполняем дальше
+      var id = window.location.pathname;
+      //servAns = base.ajax($thisForm, id + 'addAlbum/');
+    	var formData = new FormData();
+      formData.append("albumName",$thisForm.find('.add-album__name-input').val());
+			formData.append("albumText",$thisForm.find('.add-album__textarea').val());
+      formData.append("albumCover",$thisForm.find('.btn__upload')[0].files[0]);
+
+
+			var xhr = new XMLHttpRequest;
+      xhr.open('POST', id + 'addAlbum/',true);
+      xhr.send(formData);
+      xhr.onreadystatechange = function() {
+        if (xhr.readyState != 4) return;
+
+        if (xhr.status == 200) {
+        	if ($.isEmptyObject(xhr.response)) {
+					  alert(xhr.response);
+					}
+        	
+        }
+      }
+      
+    }
+
+  });
+
+
+
+
+
 
 	// Анимация для редактирования хедера
 	var editAllHeader = (function() {

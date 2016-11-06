@@ -4,6 +4,8 @@ block content
 	-var user = 'Александра Соколова';
 	-var ava = avatar || '../img/album/no_photo.jpg';
 	-var BG = backgroundIamge || '../img/album/no_photo.jpg';
+	-var user = userName || Пользователь
+	-var about = userAbout || ""
 	div.page-container
 		div.page-content
 			.header.header-main(style="background-image: url(" + backgroundIamge + "), url(../img/album/no_photo.jpg)")
@@ -13,8 +15,8 @@ block content
 							.user-block
 								.user-block__photo(style="background-image: url("+ ava +"), url(../img/album/no_photo.jpg)")
 								.user-block__main
-									.user-block__name!= userName
-									.user-block__desc!= userAbout
+									.user-block__name!= user
+									.user-block__desc!= about
 									.user-block__social
 										+social()
 						.header__part.header__part--zip
@@ -44,10 +46,10 @@ block content
 										input.field.width--lg(
 											type="text"
 											name="name"
-											value= userName
+											value= user
 										)
 									.form__row
-										textarea.field.width--lg(name="desc")!= userAbout
+										textarea.field.width--lg(name="desc")!= about
 									.form__row
 										+social('edit')
 

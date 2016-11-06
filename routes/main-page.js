@@ -2,16 +2,7 @@
 // Стандартный файл с описанием маршрута.
 // В данном файле описано обращение к корню сайта
 
-let express = require('express');
 let route = require('express').Router();
-let async = require('async');
-let User = require('../modules/models/user.js').User;
-let Album = require('../modules/models/album.js').Album;
-let BaseModule = require('../modules/libs/_base.js');
-let multiparty = require('multiparty');
-let base = new BaseModule;
-let path = require('path');
-let fs = require('fs');
 
 
 // Главная страница пользователя
@@ -29,20 +20,16 @@ route.post('/editUserData/', (req, res) => {
 	require('../modules/edit_user_data.js')(req,res);
 });
 
+// Реакция на изменение обложки альбома
+route.post('/addAlbumCover/', (req,res) =>{
+	//console.log(req.session);
+	require('../modules/add_new-album_cover.js')(req,res);
+});
+
+//Добавляем новый альбом
 route.post('/addAlbum/', (req,res) =>{
 	//console.log(req.session);
-	// Создаем экземпляр пользователя
-	let album = new Album({
-		name : req.body.name,
-		about: req.body.about,
-		user_id: req.session.user_id
-	});
-	// Сохраняем пользователя в базу
-	album.save(function( err, album, affected){
-		if (err) throw err;
-		console.log('Создан альбом');
-		res.end('end');
-	});
+	require('../modules/create_album.js')(req,res);
 });
 
 // Выход с сайта 

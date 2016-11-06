@@ -1,4 +1,6 @@
 let fs = require('fs');
+let async = require('async');
+let del = require('del');
 
 function Base(){
 
@@ -35,6 +37,28 @@ function Base(){
       }else{
         callback();
       }
+    })
+  }
+
+  this.clearFolder = function(folder,callback){
+    let thisModule = this;
+    async.series(
+    [
+      function(callback_2){
+
+        thisModule.folderGenerator(folder,callback_2);
+      },
+      function(callback_2){
+        del([folder + '/**/*']).then(() =>{
+          callback_2();
+        })
+        
+      }
+        
+    ],
+    (err)=>{
+      if(err) throw err;
+      callback();
     })
   }
 
