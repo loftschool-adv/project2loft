@@ -43,9 +43,7 @@ function uploadImg(req, res) {
       image.write(thumb);
 
       server.io.emit('eventClient', {thumb: thumb});
-
       //res.json({ thumb : thumb });
-
     });
 
     //imgProcessing(file);

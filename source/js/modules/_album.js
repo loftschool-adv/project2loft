@@ -16,17 +16,30 @@ var albumModule = (function() {
 
 
 	// Открыть окно для загрузки изображений
+	// Открыть окно для загрузки изображений
 	var openUpload = function(){
-		base.changeClass('.modal-container','hide','del')
+		base.changeClass('.modal_add-photo, .modal-overlay','hide','del')
 	};
-
 
 	// Закрыть окно для загрузки изображений
 	var closeUpload = function(){
-		base.changeClass('.modal-container','hide','add')
+		var modal = $(this).closest('.modal');
+		base.changeClass(modal,'hide','add');
+		base.changeClass('.modal-overlay','hide','add');
+		$(".img-list").empty();
+		$('.modal__load-img').show();
 	};
 
-
+	// Отмена загрузки для одной картинки
+	var _cancelLoad = function(e){
+		alert("Отменить загрузку?");
+		$(this).remove();
+		console.log($('.img-list li').length);
+		if($('.img-list li').length == 0){
+			$('.modal__load-img').show();
+		}
+		
+};
 	// Функция при скролле
 	var _fixedAdd = function() {
 		var $albumContainer = $('.header-album__content');
@@ -191,6 +204,7 @@ var albumModule = (function() {
 		$('.btn_album-add').on('click', openUpload);
 		$('.modal__header-close').on('click', closeUpload);
 		$(window).on('scroll', _fixedAdd);
+		$('body').on('click','.img-item',_cancelLoad);
 	};
 
 

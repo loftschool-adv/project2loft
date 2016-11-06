@@ -67,11 +67,18 @@ $form.on('submit', function(e) {
       cache: false,
       contentType: false,
       processData: false,
-      complete: function() {
+      complete: function(ans) {
         $form.removeClass('is-uploading');
+        console.log(ans.responseText);
+
+
+      
+      //socket.emit('eventServer', {data: 'Hello Server'});
       },
       success: function(data) {
+
         $form.addClass( data.success == true ? 'is-success' : 'is-error' );
+
         if (!data.success) $errorMsg.text(data.error);
       },
       error: function() {
