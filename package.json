@@ -25,6 +25,8 @@
     "normalize.css": "^5.0.0",
     "pug": "^2.0.0-beta6",
     "serve-favicon": "~2.3.0",
+    "slug": "^0.9.1",
+    "translit-be2ascii": "0.0.4",
     "winston": "^2.2.0"
   },
   "devDependencies": {
