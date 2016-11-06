@@ -5,60 +5,89 @@ let path       = require('path');
 let util       = require('util');
 let Jimp       = require('jimp');
 var async      = require('async');
-let formidable = require('formidable');
+let multiparty = require('multiparty');
 let BaseModule = require('../modules/libs/_base.js');
 let base = new BaseModule;
 let mongoose = require('../modules/libs/mongoose.js');
 let Image = require('../modules/models/image.js').Image;
 
 function uploadImg(req, res) {
-  console.log("Пришел запрос с картинкой");
 
-  Image.find({}).sort({img_id:-1}).limit(1).then((item) => {
-    if (item > 0) {
-      counter = item + 1;
-    } else {
-      counter = 1;
-    }
+  var count = 0;
+  var form = new multiparty.Form();
+  form.uploadDir = 'tmp';
+  form.autoFiles = true;
 
+  form.on('progress', function (bytesReceived, bytesExpected) {
+    console.log(bytesReceived / bytesExpected * 100, '%');
   });
 
-  //var Header = new formidable.IncomingForm();
-  var File = new formidable.IncomingForm();
-  var files = [];
-  var tmp;
-  var counter = false;
+  form.on('file', function (name, file) {
+    console.log(file);
+  });
 
-  File.multiples = true;
-  File.uploadDir = "users/id2/tmp";
+// Close emitted after form parsed
+  form.on('close', function() {
+    console.log('Upload completed!');
+  });
 
-  File
-    .on('fileBegin', function(name, file) {
+// Parse req
+  form.parse(req);
 
-      console.log('начинаем загрузку файлов');
-      //console.log('counter:', ++counter);
+  res.end('ok');
 
-    })
-    .on('progress', function(bytesReceived, bytesExpected) {
+}
 
-      //console.log(bytesReceived / bytesExpected);
 
-    })
-    .on('file', function(name, file) {
 
-        files.push([file]);
-    })
-    .on('end', function() {
-      console.log('end');
-      //console.log(files);
-      imgProcessing(req, files, counter);
+  // Image.find({}).sort({img_id:-1}).limit(1).then((item) => {
+  //   if (item > 0) {
+  //     counter = item + 1;
+  //   } else {
+  //     counter = 1;
+  //   }
+  //
+  // });
 
-      res.end('upload');
-    });
-    res.end('upload');
-    File.parse(req);
 
-  }
+  /////////////////
+
+  // //var Header = new formidable.IncomingForm();
+  // var File = new formidable.IncomingForm();
+  // var files = [];
+  // var tmp;
+  // var counter = false;
+  //
+  // File.multiples = true;
+  // File.uploadDir = "users/id2/tmp";
+  //
+  // File
+  //   .on('fileBegin', function(name, file) {
+  //
+  //     console.log('начинаем загрузку файлов');
+  //     //console.log('counter:', ++counter);
+  //
+  //   })
+  //   .on('progress', function(bytesReceived, bytesExpected) {
+  //
+  //     //console.log(bytesReceived / bytesExpected);
+  //
+  //   })
+  //   .on('file', function(name, file) {
+  //
+  //       files.push([file]);
+  //   })
+  //   .on('end', function() {
+  //     console.log('end');
+  //     //console.log(files);
+  //     imgProcessing(req, files, counter);
+  //
+  //     res.end('upload');
+  //   });
+  //   res.end('upload');
+  //   File.parse(req);
+  //
+  // }
 
 
 
