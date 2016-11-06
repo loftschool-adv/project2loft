@@ -118,10 +118,7 @@ block content
 						.upload__text Перетащите фото сюда или
 							span.modal__link-load выберите файл
 						input#file.upload__input(type='file', name='files[]', data-multiple-caption='{count} files selected', multiple='')
-						label(for='file')
-							strong Choose a file
-							span.box__dragndrop  or drag it here
-							| .
+
 						//button.box__button(type='submit') Upload
 					.box__uploading Uploading…
 					.box__success Done!
@@ -129,6 +126,18 @@ block content
 						| Error!
 						span
 						| .
+					ul.img-list#img-list
+			.modal__footer
+				.modal-pane
+					.modal-pane__part
+						.btn#save Сохранить
+						a.btn.btn--text(href="#cancel"  data-action="close")
+							span.btn__text.btn-cancelLoad Отменить
+					.modal-pane__part
+						a.btn.btn--important
+							svg.btn__icon
+								use(xlink:href='/img/sprite.svg#delete')
+							span.btn__text Удалить
 
 	//div.modal-content
 		//	div.modal__header
