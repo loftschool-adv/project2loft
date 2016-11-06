@@ -124,5 +124,38 @@ block content
 					.box__success Done!
 					.box__error
 						| Error!
-						span
-						| .
+			.modal__footer
+				.modal-pane
+					.modal-pane__part
+						.btn#save Сохранить
+						a.btn.btn--text(href="#cancel"  data-action="close")
+							span.btn__text.btn-cancelLoad Отменить
+					.modal-pane__part
+						a.btn.btn--important
+							svg.btn__icon
+								use(xlink:href='/img/sprite.svg#delete')
+							span.btn__text Удалить
+
+	//div.modal-content
+		//	div.modal__header
+		//		div.modal__header-title Добавить фотографии
+		//		div.modal__header-close
+		//			svg.modal__header-svg
+		//				use(xlink:href='/img/sprite.svg#close')
+		//	div.modal__title
+		//		span.modal__title-title Название
+		//		span.modal__title-text Как я провёл лето
+		//	.modal__load-container#img-container
+		//		.upload.modal__load-img(title="Выбрать изображение")
+		//			svg.upload__icon
+		//				use(xlink:href='/img/sprite.svg#cam')
+		//			.upload__text Перетащите фото сюда или
+		//				span.modal__link-load выберите файл
+		//			input.upload__input(type="file"  name="bg" multiple)#file-field
+		//		ul.img-list#img-list
+		//div.modal__footer
+		//	div.modal__buttons
+		//		a.btn(href="#")#upload Сохранить
+		//		a.btn.btn--text.btn-cancelLoad(href="#cancel")
+		//			span.btn__text Отменить
+>>>>>>> 0a147937aa6c14b595ec7e297a70437ebb672eed
