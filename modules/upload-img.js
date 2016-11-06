@@ -4,8 +4,10 @@ let fs         = require('fs');
 let path       = require('path');
 let util       = require('util');
 let Jimp       = require('jimp');
-var async      = require('async');
+let async      = require('async');
 let multiparty = require('multiparty');
+let server     = require('../server.js');
+
 let BaseModule = require('../modules/libs/_base.js');
 let base = new BaseModule;
 let mongoose = require('../modules/libs/mongoose.js');
@@ -40,6 +42,10 @@ function uploadImg(req, res) {
       image.resize(100, Jimp.AUTO);
       image.write(thumb);
 
+      server.io.emit('eventClient', {thumb: thumb});
+
+      //res.json({ thumb : thumb });
+
     });
 
     //imgProcessing(file);
@@ -48,13 +54,15 @@ function uploadImg(req, res) {
 // Close emitted after form parsed
   form.on('close', function() {
     console.log('Upload completed!');
+
+    res.end('ok');
     //imgSave(req, files);
   });
 
 // Parse req
   form.parse(req);
 
-  res.end('ok');
+
 
 }
 

@@ -17,6 +17,8 @@ let creatUsersFolder = require('./modules/createUserFolder.js');
 
 let app = express();
 
+//let server = require('./server.js');
+
 // Create session
 app.use(session({
   secret: 'photo',
@@ -25,8 +27,6 @@ app.use(session({
   resave: false,
   saveUninitialized: false
 }));
-
-
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views/pages'));
