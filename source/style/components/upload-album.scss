@@ -1,7 +1,6 @@
 .modal__add-album{
   display: flex;
   flex-direction: column;
-  height: 450px !important;
 }
 
 
@@ -83,33 +82,11 @@
   display: block;
 }
 
-.add-album__footer {
-  flex: 0 0 auto;
-}
+.add-album__footer {}
 
-.add-album__btn-save {
-  //flex: 1 1 auto;
-  display: flex;
 
-}
+.add-album__btn-save {}
 
-.add-album__buttons {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: flex-start;
-  width: 100%;
-}
+.add-album__btn-cancel {}
 
-.add-album__btn-cancel {
-  //flex: 1 1 auto;
-  display: flex;
-
-}
-
-.add-album__btn-delete {
-  //flex: 1 1 auto;
-  display: flex;
-  //align-self: flex-end;
-  margin-left: auto;
-}
+.add-album__btn-delete {}

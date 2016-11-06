@@ -10,7 +10,7 @@ block content
 							div.header-album__user
 								div.header-album__user-avatar
 									img.header-album__user-photo(src="../img/album/album-user.png", alt="фото пользователя")
-								div.header-album__user-name Антон Черепов 
+								div.header-album__user-name Антон Черепов
 						div.header-album__buttons
 							div.btn.btn--light.btn--expand.btn_album
 								svg.btn__icon
@@ -19,7 +19,7 @@ block content
 							div.btn.btn--light.btn--expand.btn_album.btn_edit-header
 								svg.btn__icon
 									use(xlink:href='/img/sprite.svg#edit')
-								span.btn__text Редактировать            
+								span.btn__text Редактировать
 						div.header-album__description
 							div.header-album__title-description Лесные прогулки
 							div.header-album__text-description   Фотографии природы леса, енотов и оленей. Как прекрасно сойти на дальней станции и пройтись по полю босиком. И чтобы никто не беспокоил бродить влюблённым в тишину. Запах мёда, лесных оленей и енотов будоражит нутро.
@@ -27,8 +27,8 @@ block content
 						div.header-album__user-container
 							div.header-album__user
 								div.header-album__user-avatar
-									img.header-album__user-photo(src="../img/album/album-user.png", alt="фото пользователя")  
-								div.header-album__user-name Антон Черепов        
+									img.header-album__user-photo(src="../img/album/album-user.png", alt="фото пользователя")
+								div.header-album__user-name Антон Черепов
 						div.header-album__description
 										div.form__row
 											input.field.field_header-edit(
@@ -38,14 +38,14 @@ block content
 												)
 										div.form__row
 											textarea.field.field_header-edit(name="desc").
-												Фотографии природы леса, енотов и оленей. Как прекрасно сойти на дальней станции и пройтись по полю босиком. И чтобы никто не беспокоил бродить влюблённым в тишину. Запах мёда, лесных оленей и енотов будоражит нутро.	
+												Фотографии природы леса, енотов и оленей. Как прекрасно сойти на дальней станции и пройтись по полю босиком. И чтобы никто не беспокоил бродить влюблённым в тишину. Запах мёда, лесных оленей и енотов будоражит нутро.
 						.upload__header-edit
 							.upload(title="Выбрать изображение")
 								svg.upload__icon
 									use(xlink:href='/img/sprite.svg#cam')
 								.upload__text Изменить фон
 								input.upload__input(type="file" name="bg")
-    
+
 				div.header-album__about
 					.header__section.header__bottom.section.header-edit-bottom
 						.header__part.header__right
@@ -69,7 +69,7 @@ block content
 								div.btn.btn--light.btn--expand.btn_album
 									svg.btn__icon
 										use(xlink:href='/img/sprite.svg#home')
-									span.btn__text На главную          
+									span.btn__text На главную
 			div.album-cards
 				div.header-edit-overlay
 				div.btn.btn--light.btn--expand.btn_album.btn_album-add
@@ -100,27 +100,34 @@ block content
 									.photo-card__foot-part
 										.photo-card__link(href="#404") Название фотографии
 		include ../commons/footer
-	div.modal-overlay.hide
-	div.modal.hide
-		div.modal-content
-			div.modal__header
-				div.modal__header-title Добавить фотографии
-				div.modal__header-close
-					svg.modal__header-svg
-						use(xlink:href='/img/sprite.svg#close') 
-			div.modal__title
-				span.modal__title-title Название
-				span.modal__title-text Как я провёл лето
-			.modal__load-container#img-container
-				.upload.modal__load-img(title="Выбрать изображение")
-					svg.upload__icon
-						use(xlink:href='/img/sprite.svg#cam')
-					.upload__text Перетащите фото сюда или 
-						span.modal__link-load выберите файл
-					input.upload__input(type="file"  name="bg" multiple)#file-field
-				ul.img-list#img-list
-		div.modal__footer
-			div.modal__buttons
-				a.btn(href="#")#upload Сохранить
-				a.btn.btn--text.btn-cancelLoad(href="#cancel")
-					span.btn__text Отменить
+
+
+
+
+
+	.modal-overlay.hide
+		.modal.hide
+			.modal-content
+				.modal__header
+					.modal__header-title Добавить фотографии
+					.modal__header-close
+						svg.modal__header-svg
+							use(xlink:href='/img/sprite.svg#close')
+				.modal__title
+					span.modal__title-title Название
+					span.modal__title-text Как я провёл лето
+				.modal__load-container#img-container
+					.upload.modal__load-img(title="Выбрать изображение")
+						svg.upload__icon
+							use(xlink:href='/img/sprite.svg#cam')
+						.upload__text Перетащите фото сюда или
+							span.modal__link-load выберите файл
+						input.upload__input(type="file"  name="bg" multiple)#file-field
+					ul.img-list#img-list
+
+			.modal__footer
+				.modal-pane
+					.modal-pane__part
+					a.btn(href="#")#upload Сохранить
+					a.btn.btn--text.btn-cancelLoad(href="#cancel")
+						span.btn__text Отменить

@@ -17,7 +17,7 @@ var albumModule = (function() {
 		base.changeClass('.modal-container','hide','add')
 	};
 
-	
+
 	// Функция при скролле
 	var _fixedAdd = function() {
 		var $albumContainer = $('.header-album__content');
@@ -95,13 +95,13 @@ var albumModule = (function() {
 		$(window).on('scroll', _fixedAdd);
 	};
 
-	
+
 
   return {
   	edit: editAllHeader(),
     init: function () {
     	_setUpListners();
     },
-    
+
   };
 })();
