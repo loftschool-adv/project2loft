@@ -27,16 +27,13 @@ div.modal-container.hide
                         label.btn.btn--clear.label__upload(for='upload-album') Выбрать файл
                         input.btn__upload-album(type='file' id='upload-album' name='photo'  multiple  accept='image/*,image/jpeg')
                         span.wrapper-input__text (файл должен быть размером не более 1024 КБ)
+                    span.add-album__error.hide
             div.modal__footer.add-album__footer
                 div.modal__buttons.add-album__buttons
                     a.btn.add-album__btn-save(href="#")#upload Сохранить
                     a.btn.btn--text.add-album__btn-cancel(href="#cancel")
                         span.btn__text Отменить
-                    a.btn.btn--important.add-album__btn-delete
-                        svg.btn__icon
-                            use(xlink:href='/img/sprite.svg#delete')
-                        span.btn__text Удалить
-            .preload__container.loader
+            .preload__container
                 .preload__loading
                     each i in Array(4)
                         i
