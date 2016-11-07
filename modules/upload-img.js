@@ -49,12 +49,9 @@ function uploadImg(req, res) {
         // src =String(src).replace(/\\/g, "/");
         // src = src.substr(6);
 
-
           ws.on('open', function open() {
-            s.send('something');
+            ws.send('something');
           });
-
-
 
         //server.io.emit('eventClient', {thumb: src});
 

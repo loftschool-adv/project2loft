@@ -33,7 +33,7 @@ var webSocketServer = new WebSocketServer.Server({
 });
 webSocketServer.on('connection', function(ws) {
 
-  module.exports.ws = ws;
+  exports.ws = ws;
 
   var id = Math.random();
   clients[id] = ws;
