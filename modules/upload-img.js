@@ -21,7 +21,7 @@ var clients = {};
 var wss = new WebSocketServer.Server({
   port: 4001
 });
-wss.on('connection', function(ws) {
+var socket = wss.on('connection', function(ws) {
 
   var id = Math.random();
   clients[id] = ws;
@@ -44,12 +44,11 @@ wss.on('connection', function(ws) {
 
 });
 
+
+
 function uploadImg(req, res) {
 
-  wss.on('open', function open() {
-    console.log('connected');
-    wss.send(Date.now().toString(), {mask: true});
-  });
+  socket.send('ololo');
 
   var count = 0;
   var form = new multiparty.Form();
