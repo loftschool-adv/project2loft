@@ -25,7 +25,6 @@ if (isAdvancedUpload) {
     })
     .on('drop', function(e) {
       droppedFiles = e.originalEvent.dataTransfer.files;
-      console.log(droppedFiles);
       $form.trigger('submit');
     });
 
@@ -39,6 +38,7 @@ if (isAdvancedUpload) {
 }
 
 
+
 // Ручная отправка
 $form.on('submit', function(e) {
   if ($form.hasClass('is-uploading')) return false;
@@ -50,42 +50,56 @@ $form.on('submit', function(e) {
   if (isAdvancedUpload) {
     e.preventDefault();
 
-    var ajaxData = new FormData($form.get(0));
+
+
+    var photos = $input[0].files;
+
+    $.each( photos, function( key, photo ) {
+      var ajaxData = new FormData();
+      ajaxData.append("photo", photo);
+
+      $.ajax({
+        url: location.href + '/addImg/',
+        type: $form.attr('method'),
+        data: ajaxData,
+        dataType: 'json',
+        cache: false,
+        contentType: false,
+        processData: false,
+        complete: function(ans) {
+          $form.removeClass('is-uploading');
+          console.log(ans.responseText);
+
+
+
+          //socket.emit('eventServer', {data: 'Hello Server'});
+        },
+        success: function(data) {
+
+          $form.addClass( data.success == true ? 'is-success' : 'is-error' );
+
+          if (!data.success) $errorMsg.text(data.error);
+        },
+        error: function() {
+          // Log the error, show an alert, whatever works for you
+        }
+      });
+
+    });
 
     if (droppedFiles) {
       $.each( droppedFiles, function(i, file) {
+
+        console.log($input.attr('name'));
 
         ajaxData.append( $input.attr('name'), file );
 
       });
     }
 
-    $.ajax({
-      url: location.href + '/addImg/',
-      type: $form.attr('method'),
-      data: ajaxData,
-      dataType: 'json',
-      cache: false,
-      contentType: false,
-      processData: false,
-      complete: function(ans) {
-        $form.removeClass('is-uploading');
-        console.log(ans.responseText);
+    //console.log(ajaxData);
 
 
-      
-      //socket.emit('eventServer', {data: 'Hello Server'});
-      },
-      success: function(data) {
-
-        $form.addClass( data.success == true ? 'is-success' : 'is-error' );
-
-        if (!data.success) $errorMsg.text(data.error);
-      },
-      error: function() {
-        // Log the error, show an alert, whatever works for you
-      }
-    });
 
     console.log($form.attr('action'));
 
