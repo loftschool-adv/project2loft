@@ -10,7 +10,7 @@
 // 8) Для того чтобы модуль собрался в один файл app.js его нужно прописать в в gulpfile.js.
 // Документация по фунциям base, будет чуть позже...
 
-var socket = io.connect('http://85.143.214.16:4000');
+var socket = io.connect();
 
 socket.on('eventClient', function (data) {
 
