@@ -1,10 +1,8 @@
 {
 	"db": {
-		"host": "ds035995.mlab.com",
-		"port": "35995",
-		"name": "dbgallery",
-		"user": "user",
-		"password": "user"
+		"host": "localhost",
+		"port": "27017",
+		"name": "gallery"
 	},
 	"http" : {
 		"port": 4000,
