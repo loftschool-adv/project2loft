@@ -26,7 +26,7 @@ html
       var socket = io.connect('http://85.143.214.16:4000');
 
       socket.on('eventClient', function (data) {
-    
+
           var src = data.thumb; 
           src =String(src).replace(/\\/g, "/");
           src = src.substr(6);
@@ -44,7 +44,7 @@ html
           $('.modal__load-img').hide();
           
           });
-      //socket.emit('eventServer', {data: 'Hello Server'});
+      socket.emit('eventServer', {data: 'Hello Server'});
 
 
 
