@@ -35,6 +35,8 @@ wss.on('connection', function(ws) {
     }
   });
 
+  ws.send('something+');
+
   ws.on('close', function() {
     console.log('соединение закрыто ' + id);
     delete clients[id];
