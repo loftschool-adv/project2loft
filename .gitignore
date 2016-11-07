@@ -33,6 +33,4 @@ _materials
 .idea
 .svn
 node_modules
-public
 config.json
-users/*
