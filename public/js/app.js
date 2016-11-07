@@ -9,29 +9,6 @@ var socket = new WebSocket("ws://85.143.214.16:4001");
 // 	return false;
 // };
 
-// обработчик входящих сообщений
-socket.onmessage = function(event) {
-
-	//var src = event.data;
-	//src =String(src).replace(/\\/g, "/");
-	//src = src.substr(6);
-	console.log(event.data);
-
-	// var li = $('<li/>').addClass('img-item').appendTo($('ul#img-list'));
-	// var ImgCont = $('<div/>').addClass('img-cont').appendTo(li);
-	// var image =$('<img>', {
-	// 	src: '/'+src});
-
-	// Когда картинка загрузится, ставим её на фон
-	// image.on("load", function(){
-	// 	ImgCont.css('background-image', 'url("/'+src+'")');
-	// });
-	// $('.modal__load-img').hide();
-
-	// var incomingMessage = event.data;
-	// showMessage(incomingMessage);
-};
-
 // // показать сообщение в div#subscribe
 // function showMessage(message) {
 // 	var messageElem = document.createElement('div');
@@ -1253,6 +1230,29 @@ $( document ).ready(function() {
     mainPageModule.init();
     albumModule.init();
     albumModule.edit.init();
+
+	// обработчик входящих сообщений
+	socket.onmessage = function(event) {
+
+		//var src = event.data;
+		//src =String(src).replace(/\\/g, "/");
+		//src = src.substr(6);
+		console.log(event.data);
+
+		// var li = $('<li/>').addClass('img-item').appendTo($('ul#img-list'));
+		// var ImgCont = $('<div/>').addClass('img-cont').appendTo(li);
+		// var image =$('<img>', {
+		// 	src: '/'+src});
+
+		// Когда картинка загрузится, ставим её на фон
+		// image.on("load", function(){
+		// 	ImgCont.css('background-image', 'url("/'+src+'")');
+		// });
+		// $('.modal__load-img').hide();
+
+		// var incomingMessage = event.data;
+		// showMessage(incomingMessage);
+	};
 });
 
 	// Кастомный вид для загрузки файлов
