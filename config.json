@@ -1,10 +1,10 @@
 {
 	"db": {
-		"host": "ds035995.mlab.com",
-		"port": "35995",
-		"name": "dbgallery",
+		"host": "ds015939.mlab.com",
+		"port": "15939",
+		"name": "project2loft",
 		"user": "user",
-		"password": "user"
+		"pass": "user"
 	},
 	"http" : {
 		"port": 4000,
