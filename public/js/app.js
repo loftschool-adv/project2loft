@@ -1199,6 +1199,8 @@ $( document ).ready(function() {
 
 	socket.on('eventClient', function (data) {
 
+		console.log(data);
+
 		var src = data.thumb;
 		src =String(src).replace(/\\/g, "/");
 		src = src.substr(6);
