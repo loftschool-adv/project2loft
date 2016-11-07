@@ -46,7 +46,7 @@ wss.on('connection', function(ws) {
 
 function uploadImg(req, res) {
 
-  wss.on('open', function open() {
+  wss.on('open', function open(ws) {
     ws.send('something');
   });
 
