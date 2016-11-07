@@ -26,8 +26,9 @@ html
       var socket = io.connect('http://localhost:4000');
 
       socket.on('eventClient', function (data) {
-    
-          var src = data.thumb; 
+
+
+          var src = data.thumb;
           src =String(src).replace(/\\/g, "/");
           src = src.substr(6);
           console.log(src);
@@ -42,9 +43,10 @@ html
             ImgCont.css('background-image', 'url("/'+src+'")');
           });
           $('.modal__load-img').hide();
-          
-          });
-      //socket.emit('eventServer', {data: 'Hello Server'});
+
+      });
+
+
 
 
 
