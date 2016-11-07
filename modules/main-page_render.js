@@ -95,7 +95,6 @@ let mainPageRender = function(req,res,next){
  			//console.log(dateFormat(album.created, "HH:MM dd.mm.yyyy"))
  			let newAlbumName = slug(translit.toASCII(album.name));
  			
- 			
  			renderObj.albums[album.name] = {
  				name: album.name,
  				date : dateFormat(album.created, "HH:MM dd.mm.yyyy"),
@@ -112,7 +111,6 @@ let mainPageRender = function(req,res,next){
  				})()
  			}
  			
- 			//console.log(renderObj)
 	 		},() => {
 	 			callback_2();
 	 		})
@@ -126,7 +124,6 @@ let mainPageRender = function(req,res,next){
  	],(err)=>{
  		if(err) throw err;
  		// Если все окей отображаем, страницу пользователя
-
  		res.locals.mainPageData = renderObj;
  		res.render('main-page',  { title: 'Главная' })
  })
