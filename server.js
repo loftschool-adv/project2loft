@@ -33,8 +33,6 @@ var webSocketServer = new WebSocketServer.Server({
 });
 webSocketServer.on('connection', function(ws) {
 
-  exports.ws = ws;
-
   var id = Math.random();
   clients[id] = ws;
   console.log("новое соединение " + id);
@@ -121,3 +119,5 @@ function onListening() {
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
 }
+
+exports.webSocketServer = webSocketServer;
