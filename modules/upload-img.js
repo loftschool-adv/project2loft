@@ -46,6 +46,10 @@ wss.on('connection', function(ws) {
 
 function uploadImg(req, res) {
 
+  wss.on('open', function open() {
+    ws.send('something');
+  });
+
   var count = 0;
   var form = new multiparty.Form();
   form.uploadDir = 'users/id' + req.session.user_id + '/tmp/';
@@ -82,10 +86,6 @@ function uploadImg(req, res) {
         //webSocketServer.send('something');
         //   ws.send('something');
         // });
-
-        wss.on('open', function open() {
-          ws.send('something');
-        });
 
 
         //server.io.emit('eventClient', {thumb: src});
