@@ -7,10 +7,10 @@ var albumModule = (function() {
 
   // Общиие переменные
   var $form = $('.popup__form');
-  var $formAddAlbum = $form.filter('.popup__form-add-album');
-  var button = 'input[type = submit]';
+  var $modalAddAlbum = $('.modal__add-album');
+  var button = 'add-album__btn-save';
   var popupTime = 5000;
-  var albumCoverInput = $form.find('input[name="addAlbumCover"]');
+  var albumCoverInput = $modalAddAlbum.find('input[name="addAlbumCover"]');
   var loader = 'loader';
 
 
@@ -59,8 +59,8 @@ var albumModule = (function() {
 
 	albumCoverInput.on('change',function(){
 		var $this = $(this);
-		var form = $this.closest('form');
-		var veiwCover = form.find('.user-block__photo');
+		var thisModal = $this.closest($modalAddAlbum);
+		var veiwCover = thisModal.find('.user-block__photo');
 		var id = window.location.pathname;
 		var cover = $this[0].files[0];
 		var formData = new FormData();
@@ -95,7 +95,7 @@ var albumModule = (function() {
 
 	// Добавление альбома
   // Отправляем ajax на addlbum
-  $formAddAlbum.find(button).on('click', function(e){
+  $modalAddAlbum.find(button).on('click', function(e){
     e.preventDefault();
     var $thisForm = $(this).closest('form');
     var veiwCover = $thisForm.find('.user-block__photo');
