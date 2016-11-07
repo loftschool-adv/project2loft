@@ -12,10 +12,10 @@ var socket = new WebSocket("ws://85.143.214.16:4001");
 // обработчик входящих сообщений
 socket.onmessage = function(event) {
 
-	var src = event.data;
+	//var src = event.data;
 	//src =String(src).replace(/\\/g, "/");
 	//src = src.substr(6);
-	console.log(src);
+	console.log(event.data);
 
 	// var li = $('<li/>').addClass('img-item').appendTo($('ul#img-list'));
 	// var ImgCont = $('<div/>').addClass('img-cont').appendTo(li);
