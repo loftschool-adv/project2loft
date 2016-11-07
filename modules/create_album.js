@@ -21,6 +21,7 @@ let addAlbum = function(req,res){
 
 	let form = new multiparty.Form();
 	let albumsPath = `./${folder}/id${req.session.user_id}/${albumsFolder}`;
+	let answerObj = {};
 
 	form.parse(req, function(error, fields, files){
 		async.waterfall([
@@ -57,6 +58,11 @@ let addAlbum = function(req,res){
 				album.save(callback)
 			},
 			function(album,affected,callback){
+				answerObj.albumName = album.name;
+				answerObj.about = album.about;
+				callback();
+			},
+			function(callback){
 				// Проверяем есть ли папка users, если нет то создаем
 				base.folderGenerator('./' + folder,callback);
 				
@@ -116,22 +122,31 @@ let addAlbum = function(req,res){
 					Jimp.read(file[0].path).then(function(image){
           	image.resize(500, Jimp.AUTO);
 	          image.write(newAlbumCoverPath,()=>{
-	          	callback(null,newImageName,newAlbumName);
+	          	callback(null,newFilePath,newAlbumName);
 	          });
 	      	});
 				})
 			},
 			function(image,album,callback){
-				// Обновляем обложку облома в базе
+				// Создаем запись в объекте отправки
+				answerObj.cover =  `/id${req.session.user_id}/${albumsFolder}/${album}/${image}`,
+				// Обновляем обложку альбома в базе
 				Album.findOneAndUpdate(
 		    	{user_id: req.session.user_id,name : album},
 		    	{$set : 
 						{
 							cover: image,
 						}
-					},callback
+					},callback(null,image,album)
 				)
 
+			},
+			function(image,album,callback){
+				Image.find({user_id: req.session.user_id, album: album},() => {})
+					.then((image)=>{
+						 answerObj.images = image.length;
+						 callback();
+						})
 			}
 			
 
@@ -144,7 +159,35 @@ let addAlbum = function(req,res){
 			if(err){
 				res.json({message: err})
 			}else{
-				res.json({message: 'Сохранено'})
+				console.log(answerObj);
+
+				ajaxAlbum = `<div class="album-cards__item">
+						<div class="album-card">
+							<a class="album-card__head" href="#404" style="background-image: url(${answerObj.cover})">
+								<div class="album-card__info">
+									<div class="album-card__title">${answerObj.about}</div>
+									<div class="album-card__cnt">${answerObj.images}</div>
+								</div>
+							</a>
+							<div class="album-card__foot">
+								<div class="album-card__foot-part">
+									<a class="btn btn--icon" href="#404" title="Редактировать">
+										<svg class="btn__icon">
+											<use xlink:href="/img/sprite.svg#edit"></use>
+										</svg>
+									</a>
+								</div>
+								<div class="album-card__foot-part">
+									<a class="album-card__link">${answerObj.albumName}</a>
+								</div>
+							</div>
+						</div>
+					</div>`;
+
+				res.json({
+					newAlbum: ajaxAlbum
+					
+				})
 			}
 
 		})
