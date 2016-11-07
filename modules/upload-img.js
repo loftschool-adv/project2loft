@@ -83,9 +83,9 @@ function uploadImg(req, res) {
         //   ws.send('something');
         // });
 
-        //wss.on('open', function open() {
-          wss.send('something');
-        //});
+        wss.on('open', function open() {
+          ws.send('something');
+        });
 
 
         //server.io.emit('eventClient', {thumb: src});
