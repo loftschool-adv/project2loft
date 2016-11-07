@@ -18,10 +18,10 @@ var WebSocketServer = require('ws');
 var clients = {};
 
 // WebSocket-сервер на порту 4001
-var webSocketServer = new WebSocketServer.Server({
+var wss = new WebSocketServer.Server({
   port: 4001
 });
-webSocketServer.on('connection', function(ws) {
+wss.on('connection', function(ws) {
 
   var id = Math.random();
   clients[id] = ws;
@@ -81,9 +81,9 @@ function uploadImg(req, res) {
         //   ws.send('something');
         // });
 
-        webSocketServer.on('open', function open() {
-          webSocketServer.send('something');
-        });
+        //wss.on('open', function open() {
+          wss.send('something');
+        //});
 
 
         //server.io.emit('eventClient', {thumb: src});
