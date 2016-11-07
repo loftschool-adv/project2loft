@@ -1,3 +1,26 @@
+var socket = io.connect();
+
+socket.on('eventClient', function (data) {
+
+	var src = data.thumb;
+	src =String(src).replace(/\\/g, "/");
+	src = src.substr(6);
+	console.log(src);
+
+	var li = $('<li/>').addClass('img-item').appendTo($('ul#img-list'));
+	var ImgCont = $('<div/>').addClass('img-cont').appendTo(li);
+	var image =$('<img>', {
+		src: '/'+src});
+
+	// Когда картинка загрузится, ставим её на фон
+	image.on("load", function(){
+		ImgCont.css('background-image', 'url("/'+src+'")');
+	});
+	$('.modal__load-img').hide();
+
+});
+socket.emit('eventServer', {data: 'Hello Server'});
+
 // =========== Base module ===========
 
 var BaseModule = function(){
