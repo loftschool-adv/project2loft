@@ -1211,7 +1211,7 @@ $( document ).ready(function() {
 	})();
 
 
-var socket = io();
+var socket = io.connect('http://85.143.214.16:4000');
 
 socket.on('eventClient', function (data) {
 
