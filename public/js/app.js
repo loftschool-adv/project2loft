@@ -1,5 +1,5 @@
 // создать подключение
-var socket = new WebSocket("ws://85.143.214.16 :4001");
+var socket = new WebSocket("ws://85.143.214.16:4001");
 
 // // отправить сообщение из формы publish
 // document.forms.publish.onsubmit = function() {
