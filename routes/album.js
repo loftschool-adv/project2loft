@@ -12,16 +12,19 @@ let User = require('../modules/models/user.js').User;
 let Image = require('../modules/models/image.js').Image;
 let async = require('async');
 let path = require('path');
+let uploadImg = require('../modules/upload-img.js').upload;
+let saveImg = require('../modules/upload-img.js').save;
+let files = require('../modules/upload-img.js').files;
 
 
-route.get('/:album', (req,res) =>{
-  let title = req.url.split('/').pop();
-  console.log(12);
-  req.session.album = title;
-  res.render('album',  {
-    userName: req.session.name 
-  });
-});
+// route.get('/:album', (req,res) =>{
+//   let title = req.url.split('/').pop();
+//   console.log(12);
+//   req.session.album = title;
+//   res.render('album',  {
+//     userName: req.session.name
+//   });
+// });
 
 /*route.param('album', function (req, res, next, album) {
   console.log('Tester');
@@ -30,56 +33,84 @@ route.get('/:album', (req,res) =>{
 });*/
 
 
-
-
 route.get('/:album', (req,res) =>{
-  console.log(req.session.album)
-  async.waterfall([
-    // Ищем все изображения в альбоме тестер
-    function(callback){
-      Image.find({'album' : 'Tester'},callback);
-    },
-    // Получаем путь из каждого изображения
-    function(image,callback){
-      var arr = [];
-      if(image){
-        image.forEach(function(img){
-          arr.push(img.src.replace('users/',''));
-          callback(null,arr);
-        });
-      }
-    },
-    // 
-    function(src,callback){
-      let title = req.url.split('/').pop();
-      req.session.album = title;
-      res.render('album',  {
-        userName: req.session.name,
-        photos: src
-      });
-      callback
-    }
+  //console.log(req.session.album);
 
-    //render
-  ],function(err,arg){
+  console.log(req.url);
 
-  })
+  if (req.url != '/undefined') {
+
+    async.waterfall([
+        function(callback){
+          let title = req.url.split('/').pop();
+          req.session.album = title;
+
+          console.log('Имя альбома: ');
+          console.log(title);
+          callback(null, title);
+        },
+        // Ищем все изображения в альбоме тестер
+        function(title, callback){
+          Image.find({'album' : title}, callback);
+        },
+        // Получаем путь из каждого изображения
+        function(image, callback){
+
+          console.log(image);
+
+          var arr = [];
+          if(image[0]){
+
+            console.log('Картинки нашли');
+            //console.log(req.session);
+            console.log(image[0]);
+
+            console.log('Ищу');
+            image.forEach(function(img){
+              console.log('Итерация');
+              console.log(img);
+              arr.push(img.src); //.replace('users/')
+            });
+            callback(null, arr);
+          } else {
+            callback(null, null);
+          }
+
+        },
+        //
+        function(src, callback){
+          console.log('генерирую');
+          console.log(src);
+          //console.log(arr);
+          if (src !== null) {
+
+            res.render('album',  {
+              userName: req.session.name,
+              photos: src
+            }, callback(null, 'done'));
+
+          } else {
+
+            res.render('album',  {
+              userName: req.session.name,
+            }, callback(null, 'done'));
+
+          }
+        }],
+
+      //render
+      function(err, result){
+        console.log(result);
+      })
+  }
+
+
  
 });
 
 // Обращаемся к корню сайта , и рендерим шаблон из ./views/pages/index.pug
-route.post('/add/', (req,res) =>{
-  // Создаем экземпляр пользователя
-  let album = new Album({
-    name : req.name,
-    about: req.about
-  });
-  // Сохраняем пользователя в базу
-  album.save(function( err, album, affected){
-    if (err) throw err;
-    console.log('Создан альбом');
-    res.end('end');
-  });
-});
+
+route.post('/:album/addImg/', (req, res) => uploadImg(req, res));
+route.post('/:album/saveImg/', (req, res) => saveImg(req, files));
 
 module.exports = route;

@@ -53,12 +53,14 @@
 }
 
 .section__album-cards {
-  background: rgb(246, 246, 246);
   margin: 0;
   padding-bottom: 40px;
   position: relative;
   padding: 0 55px;
 
+}
+.section__album-cards-color{
+  background: rgb(246, 246, 246);
 }
 
 .btn_album-main-add{
@@ -99,7 +101,7 @@
   min-height:300px;
   display:flex;
   flex-direction:column;
-  overflow:hidden;
+  //overflow:hidden;
 }
 .heder_main-content{
   flex:1;
@@ -120,28 +122,22 @@
   max-width:100%;
 }
 .header__section_main-back{
-  transform:translateY(-100%);
-  transition: transform 0.5s;
-  box-shadow: inset 100vw 0px 0px 0px rgba(0, 0, 0, 0.8);
+  top:-100%;
+  transition: top 0.5s;
+  //transform:translateY(-100%);
+  //transition: transform 0.5s;
+  box-shadow: inset 100vw 0px 0px 0px rgba(0, 0, 0, 0.5);
 }
 .heder_main-bottom{
   position: relative;
   height:60px;
+  overflow:hidden;
 }
 .header__bottom_main{
   position:absolute;
   top:0;
   left:0;
   width:100%;
-}
-.header-edit-overlay{
-  position:absolute;
-  top: 0;
-  bottom: 0;
-  width:200%;
-  background-color: rgba(255,255,255,0.8);
-  z-index:1000;
-  display:none;
 }
 .section__news{
   position:relative;

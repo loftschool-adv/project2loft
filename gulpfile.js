@@ -19,7 +19,7 @@ var notify = require('gulp-notify');
 // =====================  Настройки  =====================
 
 var
-  start = 'front';
+  start = 'server';
 /*
  1.) 'server' -  gulp запустится в режими с сервером, в этом варианте отключен
  pug, так как он компилируеться на сервере. Так же галп прилинкуется к запущенному серверу.
@@ -45,9 +45,10 @@ var path = {
 
   sourse: {		// Пути исходников
 
-  	
+
 		folder 	: 	'source',       		// Папка где лежат исходника
 		pug 		:  	'templates', 	      // Папка с шаблонами , только для фронт версии
+    views   :   'views',            // Папка с шаблонами , только для серверной версии
 		sass 		: 	'style',					 	// Папка со стилями
 		libs 		: 	'node_modules',			// Папка с библиотеками
 		js 			: 	'js',								// Папка с модулями js
@@ -120,8 +121,11 @@ var mainJs = [
   path.sourse.folder + '/' + path.sourse.js + '/modules/_common.js',
   path.sourse.folder + '/' + path.sourse.js + '/modules/_login.js',
   path.sourse.folder + '/' + path.sourse.js + '/upload.js',
-  path.sourse.folder + '/' + path.sourse.js + '/uploaderObject.js',
+  //path.sourse.folder + '/' + path.sourse.js + '/oldUploaderObject.js',
+  path.sourse.folder + '/' + path.sourse.js + '/modules/_main-page.js',
   path.sourse.folder + '/' + path.sourse.js + '/modules/_album.js',
+  path.sourse.folder + '/' + path.sourse.js + '/modal.js',
+  path.sourse.folder + '/' + path.sourse.js + '/slider.js',
   path.sourse.folder + '/' + path.sourse.js + '/app.js',
 
 ];
@@ -278,7 +282,12 @@ gulp.task('server', function () {
 // Слежка за папкой с иходниками
 gulp.task('watch', function () {
   gulp.watch(path.sourse.folder + '/**/*.scss', gulp.series('sass'));
-  gulp.watch(path.sourse.pug + '/**/*.pug', gulp.series('pug', 'reload'));
+  if(start == 'front'){
+    gulp.watch(path.sourse.pug + '/**/*.pug', gulp.series('pug', 'reload'));
+  }
+  if(start == 'server'){
+    gulp.watch(path.sourse.views + '/**/*.pug', gulp.series('pug', 'reload'));
+  }
   gulp.watch(path.sourse.folder + '/js/**/*.js', gulp.series('concat', 'reload'));
 });
 

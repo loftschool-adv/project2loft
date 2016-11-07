@@ -26,9 +26,9 @@
 		color: $white;
 	}
 
-	//&:last-child {
-	//	margin-right: 0;
-	//}
+	&:last-child {
+		margin-right: 0;
+	}
 }
 
 	.btn__icon {
@@ -39,6 +39,7 @@
 		width:  20px;
 		height: 20px;
 		fill: currentColor;
+		transition: fill .5s;
 
 		& + .btn__text,
 		.btn__text + & {
@@ -156,5 +157,38 @@
 		background-color: transparent;
 		color: $gray;
 		opacity: 1;
+	}
+}
+
+
+
+.btn--like {
+	padding: .385em 1em;
+	padding-left: .8em;
+	background: $red;
+	font-size: 17px;
+
+	& .btn__icon {
+		width: 24px;
+		fill: transparent;
+		stroke: currentColor;
+		stroke-width: 3px;
+	}
+
+	&:hover {
+		background: darken($red, 7%);
+	}
+}
+
+.btn--like[data-like="not-like"] {
+	& .btn__icon {
+		fill: transparent;
+		stroke: currentColor;
+	}
+}
+
+.btn--like[data-like="like"] {
+	& .btn__icon {
+		fill: currentColor;
 	}
 }

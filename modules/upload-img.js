@@ -3,74 +3,161 @@
 let fs         = require('fs');
 let path       = require('path');
 let util       = require('util');
-let formidable = require('formidable');
+let Jimp       = require('jimp');
+let async      = require('async');
+let multiparty = require('multiparty');
+let server     = require('../server.js');
+
 let BaseModule = require('../modules/libs/_base.js');
 let base = new BaseModule;
 let mongoose = require('../modules/libs/mongoose.js');
 let Image = require('../modules/models/image.js').Image;
+var files = [];
 
 function uploadImg(req, res) {
-  console.log("Пришел запрос с картинкой");
 
-  var Header = new formidable.IncomingForm();
-  var File = new formidable.IncomingForm();
-  var filename;
-  var imgSrc;
-
-  File.maxFieldsSize = 8 * 1024 * 1024;
-  File.multiples = true;
-
-  Header.parse(req);
-
-  // Parts are emitted when parsing the form
-  Header.onPart = function(part) {
-
-    if (part) {
-      var fileType = part.mime.split('/').pop();
-      filename = 'IMG' + base.passGenerate(10) + '.' + fileType;
-      console.log(filename);
-    }
-  };
+  var count = 0;
+  var form = new multiparty.Form();
+  form.uploadDir = 'users/id' + req.session.user_id + '/tmp/';
+  form.autoFiles = true;
 
 
-  File
-    .on('field', function(name, field) {
+  // form.on('progress', function (bytesReceived, bytesExpected) {
+  //   console.log(bytesReceived / bytesExpected * 100, '%');
+  // });
 
-      imgSrc = 'users/id' + req.session.user_id + '/' + req.session.album + '/' + filename;
+  form.on('file', function (name, file) {
 
-    fs.writeFile(imgSrc, field, 'binary', function(err){
-      if (err) throw err;
-      console.log('File saved.');
-      console.log(req.session.user_id);
-      //console.log(req.headers);
-    });
+    if (file.originalFilename) {
 
-    console.log('Upload completed!');
-  })
-  .on('end', function() {
-        console.log('-> upload done');
+      files.push(file);
 
-        addImgDB(req, imgSrc);
-        res.end('upload');
+      console.log('Картинка загруженна');
+
+      let _thumb = file.path.split('.');
+      let thumb = _thumb[0] + '-small.' +  _thumb[1];
+      console.log(thumb);
+
+      Jimp.read(file.path).then(function(image){
+
+        console.log(file.path, '-> resize ->', thumb);
+
+        image.resize(100, Jimp.AUTO);
+        image.write(thumb);
+
+        server.io.emit('eventClient', {thumb: thumb});
+
       });
 
-  File.parse(req);
+    }
+});
+
+// Close emitted after form parsed
+  form.on('close', function() {
+    console.log('Upload completed!');
+
+    res.end('ok');
+    //imgSave(req, files);
+  });
+
+// Parse req
+  form.parse(req);
+
+
 
 }
 
-function addImgDB(req, imgSrc) {
+function imgSave(req, files) {
 
-  // Создаем экземпляр пользователя
-  let image = new Image({
-    src: imgSrc,
-    album: req.session.album,
-    user_id: req.session._id
+  async.eachSeries(files, function (file, callbackEach) {
+
+    //Перебираем файлы
+
+    async.waterfall([
+
+      // 1. Записываем в базу
+      function (callback_1) {
+
+        console.log(file.path);
+        console.log('Запись в базу');
+
+        // Запись в базу
+
+        let image = new Image({
+          album: req.session.album,
+          user_id: req.session.user_id
+        });
+
+        // Сохраняем картинку в базу
+        image.save(function (err, image, affected) {
+          if (err) throw err;
+          console.log('Сохранена картинка в базу');
+          //console.log(image);
+          //console.log(affected);
+
+          callback_1(null, image.img_id);
+        });
+
+      },
+
+      // 2. Сохраняем большую картинку
+      function (id, callback_2) {
+
+        //console.log(req.session);
+        let type = file.path.split('.').pop();
+
+        let newPath = 'users/id' + req.session.user_id + '/albums/'
+          + req.session.album + '/img' + id + '.' + type;
+
+
+
+        //Ресайз изображений
+        Jimp.read(file.path).then(function(image){
+
+          console.log(file.path, '-> resize ->', newPath);
+
+          image.resize(1200, Jimp.AUTO);
+          image.write(newPath);
+
+          callback_2(null, type, id);
+
+        });
+
+      },
+
+      // 3. Сохраняем маленькую картинку
+      function (type, id, callback_3) {
+
+        let newPathSmall = 'users/id' + req.session.user_id + '/albums/'
+          + req.session.album + '/small-img' + id + '.' + type;
+
+        //Ресайз изображений
+        Jimp.read(file.path).then(function(image){
+
+          console.log(file.path, '-> resize ->', newPathSmall);
+
+          image.resize(380, Jimp.AUTO);
+          image.write(newPathSmall);
+
+          callback_3(null);
+
+        });
+
+          // Итерация закончена
+      }], function (err) {
+
+      callbackEach(null);
+
+    });
+
+  }, function (err, results) {
+
+    // Сохранили все картинки
+
   });
-  // Сохраняем картинку в базу
-  image.save(function( err, image, affected){
-    if (err) throw err;
-    console.log('Сохранена картинка в базу')
-  });
+
 }
 
-module.exports = uploadImg;
+exports.upload = uploadImg;
+exports.save = imgSave;
+exports.files = files;

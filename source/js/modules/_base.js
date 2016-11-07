@@ -7,6 +7,7 @@ var BaseModule = function(){
   	0 : 'Заполнены не все поля',
   	1 : 'Введите корректный e-mail',
   	2	: 'Длина пароля меньше 8 символов',
+  	3 : 'Выберите обложку'
   };
 
   this.RegPatterns = {
@@ -40,6 +41,17 @@ var BaseModule = function(){
 				contentType: 'application/json',
 				data: data
 			});
+	}
+
+	this.ajaxDataObj = function(obj,url,method){
+		method = method || 'POST'
+		var data = JSON.stringify(obj);
+		return $.ajax({
+			url: url,
+			type: method,
+			contentType: 'application/json',
+			data: data
+		});
 	}
 
 	this.showError = function(errorIndex,elem,_ms){
@@ -84,26 +96,33 @@ var BaseModule = function(){
 			return true;
 		}
 	};
+
+	this.validFiles = function(input,length){
+		var len = length || 0;
+		if(!(input[0].files.length <= len)){
+			return true;
+		};
+	}
 	
 	this.validateForm = function(form) {
 		var thisModule = this;
 		var pattern = thisModule.RegPatterns.email;
 		var $thisForm = form;
-		var elements = $thisForm.find('input');
+		var elements = $thisForm.find('textarea,input:not(input[type="submit"])');
 		var errors = thisModule.errors;
 		var output = [];
 
 		$.each(elements, function(){
-			if(!$(this).val()){
-				output.push(0);
-				return false;	
+			if(!$(this).val() && $(this).attr('type') != 'file'){
+					output[0] = 0;
 			}
 		});
 
 		if(output.length == 0){
-			$.each(elements, function(index,elem){
+			$.each(elements, function(){
 				var $this = $(this);
 				var type = $this.attr('type');
+				var nameAttr = $this.attr('name');
 				switch(type){
 					case 'password' :
 						if(!thisModule.validPass($this)){
@@ -115,12 +134,14 @@ var BaseModule = function(){
 							output.push(1);
 						}
 						break;
-					case 'login' :
-						// Проверка на логин
+				};
+				switch(nameAttr){
+					case 'addAlbumCover' :
+						if(!thisModule.validFiles($this)){
+							output.push(3);
+						}
 						break;
-					default:
-						return true;
-				}
+				};
 			})
 		};
 

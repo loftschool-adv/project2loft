@@ -11,7 +11,7 @@
 	min-height: 300px;
 	display:flex;
 	flex-direction: column;
-	box-shadow: inset 100vw 0px 0px 0px rgba(0, 0, 0, 0.55);
+	box-shadow: inset 100vw 0px 0px 0px rgba(0, 0, 0, 0.5);
 	overflow:hidden;
 }
 .header-album__content-cotainer{
@@ -27,9 +27,11 @@
 	width:100%;
 }
 .header-album__content_back{
-	transform:translateY(-100%);
-	transition: transform 0.5s;
-	box-shadow: inset 100vw 0px 0px 0px rgba(0, 0, 0, 0.8);
+	top:-100%;
+	transition: top 0.5s;
+	//transform:translateY(-100%);
+	//transition: transform 0.5s;
+	box-shadow: inset 100vw 0px 0px 0px rgba(0, 0, 0, 0.5);
 }
 .field_header-edit{
 	width:100%;
@@ -56,7 +58,7 @@
 	bottom: 0;
 	width:200%;
 	background-color: rgba(255,255,255,0.8);
-	z-index:1000;
+	z-index:9;
 	display:none;
 }
 .upload__header-edit .upload__icon{
@@ -101,7 +103,7 @@
 	position: absolute;
 	top:20px;
 	right:40px;
-	z-index:900;
+	z-index:8;
 }
 .header-album__description{
 	margin:auto;
@@ -128,7 +130,7 @@
 	width:100%;
 	height:60px;
 	z-index:1000;
-}	
+}
 .back-content{
 	display:flex;
 	justify-content:space-around;
@@ -182,82 +184,7 @@
 	z-index:1000;
 	right:40px;
 }
-.modal{
-	position:fixed;
-	z-index:1010;
-	top:50%;
-	left:50%;
-	transform:translate(-50%, -50%);
-	background-color: #fff;
-	width:680px;
-	max-width:100%;
-	height: 600px;
-	max-height:100%;
-	border-radius:5px;
-	overflow:hidden;
-	display:flex;
-	flex-direction:column;
-}
-.modal.hide{
-	display:none;
-}
-.modal-content{
-	flex-grow:1;
-}
-.modal__header{
-	background-color: #f1f1f1;
-	height:68px;
-	display:flex;
-	align-items: center;
-	padding-left: 20px;
-}
-.modal__header-title{
-	flex-grow:1;
-	color: #323232;
-	font: 600 21px Panton, sans-serif;
-}
-.modal__header-close{
-	width:20px;
-	height:20px;
-	cursor:pointer;
-	margin-right: 20px;
-}
-.modal__header-svg{
-	width:100%;
-	height: 100%;
-	fill:#a0a09f;
-}
-.modal__title{
-	margin: 30px 20px;
-}
-.modal__title-title{
-	font: 600 16px ProximaNova, sans-serif;
-	margin-right: 20px;
-}
-.modal__title-text{
-	opacity:0.8;
-}
-.modal__footer{
-	background-color: #f1f1f1;
-	height:68px;
-	display:flex;
-	padding-left: 20px;
-}
-.modal__buttons{
-	display:flex;
-	align-items: center;
-}
-.modal__load-container{
-	margin: 40px 15px;
-	background-color: #f9f9f9;
-	border-radius:10px;
-	border:2px dashed #f1f1f1;
-	display:flex;
-	flex-direction:column;
-	height:320px;
-	overflow:auto;
-	flex-wrap: wrap;
-}
+
 .img-list{
 	display: flex;
 	flex-wrap: wrap;
@@ -292,40 +219,21 @@
 	height:135px;
 	overflow:hidden;
 	border-radius:5px;
-	background-color: #FFF;
-    object-fit: cover;
+	//background-color: #FFF;
+	//object-fit: cover;
+	background-image: url(../img/album/no_photo.jpg);
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: cover;
 }
-
+.img-cont img{
+	display:block;
+	width:100%;
+}
 .highlighted {
 	border: 3px dashed #9b9b9b;
 }
-.modal__load-img{
-	margin: auto;
-	opacity:0.6;
-	white-space: normal;
-	width: 180px;
 
-}
-.modal__link-load{
-	color:#28bbf0;
-}
-.modal-overlay{
-	background-color: rgba(0,0,0,0.9);
-	position:fixed;
-	z-index:1001;
-	top:0;
-	left:0;
-	width: 100%;
-	height: 100%;
-}
-.modal-container{
-	z-index:1001;
-	position:absolute;
-	top:0;
-	left:0;
-	width:100%;
-	height:100%;
-}
 
 // FOR USER
 .header__section_user{
@@ -353,55 +261,70 @@
 	margin:auto;
 }
 
-//FOR MAIN ANIMATION
-.header-main{
-	min-height:300px;
+
+
+// new upload
+.box {
+	width: 100%;
+	height: 100%;
+	font-size: 1.25rem;
+	background-color: #c8dadf;
+	position: relative;
+	padding: 100px 20px;
+}
+
+.box__dragndrop,
+.box__uploading,
+.box__success,
+.box__error {
+	display: none;
+}
+
+.box.has-advanced-upload {
+	outline: 2px dashed #92b0b3;
+	outline-offset: -10px;
+
+	transition: outline-offset .15s ease-in-out, background-color .15s linear;
+}
+.box.has-advanced-upload .box__dragndrop {
+	display: inline;
+}
+
+.box.is-dragover {
+	background-color: grey;
+}
+
+.box.is-uploading .box__input {
+	visibility: hidden;
+}
+.box.is-uploading .box__uploading {
+	display: block;
+}
+// Модальное окно для редактирвания картинки
+.modal_edit-photo{
+	//height:400px;
+}
+.modal__form-container{
+	padding:40px;
+}
+.modal__form{
 	display:flex;
 	flex-direction:column;
-	overflow:hidden;
+	width:100%;
 }
-.heder_main-content{
-	flex:1;
-	position:relative;
-}
-.header__part--zip_main{
+.modal__form-row{
 	display:flex;
 	align-items:center;
+	margin-bottom: 30px;
 }
-.header__section_main{
-	position:absolute;
-	top:0;
-	left:0;
-	height:100%;
-	width:100%;
+.modal__form-label{
+	flex-basis:100px;
+	text-align:right;
+	margin-right: 20px;
+	color: #323232;
+	font: 600 16px ProximaNova, sans-serif;
 }
-.header__section{
-	max-width:100%;
-}
-.header__section_main-back{
-	transform:translateY(-100%);
-	transition: transform 0.5s;
-	box-shadow: inset 100vw 0px 0px 0px rgba(0, 0, 0, 0.8);
-}
-.heder_main-bottom{
-	position: relative;
-	height:60px;
-}
-.header__bottom_main{
-	position:absolute;
-	top:0;
-	left:0;
-	width:100%;
-}
-.header-edit-overlay{
-	position:absolute;
-	top: 0;
-	bottom: 0;
-	width:200%;
-	background-color: rgba(255,255,255,0.8);
-	z-index:1000;
-	display:none;
-}
-.section__news{
-	position:relative;
+.modal__form-input{
+	flex-grow:1;
+	border: 1px solid #d8d6d6;
 }

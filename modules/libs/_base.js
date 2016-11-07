@@ -1,4 +1,6 @@
 let fs = require('fs');
+let async = require('async');
+let del = require('del');
 
 function Base(){
 
@@ -11,6 +13,52 @@ function Base(){
       callback(err)
     }
 
+    })
+  }
+
+  // Отправляет ответ серверу в виде сообщение и статуса
+  this.sendMasage = function (message, res, status = 0) {
+  res.json(
+    {
+      message: message,
+      status: status
+    })
+  };
+
+
+  // Генератор папки. Если папки нет, то создает ее
+  this.folderGenerator = function(folder,callback){
+    fs.stat(folder, function(err,stats){
+      if(!stats){
+        fs.mkdir(folder,(err) =>{
+          if(err) throw err;
+          callback();
+        })
+      }else{
+        callback();
+      }
+    })
+  }
+
+  this.clearFolder = function(folder,callback){
+    let thisModule = this;
+    async.series(
+    [
+      function(callback_2){
+
+        thisModule.folderGenerator(folder,callback_2);
+      },
+      function(callback_2){
+        del([folder + '/**/*']).then(() =>{
+          callback_2();
+        })
+        
+      }
+        
+    ],
+    (err)=>{
+      if(err) throw err;
+      callback();
     })
   }
 
@@ -30,6 +78,14 @@ function Base(){
       }
     }
     return out.toUpperCase();
+  }
+
+  // Поиск по базе
+  this.findDB = function(model,callback,find={}){
+    model.find(find,callback)
+  }
+  this.findOneDB = function(model,callback,find={}){
+    model.find(find,callback)
   }
 } 
 

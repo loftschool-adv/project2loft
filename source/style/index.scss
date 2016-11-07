@@ -33,6 +33,7 @@ a{
 html {
 	box-sizing: border-box;
 	height: 100%;
+	color: $textColor;
 	font: 300 16px/1.5 ProximaNova, sans-serif;
 }
 
@@ -90,19 +91,6 @@ body {
 	}
 
 
-	.width--md {
-		width: 100%;
-		max-width: 380px;
-	}
-
-	.width--lg {
-		width: 100%;
-		max-width: 480px;
-	}
-
-	.width--full {
-		width: 100%;
-	}
 
 
 
@@ -277,4 +265,26 @@ body {
 	text-align: center;
 	opacity:0.8;
 	font-size: 16px;
+}
+
+
+
+
+
+.no-scroll {
+	overflow: hidden;
+}
+
+.width--md {
+		width: 100%;
+		max-width: 380px;
+}
+
+.width--lg {
+	width: 100%;
+	max-width: 480px;
+}
+
+.width--full {
+	width: 100%;
 }
