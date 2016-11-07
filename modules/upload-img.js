@@ -82,7 +82,7 @@ function uploadImg(req, res) {
         // });
 
         webSocketServer.on('open', function open() {
-          ws.send('something');
+          webSocketServer.send('something');
         });
 
 
