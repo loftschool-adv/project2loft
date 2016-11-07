@@ -45,7 +45,11 @@ function uploadImg(req, res) {
         image.resize(100, Jimp.AUTO);
         image.write(thumb);
 
-        server.io.emit('eventClient', {thumb: thumb});
+        var src = thumb;
+        src =String(src).replace(/\\/g, "/");
+        src = src.substr(6);
+
+        server.io.emit('eventClient', {thumb: src});
 
       });
 

@@ -9,8 +9,6 @@ socket.on('eventClient', function (data) {
 	console.log(data);
 
 	var src = data.thumb;
-	src =String(src).replace(/\\/g, "/");
-	src = src.substr(6);
 	console.log(src);
 
 	var li = $('<li/>').addClass('img-item').appendTo($('ul#img-list'));
