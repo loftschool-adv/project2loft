@@ -36,19 +36,14 @@ wss.on('connection', function(ws) {
   });
 
   ws.send('something+');
+  ws.send(Date.now().toString(), {mask: true});
 
   ws.on('close', function() {
     console.log('соединение закрыто ' + id);
     delete clients[id];
   });
 
-
-
-
-  ws.send(Date.now().toString(), {mask: true});
-
-
-
+});
 
 function uploadImg(req, res) {
 
@@ -205,10 +200,6 @@ function imgSave(req, files) {
 
 }
 
-
-
 exports.upload = uploadImg;
 exports.save = imgSave;
 exports.files = files;
-
-});
