@@ -23,7 +23,7 @@ app.set('port', port);
 
 var server = http.createServer(app);
 
-let WebSocketServer = new require('ws');
+let WebSocketServer = require('ws');
 
 let clients = {};
 
