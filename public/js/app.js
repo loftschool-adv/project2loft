@@ -19,7 +19,7 @@ socket.on('eventClient', function (data) {
 	$('.modal__load-img').hide();
 
 });
-//socket.emit('eventServer', {data: 'Hello Server'});
+//socket.emit('eventServer', {data: 'Hello Server'});12
 
 // =========== Base module ===========
 
