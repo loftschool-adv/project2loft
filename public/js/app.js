@@ -16,10 +16,8 @@ socket.on('eventClient', function (data) {
 	var image =$('<img>', {
 		src: '/'+src});
 
-	// Когда картинка загрузится, ставим её на фон
-	image.on("load", function(){
-		ImgCont.css('background-image', 'url("/'+src+'")');
-	});
+	ImgCont.css('background-image', 'url("/'+src+'")');
+
 	$('.modal__load-img').hide();
 
 });
