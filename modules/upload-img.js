@@ -46,7 +46,7 @@ wss.on('connection', function(ws) {
 
 function uploadImg(req, res) {
 
-  wss.ws.send('something');
+  //wss.ws.send('something');
 
 
   var count = 0;
