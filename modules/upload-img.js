@@ -6,7 +6,7 @@ let util       = require('util');
 let Jimp       = require('jimp');
 let async      = require('async');
 let multiparty = require('multiparty');
-let ws         = require('../server.js');
+let ws         = require('../server.js').ws;
 
 let BaseModule = require('../modules/libs/_base.js');
 let base = new BaseModule;
@@ -49,11 +49,11 @@ function uploadImg(req, res) {
         // src =String(src).replace(/\\/g, "/");
         // src = src.substr(6);
 
-        ws.on('connection', function (s) {
-          s.on('open', function open() {
+
+          ws.on('open', function open() {
             s.send('something');
           });
-        });
+
 
 
         //server.io.emit('eventClient', {thumb: src});
