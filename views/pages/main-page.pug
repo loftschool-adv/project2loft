@@ -2,22 +2,21 @@ extends ../layout
 
 block content
 	-var user = 'Александра Соколова';
-	-var ava = avatar || '../img/album/no_photo.jpg';
-	-var BG = backgroundIamge || '../img/album/no_photo.jpg';
-	-var user = userName || Пользователь
-	-var about = userAbout || ""
-	
+	-var avatar = "user_avatar";
+	-var BG = "user_header";
+	- console.log(renderObj);
 	div.page-container
 		div.page-content
-			.header.header-main(style="background-image: url(" + backgroundIamge + "), url(../img/album/no_photo.jpg)")
+			.header.header-main(style="background-image: url(../img/user/"+BG+".png), url(../img/album/no_photo.jpg)")
 				.heder_main-content
 					.header__section.section.header__section_main.header__section_main-front
 						.header__part
 							.user-block
-								.user-block__photo(style="background-image: url("+ ava +"), url(../img/album/no_photo.jpg)")
+								.user-block__photo(style="background-image: url(../img/user/"+avatar+".png), url(../img/album/no_photo.jpg)")
 								.user-block__main
-									.user-block__name!= user
-									.user-block__desc!= about
+									.user-block__name Александра Соколова
+									.user-block__desc.
+										Я веб разработчик разработчик. Мне 24 года. Люблю путешествия, кодинг, фриланс, и активный отдых.
 									.user-block__social
 										+social()
 						.header__part.header__part--zip
@@ -35,7 +34,7 @@ block content
 					.header__section.section.header__section_main.header__section_main-back
 						.header__part
 							.user-block.user-block--edit
-								.user-block__photo(style="background-image: url("+ ava +"), url(../img/album/no_photo.jpg)")
+								.user-block__photo
 									.upload.user-block__photo-edit(title="Выбрать изображение")
 										svg.upload__icon
 											use(xlink:href='/img/sprite.svg#cam')
@@ -47,10 +46,11 @@ block content
 										input.field.width--lg(
 											type="text"
 											name="name"
-											value= user
+											value="Александра Соколова"
 										)
 									.form__row
-										textarea.field.width--lg(name="desc")!= about
+										textarea.field.width--lg(name="desc").
+											Я веб разработчик разработчик. Мне 24 года. Люблю путешествия, кодинг, фриланс, и активный отдых.
 									.form__row
 										+social('edit')
 

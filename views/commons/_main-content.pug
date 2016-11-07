@@ -1,17 +1,9 @@
--
-	var date = [1,5,3,2,8];
-	/*for(album in mainPageData.albums){
-		date.push(mainPageData.albums[album].date);
-	}*/
-	//console.log(mainPageData);
-
-
-section.section__news
+section.section__album-cards
 	div.header-edit-overlay
 	.container
 		h1.main-content__title Новое в мире
 		.news__list
-			each album in mainPageData.albums
+			each i in Array(8)
 				.news__item
 					.photo-card
 						a.photo-card__head(href="#404")
@@ -43,7 +35,7 @@ section.section__news
 									.link__text Название альбома
 		.news__button
 			.btn.btn--clear Показать еще
-section.section__album-cards
+section.section__album-cards.section__album-cards-color
 	div.btn.btn--light.btn--expand.btn_album.btn_album-add.btn_album-main-add
 		svg.btn__icon
 			use(xlink:href='/img/sprite.svg#add')
@@ -51,13 +43,13 @@ section.section__album-cards
 	.container
 		h2.album-cards__title Мои альбомы
 		.album-cards__list
-			each album in mainPageData.albums
+			each i in Array(10)
 				.album-cards__item
 					.album-card
-						a.album-card__head(href="#404" style='background-image: url('+ album.cover +')')
+						a.album-card__head(href="#404")
 							.album-card__info
-								.album-card__title!= album.about
-								.album-card__cnt Количество фотографий #{album.imageNumber}
+								.album-card__title Описание альбома ...
+								.album-card__cnt Количество фотографий
 
 						.album-card__foot
 							.album-card__foot-part
@@ -66,4 +58,4 @@ section.section__album-cards
 										use(xlink:href='/img/sprite.svg#edit')
 
 							.album-card__foot-part
-								a.album-card__link(href="#404")!= album.name
+								a.album-card__link(href="#404") Название альбома
