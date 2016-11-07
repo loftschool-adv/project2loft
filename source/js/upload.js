@@ -6,6 +6,7 @@ var isAdvancedUpload = function() {
 // Читаем разметку и сохраняем форму
 var $form = $('#upload');
 var $input = $('#file');
+var $save = $('#save');
 
 // Если чтото закинули добавляем класс
 if (isAdvancedUpload) {
@@ -67,11 +68,18 @@ $form.on('submit', function(e) {
       cache: false,
       contentType: false,
       processData: false,
-      complete: function() {
+      complete: function(ans) {
         $form.removeClass('is-uploading');
+        console.log(ans.responseText);
+
+
+      
+      //socket.emit('eventServer', {data: 'Hello Server'});
       },
       success: function(data) {
+
         $form.addClass( data.success == true ? 'is-success' : 'is-error' );
+
         if (!data.success) $errorMsg.text(data.error);
       },
       error: function() {
@@ -100,4 +108,24 @@ $form.on('submit', function(e) {
       $iframe.remove();
     });
   }
+});
+
+$save.on('click', function () {
+
+  $.ajax({
+    type: "POST",
+    url: location.href + '/saveImg/',
+    data: 'ok',
+    cache: false,
+    contentType: false,
+    processData: false,
+    success: function(data) {
+      $form.addClass( data.success == true ? 'is-success' : 'is-error' );
+      if (!data.success) $errorMsg.text(data.error);
+    },
+    error: function() {
+      // Log the error, show an alert, whatever works for you
+    }
+  });
+
 });

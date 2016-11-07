@@ -21,28 +21,6 @@ $( document ).ready(function() {
     albumModule.edit.init();
 });
 
-
-
-// Открыть/закрыть окно для загрузки изображений
-(function(){
-	$('.btn_album-add').on('click', function() {
-	$('.modal, .modal-overlay').removeClass('hide');
-
-	})
-$('.modal__header-close,  .btn-cancelLoad').on('click', function(ev) {
-	ev.preventDefault();
-	$('.modal, .modal-overlay').addClass('hide');
-	$(".img-list").empty();
-	$('.modal__load-img').show();
-})
-})();
-
-// Отменить загрузку для одной картинки
-$('body').on('click','.img-item',function(e){
-		alert("Отменить загрузку?");
-		$(this).remove();
-});
-
 	// Кастомный вид для загрузки файлов
 	(function() {
 		var el = $('.upload');
