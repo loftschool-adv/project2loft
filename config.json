@@ -1,8 +1,10 @@
 {
 	"db": {
-		"host": "localhost",
-		"port": "27017",
-		"name": "gallery"
+		"host": "ds015939.mlab.com",
+		"port": "15939",
+		"name": "project2loft",
+		"user": "user",
+		"pass": "user"
 	},
 	"http" : {
 		"port": 4000,
