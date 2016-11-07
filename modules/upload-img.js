@@ -6,13 +6,41 @@ let util       = require('util');
 let Jimp       = require('jimp');
 let async      = require('async');
 let multiparty = require('multiparty');
-let webSocketServer = require('../server.js').webSocketServer;
 
 let BaseModule = require('../modules/libs/_base.js');
 let base = new BaseModule;
 let mongoose = require('../modules/libs/mongoose.js');
 let Image = require('../modules/models/image.js').Image;
 var files = [];
+
+var WebSocketServer = require('ws');
+
+var clients = {};
+
+// WebSocket-сервер на порту 4001
+var webSocketServer = new WebSocketServer.Server({
+  port: 4001
+});
+webSocketServer.on('connection', function(ws) {
+
+  var id = Math.random();
+  clients[id] = ws;
+  console.log("новое соединение " + id);
+
+  ws.on('message', function(message) {
+    console.log('получено сообщение ' + message);
+
+    for (var key in clients) {
+      clients[key].send(message);
+    }
+  });
+
+  ws.on('close', function() {
+    console.log('соединение закрыто ' + id);
+    delete clients[id];
+  });
+
+});
 
 function uploadImg(req, res) {
 
@@ -49,9 +77,13 @@ function uploadImg(req, res) {
         // src =String(src).replace(/\\/g, "/");
         // src = src.substr(6);
 
-        webSocketServer.send('something');
+        //webSocketServer.send('something');
         //   ws.send('something');
         // });
+
+        webSocketServer.on('open', function open() {
+          ws.send('something');
+        });
 
 
         //server.io.emit('eventClient', {thumb: src});

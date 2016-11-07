@@ -23,35 +23,6 @@ app.set('port', port);
 
 var server = http.createServer(app);
 
-var WebSocketServer = require('ws');
-
-var clients = {};
-
-// WebSocket-сервер на порту 4001
-var webSocketServer = new WebSocketServer.Server({
-  port: 4001
-});
-webSocketServer.on('connection', function(ws) {
-
-  var id = Math.random();
-  clients[id] = ws;
-  console.log("новое соединение " + id);
-
-  ws.on('message', function(message) {
-    console.log('получено сообщение ' + message);
-
-    for (var key in clients) {
-      clients[key].send(message);
-    }
-  });
-
-  ws.on('close', function() {
-    console.log('соединение закрыто ' + id);
-    delete clients[id];
-  });
-
-});
-
 /**
  * Listen on provided port, on all network interfaces.
  */
