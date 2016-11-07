@@ -23,9 +23,9 @@ app.set('port', port);
 
 var server = http.createServer(app);
 
-let WebSocketServer = require('ws');
+var WebSocketServer = require('ws');
 
-let clients = {};
+var clients = {};
 
 // WebSocket-сервер на порту 4001
 var webSocketServer = new WebSocketServer.Server({
@@ -120,4 +120,4 @@ function onListening() {
   debug('Listening on ' + bind);
 }
 
-exports.ws = webSocketServer;
+module.exports.ws = webSocketServer;

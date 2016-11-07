@@ -6,7 +6,7 @@ let util       = require('util');
 let Jimp       = require('jimp');
 let async      = require('async');
 let multiparty = require('multiparty');
-let ws         = require('../server.js').ws;
+let ws         = require('../server.js');
 
 let BaseModule = require('../modules/libs/_base.js');
 let base = new BaseModule;
