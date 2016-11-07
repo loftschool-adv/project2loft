@@ -40,6 +40,7 @@ function Base(){
     })
   }
 
+
   this.clearFolder = function(folder,callback){
     let thisModule = this;
     async.series(
