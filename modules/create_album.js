@@ -1,5 +1,4 @@
 let async = require('async');
-let User = require('./models/user.js');
 let Album = require('./models/album.js').Album;
 let Image = require('./models/image.js').Image;
 let multiparty = require('multiparty');
@@ -128,26 +127,22 @@ let addAlbum = function(req,res){
 				})
 			},
 			function(image,album,callback){
-				// Создаем запись в объекте отправки
-				answerObj.cover =  `/id${req.session.user_id}/${albumsFolder}/${album}/${image}`,
 				// Обновляем обложку альбома в базе
-				Album.findOneAndUpdate(
-		    	{user_id: req.session.user_id,name : album},
-		    	{$set : 
-						{
-							cover: image,
-						}
-					},callback(null,image,album)
-				)
-
+				Album.findOneAndUpdate({user_id: req.session.user_id, name : album}, {$set:{cover: image }},(err,alb) => {
+					answerObj.cover =  `/id${req.session.user_id}/${albumsFolder}/${album}/${image}`;
+					callback(null,image,album)
+				})
 			},
-			function(image,album,callback){
+
+		/*	function(image,album,callback){
+				
 				Image.find({user_id: req.session.user_id, album: album},() => {})
 					.then((image)=>{
 						 answerObj.images = image.length;
 						 callback();
 						})
-			}
+				
+			}*/
 			
 
 
@@ -159,14 +154,13 @@ let addAlbum = function(req,res){
 			if(err){
 				res.json({message: err})
 			}else{
-				console.log(answerObj);
 
 				ajaxAlbum = `<div class="album-cards__item">
 						<div class="album-card">
 							<a class="album-card__head" href="#404" style="background-image: url(${answerObj.cover})">
 								<div class="album-card__info">
 									<div class="album-card__title">${answerObj.about}</div>
-									<div class="album-card__cnt">${answerObj.images}</div>
+									<div class="album-card__cnt">Количетво фотографий 1</div>
 								</div>
 							</a>
 							<div class="album-card__foot">
