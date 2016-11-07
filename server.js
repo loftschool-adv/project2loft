@@ -23,16 +23,33 @@ app.set('port', port);
 
 var server = http.createServer(app);
 
-let io = require('socket.io')(server);
+let WebSocketServer = new require('ws');
 
-io.on('connection', function (socket) {
-  socket.on('eventServer', function (data) {
-    console.log(data);
-    socket.emit('eventClient', { data: 'Hello Client' });
+let clients = {};
+
+// WebSocket-сервер на порту 4001
+var webSocketServer = new WebSocketServer.Server({
+  port: 4001
+});
+webSocketServer.on('connection', function(ws) {
+
+  var id = Math.random();
+  clients[id] = ws;
+  console.log("новое соединение " + id);
+
+  ws.on('message', function(message) {
+    console.log('получено сообщение ' + message);
+
+    for (var key in clients) {
+      clients[key].send(message);
+    }
   });
-  socket.on('disconnect', function () {
-    console.log('user disconnected');
+
+  ws.on('close', function() {
+    console.log('соединение закрыто ' + id);
+    delete clients[id];
   });
+
 });
 
 /**

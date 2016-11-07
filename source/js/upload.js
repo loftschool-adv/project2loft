@@ -72,8 +72,6 @@ $form.on('submit', function(e) {
         $form.removeClass('is-uploading');
         console.log(ans.responseText);
 
-
-      
       //socket.emit('eventServer', {data: 'Hello Server'});
       },
       success: function(data) {
