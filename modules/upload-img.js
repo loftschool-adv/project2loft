@@ -46,9 +46,8 @@ wss.on('connection', function(ws) {
 
 function uploadImg(req, res) {
 
-  wss.on('open', function open(ws) {
-    ws.send('something');
-  });
+  wss.send('something');
+
 
   var count = 0;
   var form = new multiparty.Form();
