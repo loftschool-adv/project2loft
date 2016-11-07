@@ -120,4 +120,4 @@ function onListening() {
   debug('Listening on ' + bind);
 }
 
-module.exports.ws = webSocketServer;
+exports.ws = webSocketServer;
