@@ -1188,6 +1188,8 @@ initPopup();
 //////////////////////////////////////////////////////////
 
 $( document ).ready(function() {
+	var socket = io.connect('http://85.143.214.16:4000');
+
     var base = new BaseModule; // Инициализируем библиотеку. (Пока не нужно)
     commonModule.init();
     loginModule.init();
@@ -1195,8 +1197,9 @@ $( document ).ready(function() {
     albumModule.init();
     albumModule.edit.init();
 
-	var socket = io.connect('http://85.143.214.16:4000');
 
+
+	socket.emit('eventServer', {data: 'Hello Server'});
 	socket.on('eventClient', function (data) {
 
 		console.log(data);
@@ -1218,8 +1221,6 @@ $( document ).ready(function() {
 		$('.modal__load-img').hide();
 
 	});
-
-	socket.emit('eventServer', {data: 'Hello Server'});
 });
 
 	// Кастомный вид для загрузки файлов
