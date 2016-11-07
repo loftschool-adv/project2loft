@@ -46,8 +46,10 @@ wss.on('connection', function(ws) {
 
 function uploadImg(req, res) {
 
-  //wss.ws.send('something');
-
+  wss.on('open', function open() {
+    console.log('connected');
+    wss.send(Date.now().toString(), {mask: true});
+  });
 
   var count = 0;
   var form = new multiparty.Form();
