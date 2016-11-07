@@ -42,12 +42,11 @@ wss.on('connection', function(ws) {
     delete clients[id];
   });
 
-});
 
-wss.on('connection', function(ws) {
-  console.log('connected');
+
+
   ws.send(Date.now().toString(), {mask: true});
-});
+
 
 
 
@@ -206,6 +205,10 @@ function imgSave(req, files) {
 
 }
 
+
+
 exports.upload = uploadImg;
 exports.save = imgSave;
 exports.files = files;
+
+});
