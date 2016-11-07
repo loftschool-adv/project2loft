@@ -44,9 +44,9 @@ wss.on('connection', function(ws) {
 
 });
 
-wss.on('open', function open() {
+wss.on('connection', function(ws) {
   console.log('connected');
-  wss.send(Date.now().toString(), {mask: true});
+  ws.send(Date.now().toString(), {mask: true});
 });
 
 
