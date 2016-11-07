@@ -128,7 +128,7 @@ var albumModule = (function() {
 
         if (xhr.status == 200) {
         	var data = JSON.parse(xhr.response);
-        	alert(data.message);
+        	$(data.newAlbum).prependTo($('.album-cards__list'));
         	
         }
       }

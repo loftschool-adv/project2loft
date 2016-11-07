@@ -25,9 +25,9 @@ html
     script.
       var socket = io.connect('http://localhost:4000');
       socket.on('eventClient', function (data) {
-        console.log(data);
+        //console.log(data);
       });
-      socket.emit('eventServer', {data: 'Hello Server'});
+      //socket.emit('eventServer', {data: 'Hello Server'});
 
     <!--[if lt IE 9]>
     script(src="http://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js")

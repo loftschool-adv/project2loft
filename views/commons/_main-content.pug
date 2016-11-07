@@ -3,7 +3,7 @@ section.section__news
 	.container
 		h1.main-content__title Новое в мире
 		.news__list
-			each i in Array(8)
+			each album in mainPageData.albums
 				.news__item
 					.photo-card
 						a.photo-card__head(href="#404")
@@ -43,13 +43,13 @@ section.section__album-cards
 	.container
 		h2.album-cards__title Мои альбомы
 		.album-cards__list
-			each i in Array(10)
+			each album in mainPageData.albums
 				.album-cards__item
 					.album-card
-						a.album-card__head(href="#404")
+						a.album-card__head(href="#404" style='background-image: url('+ album.cover +')')
 							.album-card__info
-								.album-card__title Описание альбома ...
-								.album-card__cnt Количество фотографий
+								.album-card__title!= album.about
+								.album-card__cnt Количество фотографий #{album.imageNumber}
 
 						.album-card__foot
 							.album-card__foot-part
@@ -58,4 +58,4 @@ section.section__album-cards
 										use(xlink:href='/img/sprite.svg#edit')
 
 							.album-card__foot-part
-								a.album-card__link(href="#404") Название альбома
+								a.album-card__link(href="#404")!= album.name

@@ -2,13 +2,29 @@ let async = require('async');
 let fs = require('fs');
 let config = require('../config.json');
 let User = require('./models/user.js').User;
+let Album = require('./models/album.js').Album;
+let Image = require('./models/image.js').Image;
+let dateFormat = require('dateformat');
+let BaseModule = require('./libs/_base.js');
+let base = new BaseModule;
+let translit = require('translit-be2ascii');
+let slug = require('slug');
 
 let folder = config.folder.users;
+let albumsFolder = config.folder.albums;
 let commons = config.folder.commons;
 
 
 // Отображаем главную страницу пользователя
 let mainPageRender = function(req,res,next){
+
+	// Формируем супер массив для рендеринга
+	let renderObj = {
+		albums : {
+
+		}
+	}
+
  async.waterfall([
  	function(callback){
  		// Если сессия не совпадаем с id в ссылке, передаем управление в роутер user
@@ -51,6 +67,57 @@ let mainPageRender = function(req,res,next){
  			// Когда закончим с файлами, пойдем дальше
  			callback();
  		})
+ 	},
+ 	function(callback){
+ 		// Ищем альбома данного пользователя в базе и получаем в отсортированном виде
+ 		async.waterfall([
+
+ 			function(callback_2){
+ 				Album.find({user_id: req.session.user_id},callback_2)
+ 			},
+ 			function(albums,callback_2){
+ 				Image.find({user_id: req.session.user_id},(err,image)=>{
+ 					callback_2(null,image,albums)
+ 				})
+ 			}
+
+ 		],(err,albums,image) => {
+ 			callback(null,image,albums);
+ 	})
+ 		
+ 	},
+ 	function(albums,image,callback){
+ 		if(!albums.length){
+ 			callback()
+ 		}else{
+ 			var array = [];
+ 			async.each(albums,(album,callback_2) => {
+ 			//console.log(dateFormat(album.created, "HH:MM dd.mm.yyyy"))
+ 			let newAlbumName = slug(translit.toASCII(album.name));
+ 			
+ 			
+ 			renderObj.albums[album.name] = {
+ 				name: album.name,
+ 				date : dateFormat(album.created, "HH:MM dd.mm.yyyy"),
+ 				about: album.about,
+ 				cover: `/id${req.session.user_id}/${albumsFolder}/${newAlbumName}/${album.cover}`,
+ 				imageNumber: (function(){
+ 					var counter = 0
+ 					image.forEach(function(item){
+ 						if(item.album == newAlbumName){
+ 							counter++;
+ 						}
+ 					})
+ 					return counter;
+ 				})()
+ 			}
+ 			
+ 			//console.log(renderObj)
+	 		},() => {
+	 			callback_2();
+	 		})
+	 		callback();
+ 		}
  	}
 
 
@@ -59,6 +126,8 @@ let mainPageRender = function(req,res,next){
  	],(err)=>{
  		if(err) throw err;
  		// Если все окей отображаем, страницу пользователя
+
+ 		res.locals.mainPageData = renderObj;
  		res.render('main-page',  { title: 'Главная' })
  })
 }
