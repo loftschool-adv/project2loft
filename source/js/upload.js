@@ -54,7 +54,8 @@ $form.on('submit', function(e) {
 
     var photos = $input[0].files;
 
-    $.each( photos, function( key, photo ) {
+    async.each(photos, function(photo, callback) {
+
       var ajaxData = new FormData();
       ajaxData.append("photo", photo);
 
@@ -78,6 +79,8 @@ $form.on('submit', function(e) {
 
           $form.addClass( data.success == true ? 'is-success' : 'is-error' );
 
+          callback('upload');
+
           if (!data.success) $errorMsg.text(data.error);
         },
         error: function() {
@@ -86,6 +89,39 @@ $form.on('submit', function(e) {
       });
 
     });
+
+    // $.each( photos, function( key, photo ) {
+    //   var ajaxData = new FormData();
+    //   ajaxData.append("photo", photo);
+    //
+    //   $.ajax({
+    //     url: location.href + '/addImg/',
+    //     type: $form.attr('method'),
+    //     data: ajaxData,
+    //     dataType: 'json',
+    //     cache: false,
+    //     contentType: false,
+    //     processData: false,
+    //     complete: function(ans) {
+    //       $form.removeClass('is-uploading');
+    //       console.log(ans.responseText);
+    //
+    //
+    //
+    //       //socket.emit('eventServer', {data: 'Hello Server'});
+    //     },
+    //     success: function(data) {
+    //
+    //       $form.addClass( data.success == true ? 'is-success' : 'is-error' );
+    //
+    //       if (!data.success) $errorMsg.text(data.error);
+    //     },
+    //     error: function() {
+    //       // Log the error, show an alert, whatever works for you
+    //     }
+    //   });
+    //
+    // });
 
     if (droppedFiles) {
       $.each( droppedFiles, function(i, file) {
