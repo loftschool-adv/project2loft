@@ -1,6 +1,8 @@
 
 //socket.emit('eventServer', {data: 'Hello Server'});12
 
+var socket = io.connect('http://85.143.214.16:4000');
+
 // =========== Base module ===========
 
 var BaseModule = function(){
@@ -1188,7 +1190,6 @@ initPopup();
 //////////////////////////////////////////////////////////
 
 $( document ).ready(function() {
-	var socket = io.connect('http://85.143.214.16:4000');
 
     var base = new BaseModule; // Инициализируем библиотеку. (Пока не нужно)
     commonModule.init();
