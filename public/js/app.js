@@ -3,7 +3,7 @@
 
 var socket = io.connect('http://85.143.214.16:4000');
 
-socket.emit('eventServer', {data: 'Hello Server'});
+//socket.emit('eventServer', {data: 'Hello Server'});
 socket.on('eventClient', function (data) {
 
 	console.log(data);
