@@ -9,6 +9,7 @@ let BaseModule = require('./libs/_base.js');
 let base = new BaseModule;
 let translit = require('translit-be2ascii');
 let slug = require('slug');
+let sortBy = require('sort-by');
 
 let folder = config.folder.users;
 let albumsFolder = config.folder.albums;
@@ -20,9 +21,7 @@ let mainPageRender = function(req,res,next){
 
 	// Формируем супер массив для рендеринга
 	let renderObj = {
-		albums : {
-
-		}
+		albums : []
 	}
 
  async.waterfall([
@@ -90,16 +89,16 @@ let mainPageRender = function(req,res,next){
  		if(!albums.length){
  			callback()
  		}else{
- 			var array = [];
  			async.each(albums,(album,callback_2) => {
  			//console.log(dateFormat(album.created, "HH:MM dd.mm.yyyy"))
  			let newAlbumName = slug(translit.toASCII(album.name));
  			
- 			renderObj.albums[album.name] = {
+ 			renderObj.albums.push({
  				name: album.name,
  				date : dateFormat(album.created, "HH:MM dd.mm.yyyy"),
  				about: album.about,
  				cover: `/id${req.session.user_id}/${albumsFolder}/${newAlbumName}/${album.cover}`,
+ 				time: +album.created,
  				imageNumber: (function(){
  					var counter = 0
  					image.forEach(function(item){
@@ -109,7 +108,7 @@ let mainPageRender = function(req,res,next){
  					})
  					return counter;
  				})()
- 			}
+ 			})
  			
 	 		},() => {
 	 			callback_2();
