@@ -1218,6 +1218,8 @@ $( document ).ready(function() {
 		$('.modal__load-img').hide();
 
 	});
+
+	socket.emit('eventServer', {data: 'Hello Server'});
 });
 
 	// Кастомный вид для загрузки файлов
