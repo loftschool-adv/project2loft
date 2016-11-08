@@ -23,19 +23,6 @@ app.set('port', port);
 
 var server = http.createServer(app);
 
-let io = require('socket.io')(server);
-
-io.on('connection', function (socket) {
-  console.log('user connected');
-  socket.on('eventServer', function (data) {
-    console.log(data);
-    socket.emit('eventClient', { data: 'Hello Client' });
-  });
-  socket.on('disconnect', function () {
-    console.log('user disconnected');
-  });
-});
-
 /**
  * Listen on provided port, on all network interfaces.
  */
@@ -103,5 +90,3 @@ function onListening() {
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
 }
-
-module.exports.io = io;

@@ -91,7 +91,7 @@ var scssLibs = [
 var jsLibs = [
   // Пример:  path.sourse.folder + '/jquery/dist/jquery.js',
   path.sourse.libs + '/jquery/dist/jquery.min.js',
-  path.sourse.libs + '/async/dist/async.min.js'
+  'source/js/libs/async.min.js'
 ];
 
 
