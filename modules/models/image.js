@@ -3,14 +3,18 @@
 
 let mongoose = require('./../libs/mongoose.js');
 let Schema = mongoose.Schema;
-
+let autoIncrement = require('mongoose-auto-increment');
+autoIncrement.initialize(mongoose);
 
 let schema = new Schema({
+  img_id : {
+    type: Number,
+    unique: false,
+  },
   name: {
     type: String,
     unique: false,
     required: false,
-    default: "Изображение"
   },
   src: {
     type: String,
@@ -32,5 +36,12 @@ let schema = new Schema({
     required: false
   }
 });
+
+schema.plugin(autoIncrement.plugin, {
+  model: 'Image',
+  field: 'img_id',
+  startAt: 1,
+});
+
 
 exports.Image = mongoose.model('Image', schema);

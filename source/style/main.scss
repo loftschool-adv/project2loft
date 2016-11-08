@@ -4,7 +4,6 @@
 @import "base/fonts";
 
 
-
 // components
 @import "index";
 
@@ -17,6 +16,7 @@
 @import "components/drop";
 @import "components/info";
 @import "components/search";
+@import "components/load";
 
 @import "components/form";
 @import "components/album-card";
@@ -25,8 +25,12 @@
 @import "components/upload";
 @import "components/upload-album";
 
+@import "components/slider";
+@import "components/modal";
+
 @import "components/_header";
 @import "components/_footer";
+
 
 
 

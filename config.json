@@ -11,5 +11,11 @@
 		"host": "localhost",
 		"publicRoot": "public",
 		"templatesRoot" : "templates"
+	},
+	"folder" : {
+		"users" : "users",
+		"tmp"	: "tmp",
+		"commons" : "commons",
+		"albums" : "albums"
 	}
 }
