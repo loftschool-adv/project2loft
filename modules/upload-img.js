@@ -42,6 +42,10 @@ function uploadImg(req, res) {
 
         res.write(thumb);
 
+        res.end();
+
+        //server.io.emit('eventClient', {thumb: thumb});
+
       });
 
     }
