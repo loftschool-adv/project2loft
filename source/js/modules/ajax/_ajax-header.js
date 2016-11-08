@@ -39,9 +39,11 @@ var ajaxHeaderModule = (function() {
   	var $headrBack = $header.find('.header__section_main-back');
   	var inputName = $headrBack.find('input[name="name"]');
   	var inputAbout = $headrBack.find('textarea[name = "desc"]');
+    var inputAvatar = $headrBack.find('input[name="photo"]')[0].files[0];
   	
   	formData.append("userName",inputName.val());
   	formData.append("userAbout",inputAbout.val());
+    formData.append("userAvatar",inputAvatar);
   	return formData;
   
   }
@@ -154,8 +156,15 @@ var ajaxHeaderModule = (function() {
       data: setData(formData),
       processData: false,
       contentType: false,
+      cache: false,
       success: function(res){
-        console.log(res);
+        // Выводим данные с сервера
+        headerFront.find('.user-block__name').text(res.name);
+        headerFront.find('.user-block__desc').text(res.about);
+        console.log(res.avatar);
+        headerFront.find('.user-block__photo').css({
+          'background-image': 'url(' + res.avatar + '), url(../img/album/no_photo.jpg)'
+        })
         closeEditHeader(e);
       }
     });
