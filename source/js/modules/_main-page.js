@@ -139,6 +139,7 @@ var mainPageModule = (function() {
   var _editUserData = function(){
   	
   	btnSave.on('click', function(e){
+      //$('.preload__container').addClass('active');
   		e.preventDefault();
       setUserBackGround();
       setAvatar();
