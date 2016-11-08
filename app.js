@@ -17,8 +17,6 @@ let creatUsersFolder = require('./modules/createUserFolder.js');
 
 let app = express();
 
-//let server = require('./server.js');
-
 // Create session
 app.use(session({
   secret: 'photo',
@@ -42,11 +40,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'users')));
 
 
-// Генерируем id
-/*app.param('id', function (req, res, next, id) {
-  next();
-});*/
-
 //===маршруты===
 app.use('/', require('./routes/index.js'));
 app.use('/:id', require('./routes/main-page.js'));
@@ -55,18 +48,6 @@ app.use('/:id/album', require('./routes/album.js'));
 app.use('/:id/components', require('./routes/components.js'));
 app.use('/:id/search', require('./routes/search.js'));
 app.use('/:id/user', require('./routes/user.js'));
-
-// // debug
-// app.use('/', require('./routes/login.js'));
-// app.use('/main', require('./routes/main-page.js'));
-// app.use('/album', require('./routes/album.js'));
-// app.use('/upload', require('./routes/oldUpload.js'));
-// app.use('/components', require('./routes/components.js'));
-// app.use('/search', require('./routes/search.js'));
-// app.use('/user', require('./routes/user.js'));
-//=============
-
-// catch 404 and forward to error handler
 
 
 app.use((req, res, next)  => {

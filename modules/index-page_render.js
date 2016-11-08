@@ -5,9 +5,9 @@ let indexRender = function(req,res){
   } else {
     res.redirect(`/id${req.session.user_id}/`);
   }
-}
+};
 
 
 module.exports = function(req, res){
   indexRender(req, res);
-}
+};
