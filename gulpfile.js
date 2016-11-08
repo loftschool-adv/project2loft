@@ -120,12 +120,15 @@ var mainJs = [
   path.sourse.folder + '/' + path.sourse.js + '/modules/_base.js',
   path.sourse.folder + '/' + path.sourse.js + '/modules/_common.js',
   path.sourse.folder + '/' + path.sourse.js + '/modules/_login.js',
+  path.sourse.folder + '/' + path.sourse.js + '/modules/animation/_header.js',
   path.sourse.folder + '/' + path.sourse.js + '/upload.js',
   //path.sourse.folder + '/' + path.sourse.js + '/oldUploaderObject.js',
   path.sourse.folder + '/' + path.sourse.js + '/modules/_main-page.js',
   path.sourse.folder + '/' + path.sourse.js + '/modules/_album.js',
   path.sourse.folder + '/' + path.sourse.js + '/modal.js',
   path.sourse.folder + '/' + path.sourse.js + '/slider.js',
+  // ajax
+  path.sourse.folder + '/' + path.sourse.js + '/modules/ajax/_ajax-header.js',
   path.sourse.folder + '/' + path.sourse.js + '/app.js',
 
 ];
