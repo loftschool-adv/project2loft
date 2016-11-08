@@ -43,25 +43,6 @@ var BaseModule = function(){
 			});
 	}
 
-/*	this.ajax = function(xhr,data,url,method,callback){
-
-			xhr = {
-
-			}
-
-
-			xhr = new XMLHttpRequest;
-      xhr.open(method, url ,true);
-      xhr.send(data);
-     	console.log(this.xhr);
-      xhr.onreadystatechange = function() {
-      if (xhr.readyState != 4) return;
-      if (xhr.status == 200) {
-      	callback();
-      }
-    }
-	}*/
-
 	this.ajaxDataObj = function(obj,url,method){
 		method = method || 'POST'
 		var data = JSON.stringify(obj);

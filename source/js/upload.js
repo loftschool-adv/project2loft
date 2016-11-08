@@ -98,6 +98,8 @@ function ajaxUploadImg(photos) {
       complete: function(data) {
         $form.removeClass('is-uploading');
 
+        console.log(data);
+
         ////////////////////////////////////////////
         ////////////////////////////////////////////
         var src = data.responseText;

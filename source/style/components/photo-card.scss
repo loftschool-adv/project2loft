@@ -20,7 +20,7 @@
 			transition: background .5s;
 		}
 
-		/*&:after {
+		&:after {
 			content: '';
 			position: absolute;
 			left: 0;  right: 0;
@@ -31,14 +31,16 @@
 			background: url('../img/icons/loupe.svg')  no-repeat;
 			opacity: 0;
 			transition: opacity .5s;
-		}*/
+		}
 
 		&:hover {
 			&:before {
 				background: rgba(0,0,0,.25);
 			}
 
-			
+			&:after {
+				opacity: .9;
+			}
 		}
 	}
 

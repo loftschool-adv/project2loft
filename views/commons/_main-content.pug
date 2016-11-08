@@ -1,35 +1,37 @@
 -
-	if(mainPageData){
-		albums = mainPageData.albums
-	}else{
-		albums = [1]
-	}
+	var date = [1,5,3,2,8];
+	/*for(album in mainPageData.albums){
+		date.push(mainPageData.albums[album].date);
+	}*/
+	//console.log(mainPageData);
 
-section.section__album-cards
+
+section.section__news
 	div.header-edit-overlay
 	.container
 		h1.main-content__title Новое в мире
 		.news__list
-			.news__item
-				.photo-card
-					a.photo-card__head(href="#404")
+			each album in mainPageData.albums
+				.news__item
+					.photo-card
+						a.photo-card__head(href="#404")
 
-					.photo-card__body
-						.photo-details
-							.photo-details__side
-								a.photo-details__ava(href="#user")
+						.photo-card__body
+							.photo-details
+								.photo-details__side
+									a.photo-details__ava(href="#user")
 
-							.photo-details__main
-								.photo-details__title Название фотографии
-								.photo-details__info.info
-									.info__item
-										svg.info__icon
-											use(xlink:href='/img/sprite.svg#comments')
-										span.info__text 2
-									.info__item
-										svg.info__icon
-											use(xlink:href='/img/sprite.svg#like')
-										span.info__text 10
+								.photo-details__main
+									.photo-details__title Название фотографии
+									.photo-details__info.info
+										.info__item
+											svg.info__icon
+												use(xlink:href='/img/sprite.svg#comments')
+											span.info__text 2
+										.info__item
+											svg.info__icon
+												use(xlink:href='/img/sprite.svg#like')
+											span.info__text 10
 
 						.photo-card__foot
 							.photo-card__foot-part
@@ -41,15 +43,15 @@ section.section__album-cards
 									.link__text Название альбома
 		.news__button
 			.btn.btn--clear Показать еще
-section.section__album-cards.section__album-cards-color
-	div.btn.btn--light.btn--expand.btn_album.btn_album-main-add
+section.section__album-cards
+	div.btn.btn--light.btn--expand.btn_album.btn_album-add.btn_album-main-add
 		svg.btn__icon
 			use(xlink:href='/img/sprite.svg#add')
 		span.btn__text Добавить
 	.container
 		h2.album-cards__title Мои альбомы
 		.album-cards__list
-			each album in albums
+			each album in mainPageData.albums
 				.album-cards__item
 					.album-card
 						a.album-card__head(href="#404" style='background-image: url('+ album.cover +')')
