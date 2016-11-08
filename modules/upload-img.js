@@ -42,6 +42,8 @@ function uploadImg(req, res) {
 
         res.write(thumb);
 
+        res.end();
+
         //server.io.emit('eventClient', {thumb: thumb});
 
       });
@@ -52,7 +54,6 @@ function uploadImg(req, res) {
 // Close emitted after form parsed
   form.on('close', function() {
     console.log('Upload completed!');
-    res.end();
 
     //imgSave(req, files);
   });
