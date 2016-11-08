@@ -90,7 +90,8 @@ var scssLibs = [
 // Тут пишем пути к файлам js, чтобы они превратились в единый файл foundation.js (название файла береться из конфига)
 var jsLibs = [
   // Пример:  path.sourse.folder + '/jquery/dist/jquery.js',
-  path.sourse.libs + '/jquery/dist/jquery.min.js'
+  path.sourse.libs + '/jquery/dist/jquery.min.js',
+  path.sourse.libs + '/async/dist/async.min.js'
 ];
 
 
