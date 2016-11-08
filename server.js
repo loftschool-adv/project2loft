@@ -26,6 +26,7 @@ var server = http.createServer(app);
 let io = require('socket.io')(server);
 
 io.on('connection', function (socket) {
+  console.log('user connected');
   socket.on('eventServer', function (data) {
     console.log(data);
     socket.emit('eventClient', { data: 'Hello Client' });

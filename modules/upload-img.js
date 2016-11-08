@@ -21,11 +21,6 @@ function uploadImg(req, res) {
   form.uploadDir = 'users/id' + req.session.user_id + '/tmp/';
   form.autoFiles = true;
 
-
-  // form.on('progress', function (bytesReceived, bytesExpected) {
-  //   console.log(bytesReceived / bytesExpected * 100, '%');
-  // });
-
   form.on('file', function (name, file) {
 
     if (file.originalFilename) {
@@ -42,10 +37,12 @@ function uploadImg(req, res) {
 
         console.log(file.path, '-> resize ->', thumb);
 
-        image.resize(100, Jimp.AUTO);
+        image.resize(380, Jimp.AUTO);
         image.write(thumb);
 
-        server.io.emit('eventClient', {thumb: thumb});
+        res.write(thumb);
+
+        //server.io.emit('eventClient', {thumb: thumb});
 
       });
 
@@ -55,8 +52,8 @@ function uploadImg(req, res) {
 // Close emitted after form parsed
   form.on('close', function() {
     console.log('Upload completed!');
+    res.end();
 
-    res.end('ok');
     //imgSave(req, files);
   });
 
