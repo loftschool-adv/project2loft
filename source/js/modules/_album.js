@@ -175,49 +175,7 @@ var albumModule = (function() {
     }
 
   });
-	// Анимация для редактирования хедера
-	var editAllHeader = (function() {
 
-		var $this,
-				front,
-				back,
-				headerBottom,
-				headerBottomEdit;
-
-		var _setUpListners = function() {
-			$('.btn_edit-header').on('click', _editHeader);
-			$('#cancel_edit_header').on('click', _returnHeader);
-			$('.btn--save').on('click', _returnHeader);
-		};
-
-		var _editHeader = function() {
-
-			$this = $(this);
-			front = $this.closest('.header__section');
-			back = front.next();
-			headerBottom = front.parent().siblings().children('.header-bottom-front');
-			headerBottomEdit  = headerBottom.prev();
-
-			back.css('top','0');
-			headerBottomEdit.css('transform','translateY(0)');
-			front.fadeOut(500);
-			$('.header-edit-overlay').fadeIn(500);
-			headerBottom.fadeOut(500);
-		}
-		var _returnHeader = function(ev) {
-			ev.preventDefault();
-			back.css('top','-100%');
-			headerBottomEdit.css('transform','translateY(100%)');
-			front.fadeIn(500);
-			$('.header-edit-overlay').fadeOut(500);
-			headerBottom.fadeIn(500);
-		}
-		return{
-			init : function() {
-				_setUpListners();
-			},
-		}
-});
 
 
 // Слайдер
@@ -359,11 +317,9 @@ var funcSlider = function() {
 	};
 
 
-
   return {
-  	edit: editAllHeader(),
     init: function () {
-    	_setUpListners();
+    	
     },
 
   };

@@ -18,7 +18,11 @@ $( document ).ready(function() {
     loginModule.init();
     mainPageModule.init();
     albumModule.init();
-    albumModule.edit.init();
+    // Анимации
+    headerModule.init();
+    // ajax
+    ajaxHeaderModule.init();
+
 });
 
 	// Кастомный вид для загрузки файлов

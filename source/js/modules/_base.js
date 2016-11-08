@@ -32,7 +32,7 @@ var BaseModule = function(){
 		return format;
 	};
 
-	this.ajax = function(form, url, _method){
+	/*this.ajax = function(form, url, _method){
 			var method = _method || 'POST';
 			var data = this.ajaxData(form);
 			return $.ajax({
@@ -41,6 +41,47 @@ var BaseModule = function(){
 				contentType: 'application/json',
 				data: data
 			});
+	}*/
+
+/*	this.ajax = function(xhr,data,url,method,callback){
+
+			xhr = {
+
+			}
+
+
+			xhr = new XMLHttpRequest;
+      xhr.open(method, url ,true);
+      xhr.send(data);
+     	console.log(this.xhr);
+      xhr.onreadystatechange = function() {
+      if (xhr.readyState != 4) return;
+      if (xhr.status == 200) {
+      	callback();
+      }
+    }
+	}*/
+
+	this.ajax = function(data, url, callback) {
+	  var xhr; // create our XMLHttpRequest object
+	  if (window.XMLHttpRequest) {
+	    xhr = new XMLHttpRequest();
+	  } else if (window.ActiveXObject) {
+	    // Internet Explorer is stupid
+	    xhr = new
+	    ActiveXObject("Microsoft.XMLHTTP");
+	  }
+	  xhr.open('POST', url);
+	  xhr.send(data);
+
+	  xhr.onreadystatechange = function() {
+	    if (xhr.readyState === 4 && xhr.status === 200) {
+	      callback.call(xhr.responseXML);
+
+	      // call the callback function
+	    }
+	  };
+	  
 	}
 
 	this.ajaxDataObj = function(obj,url,method){
