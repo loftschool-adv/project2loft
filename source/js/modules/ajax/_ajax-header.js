@@ -128,6 +128,7 @@ var ajaxHeaderModule = (function() {
 		
   }
 
+  // Скидываем бекраунд и аватар при отмене
   var resetPreview = function(){
   	var blockPhoto = headerBack.find('.user-block__photo');
   	ajaxFlag = false;
@@ -136,30 +137,37 @@ var ajaxHeaderModule = (function() {
   	blockPhoto.removeClass('loader');
   	blockPhoto.removeAttr('style');
 
-  	$header.addClass(classCancel);
-  	thisAjax.abort();
+  	//$header.addClass(classCancel);
+    if(thisAjax){
+      thisAjax.abort();
+    }
   }
+
   
 
   // Отправляем запрос на editUserData
- /* var requestToServer = function(){
-  	var xhr = base.ajax(setData(formData),id + 'editUserData/', "POST")
-  	xhr.onreadystatechange = function() {
-      if (xhr.readyState != 4) return;
-      if (xhr.status == 200) {
-      	
+ var requestToServer = function(e){
+  var formData = new FormData();
+  $.ajax({
+      url: id + 'editUserData/',
+      type: "POST",
+      data: setData(formData),
+      processData: false,
+      contentType: false,
+      success: function(res){
+        console.log(res);
+        closeEditHeader(e);
       }
-    }
-  }*/
+    });
+  }
 
   var _setUplistner = function(){
-  	saveBtn.on('click',closeEditHeader);
   	uploadAvatar.on('change',changeAvatar);
   	uploadBg.on('change',changeBackGround);
   	cancelBtn.on('click',resetPreview);
   	uploadBg.on('click',lockSelFile);
   	uploadAvatar.find('input').on('click',lockSelFile);
-  	//saveBtn.on('click',requestToServer);
+  	saveBtn.on('click',requestToServer);
   }
 
 
