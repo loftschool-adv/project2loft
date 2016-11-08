@@ -10,9 +10,12 @@ let server     = require('../server.js');
 
 let mongoose = require('../modules/libs/mongoose.js');
 let Image = require('../modules/models/image.js').Image;
-var files = [];
+
+//var files = [];
 
 function uploadImg(req, res) {
+
+  req.session.uploadFiles = [];
 
   var form = new multiparty.Form();
   form.uploadDir = 'users/id' + req.session.user_id + '/tmp/';
@@ -22,7 +25,7 @@ function uploadImg(req, res) {
 
     if (file.originalFilename) {
 
-      files.push(file);
+      req.session.uploadFiles.push(file);
 
       console.log('Картинка загруженна');
 
@@ -154,8 +157,11 @@ function imgSave(req, files) {
 }
 
 
-function closeImgUploader(res, files) {
-  files = [];
+function closeImgUploader(req, res) {
+
+  console.log('clear');
+
+  req.session.uploadFiles = false;
 
   res.end('close');
 }
@@ -164,4 +170,3 @@ function closeImgUploader(res, files) {
 exports.uploadImg = uploadImg;
 exports.imgSave = imgSave;
 exports.closeImgUploader = closeImgUploader;
-exports.files = files;

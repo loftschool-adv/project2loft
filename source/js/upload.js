@@ -8,6 +8,7 @@ var $form = $('#upload');
 var $input = $('#file');
 var $save = $('#save');
 var $closeUploaderImg = $('.modal__close-img');
+var simpleUpload = false;
 
 // Если чтото закинули добавляем класс
 if (isAdvancedUpload) {
@@ -25,11 +26,13 @@ if (isAdvancedUpload) {
       $form.removeClass('is-dragover');
     })
     .on('drop', function(e) {
+      simpleUpload = false;
       droppedFiles = e.originalEvent.dataTransfer.files;
       $form.trigger('submit');
     });
 
   $input.on('change', function(e) { // drag & drop НЕ поддерживается
+    simpleUpload = true;
     $form.trigger('submit');
   });
 
@@ -47,9 +50,13 @@ $form.on('submit', function(e) {
 
   if (isAdvancedUpload) {
     e.preventDefault();
-    var photos = $input[0].files;
 
-    ajaxUploadImg(photos);
+    if (simpleUpload) {
+      var photos = $input[0].files;
+
+      ajaxUploadImg(photos);
+    }
+
 
     if (droppedFiles) {
       ajaxUploadImg(droppedFiles);
@@ -87,7 +94,7 @@ $closeUploaderImg.on('click', function () {
     contentType: false,
     processData: false,
     success: function(data) {
-
+      droppedFiles = false;
     },
     error: function() {
       // Log the error, show an alert, whatever works for you
@@ -116,8 +123,6 @@ function ajaxUploadImg(photos) {
       processData: false,
       complete: function(data) {
         $form.removeClass('is-uploading');
-
-        console.log(data);
 
         ////////////////////////////////////////////
         ////////////////////////////////////////////

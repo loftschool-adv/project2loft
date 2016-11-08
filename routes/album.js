@@ -109,8 +109,8 @@ route.get('/:album', (req,res) =>{
 // Обращаемся к корню сайта , и рендерим шаблон из ./views/pages/index.pug
 
 route.post('/:album/addImg/', (req, res) => upload.uploadImg(req, res));
-route.post('/:album/saveImg/', (req, res) => upload.imgSave(req, upload.files));
-route.post('/:album/closeUploaderImg/', (req, res) => upload.closeImgUploader(res, upload.files));
+route.post('/:album/saveImg/', (req, res) => upload.imgSave(req, req.session.uploadFiles));
+route.post('/:album/closeUploaderImg/', (req, res) => upload.closeImgUploader(req, res));
 
 
 module.exports = route;
