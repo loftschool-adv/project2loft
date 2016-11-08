@@ -129,8 +129,10 @@ var mainJs = [
   path.sourse.folder + '/' + path.sourse.js + '/modal.js',
   path.sourse.folder + '/' + path.sourse.js + '/slider.js',
   // ajax
-  path.sourse.folder + '/' + path.sourse.js + '/modules/ajax/_ajax-header.js',
   path.sourse.folder + '/' + path.sourse.js + '/modules/ajax/_ajax-login-cover.js',
+  path.sourse.folder + '/' + path.sourse.js + '/modules/ajax/_ajax-header.js',
+  path.sourse.folder + '/' + path.sourse.js + '/modules/ajax/_ajax-social.js',
+  
   path.sourse.folder + '/' + path.sourse.js + '/app.js',
 
 ];

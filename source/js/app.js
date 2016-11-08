@@ -24,6 +24,7 @@ $( document ).ready(function() {
     // ajax
     ajaxLoginCoverModule.init();
     ajaxHeaderModule.init();
+    ajaxSocialModule.init();
 
 });
 

@@ -134,12 +134,14 @@ var ajaxHeaderModule = (function() {
 
   // Скидываем бекраунд и аватар при отмене
   var resetPreview = function(){
-  	var blockPhoto = headerBack.find('.user-block__photo');
+  	var blockPhotoBack = headerBack.find('.user-block__photo');
+    var avatar = blockPhotoBack.attr('style');
+    var background = $header.attr('style');
   	ajaxFlag = false;
   	$header.removeClass('loader');
-  	$header.attr('style',headerBgStyle);
-  	blockPhoto.removeClass('loader');
-  	blockPhoto.removeAttr('style');
+  	$header.attr('style',background);
+  	blockPhotoBack.removeClass('loader');
+  	blockPhotoBack.attr('style',avatar);
 
   	//$header.addClass(classCancel);
     if(thisAjax){
@@ -163,9 +165,11 @@ var ajaxHeaderModule = (function() {
         // Выводим данные с сервера
         headerFront.find('.user-block__name').text(res.name);
         headerFront.find('.user-block__desc').text(res.about);
-        console.log(res.avatar);
         headerFront.find('.user-block__photo').css({
-          'background-image': 'url(' + res.avatar + '), url(../img/album/no_photo.jpg)'
+          'background-image': 'url(' + res.avatarFile + '), url(../img/album/no_photo.jpg)'
+        })
+        headerBack.find('.user-block__photo').css({
+          'background-image': 'url(' + res.avatarFile + '), url(../img/album/no_photo.jpg)'
         })
         closeEditHeader(e);
       }
