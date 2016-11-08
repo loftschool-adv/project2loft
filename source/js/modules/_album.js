@@ -179,6 +179,7 @@ var albumModule = (function() {
     }
 
   });
+<<<<<<< c6c64cfb6270da61bd469582b0947eb7e522061e
 
 
 
@@ -198,6 +199,10 @@ var funcSlider = function() {
 		var activeSlideIdx = activeSlide.index();
 
 		var isReady    = true;
+=======
+	// Анимация для редактирования хедера
+	var editAllHeader = (function() {
+>>>>>>> add slider on page album
 
 
 		function showedSlide(slider, idx) {
@@ -252,6 +257,78 @@ var funcSlider = function() {
 		}
 
 
+<<<<<<< c6c64cfb6270da61bd469582b0947eb7e522061e
+=======
+// Слайдер
+var funcSlider = function() {
+	var transitionEnd = 'transitionend webkitTransitionEnd oTransitionEnd';
+
+	function Slider(options) {
+		var gallery     = options.elem;
+		var prev        = gallery.find('.slider__control--prev');
+		var next        = gallery.find('.slider__control--next');
+
+		var slides         = gallery.find('.slider__item');
+		console.log(slides);
+		var activeSlide    = slides.filter('.slider__item--active');
+		var slidesCnt      = slides.length;
+		var activeSlideIdx = activeSlide.index();
+
+		var isReady    = true;
+
+
+		function showedSlide(slider, idx) {
+			slider
+				.eq(idx).addClass('slider__item--active')
+				.siblings().removeClass('slider__item--active');
+		}
+
+		// function dataChange(direction) {
+		// 	activeSlideIdx = (direction === 'next') ? getIdx(activeSlideIdx, 'next') : getIdx(activeSlideIdx, 'prev');
+		// }
+
+		function getIdx(currentIdx, dir) {
+			if(dir === 'prev') {
+				return (currentIdx - 1 < 0) ? slidesCnt - 1 : currentIdx - 1 ;
+			}
+			if(dir === 'next') {
+				return (currentIdx + 1 >= slidesCnt) ? 0 : currentIdx + 1 ;
+			}
+
+			return currentIdx;
+		}
+
+		function changeSlide(slides, direction, className) {
+			var currentSlide    = slides.filter('.slider__item--active');
+			var currentSlideIdx = currentSlide.index();
+			var newSlideIdx;
+			if (direction === 'prev') {
+				 newSlideIdx = getIdx(currentSlideIdx, 'prev');
+			}
+			if (direction === 'next') {
+				newSlideIdx = getIdx(currentSlideIdx, 'next');
+			}
+			// Подстраиваем высоту
+			$('.slider__view').height(slides.eq(newSlideIdx).children().height());
+
+			slides.eq(newSlideIdx)
+				.addClass( className )
+				.one(transitionEnd, function() {
+					$(this)
+						.removeClass( className )
+						.addClass('slider__item--active')
+						.trigger('changed-slide');
+				});
+
+			currentSlide
+				.addClass( className )
+				.one(transitionEnd, function() {
+					$(this).removeClass('slider__item--active ' + className);
+				});
+		}
+
+
+>>>>>>> add slider on page album
 		$(document).on('changed-slide', function() {
 			isReady = true;
 		});
@@ -299,18 +376,31 @@ var funcSlider = function() {
 				var url = ($(this).css('background-image').split(',')[0]);
 				var src = url.substr(5, 39 );
 				var cont = $('<div/>').addClass('slider__item').appendTo($('.slider__view'));
+<<<<<<< c6c64cfb6270da61bd469582b0947eb7e522061e
 
 				var img = $('<img>').addClass('slider__img').appendTo(cont).attr('src',src);
 
 				if (url==currentImg.css('background-image').split(',')[0]){
 					cont.removeClass('slider__item--loading').addClass('slider__item--active');
 						$('.slider__view').height(cont.children().height());
+=======
+				var img = $('<img>').addClass('slider__img').appendTo(cont).attr('src',src);				
+				if (url==currentImg.css('background-image').split(',')[0]){
+					cont.removeClass('slider__item--loading').addClass('slider__item--active');
+					$('.slider__view').height(cont.children().height());
+>>>>>>> add slider on page album
 					 cont.next().addClass('slider__item--loading');
 				}
 
 		})
 		funcSlider();
 	};
+<<<<<<< c6c64cfb6270da61bd469582b0947eb7e522061e
+=======
+
+
+
+>>>>>>> add slider on page album
 	var _setUpListners = function() {
 		$('.btn_album-add').on('click', openUploadImg);
 		$('.btn_album-main-add').on('click', openUploadAlbum);
