@@ -40,10 +40,12 @@ var ajaxHeaderModule = (function() {
   	var inputName = $headrBack.find('input[name="name"]');
   	var inputAbout = $headrBack.find('textarea[name = "desc"]');
     var inputAvatar = $headrBack.find('input[name="photo"]')[0].files[0];
+    var inputBG = $headrBack.find('input[name="bg"]')[0].files[0];
   	
   	formData.append("userName",inputName.val());
   	formData.append("userAbout",inputAbout.val());
     formData.append("userAvatar",inputAvatar);
+    formData.append("userBackGround",inputBG);
   	return formData;
   
   }
