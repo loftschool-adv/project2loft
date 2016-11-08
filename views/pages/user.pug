@@ -12,8 +12,9 @@ block content
 						.user-block
 							.user-block__photo(style="background-image: url(../img/user/"+avatar+".png), url(../img/album/no_photo.jpg)")
 							.user-block__main
-								.user-block__name!= userNameOther
-								.user-block__desc!= userAboutOther
+								.user-block__name Александра Соколова
+								.user-block__desc.
+									Я веб разработчик разработчик. Мне 24 года. Люблю путешествия, кодинг, фриланс, и активный отдых.
 								.user-block__social
 									+social()
 					.header__part.header__part--zip
@@ -22,7 +23,7 @@ block content
 								.btn.btn--light.btn--expand
 									svg.btn__icon
 										use(xlink:href='/img/sprite.svg#home')
-									a(href='/' title='На главную').btn__text На главную
+									span.btn__text На главную
 				.header__section.header__bottom.header__bottom_user.section
 					.header__part.header__right
 						form.search
