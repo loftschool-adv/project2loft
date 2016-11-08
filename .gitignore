@@ -35,5 +35,4 @@ _materials
 node_modules
 public
 templates
-config.json
 users/*
