@@ -1,0 +1,144 @@
+.wrapper__main-page {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+
+.main-content{
+  flex: 1 0 auto;
+
+}
+
+.section__news {
+  background: $white;
+  margin: 0 55px;
+}
+
+.container {
+
+  max-width: 1581px;
+  margin: 0 auto;
+  height: 100%;
+}
+
+.main-content__title {
+  max-width: 380px;
+  font-size: 42px;
+  font-family: Panton, sans-serif;
+  color: rgb(50, 50, 50);
+  padding: 40px 0 40px 0;
+  margin: 0;
+}
+
+
+
+.news__list{
+  display: flex;
+  flex-wrap: wrap;
+  //justify-content: center;
+  margin-left: -20px;
+}
+
+.news__item {
+  max-width: 380px;
+  margin-left: 20px;
+  flex: 1 1 380px;
+  margin-bottom: 22px;
+}
+
+.news__button {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.section__album-cards {
+  margin: 0;
+  padding-bottom: 40px;
+  position: relative;
+  padding: 0 55px;
+
+}
+.section__album-cards-color{
+  background: rgb(246, 246, 246);
+}
+
+.btn_album-main-add{
+  top: 60px;
+  right: 16px;
+}
+
+.album-cards__title {
+  max-width: 380px;
+  font-size: 42px;
+  font-family: Panton, sans-serif;
+  color: rgb(50, 50, 50);
+  padding: 40px 0 40px 0;
+  margin: 0;
+}
+
+.album-cards__list{
+  display: flex;
+  flex-wrap: wrap;
+  //justify-content: center;
+  margin-left: -20px;
+}
+
+.album-cards__item {
+  max-width: 300px;
+  margin-left: 20px;
+  //display: flex;
+  flex: 1 1 380px;
+  margin-bottom: 22px;
+}
+
+.footer {
+  flex: 0 0 auto;
+}
+
+//FOR MAIN ANIMATION
+.header-main{
+  min-height:300px;
+  display:flex;
+  flex-direction:column;
+  //overflow:hidden;
+}
+.heder_main-content{
+  flex:1;
+  position:relative;
+}
+.header__part--zip_main{
+  display:flex;
+  align-items:center;
+}
+.header__section_main{
+  position:absolute;
+  top:0;
+  left:0;
+  height:100%;
+  width:100%;
+}
+.header__section{
+  max-width:100%;
+}
+.header__section_main-back{
+  top:-100%;
+  transition: top 0.5s;
+  //transform:translateY(-100%);
+  //transition: transform 0.5s;
+  box-shadow: inset 100vw 0px 0px 0px rgba(0, 0, 0, 0.5);
+}
+.heder_main-bottom{
+  position: relative;
+  height:60px;
+  overflow:hidden;
+}
+.header__bottom_main{
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+}
+.section__news{
+  position:relative;
+}

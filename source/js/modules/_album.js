@@ -7,10 +7,10 @@ var albumModule = (function() {
 
   // Общиие переменные
   var $form = $('.popup__form');
-  var $formAddAlbum = $form.filter('.popup__form-add-album');
-  var button = 'input[type = submit]';
+  var $modalAddAlbum = $('.modal__add-album');
+  var button = 'add-album__btn-save';
   var popupTime = 5000;
-  var albumCoverInput = $form.find('input[name="addAlbumCover"]');
+  var albumCoverInput = $modalAddAlbum.find('input[name="addAlbumCover"]');
   var loader = 'loader';
 
 	// Открыть окно для загрузки изображений
@@ -25,7 +25,6 @@ var albumModule = (function() {
 		base.changeClass(modal,'hide','add');
 		base.changeClass('.modal-overlay','hide','add');
 		$(".img-list").empty();
-		$(".slider__item").remove();
 		$('.modal__load-img').show();
 	};
 
@@ -98,8 +97,8 @@ var albumModule = (function() {
 
 	albumCoverInput.on('change',function(){
 		var $this = $(this);
-		var form = $this.closest('form');
-		var veiwCover = form.find('.user-block__photo');
+		var thisModal = $this.closest($modalAddAlbum);
+		var veiwCover = thisModal.find('.user-block__photo');
 		var id = window.location.pathname;
 		var cover = $this[0].files[0];
 		var formData = new FormData();
@@ -134,7 +133,7 @@ var albumModule = (function() {
 
 	// Добавление альбома
   // Отправляем ajax на addlbum
-  $formAddAlbum.find(button).on('click', function(e){
+  $modalAddAlbum.find(button).on('click', function(e){
     e.preventDefault();
     var $thisForm = $(this).closest('form');
     var veiwCover = $thisForm.find('.user-block__photo');
@@ -167,7 +166,7 @@ var albumModule = (function() {
 
         if (xhr.status == 200) {
         	var data = JSON.parse(xhr.response);
-        	alert(data.message);
+        	$(data.newAlbum).prependTo($('.album-cards__list'));
         	
         }
       }
@@ -175,6 +174,12 @@ var albumModule = (function() {
     }
 
   });
+
+
+
+
+
+
 	// Анимация для редактирования хедера
 	var editAllHeader = (function() {
 
@@ -220,142 +225,12 @@ var albumModule = (function() {
 });
 
 
-// Слайдер
-var funcSlider = function() {
-	var transitionEnd = 'transitionend webkitTransitionEnd oTransitionEnd';
-
-	function Slider(options) {
-		var gallery     = options.elem;
-		var prev        = gallery.find('.slider__control--prev');
-		var next        = gallery.find('.slider__control--next');
-
-		var slides         = gallery.find('.slider__item');
-		console.log(slides);
-		var activeSlide    = slides.filter('.slider__item--active');
-		var slidesCnt      = slides.length;
-		var activeSlideIdx = activeSlide.index();
-
-		var isReady    = true;
-
-
-		function showedSlide(slider, idx) {
-			slider
-				.eq(idx).addClass('slider__item--active')
-				.siblings().removeClass('slider__item--active');
-		}
-
-		// function dataChange(direction) {
-		// 	activeSlideIdx = (direction === 'next') ? getIdx(activeSlideIdx, 'next') : getIdx(activeSlideIdx, 'prev');
-		// }
-
-		function getIdx(currentIdx, dir) {
-			if(dir === 'prev') {
-				return (currentIdx - 1 < 0) ? slidesCnt - 1 : currentIdx - 1 ;
-			}
-			if(dir === 'next') {
-				return (currentIdx + 1 >= slidesCnt) ? 0 : currentIdx + 1 ;
-			}
-
-			return currentIdx;
-		}
-
-		function changeSlide(slides, direction, className) {
-			var currentSlide    = slides.filter('.slider__item--active');
-			var currentSlideIdx = currentSlide.index();
-			var newSlideIdx;
-			if (direction === 'prev') {
-				 newSlideIdx = getIdx(currentSlideIdx, 'prev');
-			}
-			if (direction === 'next') {
-				newSlideIdx = getIdx(currentSlideIdx, 'next');
-			}
-			// Подстраиваем высоту
-			$('.slider__view').height(slides.eq(newSlideIdx).children().height());
-
-			slides.eq(newSlideIdx)
-				.addClass( className )
-				.one(transitionEnd, function() {
-					$(this)
-						.removeClass( className )
-						.addClass('slider__item--active')
-						.trigger('changed-slide');
-				});
-
-			currentSlide
-				.addClass( className )
-				.one(transitionEnd, function() {
-					$(this).removeClass('slider__item--active ' + className);
-				});
-		}
-
-
-		$(document).on('changed-slide', function() {
-			isReady = true;
-		});
-
-
-
-
-		this.prev = function() {
-			if( !isReady ) return;
-			isReady = false;
-
-			changeSlide(slides, 'prev', 'slider__item--animate-fade');
-			// dataChange('prev');
-		};
-
-
-		this.next = function() {
-			if( !isReady ) return;
-			isReady = false;
-
-			changeSlide(slides, 'next', 'slider__item--animate-fade');
-			// dataChange('next');
-		};
-
-
-		prev.on('click', this.prev);
-		next.on('click', this.next);
-	} // Slider
-
-
-
-	var slider = new Slider({
-		elem: $('#slider')
-	});
-};
-// Открыть слайдер
-
-	var openSlider = function(){
-		base.changeClass('.modal--slider, .modal-overlay','hide','del')
-		// находим все картинки из альбома
-		var images = $('.photo-card__head'),
-				currentImg = $(this).closest('.photo-card__head');
-
-		$('.photo-card__head').each(function(i, img){
-				var url = ($(this).css('background-image').split(',')[0]);
-				var src = url.substr(5, 39 );
-				var cont = $('<div/>').addClass('slider__item').appendTo($('.slider__view'));
-				var img = $('<img>').addClass('slider__img').appendTo(cont).attr('src',src);				
-				if (url==currentImg.css('background-image').split(',')[0]){
-					cont.removeClass('slider__item--loading').addClass('slider__item--active');
-					$('.slider__view').height(cont.children().height());
-					 cont.next().addClass('slider__item--loading');
-				}
-
-		})
-		funcSlider();
-	};
-
-
-
 	var _setUpListners = function() {
 		$('.btn_album-add').on('click', openUpload);
 		$('.btn_edit-photo').on('click', openEditPhoto);
 		$('.modal__header-close').on('click', closeUpload);
 		$(window).on('scroll', _fixedAdd);
 		$('body').on('click','.img-item',_cancelLoad);
-		$('.loupe').on('click', openSlider);
 	};
 
 

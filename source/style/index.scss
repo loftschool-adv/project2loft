@@ -1,0 +1,290 @@
+// Сброс стилей
+.cf::before,
+.cf::after {
+		content: " ";
+		display: table;
+}
+.cf::after {
+	 clear: both;
+}
+.hide {
+	display:none;
+}
+
+ul{
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+}
+p{
+	padding: 0;
+}
+a{
+	text-decoration: none;
+	color:#fff;
+}
+
+*,
+*:before,
+*:after {
+	box-sizing: inherit;
+}
+
+html {
+	box-sizing: border-box;
+	height: 100%;
+	color: $textColor;
+	font: 300 16px/1.5 ProximaNova, sans-serif;
+}
+
+body {
+	height: 100%;
+}
+
+
+.link {
+	display: inline-flex;
+
+	&:hover {
+		& .link__icon {
+			opacity: 1;
+		}
+	}
+}
+
+	.link__icon {
+		flex-shrink: 0;
+		width:  20px;
+		height: 20px;
+		fill: currentColor;
+		opacity: .4;
+		transition: opacity .5s;
+
+		& + .link__text,
+		.link__text + & {
+			margin-left: .65em;
+		}
+	}
+
+	.link__text {}
+
+
+::selection {
+	background: rgba($blue, .7);
+	color: rgba(255,255,255,.9);
+	text-shadow: 0 0 1px rgba(0,0,0,.25);
+}
+
+
+::placeholder {
+	color: $gray;
+	text-indent: 0;
+	transition:
+		opacity .75s;
+}
+	:focus::placeholder {
+		text-indent: 100%;
+		opacity: 0;
+		transition:
+			opacity .5s,
+			text-indent 1s;
+	}
+
+
+
+
+
+.section {
+	max-width: 1580px;
+	padding: 0 60px;
+}
+// Главная страница
+.wrapper{
+	height:100vh;
+	min-height:700px;
+	background: url(../img/bg-main.jpg) 50% 50% no-repeat;
+	background-size: cover;
+	display:flex;
+	flex-direction:column;
+	color:#fff;
+	font-family: ProximaNova, sans-serif;
+	font-size: 14px;
+	box-shadow: inset 100vw 0px 0px 0px rgba(0, 0, 0, 0.15);
+}
+.content-main{
+	flex:1;
+	display:flex;
+}
+.welcome{
+	width:580px;
+	text-align: center;
+	margin-bottom: 20px;
+}
+.welcome__title{
+	font-family: Panton, sans-serif;
+	font-size: 42px;
+	font-weight: bold;
+	margin-bottom: 15px;
+}
+
+.welcome__text{
+	font-size: 16px;
+	line-height: 1.5;
+}
+.popup{
+	background-color: #fff;
+	overflow:hidden;
+	border-radius:20px;
+	width:280px;
+	margin: 0 auto;
+	position:relative;
+}
+.popup__form{
+	text-align:center;
+}
+.popup__input-container{
+	position: relative;
+}
+.popup__label{
+	position: absolute;
+	display: block;
+	width:15px;
+	height:15px;
+	top:50%;
+	margin-top:-8px;
+	left:20px;
+}
+.popup__svg{
+	width:100%;
+	height:100%;
+	fill:#ccc;
+}
+.popup__input{
+	line-height:40px;
+	border:none;
+	border-bottom: 1px solid #e1e1e1;
+	width:100%;
+	padding-left: 45px;
+	outline:none;
+}
+.popup__input_forget-password{
+	border-top: 1px solid #e1e1e1;
+}
+.popup__input-container_forget{
+	margin-bottom: 20px;
+}
+.popup__promt_forget{
+	font-family: 'Proxima Nova Semibold', sans-serif;
+}
+.popup__link{
+	display:inline-block;
+	color:#28bbf0;
+	line-height:40px;
+	font-weight: 600;
+	transition: all 0.5s;
+}
+.popup__link_forget-pass{
+	padding-left: 20px;
+	display:block;
+	text-align:left;
+}
+.popup__link:hover{
+	color: #24b0e3;
+}
+.popup__submit{
+	display:block;
+	margin:0 auto;
+	background-color: #28bbf0;
+	border-radius:25px;
+	border:none;
+	line-height:40px;
+	color:#fff;
+	width:240px;
+	font-family: Panton, sans-serif;
+	font-weight: bold;
+	cursor:pointer;
+	transition: all 0.5s;
+	outline:none;
+}
+.popup__submit:hover{
+	background-color: #24b0e3;
+}
+.popup__registration{
+	color: #323232;
+}
+ .popup__error{
+	font-weight: 600;
+	color: rgba(50,50,50, 0.6);
+	line-height:40px;
+	background-color: rgba(255,224,224, 0.8);
+	border-radius:5px;
+	width:240px;
+	margin: 0 auto;
+	margin-bottom: 10px;
+	text-align:left;
+	padding-left: 10px;
+ }
+ .popup__promt{
+	color: rgba(50,50,50, 0.8);
+	text-align: left;
+	padding: 10px 20px;
+ }
+ .flipper-container{
+ 	margin:auto;
+	text-align:center;
+	perspective: 1000;
+}
+.flipper-container.flipp .flipper {
+		transform: rotateY(180deg);
+	}
+.flipper {
+	min-height:354px;
+	transform: rotateX(-90deg);
+	transition: transform 0.7s;
+	transform-style: preserve-3d;
+	position: relative;
+	transform: rotateX(0deg);
+}
+.flipper-container, .front, .back {
+	width: 580px;
+}
+.front, .back {
+	position: absolute;
+	top: 0;
+	left: 0;
+	backface-visibility: hidden;
+}
+.front {
+	z-index: 0;
+}
+.back {
+	transform: rotateY(180deg);
+}
+.main-footer{
+	padding: 20px 0;
+	text-align: center;
+	opacity:0.8;
+	font-size: 16px;
+}
+
+
+
+
+
+.no-scroll {
+	overflow: hidden;
+}
+
+.width--md {
+		width: 100%;
+		max-width: 380px;
+}
+
+.width--lg {
+	width: 100%;
+	max-width: 480px;
+}
+
+.width--full {
+	width: 100%;
+}

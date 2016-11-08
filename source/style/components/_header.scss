@@ -1,0 +1,76 @@
+.header {
+	position: relative;
+	background: #eee url('../img/no_album_cover.jpg') no-repeat  top / cover;
+	color: $white;
+
+	&:before {
+		content: '';
+		position: absolute;
+		left: 0;  right: 0;
+		top: 0;  bottom: 0;
+		background: rgba(0,0,0,.4);
+	}
+}
+
+		.header__section {
+			position: relative;
+			display: flex;
+			padding-top:    40px;
+			padding-bottom: 40px;
+		}
+
+		.header__bottom {
+			padding-top:    10px;
+			padding-bottom: 10px;
+			background: rgba(255,255,255,.8);
+			white-space: nowrap;
+		}
+
+		.header__part {
+			display: inline-block;
+			vertical-align: middle;
+			flex: 1;
+			padding: 0 50px;
+
+			&:first-child {
+				padding-left: 0;
+			}
+
+			&:last-child {
+				padding-right: 0;
+			}
+		}
+
+		.header__part--zip {
+			flex-shrink: 1;
+			flex-grow: 0;
+		}
+
+		.header__right {
+			flex-grow: 0;
+			margin-left: auto;
+			text-align: right;
+		}
+
+
+		.header__controls {
+			position: absolute;
+			top: 20px;  right: 60px;
+			text-align: right;
+		}
+
+			.header__control {
+				margin-bottom: 10px;
+
+				&:last-child {
+					margin-bottom: 0;
+				}
+			}
+
+
+
+.header--edit {}
+
+.header--edit  .header__section {
+	align-items: center;
+}

@@ -1,0 +1,194 @@
+.btn {
+	display: inline-block;
+	vertical-align: middle;
+	margin-right: 20px;
+	padding: .6075em 1.4em;
+	border: 1px solid transparent;
+	border-radius: 20px;
+	outline: none;
+	background: $blue;
+	color: $white;
+	font: bold 14px/1.5 Panton, sans-serif;
+	text-align: center;
+	text-decoration: none;
+	cursor: pointer;
+	transition:
+		width,
+		color,
+		border-color,
+		background-color,
+		opacity;
+	transition-duration: .5s;
+	user-select: none;
+
+	&:hover {
+		background: darken($blue, 7%);
+		color: $white;
+	}
+
+	&:last-child {
+		margin-right: 0;
+	}
+}
+
+	.btn__icon {
+		position: relative;
+		top: -.05em;
+		display: inline-block;
+		vertical-align: middle;
+		width:  20px;
+		height: 20px;
+		fill: currentColor;
+		transition: fill .5s;
+
+		& + .btn__text,
+		.btn__text + & {
+			margin-left: .65em;
+		}
+	}
+
+	.btn__text {}
+
+	.btn__text--lg {
+		font-size: 16px;
+	}
+
+
+
+.btn--text {
+	padding-left:  .5em;
+	padding-right: .5em;
+	background: transparent;
+	color: $blue;
+
+	& .btn__text {
+		border-bottom: 1px dashed transparent;
+		transition: border .5s;
+	}
+
+	&:hover {
+		background: inherit;
+		color: $blue;
+
+		& .btn__text {
+			border-bottom-color: currentColor;
+		}
+	}
+}
+
+
+
+.btn--text-important {
+	padding-left:  1.25em;
+	padding-right: 1.25em;
+	background: transparent;
+	color: $textColor;
+
+	&:hover {
+		background: $red;
+	}
+}
+
+
+
+.btn--light {
+	background: $white;
+	color: $gray;
+}
+
+
+
+.btn--important {
+	background: $red;
+
+	&:hover {
+		background: darken($red, 7%);
+	}
+}
+
+
+
+.btn--clear {
+	background: transparent;
+	border-color: $blue;
+	color: $blue;
+
+	&:hover {
+		background: darken($blue, 7%);
+	}
+}
+
+
+
+.btn--expand {
+	width: 40px;
+	padding-left:  .67em;
+	padding-right: .67em;
+	box-shadow: 0 1px 1px rgba(0,0,0,.15);
+	white-space: nowrap;
+	overflow: hidden;
+
+	&:hover {
+		width: auto;
+	}
+}
+
+
+
+.btn--icon {
+	position: relative;
+	width:  20px;
+	height: 20px;
+	padding: .5em;
+	background-color: transparent;
+	color: $gray;
+	opacity: .4;
+
+	& .btn__icon {
+		position: absolute;
+		left: 0;  right: 0;
+		top: 0;  bottom: 0;
+		max-width:  20px;
+		max-height: 20px;
+		margin: auto;
+	}
+
+	&:hover {
+		background-color: transparent;
+		color: $gray;
+		opacity: 1;
+	}
+}
+
+
+
+.btn--like {
+	padding: .385em 1em;
+	padding-left: .8em;
+	background: $red;
+	font-size: 17px;
+
+	& .btn__icon {
+		width: 24px;
+		fill: transparent;
+		stroke: currentColor;
+		stroke-width: 3px;
+	}
+
+	&:hover {
+		background: darken($red, 7%);
+	}
+}
+
+.btn--like[data-like="not-like"] {
+	& .btn__icon {
+		fill: transparent;
+		stroke: currentColor;
+	}
+}
+
+.btn--like[data-like="like"] {
+	& .btn__icon {
+		fill: currentColor;
+	}
+}

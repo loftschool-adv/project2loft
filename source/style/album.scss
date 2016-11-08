@@ -211,7 +211,6 @@
 	cursor:pointer;
 	pointer-events: all;
 }
-
 .img-list li:nth-child(4n){
 	//margin-right: 0;
 }
@@ -328,26 +327,4 @@
 .modal__form-input{
 	flex-grow:1;
 	border: 1px solid #d8d6d6;
-}
-// Для слайдера
-.loupe{
-			content: '';
-			position: absolute;
-			left: 0;  right: 0;
-			top: 0;  bottom: 0;
-			width:  40px;
-			height: 40px;
-			margin: auto;
-			background: url('../img/icons/loupe.svg')  no-repeat;
-			opacity: 0;
-			transition: opacity .5s;
-		}
-.slider__view{
-	transition: height 1s;
-}
-.photo-card__head:hover .loupe{
-	opacity:0.9;
-}
-.slider__img{
-	width:100%;
 }

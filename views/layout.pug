@@ -1,0 +1,36 @@
+include mixin/mixin
+
+block variables
+
+doctype html
+html
+  head
+    meta(charset="utf-8")
+    title #{title}
+    meta(content="" name="author")
+    meta(content="" name="description")
+    meta(content="" name="keywords")
+    meta(content="width=device-width, initial-scale=1" name="viewport")
+    meta(content="ie=edge" http-equiv="x-ua-compatible")
+
+    //- favicon block start
+    //- favicon block end
+
+    link(rel='stylesheet' href='/stylesheets/foundation.css')
+    link(rel='stylesheet' href='/stylesheets/main.css')
+
+    script(src='/js/foundation.js' defer)
+    script(src='/js/async.js' type="text/javascript" defer)
+    script(src='/js/app.js' defer)
+      //socket.emit('eventServer', {data: 'Hello Server'});
+
+
+
+    <!--[if lt IE 9]>
+    script(src="http://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js")
+    <![endif]-->
+
+
+
+  body
+    block content

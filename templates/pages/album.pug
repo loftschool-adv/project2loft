@@ -92,7 +92,6 @@ block content
 												svg.info__icon
 													use(xlink:href='/img/sprite.svg#like')
 												span.info__text 10
-									div.loupe
 								.photo-card__foot
 									.photo-card__foot-part
 										a.btn.btn--icon(href="#404"  title="Редактировать")
@@ -140,69 +139,28 @@ block content
 							svg.btn__icon
 								use(xlink:href='/img/sprite.svg#delete')
 							span.btn__text Удалить
-			//- Модальное окно: slider
-		.modal.modal--slider.hide#slider
 
-			.modal__body
-				.modal__section.modal__section--slider.slider
-					.slider__close
-						.modal__close.modal__header-close(data-action="close"  title="закрыть")
-							svg.modal__close-icon
-								use(xlink:href='/img/sprite.svg#close')
-
-					.slider__view
-						//.slider__item.slider__item--active
-							img.slider__img(scr="../img/album/im1.png"  alt=""  style="width:100%; height: 400px; background: lightBlue;")
-						//.slider__item.slider__item--loading
-							img.slider__img(scr=""  alt=""  style="width:100%; height: 600px; background: lightCoral;")
-						//.slider__item.slider__item--loading
-							img.slider__img(scr=""  alt=""  style="width:100%; height: 400px; background: #123;")
-						//.slider__item.slider__item--loading
-							img.slider__img(scr=""  alt=""  style="width:100%; height: 600px; background: #ccc;")*/
-
-					.slider__controls
-						a.slider__control.slider__control--prev(href="#404")
-							svg.slider__control-icon
-								use(xlink:href='/img/sprite.svg#arrow_left')
-						a.slider__control.slider__control--next(href="#404")
-							svg.slider__control-icon
-								use(xlink:href='/img/sprite.svg#arrow_right')
-
-					.slider__content
-						.slider__desc.photo-desc
-							.photo-desc__head.pane
-								.pane__part
-									.user-block.user-block--sm
-										.user-block__photo
-										.user-block__main
-											.user-block__name Анна Богданова
-
-								.pane__part
-									.btn.btn--like(data-like="not-like")
-										svg.btn__icon
-											use(xlink:href='/img/sprite.svg#no_like')
-										span.btn__text 16
-
-							.photo-desc__body
-								.photo-desc__title Путешествие на речном трамвайчике
-								p.photo-desc__content Lorem ipsum dolor sit amet, consectetur adipisicing elit. Placeat, labore.
-
-						.slider__comments.comments.comments--show
-							.comments__toggle Комментарии
-							ul.comments__list
-								li.comments__item.comment.comment--add
-									.comment__ava
-									.comment__author Антон Черепанов
-									textarea.comment__input.field.field--bordered(placeholder="Добавить комментарий")
-									a.comment__btn.btn.btn--clear(href="#404")
-										span.btn__text Добавить
-
-								li.comments__item.comment
-									.comment__ava
-									.comment__author Антон Черепанов
-									.comment__text Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut doloribus voluptas, blanditiis?
-
-								li.comments__item.comment
-									.comment__ava
-									.comment__author Татьяна Летвинова
-									.comment__text Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut doloribus voluptas, blanditiis?
+	//div.modal-overlay.hide
+	//div.modal.hide
+	//	div.modal-content
+	//		div.modal__header
+	//			div.modal__header-title Добавить фотографии
+	//			div.modal__header-close
+	//				svg.modal__header-svg
+	//					use(xlink:href='/img/sprite.svg#close')
+	//		div.modal__title
+	//			span.modal__title-title Название
+	//			span.modal__title-text Как я провёл лето
+	//		.modal__load-container#img-container
+	//			.upload.modal__load-img(title="Выбрать изображение")
+	//				svg.upload__icon
+	//					use(xlink:href='/img/sprite.svg#cam')
+	//				.upload__text Перетащите фото сюда или
+	//					span.modal__link-load выберите файл
+	//				input.upload__input(type="file"  name="bg" multiple)#file-field
+	//			ul.img-list#img-list
+	//	div.modal__footer
+	//		div.modal__buttons
+	//			a.btn(href="#")#upload Сохранить
+	//			a.btn.btn--text.btn-cancelLoad(href="#cancel")
+	//				span.btn__text Отменить

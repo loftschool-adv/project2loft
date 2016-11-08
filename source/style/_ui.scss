@@ -1,0 +1,39 @@
+.ui {}
+
+	.ui-components {
+		min-height: 100%;
+		padding: 20px;
+		background: lightBlue;
+	}
+
+		.ui-section {
+			position: relative;
+			margin-bottom: 50px;
+			padding: 20px;
+			outline: 1px dashed #333;
+
+			&:last-child {
+				margin-bottom: 0;
+			}
+		}
+
+			.ui-title {
+				margin-bottom: 30px;
+				font: bold 20px/1.5 Panton, sans-serif;
+			}
+
+			.ui-icon {
+				width:  30px;
+				height: 30px;
+				margin-right: 10px;
+				fill: $white;
+				transition: fill .5s;
+
+				&:hover {
+					fill: $blue;
+				}
+
+				&:last-child {
+					margin-right: 0;
+				}
+			}
