@@ -15,12 +15,14 @@
 $( document ).ready(function() {
     var base = new BaseModule; // Инициализируем библиотеку. (Пока не нужно)
     commonModule.init();
-    loginModule.init();
+    //loginModule.init();
     mainPageModule.init();
     albumModule.init();
     // Анимации
+    loginCoverModule.init();
     headerModule.init();
     // ajax
+    ajaxLoginCoverModule.init();
     ajaxHeaderModule.init();
 
 });
