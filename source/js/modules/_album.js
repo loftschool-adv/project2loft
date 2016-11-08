@@ -17,7 +17,6 @@ var albumModule = (function() {
 	var openUpload = function(){
 		base.changeClass('.modal_add-photo, .modal-overlay','hide','del')
 	};
-
 	// Закрыть окно
 	var closeUpload = function(e){
 		e.preventDefault();
