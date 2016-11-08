@@ -15,6 +15,7 @@ let commons = config.folder.commons;
 // Редактирование данных пользователя
 let editUserData = function(req,res){
 	let form = new multiparty.Form();
+	let resObj = {};
 	// Обрабатываем данные через multiparty
 	form.parse(req, function(error, fields, files){
 		async.waterfall([
@@ -72,15 +73,21 @@ let editUserData = function(req,res){
 					// Отправляем файл для сохранения
 					callback(null,false);
 				}
-	    }
+	    },
+	  /*  function(callback){
+	    	// Формируем объект для отправки
+	    	console.log(fields);
+	    	resObj.name = fields.userName[0];
+	    	resObj.about = fields.userAbout[0];
+	    	resObj.avatar : 'users/id${req.session.user_id}/commons/'
+
+	    },*/
 
     ],(err,test)=>{
     	if(err){
     		res.json({ error: err})
     	}else{
-    		res.json({
-    			avatar : 'users/id${req.session.user_id}/commons/'
-    		});
+    		res.json({message: "Ответ"});
     	}
   	})
 

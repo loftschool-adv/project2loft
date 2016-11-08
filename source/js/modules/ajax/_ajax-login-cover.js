@@ -26,6 +26,7 @@ var ajaxLoginCoverModule = (function() {
 	var login = function(e){
 		e.preventDefault();
 		var $thisForm = $(this).closest('form');
+		var $errorContainer = $thisForm.find('.popup__error');
 		var errorArray = base.validateForm($thisForm); // Проверяем текущую форму и выдаем массив индексов ошибок
 			if(errorArray.length > 0){	// Если в массиве есть ошибки, значит выдаем окно, с номером ошибки
   			errorArray.forEach(function(index){
