@@ -20,6 +20,13 @@ route.post('/editUserData/', (req, res) => {
 	require('../modules/edit_user_data.js')(req,res);
 });
 
+
+// Реакция на изменение обложки аватарки
+route.post('/changePhoto/', (req,res) =>{
+	//console.log(req.session);
+	require('../modules/requests/change_photo.js')(req,res);
+});
+
 // Реакция на изменение обложки альбома
 route.post('/addAlbumCover/', (req,res) =>{
 	//console.log(req.session);

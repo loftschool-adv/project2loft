@@ -183,7 +183,7 @@ var mainPageModule = (function() {
 
   return {
     init: function () {
-    	_editUserData();
+    	//_editUserData();
     	_setUplistner();
     },
     
