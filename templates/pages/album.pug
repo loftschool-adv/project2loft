@@ -81,7 +81,7 @@ block content
 					for im in imgs
 						.grid__item
 							.photo-card
-								a.photo-card__head(href="#404" style="background-image: url(/img/album/"+im+".png), url(/img/album/no_photo.jpg)")
+								a.photo-card__head(href="#404" style="background-image: url(../img/album/"+im+".png), url(../img/album/no_photo.jpg)")
 									.photo-card__details
 										.info.info--light
 											.info__item
@@ -95,7 +95,7 @@ block content
 									div.loupe
 								.photo-card__foot
 									.photo-card__foot-part
-										a.btn.btn--icon.btn_edit-photo(href="#404"  title="Редактировать")
+										a.btn.btn--icon(href="#404"  title="Редактировать")
 											svg.btn__icon
 												use(xlink:href='/img/sprite.svg#edit')
 									.photo-card__foot-part
@@ -103,7 +103,7 @@ block content
 		include ../commons/footer
 
 	div.modal-overlay.hide
-		div.modal.modal_add-photo.hide
+		div.modal.hide
 			form.modal-content(method='post', action='', enctype='multipart/form-data')#upload
 				div.modal__header
 					div.modal__header-title Добавить фотографии
@@ -135,34 +135,11 @@ block content
 						input(type="submit" value="Сохранить").btn(href="#404")#upload
 						a.btn.btn--text(href="#cancel"  data-action="close")
 							span.btn__text.btn-cancelLoad Отменить
-		// Для редкатирования картинки
-		div.modal.modal_edit-photo.hide
-			div.modal-content
-				div.modal__header
-					div.modal__header-title Редактировать фотографию
-					div.modal__header-close
-						svg.modal__header-svg
-							use(xlink:href='/img/sprite.svg#close') 
-				div.modal__form-container
-					form.modal__form-edit(action="")
-						div.modal__form-row
-							label.modal__form-label(for="titleIm") Название
-							input.modal__form-input.field(
-							type="text",
-							name="titleIm",
-							value="Домик в лесу"
-						)
-						div.modal__form-row
-							label.modal__form-label(for="descrIm") Описание
-							textarea.modal__form-input.field(name="descrIm").
-								Описание фоторграфии может быть с #хештегами. Чтобы было красиво описание должно быть на нескоько строк. Убедитесь сами!
-						div.modal__form-row
-							div.popup__error.hide
-			div.modal__footer
-				div.modal__buttons
-					input(type="submit" value = "Сохранить").btn#upload.submit-edit
-					a.btn.btn--text.btn-cancelLoad(href="#cancel")
-						span.btn__text Отменить
+					.modal-pane__part
+						a.btn.btn--important
+							svg.btn__icon
+								use(xlink:href='/img/sprite.svg#delete')
+							span.btn__text Удалить
 			//- Модальное окно: slider
 		.modal.modal--slider.hide#slider
 
@@ -229,4 +206,3 @@ block content
 									.comment__ava
 									.comment__author Татьяна Летвинова
 									.comment__text Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut doloribus voluptas, blanditiis?
-

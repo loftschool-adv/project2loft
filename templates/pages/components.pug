@@ -1,0 +1,496 @@
+extends ../layout
+
+block content
+
+	//- include ../commons/header
+	include ../commons/_header
+	include ../commons/header--edit
+
+
+	.ui-components
+
+		//- User block
+		.ui-section
+			.ui-title Карточка пользователя
+
+			.user-block
+				.user-block__photo
+
+				.user-block__main
+					.user-block__name Александра Соколова
+					.user-block__desc.
+						Я веб разработчик разработчик. Мне 24 года. Люблю путешествия, кодинг, фриланс, и активный отдых.
+					.user-block__social
+						+social
+
+			br
+			br
+
+			.user-block.user-block--sm
+				.user-block__photo
+
+				.user-block__main
+					.user-block__name Александра Соколова
+
+
+
+
+
+		//- Icons
+		.ui-section
+			.ui-title Иконки
+
+			svg.ui-icon
+				use(xlink:href='/img/sprite.svg#add')
+
+			svg.ui-icon
+				use(xlink:href='/img/sprite.svg#album')
+
+			svg.ui-icon
+				use(xlink:href='/img/sprite.svg#arrow_left')
+
+			svg.ui-icon
+				use(xlink:href='/img/sprite.svg#arrow_right')
+
+			svg.ui-icon
+				use(xlink:href='/img/sprite.svg#cam')
+
+			svg.ui-icon
+				use(xlink:href='/img/sprite.svg#close')
+
+			svg.ui-icon
+				use(xlink:href='/img/sprite.svg#comments')
+
+			svg.ui-icon
+				use(xlink:href='/img/sprite.svg#delete')
+
+			svg.ui-icon
+				use(xlink:href='/img/sprite.svg#edit')
+
+			svg.ui-icon
+				use(xlink:href='/img/sprite.svg#envelope')
+
+			svg.ui-icon
+				use(xlink:href='/img/sprite.svg#heart')
+
+			svg.ui-icon
+				use(xlink:href='/img/sprite.svg#home')
+
+			svg.ui-icon
+				use(xlink:href='/img/sprite.svg#like')
+
+			svg.ui-icon
+				use(xlink:href='/img/sprite.svg#loupe')
+
+			svg.ui-icon
+				use(xlink:href='/img/sprite.svg#more')
+
+			svg.ui-icon
+				use(xlink:href='/img/sprite.svg#name')
+
+			svg.ui-icon
+				use(xlink:href='/img/sprite.svg#no_like')
+
+			svg.ui-icon
+				use(xlink:href='/img/sprite.svg#off')
+
+			svg.ui-icon
+				use(xlink:href='/img/sprite.svg#password')
+
+			svg.ui-icon
+				use(xlink:href='/img/sprite.svg#search')
+
+			svg.ui-icon
+				use(xlink:href='/img/sprite.svg#top')
+
+
+
+
+
+		//- Модальные окна
+		.ui-section
+			.ui-title Модальные окна
+
+			.btn.btn--light(data-modal="modal")
+				svg.btn__icon
+					use(xlink:href='/img/sprite.svg#add')
+				span.btn__text Модальное окно
+
+			.btn.btn--light(data-modal="alert")
+				span.btn__text alert
+
+			.btn.btn--light(data-modal="slider")
+				span.btn__text слайдер
+
+			.btn.btn--light(data-modal="add-album")
+				span.btn__text добавиь альбом
+
+
+
+
+
+		//- Поля формы
+		.ui-section
+			.ui-title Поля формы
+
+			input.field(
+				type="text"
+				placeholder="placeholder"
+			)
+
+			br
+			br
+
+			.input-complex.input-complex--search.width--md
+				input.field.input-complex__field(
+					type="text"
+					name="text"
+					placeholder="Placeholder"
+				)
+				.input-complex__side
+					svg.input-complex__icon
+						use(xlink:href='/img/sprite.svg#envelope')
+
+			br
+
+			form.search
+				input.field.search__field(
+					type="text"
+					name="text"
+					placeholder="Найти..."
+				)
+				button.search__btn
+					svg.input-complex__icon
+						use(xlink:href='/img/sprite.svg#search')
+
+			br
+
+			textarea.field(
+				placeholder="textarea"
+			)
+
+
+
+
+
+		.ui-section
+			.ui-title Социальный кнопки
+
+			+social
+			span < has drop
+
+
+
+
+
+		.ui-section
+			.ui-title Кнопки
+
+			.btn btn
+			.btn.btn--clear btn--clear
+			.btn.btn--important btn--important
+			.btn.btn--light btn--light
+
+			.btn.btn--important
+				span.btn__text text
+				svg.btn__icon
+					use(xlink:href='/img/sprite.svg#envelope')
+
+			.btn.btn--text
+				span.btn__text btn--text
+
+			.btn.btn--light
+				svg.btn__icon
+					use(xlink:href='/img/sprite.svg#envelope')
+				span.btn__text btn--light
+
+			br
+
+			.btn.btn--text
+				span.btn__text btn--text
+
+			.btn.btn--text-important
+				span.btn__text btn--text-important
+
+			br
+
+			.btn.btn--icon(title="Редактировать")
+				svg.btn__icon
+					use(xlink:href='/img/sprite.svg#edit')
+
+			.btn.btn--light.btn--expand
+				svg.btn__icon
+					use(xlink:href='/img/sprite.svg#edit')
+				span.btn__text btn--expand
+
+			.btn.btn--light.btn--expand
+				svg.btn__icon
+					use(xlink:href='/img/sprite.svg#off')
+				span.btn__text Выйти
+
+
+
+
+
+		.ui-section
+			.ui-title Сетка с карточками
+
+			.grid.grid--md
+				.grid__item
+					.album-card
+						a.album-card__head(href="#404")
+							.album-card__info
+								.album-card__title Фотографии природы леса, енотов и оленей...
+								.album-card__cnt 18 фотографий
+
+						.album-card__foot
+							.album-card__foot-part
+								a.btn.btn--icon(href="#404"  title="Редактировать")
+									svg.btn__icon
+										use(xlink:href='/img/sprite.svg#edit')
+
+							.album-card__foot-part
+								a.album-card__link(href="#404") Название альбома
+
+
+				each i in Array(3)
+					.grid__item
+						.album-card
+							a.album-card__head(href="#404")
+								.album-card__info
+									.album-card__title Описание альбома ...
+									.album-card__cnt Количество фотографий
+
+							.album-card__foot
+								.album-card__foot-part
+									a.btn.btn--icon(href="#404"  title="Редактировать")
+										svg.btn__icon
+											use(xlink:href='/img/sprite.svg#edit')
+
+								.album-card__foot-part
+									a.album-card__link(href="#404") Название альбома
+
+
+
+			.grid.grid--lg
+				each i in Array(2)
+					.grid__item
+						.photo-card
+							a.photo-card__head(href="#404")
+								.photo-card__details
+									.info.info--light
+										.info__item
+											svg.info__icon
+												use(xlink:href='/img/sprite.svg#comments')
+											span.info__text 2
+										.info__item
+											svg.info__icon
+												use(xlink:href='/img/sprite.svg#like')
+											span.info__text 10
+
+							.photo-card__foot
+								.photo-card__foot-part
+									a.btn.btn--icon(href="#404"  title="Редактировать")
+										svg.btn__icon
+											use(xlink:href='/img/sprite.svg#edit')
+								.photo-card__foot-part
+									.photo-card__link(href="#404") Название фотографии
+
+
+
+
+				.grid__item
+					.photo-card
+						a.photo-card__head(href="#404")
+
+						.photo-card__body
+							.photo-details
+								.photo-details__side
+									a.photo-details__ava(href="#user")
+
+								.photo-details__main
+									.photo-details__title Название фотографии
+									.photo-details__info.info
+										.info__item
+											svg.info__icon
+												use(xlink:href='/img/sprite.svg#comments')
+											span.info__text 2
+										.info__item
+											svg.info__icon
+												use(xlink:href='/img/sprite.svg#like')
+											span.info__text 10
+
+						.photo-card__foot
+							.photo-card__foot-part
+
+							.photo-card__foot-part
+								a.link.photo-card__link-album(href="#404")
+									svg.link__icon
+											use(xlink:href='/img/sprite.svg#album')
+									.link__text Название альбома
+
+
+
+	include ../commons/footer
+
+
+
+
+
+	.modal-overlay.hide
+
+		//- Обычное модальное окно
+		.modal#modal.hide
+			.modal-content
+				.modal__header
+					.modal__header-title Добавить фотографии
+					.modal__close(data-action="close")
+						svg.modal__close-icon
+							use(xlink:href='/img/sprite.svg#close')
+
+				.modal__title
+					span.modal__title-title Название
+					span.modal__title-text Как я провёл лето
+				.modal__load-container#img-container
+					.upload.modal__load-img(title="Выбрать изображение")
+						svg.upload__icon
+							use(xlink:href='/img/sprite.svg#cam')
+						.upload__text Перетащите фото сюда или
+							span.modal__link-load выберите файл
+						input#file-field.upload__input(type="file"  name="bg"  multiple)
+					ul.img-list#img-list
+
+			.modal__footer
+				.modal-pane
+					.modal-pane__part
+						a.btn(href="#404")#upload Сохранить
+						a.btn.btn--text(href="#cancel"  data-action="close")
+							span.btn__text Отменить
+					.modal-pane__part
+						a.btn.btn--important
+							svg.btn__icon
+								use(xlink:href='/img/sprite.svg#delete')
+							span.btn__text Удалить
+
+
+
+
+		//- Модальное окно типа alert
+		.modal.modal--alert.hide#alert
+			.modal__body
+				.modal__section Файлы были загружены
+
+			.modal__footer
+				a.btn.btn--clear(href="#404"  data-action="close")
+					span.btn__text Закрыть
+
+
+
+
+		//- Модальное окно: slider
+		.modal.modal--slider.hide#slider
+
+			.modal__body
+				.modal__section.modal__section--slider.slider
+					.slider__close
+						.modal__close(data-action="close"  title="закрыть")
+							svg.modal__close-icon
+								use(xlink:href='/img/sprite.svg#close')
+
+					.slider__view
+						.slider__item.slider__item--active
+							img.slider__img(scr=""  alt=""  style="width:100%; height: 400px; background: lightBlue;")
+						.slider__item.slider__item--loading
+							img.slider__img(scr=""  alt=""  style="width:100%; height: 600px; background: lightCoral;")
+						.slider__item.slider__item--loading
+							img.slider__img(scr=""  alt=""  style="width:100%; height: 400px; background: #123;")
+						.slider__item.slider__item--loading
+							img.slider__img(scr=""  alt=""  style="width:100%; height: 600px; background: #ccc;")
+
+					.slider__controls
+						a.slider__control.slider__control--prev(href="#404")
+							svg.slider__control-icon
+								use(xlink:href='/img/sprite.svg#arrow_left')
+						a.slider__control.slider__control--next(href="#404")
+							svg.slider__control-icon
+								use(xlink:href='/img/sprite.svg#arrow_right')
+
+					.slider__content
+						.slider__desc.photo-desc
+							.photo-desc__head.pane
+								.pane__part
+									.user-block.user-block--sm
+										.user-block__photo
+										.user-block__main
+											.user-block__name Анна Богданова
+
+								.pane__part
+									.btn.btn--like(data-like="not-like")
+										svg.btn__icon
+											use(xlink:href='/img/sprite.svg#no_like')
+										span.btn__text 16
+
+							.photo-desc__body
+								.photo-desc__title Путешествие на речном трамвайчике
+								p.photo-desc__content Lorem ipsum dolor sit amet, consectetur adipisicing elit. Placeat, labore.
+
+						.slider__comments.comments.comments--show
+							.comments__toggle Комментарии
+							ul.comments__list
+								li.comments__item.comment.comment--add
+									.comment__ava
+									.comment__author Антон Черепанов
+									textarea.comment__input.field.field--bordered(placeholder="Добавить комментарий")
+									a.comment__btn.btn.btn--clear(href="#404")
+										span.btn__text Добавить
+
+								li.comments__item.comment
+									.comment__ava
+									.comment__author Антон Черепанов
+									.comment__text Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut doloribus voluptas, blanditiis?
+
+								li.comments__item.comment
+									.comment__ava
+									.comment__author Татьяна Летвинова
+									.comment__text Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut doloribus voluptas, blanditiis?
+
+
+
+
+
+		//- Модальное окно: slider
+		.modal.hide.modal__add-album#add-album
+			.wrapper__modal
+				.modal__header.add-albums__header
+					.modal__header-title Добавить альбом
+					.modal__header-close
+						svg.modal__header-svg
+							use(xlink:href='/img/sprite.svg#close')
+				.wrapper-inputs
+					.wrapper-input__name
+						label.add-album__name Название
+						input.field.add-album__name-input(
+							type="text"
+							placeholder=""
+						)
+					.wrapper-input__description
+							label.add-album__description Описание
+							textarea.field.add-album__textarea(
+							placeholder=""
+						)
+					.wrapper-input__upload
+						.user-block.user-block--sm.user-block__upload
+							.user-block__photo
+						.btn.btn--clear.upload
+							.btn__text Загрузить обложку
+							input.upload__input(type="file"  name="bg")
+						span.wrapper-input__text (файл должен быть размером не более 1024 КБ)
+					.modal__notification
+						.notice.notice--error 156
+
+			.modal__footer.add-album__footer
+				.modal-pane
+					.modal-pane__part
+						a.btn.add-album__btn-save(href="#")#upload Сохранить
+						a.btn.btn--text.add-album__btn-cancel(href="#cancel")
+							span.btn__text Отменить
