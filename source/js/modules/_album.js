@@ -18,7 +18,7 @@ var albumModule = (function() {
 		base.changeClass('.modal_add-photo, .modal-overlay','hide','del')
 	};
 
-	// Закрыть окно для загрузки изображений
+	// Закрыть окно
 	var closeUpload = function(e){
 		e.preventDefault();
 		var modal = $(this).closest('.modal');
@@ -27,6 +27,7 @@ var albumModule = (function() {
 		$(".img-list").empty();
 		$(".slider__item").remove();
 		$('.modal__load-img').show();
+		$('.slider__view').css('transition' ,'none');
 	};
 
 	// Открыть окно для редактирования фото и отправить ajax при сохранении редактирования
@@ -269,6 +270,7 @@ var funcSlider = function() {
 			if (direction === 'next') {
 				newSlideIdx = getIdx(currentSlideIdx, 'next');
 			}
+			$('.slider__view').css('transition' ,'height 1s');
 			// Подстраиваем высоту
 			$('.slider__view').height(slides.eq(newSlideIdx).children().height());
 
@@ -336,19 +338,18 @@ var funcSlider = function() {
 				var url = ($(this).css('background-image').split(',')[0]);
 				var src = url.substr(5, 39 );
 				var cont = $('<div/>').addClass('slider__item').appendTo($('.slider__view'));
-				var img = $('<img>').addClass('slider__img').appendTo(cont).attr('src',src);				
+
+				var img = $('<img>').addClass('slider__img').appendTo(cont).attr('src',src);
+
 				if (url==currentImg.css('background-image').split(',')[0]){
 					cont.removeClass('slider__item--loading').addClass('slider__item--active');
-					$('.slider__view').height(cont.children().height());
+						$('.slider__view').height(cont.children().height());
 					 cont.next().addClass('slider__item--loading');
 				}
 
 		})
 		funcSlider();
 	};
-
-
-
 	var _setUpListners = function() {
 		$('.btn_album-add').on('click', openUpload);
 		$('.btn_edit-photo').on('click', openEditPhoto);

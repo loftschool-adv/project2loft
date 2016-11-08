@@ -103,7 +103,7 @@ block content
 		include ../commons/footer
 
 	div.modal-overlay.hide
-		div.modal.hide
+		div.modal.modal_add-photo.hide
 			form.modal-content(method='post', action='', enctype='multipart/form-data')#upload
 				div.modal__header
 					div.modal__header-title Добавить фотографии
@@ -135,11 +135,6 @@ block content
 						input(type="submit" value="Сохранить").btn(href="#404")#upload
 						a.btn.btn--text(href="#cancel"  data-action="close")
 							span.btn__text.btn-cancelLoad Отменить
-					.modal-pane__part
-						a.btn.btn--important
-							svg.btn__icon
-								use(xlink:href='/img/sprite.svg#delete')
-							span.btn__text Удалить
 		// Для редкатирования картинки
 		div.modal.modal_edit-photo.hide
 			div.modal-content
