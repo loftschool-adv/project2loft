@@ -12,9 +12,7 @@ let User = require('../modules/models/user.js').User;
 let Image = require('../modules/models/image.js').Image;
 let async = require('async');
 let path = require('path');
-let uploadImg = require('../modules/upload-img.js').upload;
-let saveImg = require('../modules/upload-img.js').save;
-let files = require('../modules/upload-img.js').files;
+let upload = require('../modules/upload-img.js');
 
 
 // route.get('/:album', (req,res) =>{
@@ -110,7 +108,9 @@ route.get('/:album', (req,res) =>{
 
 // Обращаемся к корню сайта , и рендерим шаблон из ./views/pages/index.pug
 
-route.post('/:album/addImg/', (req, res) => uploadImg(req, res));
-route.post('/:album/saveImg/', (req, res) => saveImg(req, files));
+route.post('/:album/addImg/', (req, res) => upload.uploadImg(req, res));
+route.post('/:album/saveImg/', (req, res) => upload.imgSave(req, upload.files));
+route.post('/:album/closeUploaderImg/', (req, res) => upload.closeImgUploader(res, upload.files));
+
 
 module.exports = route;

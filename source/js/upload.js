@@ -7,6 +7,7 @@ var isAdvancedUpload = function() {
 var $form = $('#upload');
 var $input = $('#file');
 var $save = $('#save');
+var $closeUploaderImg = $('.modal__close-img');
 
 // Если чтото закинули добавляем класс
 if (isAdvancedUpload) {
@@ -67,8 +68,26 @@ $save.on('click', function () {
     contentType: false,
     processData: false,
     success: function(data) {
-      $form.addClass( data.success == true ? 'is-success' : 'is-error' );
-      if (!data.success) $errorMsg.text(data.error);
+
+    },
+    error: function() {
+      // Log the error, show an alert, whatever works for you
+    }
+  });
+
+});
+
+$closeUploaderImg.on('click', function () {
+
+  $.ajax({
+    type: "POST",
+    url: location.href + '/closeUploaderImg/',
+    data: 'ok',
+    cache: false,
+    contentType: false,
+    processData: false,
+    success: function(data) {
+
     },
     error: function() {
       // Log the error, show an alert, whatever works for you

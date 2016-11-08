@@ -8,15 +8,12 @@ let async      = require('async');
 let multiparty = require('multiparty');
 let server     = require('../server.js');
 
-let BaseModule = require('../modules/libs/_base.js');
-let base = new BaseModule;
 let mongoose = require('../modules/libs/mongoose.js');
 let Image = require('../modules/models/image.js').Image;
 var files = [];
 
 function uploadImg(req, res) {
 
-  var count = 0;
   var form = new multiparty.Form();
   form.uploadDir = 'users/id' + req.session.user_id + '/tmp/';
   form.autoFiles = true;
@@ -156,6 +153,15 @@ function imgSave(req, files) {
 
 }
 
-exports.upload = uploadImg;
-exports.save = imgSave;
+
+function closeImgUploader(res, files) {
+  files = [];
+
+  res.end('close');
+}
+
+
+exports.uploadImg = uploadImg;
+exports.imgSave = imgSave;
+exports.closeImgUploader = closeImgUploader;
 exports.files = files;

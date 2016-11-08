@@ -106,7 +106,7 @@ block content
 			form.modal-content(method='post', action='', enctype='multipart/form-data')#upload
 				div.modal__header
 					div.modal__header-title Добавить фотографии
-					div.modal__header-close
+					div.modal__header-close.modal__close-img
 						svg.modal__header-svg
 							use(xlink:href='/img/sprite.svg#close')
 				div.modal__title
@@ -120,16 +120,13 @@ block content
 							span.modal__link-load выберите файл
 						input#file.upload__input(type='file', name='files', data-multiple-caption='{count} files selected', multiple='')
 					ul.img-list#img-list
-					.box__uploading Uploading…
-					.box__success Done!
-					.box__error
-						| Error!
+
 			.modal__footer
 				.modal-pane
 					.modal-pane__part
 						.btn#save Сохранить
-						a.btn.btn--text(href="#cancel"  data-action="close")
-							span.btn__text.modal__header-close Отменить
+						.btn.btn--text(data-action="close")
+							span.btn__text.modal__header-close.modal__close-img Отменить
 
 		// Для редкатирования картинки
 		div.modal.modal_edit-photo.hide
@@ -156,7 +153,7 @@ block content
 							div.popup__error.hide
 			div.modal__footer
 				div.modal__buttons
-					input(type="submit" value = "Сохранить").btn#upload.submit-edit
+					input(type="submit" value = "Сохранить").btn.submit-edit
 					a.btn.btn--text.btn-cancelLoad(href="#cancel")
 						span.btn__text Отменить
 			//- Модальное окно: slider
