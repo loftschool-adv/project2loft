@@ -5,6 +5,7 @@ let BaseModule = require('../modules/libs/_base.js');
 let base = new BaseModule;
 let User = require('./models/user.js').User;
 let multiparty = require('multiparty');
+let del = require('del');
 
 let config = require('../config.json');
 let Jimp   = require('jimp');
@@ -52,42 +53,49 @@ let editUserData = function(req,res){
 	    	if (Object.keys(files).length != 0) {
 	    		async.forEach(files,(file,callback_2)=>{
 	    			if(file[0].fieldName == "userBackGround"){
-						  let newFilePath = 'background' + path.extname(file[0].path);
+						  let newBackGroundPath = 'background' + path.extname(file[0].path);
 						  // Сохраняем файл
 					    Jimp.read(file[0].path).then(function(image){
 		            //image.resize(500, Jimp.AUTO);
-		            image.write(userPath + newFilePath);
-		            callback();
+		            image.write(userPath + newBackGroundPath);
+		            callback(null,newBackGroundPath);
 				      });
 	    			}else if(file[0].fieldName == "userAvatar"){
-	    				let newFilePath = 'avatar' + path.extname(file[0].path);
+	    				let newAvatarPath = 'avatar-'+ base.passGenerate(4) + path.extname(file[0].path);
 						  // Сохраняем файл
 					    Jimp.read(file[0].path).then(function(image){
 		            //image.resize(500, Jimp.AUTO);
-		            image.write(userPath + newFilePath);
-		            callback();
+		            image.write(userPath + newAvatarPath);
+		            callback(null,newAvatarPath);
 				      });
 	    			}
 	    		})
 				}else{
 					// Отправляем файл для сохранения
-					callback(null,false);
+					callback();
 				}
 	    },
-	  /*  function(callback){
+	  function(avatarName,callback){
 	    	// Формируем объект для отправки
-	    	console.log(fields);
-	    	resObj.name = fields.userName[0];
-	    	resObj.about = fields.userAbout[0];
-	    	resObj.avatar : 'users/id${req.session.user_id}/commons/'
-
-	    },*/
+	    resObj.name = fields.userName[0];
+	    resObj.about = fields.userAbout[0];
+	    resObj.avatar = `/id${req.session.user_id}/commons/${avatarName}`;
+	    callback(null,avatarName);
+	  },
+	  function(avatarName,callback){
+	  	// Устанавливаем аватарку в базе пользователя
+	  	User.findOneAndUpdate({'user_id': req.session.user_id},{$set:{ 'avatar': avatarName}},callback)
+	  },
+	  function(user,callback){
+	  	//console.log(user);
+	  	callback();
+	  }
 
     ],(err,test)=>{
     	if(err){
     		res.json({ error: err})
     	}else{
-    		res.json({message: "Ответ"});
+    		res.json(resObj);
     	}
   	})
 
