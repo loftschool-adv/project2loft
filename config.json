@@ -1,0 +1,21 @@
+{
+	"db": {
+		"host": "ds035995.mlab.com",
+		"port": "35995",
+		"name": "dbgallery",
+		"user": "user",
+		"password": "user"
+	},
+	"http" : {
+		"port": 4000,
+		"host": "localhost",
+		"publicRoot": "public",
+		"templatesRoot" : "templates"
+	},
+	"folder" : {
+		"users" : "users",
+		"tmp"	: "tmp",
+		"commons" : "commons",
+		"albums" : "albums"
+	}
+}
