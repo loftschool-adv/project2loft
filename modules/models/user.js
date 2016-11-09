@@ -41,12 +41,6 @@ let schema = new Schema({
         type: String,
         required: false,
         default: "Обо мне"
-    },
-    avatar: {
-       type: String 
-    },
-    background:{
-        type: String 
     }
 });
 

@@ -90,7 +90,8 @@ var scssLibs = [
 // Тут пишем пути к файлам js, чтобы они превратились в единый файл foundation.js (название файла береться из конфига)
 var jsLibs = [
   // Пример:  path.sourse.folder + '/jquery/dist/jquery.js',
-  path.sourse.libs + '/jquery/dist/jquery.min.js'
+  path.sourse.libs + '/jquery/dist/jquery.min.js',
+  'source/js/libs/async.min.js'
 ];
 
 
@@ -132,7 +133,7 @@ var mainJs = [
   path.sourse.folder + '/' + path.sourse.js + '/modules/ajax/_ajax-login-cover.js',
   path.sourse.folder + '/' + path.sourse.js + '/modules/ajax/_ajax-header.js',
   path.sourse.folder + '/' + path.sourse.js + '/modules/ajax/_ajax-social.js',
-  
+
   path.sourse.folder + '/' + path.sourse.js + '/app.js',
 
 ];

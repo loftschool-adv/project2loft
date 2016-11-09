@@ -17,7 +17,6 @@ let tmpFolder = config.folder.tmp;
 // Редактирование данных пользователя
 let editUserData = function(req,res){
 	let form = new multiparty.Form();
-	let thisUser;
 	let resObj = {};
 	// Обрабатываем данные через multiparty
 	form.parse(req, function(error, fields, files){
@@ -33,7 +32,7 @@ let editUserData = function(req,res){
 	    },
 	    function(callback){
 	    	// Получаем пользователя из базы
-	    	User.findOne({user_id: req.session.user_id},callback)   	
+	    	User.findOne({user_id: req.session.user_id},callback)
 	    },
 	    function(user,callback){
 	    	// Сохраняем данного пользователя в глобальную переменную
@@ -46,8 +45,8 @@ let editUserData = function(req,res){
 	    	let userPath = `${folder}/id${req.session.user_id}/commons/`;
 	    	if (Object.keys(files).length != 0) {
 	    		async.forEach(files,(file,callback_2)=>{
-	    			
-						
+
+
 						  // Сохраняем файл
 					    Jimp.read(file[0].path).then(function(image){
 		            //image.resize(500, Jimp.AUTO);
@@ -88,8 +87,8 @@ let editUserData = function(req,res){
 	  	}},callback)
 
 
-	  
-	  	
+
+
 	  },
 	  function(affected,callback){
 	  	// Чистим старые файлы background если они есть
@@ -157,6 +156,8 @@ let editUserData = function(req,res){
     		res.json(resObj);
     	}
   	})
+
+
 	});
 
   

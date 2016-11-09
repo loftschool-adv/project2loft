@@ -81,7 +81,7 @@ var mainPageModule = (function() {
           $footer.removeAttr('style').attr('style','background-image : url('+ e.target.result +')')
       }
       }) (photo);
-  }
+  };
 
   // Показываем новую аватарку , еще без отправки на сервер
   var previeUserAvatar = function(){
@@ -102,7 +102,7 @@ var mainPageModule = (function() {
 
    
 
-  }
+  };
 
   // Скидываем параметры при отмене
   var resetUserData = function(){
@@ -111,7 +111,7 @@ var mainPageModule = (function() {
     $avatarFront.removeAttr('style').attr('style',avatarFrontVal);
     $avatarBack.removeAttr('style').attr('style',avatarBackVal);
 
-  }
+  };
 
   // Получаем новый бекраунд
   var setUserBackGround = function(){
@@ -139,6 +139,7 @@ var mainPageModule = (function() {
   var _editUserData = function(){
   	
   	btnSave.on('click', function(e){
+      //$('.preload__container').addClass('active');
   		e.preventDefault();
       setUserBackGround();
       setAvatar();
@@ -183,8 +184,8 @@ var mainPageModule = (function() {
 
   return {
     init: function () {
-    	//_editUserData();
-    	//_setUplistner();
+    	_editUserData();
+    	_setUplistner();
     },
     
   };

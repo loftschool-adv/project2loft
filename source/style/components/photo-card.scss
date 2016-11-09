@@ -20,45 +20,22 @@
 			transition: background .5s;
 		}
 
-		&:after {
-			content: '';
-			position: absolute;
-			left: 0;  right: 0;
-			top: 0;  bottom: 0;
-			width:  40px;
-			height: 40px;
-			margin: auto;
-			background: url('../img/icons/loupe.svg')  no-repeat;
-			opacity: 0;
-			transition: opacity .5s;
-		}
 
 		&:hover {
 			&:before {
 				background: rgba(0,0,0,.25);
 			}
 
-			&:after {
-				opacity: .9;
-			}
 		}
 	}
-
-
 		.photo-card__details {
 			position: absolute;
 			left: 20px;  bottom: 20px;
 		}
-
-
-
 	.photo-card__body {
 		padding: 15px 20px;
 		background: #fff;
 	}
-
-
-
 	.photo-card__foot {
 		display: flex;
 		padding: 10px 20px;
