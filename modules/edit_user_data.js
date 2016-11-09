@@ -145,6 +145,7 @@ let editUserData = function(req,res){
 	    	// Формируем объект для отправки
 	    resObj.name = fields.userName[0];
 	    resObj.about = fields.userAbout[0];
+	    resObj.avatarFile = `/id${req.session.user_id}/${commons}/` + resObj.avatarFile;
 	    callback();
 	  },
 

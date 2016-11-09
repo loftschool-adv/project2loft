@@ -99,8 +99,6 @@ function imgSave(req, res, files) {
         image.save(function (err, image, affected) {
           if (err) throw err;
           console.log('Сохранена картинка в базу');
-          //console.log(image);
-          //console.log(affected);
 
           callback_1(null, image.img_id);
         });

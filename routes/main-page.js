@@ -11,13 +11,25 @@ let route = require('express').Router();
 
 
 route.get('/', (req,res,next) =>{
-	require('../modules/main-page_render.js')(req,res,next);
+	require('../modules/render/main-page_render.js')(req,res,next);
 });
 
 
 // Редактируем данные пользователя
 route.post('/editUserData/', (req, res) => {
 	require('../modules/edit_user_data.js')(req,res);
+});
+
+// Редактируем социальные сети пользователя
+route.post('/changeSocial/', (req, res) => {
+	require('../modules/requests/change_social.js')(req,res);
+});
+
+
+// Реакция на изменение обложки аватарки
+route.post('/changePhoto/', (req,res) =>{
+	//console.log(req.session);
+	require('../modules/requests/change_photo.js')(req,res);
 });
 
 // Реакция на изменение обложки альбома

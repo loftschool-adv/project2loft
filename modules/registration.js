@@ -4,6 +4,7 @@ let base = new BaseModule;
 let config = require('../config.json');
 let folder = './' + config.folder.users;  // Папка с пользователями
 let User = require('./models/user.js').User;
+let Social = require('./models/social.js').Social;
 
 
 
@@ -40,7 +41,20 @@ let registration = function(req,res){
       // Записываем данные сохраненного пользователя в сессию
       req.session.user_id = user.user_id;
       req.session.email = user.email;
-      callback(null,user);
+
+      
+      async.parallel([
+        function(callback_2){
+          let social = new Social({
+              user_id: user.user_id
+          });
+          social.save(callback_2);
+        }
+      ],(err)=>{
+        if(err) throw err;
+        callback(null,user);
+      })
+      
     },
     function(user,callback){
       // Создаем папку tmp

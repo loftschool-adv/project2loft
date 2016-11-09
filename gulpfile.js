@@ -47,7 +47,7 @@ var path = {
 
 
 		folder 	: 	'source',       		// Папка где лежат исходника
-		pug 		:  	'templates', 	      // Папка с шаблонами , только для фронт версии
+		pug 		:  	'views', 	      // Папка с шаблонами , только для фронт версии
     views   :   'views',            // Папка с шаблонами , только для серверной версии
 		sass 		: 	'style',					 	// Папка со стилями
 		libs 		: 	'node_modules',			// Папка с библиотеками
@@ -120,13 +120,20 @@ var mainJs = [
   // Пример:  path.sourse.folder  + '/' + path.sourse.js + '/app.js',
   path.sourse.folder + '/' + path.sourse.js + '/modules/_base.js',
   path.sourse.folder + '/' + path.sourse.js + '/modules/_common.js',
-  path.sourse.folder + '/' + path.sourse.js + '/modules/_login.js',
+  // animation
+  path.sourse.folder + '/' + path.sourse.js + '/modules/animation/_login-cover.js',
+  path.sourse.folder + '/' + path.sourse.js + '/modules/animation/_header.js',
   path.sourse.folder + '/' + path.sourse.js + '/upload.js',
   //path.sourse.folder + '/' + path.sourse.js + '/oldUploaderObject.js',
   path.sourse.folder + '/' + path.sourse.js + '/modules/_main-page.js',
   path.sourse.folder + '/' + path.sourse.js + '/modules/_album.js',
   path.sourse.folder + '/' + path.sourse.js + '/modal.js',
   path.sourse.folder + '/' + path.sourse.js + '/slider.js',
+  // ajax
+  path.sourse.folder + '/' + path.sourse.js + '/modules/ajax/_ajax-login-cover.js',
+  path.sourse.folder + '/' + path.sourse.js + '/modules/ajax/_ajax-header.js',
+  path.sourse.folder + '/' + path.sourse.js + '/modules/ajax/_ajax-social.js',
+
   path.sourse.folder + '/' + path.sourse.js + '/app.js',
 
 ];
