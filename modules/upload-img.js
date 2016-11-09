@@ -8,15 +8,15 @@ let async      = require('async');
 let multiparty = require('multiparty');
 let server     = require('../server.js');
 
-let BaseModule = require('../modules/libs/_base.js');
-let base = new BaseModule;
 let mongoose = require('../modules/libs/mongoose.js');
 let Image = require('../modules/models/image.js').Image;
-var files = [];
+
+//var files = [];
 
 function uploadImg(req, res) {
 
-  var count = 0;
+  var tmpFiles = [];
+
   var form = new multiparty.Form();
   form.uploadDir = 'users/id' + req.session.user_id + '/tmp/';
   form.autoFiles = true;
@@ -25,7 +25,15 @@ function uploadImg(req, res) {
 
     if (file.originalFilename) {
 
-      files.push(file);
+      if (!req.session.uploadFiles) {
+        tmpFiles = [];
+      } else {
+        tmpFiles = req.session.uploadFiles;
+      }
+
+
+
+      tmpFiles.push(file);
 
       console.log('Картинка загруженна');
 
@@ -41,6 +49,7 @@ function uploadImg(req, res) {
         image.write(thumb);
 
         res.write(thumb);
+        req.session.uploadFiles = tmpFiles;
 
         res.end();
 
@@ -65,7 +74,7 @@ function uploadImg(req, res) {
 
 }
 
-function imgSave(req, files) {
+function imgSave(req, res, files) {
 
   async.eachSeries(files, function (file, callbackEach) {
 
@@ -90,8 +99,6 @@ function imgSave(req, files) {
         image.save(function (err, image, affected) {
           if (err) throw err;
           console.log('Сохранена картинка в базу');
-          //console.log(image);
-          //console.log(affected);
 
           callback_1(null, image.img_id);
         });
@@ -151,11 +158,26 @@ function imgSave(req, files) {
   }, function (err, results) {
 
     // Сохранили все картинки
+    res.end();
 
   });
 
 }
 
-exports.upload = uploadImg;
-exports.save = imgSave;
-exports.files = files;
+
+function closeImgUploader(req, res) {
+
+  console.log(req.session.uploadFiles);
+
+  req.session.uploadFiles = [];
+
+  console.log('clear');
+  console.log(req.session.uploadFiles);
+
+  res.end('close');
+}
+
+
+exports.uploadImg = uploadImg;
+exports.imgSave = imgSave;
+exports.closeImgUploader = closeImgUploader;

@@ -1,11 +1,11 @@
 let async = require('async');
 let fs = require('fs');
-let config = require('../config.json');
-let User = require('./models/user.js').User;
-let Album = require('./models/album.js').Album;
-let Image = require('./models/image.js').Image;
+let config = require('../../config.json');
+let User = require('../models/user.js').User;
+let Album = require('../models/album.js').Album;
+let Image = require('../models/image.js').Image;
 let dateFormat = require('dateformat');
-let BaseModule = require('./libs/_base.js');
+let BaseModule = require('../libs/_base.js');
 let base = new BaseModule;
 let translit = require('translit-be2ascii');
 let slug = require('slug');
@@ -19,10 +19,12 @@ let commons = config.folder.commons;
 // Отображаем главную страницу пользователя
 let mainPageRender = function(req,res,next){
 
+	// Массив для всего поиска
+
+	let findObj = {};
+
 	// Формируем супер массив для рендеринга
-	let renderObj = {
-		albums : []
-	}
+	let renderObj = {albums : []}
 
  async.waterfall([
  	function(callback){
@@ -34,38 +36,42 @@ let mainPageRender = function(req,res,next){
 		}
  	},
  	function(callback){
- 		// Если все совпало начинаем искать пользователя в базе
- 		User.findOne({email: req.session.email},callback)
- 	},
- 	function(user,callback){
- 		// Записываем данные пользователя в глобальный объект, для доступа ко всем шаблонам
- 		res.locals.userName = user.name;
-	  res.locals.userAbout = user.about;
-	  res.locals.email = req.session.email;
-	  callback(null,user)
- 	},
- 	function(user,callback){
- 		// Сканируем папку сommons
- 		fs.readdir(`${folder}/id${req.session.user_id}/${commons}/`, callback)
- 	},
- 	function(files,callback){
- 		// Пробегаемся по полученным файлам
- 		async.each(files,(file,callback_2) => {
- 			//Получаем имя файла
- 			let fileName = file.split('.')[0];
- 			if(fileName == 'background'){
- 				// Если файл равен background, значит это фон шапки. Записываем его путь глобально
-				res.locals.backgroundIamge = `/id${req.session.user_id}/${commons}/${file}`;
-	    }
-	    if(fileName == 'avatar'){
- 				// Если файл равен background, значит это фон шапки. Записываем его путь глобально
-				res.locals.avatar = `/id${req.session.user_id}/${commons}/${file}`;
-	    }
-	    callback_2();
- 		},() =>{
- 			// Когда закончим с файлами, пойдем дальше
- 			callback();
+ 		// Если все совпало начинаем искать в базе
+ 		async.waterfall(
+ 			[
+ 				function(callback_2){
+ 					User.findOne({email: req.session.email},(err,user)=>{
+ 						callback_2(null,user)
+ 					});
+ 				},
+ 				function(user,callback_2){
+ 					Album.find({user_id : req.session.user_id},(err,albums)=>{
+ 						callback_2(null,user,albums)
+ 					});
+ 				},
+ 				function(user,albums,callback_2){
+ 					Image.find({user_id : req.session.user_id},(err,images)=>{
+ 						callback_2(null,user,albums,images)
+ 					});
+ 				}
+
+ 			],
+ 		(err,user,albums,images)=>{
+ 			callback(null,user,albums,images);
  		})
+ 	},
+ 	function(user,albums,images,callback){
+ 		//Записываем данные из базы в объект
+ 		findObj.user = user;
+ 		findObj.albums = albums;
+ 		findObj.images = images;
+ 		// Записываем данные пользователя в глобальный объект
+ 		res.locals.userName = findObj.user.name;
+	  res.locals.userAbout = findObj.user.about;
+	  res.locals.email = req.session.email;
+	  res.locals.backgroundIamge = `/id${req.session.user_id}/${commons}/${findObj.user.background}`;
+	  res.locals.avatar = `/id${req.session.user_id}/${commons}/${findObj.user.avatar}`;
+ 		callback();
  	},
  	function(callback){
  		// Ищем альбома данного пользователя в базе и получаем в отсортированном виде
