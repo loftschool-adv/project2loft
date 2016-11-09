@@ -7,6 +7,7 @@ var ajaxHeaderModule = (function() {
 
   // Общие
   var $header = $('.header-main');
+  var $footer = $('.footer');
   var id = window.location.pathname;
   var closeEditHeader = headerModule.closeEditHeader();
   var headerFront = $header.find('.header__section_main-front');
@@ -14,7 +15,9 @@ var ajaxHeaderModule = (function() {
   var ajaxFlag = false;
   var thisAjax;
 
-  
+  var newBackGround;
+
+
 
   // Кнопки
   var saveBtn = $header.find('.btn--save');
@@ -29,26 +32,21 @@ var ajaxHeaderModule = (function() {
    // Дефолные стили
 
   var headerBgStyle = $header.attr('style');
-  var avatarOldStyle = $header.attr('style');
+  var footerBgStyle = $footer.attr('style');
 
 
 
 
    // Функции
-  var setData = function(formData){
-  	var $headrBack = $header.find('.header__section_main-back');
-  	var inputName = $headrBack.find('input[name="name"]');
-  	var inputAbout = $headrBack.find('textarea[name = "desc"]');
+  /*var setData = function(formData){
     var inputAvatar = $headrBack.find('input[name="photo"]')[0].files[0];
     var inputBG = $headrBack.find('input[name="bg"]')[0].files[0];
   	
-  	formData.append("userName",inputName.val());
-  	formData.append("userAbout",inputAbout.val());
     formData.append("userAvatar",inputAvatar);
     formData.append("userBackGround",inputBG);
   	return formData;
-  
-  }
+
+  }*/
 
   // Заблокировать выбор файла
   var lockSelFile = function(e){
@@ -70,9 +68,11 @@ var ajaxHeaderModule = (function() {
   	var blockPhoto = $this.closest('.user-block__photo');
   	var fileInput = $this.find('input[name="photo"]');
   	var photo = fileInput[0].files[0];
+    console.log(photo);
   	if(!photo){
   		ajaxFlag = false;
-  		blockPhoto.removeAttr('style');
+      var frontAvatar = headerFront.find('.user-block__photo').attr('style');
+  		blockPhoto.attr('style',frontAvatar);
   		return;
   	}
 
@@ -80,97 +80,122 @@ var ajaxHeaderModule = (function() {
   	formData.append("userAvatar",photo);
 
   	thisAjax = $.ajax({
-	    url: id + 'changePhoto/',
-	    type: "POST",
-	    data: formData,
-	    processData: false,
-	    contentType: false,
-	    success: function(res){
-	    	ajaxFlag = false;
-	      blockPhoto.removeClass('loader');
-	      blockPhoto.css({
-	      	'background-image': 'url('+ res.newAvatarCover +')'
-	      })
-	    }
-		});
+      url: id + 'changePhoto/',
+      type: "POST",
+      data: formData,
+      processData: false,
+      contentType: false,
+      success: function(res){
+      	ajaxFlag = false;
+        blockPhoto.removeClass('loader');
+        blockPhoto.css({
+        	'background-image': 'url('+ res.newCover +')'
+        })
+      }
+  	});
 
 
   }
 
   // Превью бекраунда
   var changeBackGround = function(){
-  	if(ajaxFlag){
-  		return;
-  	}
-  	ajaxFlag = true;
-  	var formData = new FormData();
-  	var $this = $(this);
-  	var fileInput = $this.find('input[name="bg"]');
-  	var photo = fileInput[0].files[0];
-  	if(!photo){
-  		$header.attr('style',headerBgStyle);
-  		ajaxFlag = false;
-  		return;
-  	}
+  if(ajaxFlag){
+  	return;
+  }
+  ajaxFlag = true;
+  var formData = new FormData();
+  var $this = $(this);
+  var fileInput = $this.find('input[name="bg"]');
+  var photo = fileInput[0].files[0];
+  if(!photo){
+  	$header.attr('style',headerBgStyle);
+  	ajaxFlag = false;
+  	return;
+  }
+  $header.addClass('loader');
+  formData.append("userBackGround",photo);
+  thisAjax = $.ajax({
+    url: id + 'changePhoto/',
+    type: "POST",
+    data: formData,
+    processData: false,
+    contentType: false,
+    success: function(res){
+      $header.removeClass('loader');
+      ajaxFlag = false;
+      	$header.css({
+      		'background-image': 'url('+ res.newCover +')'
+      	})
+        $footer.css({
+          'background-image': 'url('+ res.newCover +')'
+        })  
 
-  	$header.addClass('loader');
-  	formData.append("userBackGround",photo);
-  	thisAjax = $.ajax({
-	    url: id + 'changePhoto/',
-	    type: "POST",
-	    data: formData,
-	    processData: false,
-	    contentType: false,
-	    success: function(res){
-	      $header.removeClass('loader');
-	      ajaxFlag = false;
-	      	$header.css({
-	      		'background-image': 'url('+ res.newAvatarCover +')'
-	      	})    
-	    }
-		});
-		
+    }
+  });
+
   }
 
   // Скидываем бекраунд и аватар при отмене
   var resetPreview = function(){
   	var blockPhotoBack = headerBack.find('.user-block__photo');
-    var avatar = blockPhotoBack.attr('style');
-    var background = $header.attr('style');
+    var frontAvatar = headerFront.find('.user-block__photo').attr('style');
+    if(newBackGround){
+      $header.css({
+        'background-image' : 'url('+ newBackGround +')'
+      })
+      $footer.css({
+        'background-image' : 'url('+ newBackGround +')'
+      })
+    }else{
+      $header.attr('style',headerBgStyle);
+      $footer.attr('style',headerBgStyle)
+    }    
   	ajaxFlag = false;
   	$header.removeClass('loader');
-  	$header.attr('style',background);
+  	
   	blockPhotoBack.removeClass('loader');
-  	blockPhotoBack.attr('style',avatar);
+    console.log(frontAvatar);
+  	blockPhotoBack.attr('style',frontAvatar);
 
   	//$header.addClass(classCancel);
     if(thisAjax){
       thisAjax.abort();
     }
+    $.ajax({
+      url: id + 'clearTmp/',
+      type: "POST",
+      data: {clear: 'clearHeader'},
+      dataType: 'json'
+    });
   }
 
-  
+
 
   // Отправляем запрос на editUserData
- var requestToServer = function(e){
-  var formData = new FormData();
+  var requestToServer = function(e){
+  e.preventDefault();
+  var $headrBack = $header.find('.header__section_main-back');
+  var inputName = $headrBack.find('input[name="name"]');
+  var inputAbout = $headrBack.find('textarea[name = "desc"]');
+  var outputData = {
+    userName: inputName.val(),
+    userAbout: inputAbout.val()
+  }
+  $header.find('.preload__container').addClass('active')
   $.ajax({
       url: id + 'editUserData/',
       type: "POST",
-      data: setData(formData),
-      processData: false,
-      contentType: false,
-      cache: false,
+      data: outputData,
+      dataType: 'json',
       success: function(res){
         // Выводим данные с сервера
         headerFront.find('.user-block__name').text(res.name);
         headerFront.find('.user-block__desc').text(res.about);
+        $header.find('.preload__container').removeClass('active');
         headerFront.find('.user-block__photo').css({
-          'background-image': 'url(' + res.avatarFile + '), url(../img/album/no_photo.jpg)'
-        })
-        headerBack.find('.user-block__photo').css({
-          'background-image': 'url(' + res.avatarFile + '), url(../img/album/no_photo.jpg)'
-        })
+          'background-image' : 'url(' + res.avatarFile + ')'
+        });
+        newBackGround = res.backGroundFile;
         closeEditHeader(e);
       }
     });

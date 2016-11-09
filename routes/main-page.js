@@ -17,12 +17,17 @@ route.get('/', (req,res,next) =>{
 
 // Редактируем данные пользователя
 route.post('/editUserData/', (req, res) => {
-	require('../modules/edit_user_data.js')(req,res);
+	require('../modules/requests/edit_user_data.js')(req,res);
 });
 
 // Редактируем социальные сети пользователя
 route.post('/changeSocial/', (req, res) => {
 	require('../modules/requests/change_social.js')(req,res);
+});
+
+// Очищаем tmp папку пользователя
+route.post('/clearTmp/', (req,res,next) =>{
+	require('../modules/requests/clear_tmp.js')(req,res);
 });
 
 

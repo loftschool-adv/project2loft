@@ -24,7 +24,10 @@ let mainPageRender = function(req,res,next){
 	let findObj = {};
 
 	// Формируем супер массив для рендеринга
-	let renderObj = {albums : []}
+	let renderObj = {
+		user: {},
+		albums : []
+	}
 
  async.waterfall([
  	function(callback){
@@ -66,14 +69,17 @@ let mainPageRender = function(req,res,next){
  		findObj.albums = albums;
  		findObj.images = images;
  		// Записываем данные пользователя в глобальный объект
- 		res.locals.userName = findObj.user.name;
-	  res.locals.userAbout = findObj.user.about;
-	  res.locals.email = req.session.email;
-	  res.locals.backgroundIamge = `/id${req.session.user_id}/${commons}/${findObj.user.background}`;
-	  res.locals.avatar = `/id${req.session.user_id}/${commons}/${findObj.user.avatar}`;
+		renderObj.user.name = findObj.user.name;
+	  renderObj.user.about = findObj.user.about;
+	  renderObj.user.email = req.session.email;
+	  renderObj.user.background = `/id${req.session.user_id}/${commons}/${findObj.user.background}`;
+	  renderObj.user.avatar = `/id${req.session.user_id}/${commons}/${findObj.user.avatar}`;
  		callback();
  	},
  	function(callback){
+ 		callback();
+ 	}
+ 	/*function(callback){
  		// Ищем альбома данного пользователя в базе и получаем в отсортированном виде
  		async.waterfall([
 
@@ -121,7 +127,7 @@ let mainPageRender = function(req,res,next){
 	 		})
 	 		callback();
  		}
- 	}
+ 	}*/
 
 
 
