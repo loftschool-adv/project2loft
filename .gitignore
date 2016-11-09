@@ -34,5 +34,5 @@ _materials
 .svn
 node_modules
 public
-config.json
+templates
 users/*

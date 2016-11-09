@@ -47,7 +47,7 @@ var path = {
 
 
 		folder 	: 	'source',       		// Папка где лежат исходника
-		pug 		:  	'views', 	      // Папка с шаблонами , только для фронт версии
+		pug 		:  	'templates', 	      // Папка с шаблонами , только для фронт версии
     views   :   'views',            // Папка с шаблонами , только для серверной версии
 		sass 		: 	'style',					 	// Папка со стилями
 		libs 		: 	'node_modules',			// Папка с библиотеками
@@ -90,7 +90,8 @@ var scssLibs = [
 // Тут пишем пути к файлам js, чтобы они превратились в единый файл foundation.js (название файла береться из конфига)
 var jsLibs = [
   // Пример:  path.sourse.folder + '/jquery/dist/jquery.js',
-  path.sourse.libs + '/jquery/dist/jquery.min.js'
+  path.sourse.libs + '/jquery/dist/jquery.min.js',
+  'source/js/libs/async.min.js'
 ];
 
 

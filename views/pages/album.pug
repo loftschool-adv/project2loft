@@ -10,7 +10,7 @@ block content
 							div.header-album__user
 								div.header-album__user-avatar
 									img.header-album__user-photo(src="../img/album/album-user.png", alt="фото пользователя")
-								div.header-album__user-name Антон Черепов 
+								div.header-album__user-name Антон Черепов
 						div.header-album__buttons
 							div.btn.btn--light.btn--expand.btn_album
 								svg.btn__icon
@@ -69,7 +69,7 @@ block content
 								div.btn.btn--light.btn--expand.btn_album
 									svg.btn__icon
 										use(xlink:href='/img/sprite.svg#home')
-									span.btn__text На главную          
+									span.btn__text На главную
 			div.album-cards
 				div.header-edit-overlay
 				div.btn.btn--light.btn--expand.btn_album.btn_album-add
@@ -94,15 +94,14 @@ block content
 												span.info__text 10
 								.photo-card__foot
 									.photo-card__foot-part
-										a.btn.btn--icon(href="#404"  title="Редактировать")
+										a.btn.btn--icon.btn_edit-photo(href="#404"  title="Редактировать")
 											svg.btn__icon
 												use(xlink:href='/img/sprite.svg#edit')
 									.photo-card__foot-part
 										.photo-card__link(href="#404") Название фотографии
 		include ../commons/footer
-
 	div.modal-overlay.hide
-		div.modal.hide
+		div.modal.modal_add-photo.hide
 			form.modal-content(method='post', action='', enctype='multipart/form-data')#upload
 				div.modal__header
 					div.modal__header-title Добавить фотографии
@@ -118,49 +117,48 @@ block content
 							use(xlink:href='/img/sprite.svg#cam')
 						.upload__text Перетащите фото сюда или
 							span.modal__link-load выберите файл
-						input#file.upload__input(type='file', name='files[]', data-multiple-caption='{count} files selected', multiple='')
+						input#file.upload__input(type='file', name='files', data-multiple-caption='{count} files selected', multiple='')
 					ul.img-list#img-list
-						//button.box__button(type='submit') Upload
 					.box__uploading Uploading…
 					.box__success Done!
 					.box__error
 						| Error!
-						span
-						| .
-					ul.img-list#img-list
 			.modal__footer
 				.modal-pane
 					.modal-pane__part
-						input(type="submit" value="Сохранить").btn(href="#404")#upload
+						.btn#save Сохранить
 						a.btn.btn--text(href="#cancel"  data-action="close")
-							span.btn__text.btn-cancelLoad Отменить
+							span.btn__text.modal__header-close Отменить
 					.modal-pane__part
 						a.btn.btn--important
 							svg.btn__icon
 								use(xlink:href='/img/sprite.svg#delete')
 							span.btn__text Удалить
-
-	//div.modal-overlay.hide
-	//div.modal.hide
-	//	div.modal-content
-	//		div.modal__header
-	//			div.modal__header-title Добавить фотографии
-	//			div.modal__header-close
-	//				svg.modal__header-svg
-	//					use(xlink:href='/img/sprite.svg#close')
-	//		div.modal__title
-	//			span.modal__title-title Название
-	//			span.modal__title-text Как я провёл лето
-	//		.modal__load-container#img-container
-	//			.upload.modal__load-img(title="Выбрать изображение")
-	//				svg.upload__icon
-	//					use(xlink:href='/img/sprite.svg#cam')
-	//				.upload__text Перетащите фото сюда или
-	//					span.modal__link-load выберите файл
-	//				input.upload__input(type="file"  name="bg" multiple)#file-field
-	//			ul.img-list#img-list
-	//	div.modal__footer
-	//		div.modal__buttons
-	//			a.btn(href="#")#upload Сохранить
-	//			a.btn.btn--text.btn-cancelLoad(href="#cancel")
-	//				span.btn__text Отменить
+		// Для редкатирования картинки
+		div.modal.modal_edit-photo.hide
+			div.modal-content
+				div.modal__header
+					div.modal__header-title Редактировать фотографию
+					div.modal__header-close
+						svg.modal__header-svg
+							use(xlink:href='/img/sprite.svg#close') 
+				div.modal__form-container
+					form.modal__form-edit(action="")
+						div.modal__form-row
+							label.modal__form-label(for="titleIm") Название
+							input.modal__form-input.field(
+							type="text",
+							name="titleIm",
+							value="Домик в лесу"
+						)
+						div.modal__form-row
+							label.modal__form-label(for="descrIm") Описание
+							textarea.modal__form-input.field(name="descrIm").
+								Описание фоторграфии может быть с #хештегами. Чтобы было красиво описание должно быть на нескоько строк. Убедитесь сами!
+						div.modal__form-row
+							div.popup__error.hide
+			div.modal__footer
+				div.modal__buttons
+					input(type="submit" value = "Сохранить").btn#upload.submit-edit
+					a.btn.btn--text.btn-cancelLoad(href="#cancel")
+						span.btn__text Отменить
