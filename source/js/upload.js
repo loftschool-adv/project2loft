@@ -13,6 +13,7 @@ var simpleUpload = false;
 // Если чтото закинули добавляем класс
 if (isAdvancedUpload) {
 
+  var tmpFiles = false;
   var droppedFiles = false;
 
   $form.on('drag dragstart dragend dragover dragenter dragleave drop', function(e) {
@@ -27,7 +28,15 @@ if (isAdvancedUpload) {
     })
     .on('drop', function(e) {
       simpleUpload = false;
-      droppedFiles = e.originalEvent.dataTransfer.files;
+      droppedFiles = [];
+      tmpFiles = e.originalEvent.dataTransfer.files;
+      console.log(tmpFiles);
+
+      for (var i = 0; i < tmpFiles.length; i++) {
+        console.log(tmpFiles[i].type);
+        droppedFiles.push(tmpFiles[i]);
+      }
+
       $form.trigger('submit');
     });
 
