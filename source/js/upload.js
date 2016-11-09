@@ -7,10 +7,13 @@ var isAdvancedUpload = function() {
 var $form = $('#upload');
 var $input = $('#file');
 var $save = $('#save');
+var $closeUploaderImg = $('.modal__close-img');
+var simpleUpload = false;
 
 // Если чтото закинули добавляем класс
 if (isAdvancedUpload) {
 
+  var tmpFiles = false;
   var droppedFiles = false;
 
   $form.on('drag dragstart dragend dragover dragenter dragleave drop', function(e) {
@@ -24,11 +27,21 @@ if (isAdvancedUpload) {
       $form.removeClass('is-dragover');
     })
     .on('drop', function(e) {
-      droppedFiles = e.originalEvent.dataTransfer.files;
+      simpleUpload = false;
+      droppedFiles = [];
+      tmpFiles = e.originalEvent.dataTransfer.files;
+      console.log(tmpFiles);
+
+      for (var i = 0; i < tmpFiles.length; i++) {
+        console.log(tmpFiles[i].type);
+        droppedFiles.push(tmpFiles[i]);
+      }
+
       $form.trigger('submit');
     });
 
   $input.on('change', function(e) { // drag & drop НЕ поддерживается
+    simpleUpload = true;
     $form.trigger('submit');
   });
 
@@ -46,9 +59,13 @@ $form.on('submit', function(e) {
 
   if (isAdvancedUpload) {
     e.preventDefault();
-    var photos = $input[0].files;
 
-    ajaxUploadImg(photos);
+    if (simpleUpload) {
+      var photos = $input[0].files;
+
+      ajaxUploadImg(photos);
+    }
+
 
     if (droppedFiles) {
       ajaxUploadImg(droppedFiles);
@@ -67,8 +84,26 @@ $save.on('click', function () {
     contentType: false,
     processData: false,
     success: function(data) {
-      $form.addClass( data.success == true ? 'is-success' : 'is-error' );
-      if (!data.success) $errorMsg.text(data.error);
+
+    },
+    error: function() {
+      // Log the error, show an alert, whatever works for you
+    }
+  });
+
+});
+
+$closeUploaderImg.on('click', function () {
+
+  $.ajax({
+    type: "POST",
+    url: location.href + '/closeUploaderImg/',
+    data: 'ok',
+    cache: false,
+    contentType: false,
+    processData: false,
+    success: function(data) {
+      droppedFiles = false;
     },
     error: function() {
       // Log the error, show an alert, whatever works for you
@@ -97,8 +132,6 @@ function ajaxUploadImg(photos) {
       processData: false,
       complete: function(data) {
         $form.removeClass('is-uploading');
-
-        console.log(data);
 
         ////////////////////////////////////////////
         ////////////////////////////////////////////
