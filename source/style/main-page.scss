@@ -13,6 +13,9 @@
 .section__news {
   background: $white;
   margin: 0 55px;
+  @include desctop_1300(){
+    margin: 0 auto;
+  }
 }
 
 .container {
@@ -20,6 +23,16 @@
   max-width: 1581px;
   margin: 0 auto;
   height: 100%;
+  @include desctop_1300(){
+    max-width: 1180px;
+  }
+  @include laptop() {
+    max-width: 780px;
+  }
+  @include tablets(){
+    max-width: 720px;
+    margin: 0 11px;
+  }
 }
 
 .main-content__title {
@@ -29,6 +42,11 @@
   color: rgb(50, 50, 50);
   padding: 40px 0 40px 0;
   margin: 0;
+  @include phones(){
+    font-size: 30px;
+    text-align: center;
+  }
+
 }
 
 
@@ -38,6 +56,10 @@
   flex-wrap: wrap;
   //justify-content: center;
   margin-left: -20px;
+  @include tablets() {
+    justify-content: center;
+
+  }
 }
 
 .news__item {
@@ -45,6 +67,22 @@
   margin-left: 20px;
   flex: 1 1 380px;
   margin-bottom: 22px;
+  @include tablets() {
+    max-width: 348px;
+    flex: 1 1 auto;
+  }
+}
+
+.photo-details__title{
+  @include phones(){
+    font-size: 14px;
+  }
+}
+
+.link__text{
+  @include phones(){
+    font-size: 14px;
+  }
 }
 
 .news__button {
@@ -57,6 +95,9 @@
   padding-bottom: 40px;
   position: relative;
   padding: 0 55px;
+  @include desctop_1300 {
+    padding: 0;
+  }
 
 }
 .section__album-cards-color{
@@ -75,6 +116,10 @@
   color: rgb(50, 50, 50);
   padding: 40px 0 40px 0;
   margin: 0;
+  @include phones(){
+    font-size: 30px;
+    text-align: center;
+  }
 }
 
 .album-cards__list{
@@ -82,6 +127,9 @@
   flex-wrap: wrap;
   //justify-content: center;
   margin-left: -20px;
+  @include tablets() {
+    justify-content: center;
+  }
 }
 
 .album-cards__item {
@@ -90,6 +138,30 @@
   //display: flex;
   flex: 1 1 380px;
   margin-bottom: 22px;
+  @include desctop_1300 {
+    max-width: 280px;
+    flex: 1 1 280px;
+  }
+  @include tablets(){
+    max-width: 224px;
+    flex: 1 1 224px;
+  }
+  @include phones(){
+    max-width: 300px;
+    flex: 1 1 300px;
+  }
+}
+
+.album-card__cnt {
+  @include phones(){
+    font-size: 14px;
+  }
+}
+
+.album-card__foot {
+  @include phones(){
+    font-size: 14px;
+  }
 }
 
 .footer {

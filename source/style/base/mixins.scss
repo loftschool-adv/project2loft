@@ -21,6 +21,12 @@
   }
 }
 
+@mixin desctop_1300 {
+  @media screen and (max-width: 1300px) {
+    @content;
+  }
+}
+
 @mixin laptop {
   @media screen and (max-width: 960px) {
     @content;

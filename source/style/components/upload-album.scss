@@ -1,7 +1,8 @@
 .modal__add-album{
   display: flex;
   flex-direction: column;
-  height: 450px !important;
+  height: 100% !important;
+  max-height: 500px !important;
 }
 
 
@@ -61,6 +62,7 @@
   //vertical-align: top;
   display: flex;
   align-items: center;
+  margin-bottom: 20px;
 }
 
 .user-block__upload {
@@ -87,6 +89,15 @@
   display: block;
 }
 
+.add-album__error {
+  background: rgba(255, 224, 224, 0.9);
+  padding: 10px;
+  border-radius: 2px;
+  font-family: 'Proxima Nova Semibold', sans-serif;
+  color: rgba(50, 50, 50, 0.6);
+  margin-bottom: 20px;
+}
+
 .add-album__footer {
   flex: 0 0 auto;
 }
@@ -100,9 +111,10 @@
 .add-album__buttons {
   display: flex;
   flex-direction: row;
-  justify-content: center;
+
   align-items: flex-start;
   width: 100%;
+  justify-content: flex-start;
 }
 
 .add-album__btn-cancel {
@@ -111,13 +123,10 @@
 
 }
 
-.add-album__btn-delete {
-  //flex: 1 1 auto;
-  display: flex;
-  //align-self: flex-end;
-  margin-left: auto;
+
+
+
+.loader {
+  display: block;
 }
-
-
-
 
