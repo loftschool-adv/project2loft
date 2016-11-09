@@ -15,7 +15,7 @@ let Image = require('../modules/models/image.js').Image;
 
 function uploadImg(req, res) {
 
-  req.session.uploadFiles = [];
+  var tmpFiles = [];
 
   var form = new multiparty.Form();
   form.uploadDir = 'users/id' + req.session.user_id + '/tmp/';
@@ -25,7 +25,15 @@ function uploadImg(req, res) {
 
     if (file.originalFilename) {
 
-      req.session.uploadFiles.push(file);
+      if (!req.session.uploadFiles) {
+        tmpFiles = [];
+      } else {
+        tmpFiles = req.session.uploadFiles;
+      }
+
+
+
+      tmpFiles.push(file);
 
       console.log('Картинка загруженна');
 
@@ -41,6 +49,7 @@ function uploadImg(req, res) {
         image.write(thumb);
 
         res.write(thumb);
+        req.session.uploadFiles = tmpFiles;
 
         res.end();
 
@@ -159,9 +168,12 @@ function imgSave(req, files) {
 
 function closeImgUploader(req, res) {
 
-  console.log('clear');
+  console.log(req.session.uploadFiles);
 
-  req.session.uploadFiles = false;
+  req.session.uploadFiles = [];
+
+  console.log('clear');
+  console.log(req.session.uploadFiles);
 
   res.end('close');
 }
