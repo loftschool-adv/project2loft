@@ -63,7 +63,27 @@ var albumModule = (function() {
 
 	// Отмена загрузки для одной картинки
 	var _cancelLoad = function(e){
-		alert("Отменить загрузку?");
+
+
+		var cancel_id = $(this).index();
+		console.log(cancel_id);
+		//droppedFiles[cancel_id] = false;
+
+		$.ajax({
+			type: "POST",
+			url: location.href + '/closeUploaderOneImg/',
+			data: cancel_id,
+			timeout:    1000,
+			cache: false,
+			processData: false,
+			success: function(data) {
+				//droppedFiles = false;
+			},
+			error: function() {
+				// Log the error, show an alert, whatever works for you
+			}
+		});
+
 		$(this).remove();
 		if($('.img-list li').length == 0){
 			$('.modal__load-img').show();
