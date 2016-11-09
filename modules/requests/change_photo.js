@@ -1,3 +1,4 @@
+let fs = require('fs');
 let async = require('async');
 let User = require('../models/user.js');
 let multiparty = require('multiparty');
@@ -6,6 +7,7 @@ let base = new BaseModule;
 let config = require('../../config.json');
 let Jimp   = require('jimp');
 let path = require('path');
+let del = require('del');
 
 let folder = config.folder.users;
 let tmpFolder = config.folder.tmp;
@@ -16,6 +18,7 @@ let changeAvatar = function(req,res){
 
 	let form = new multiparty.Form();
 	let userPath = `./${folder}/id${req.session.user_id}/${tmpFolder}`;
+	newFile = '';
 
 	form.parse(req, function(error, fields, files){
 		async.waterfall([
@@ -26,20 +29,15 @@ let changeAvatar = function(req,res){
 				}else{
 					callback();
 				}
-			},
-			function(callback){
-				// очищаем папку tmp данного пользователя, если ее нет то создаем
-				base.clearFolder(userPath,callback);
-			},
-			function(callback){
+			},function(callback){
 
 				async.forEach(files,(file)=>{
 					if(file[0].fieldName == "userBackGround"){
-						var fileType = "-newBackGround";
+						var fileType = "background-";
 					}else if(file[0].fieldName == "userAvatar"){
-						var fileType = "-newAvatar";
+						var fileType = "avatar-";
 					}
-					let newFilePath = '/'+ base.passGenerate(4) + fileType + path.extname(file[0].path);
+					let newFilePath = '/' + fileType + base.passGenerate(4)  + path.extname(file[0].path);
 					Jimp.read(file[0].path).then(function(image){
           	image.resize(1000, Jimp.AUTO);
 	          image.write(userPath + newFilePath,()=>{
@@ -47,12 +45,47 @@ let changeAvatar = function(req,res){
 	          });
 	      	});
 				})
+			},
+			function(newFileName,callback){
+				// очищаем папку tmp данного пользователя, если ее нет то создаем
+				// Сохраняем новый файл глобально в этом модуле
+				newFile = newFileName;
+	    	async.parallel([
+
+	    		// Очищаем папку tmp
+	    		function(callback_2){
+		    		fs.readdir(userPath,(err,items)=>{
+				  		if(err) throw err;
+				  		async.each(items,(item) =>{
+
+				  			if((newFileName.indexOf('avatar-') + 1) && (item.indexOf('avatar-') + 1)){
+					  				del([userPath + '/' + item, '!' + userPath + newFileName]).then(() => {
+					  					
+				  				})
+				  			}else if((newFileName.indexOf('background-') + 1) && (item.indexOf('background-') + 1)){
+					  				del([userPath + '/' + item, '!' + userPath + newFileName]).then(() => {
+					  					
+				  				})
+				  			}
+				  			
+
+				  		})
+				  		callback_2();
+				  	})
+
+
+
+	    		}
+
+	    	],(err) => {
+	    		callback();
+	    	})
 			}
 
-		],(err,newFile)=>{
+		],(err)=>{
 			if(!err){
 				res.json({
-					newAvatarCover: userPath.replace(`./${folder}`,'') + newFile
+					newCover: userPath.replace(`./${folder}`,'') + newFile
 				})
 			}
 		});
