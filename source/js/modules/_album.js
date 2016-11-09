@@ -65,7 +65,7 @@ var albumModule = (function() {
 	var _cancelLoad = function(e){
 
 
-		var cancel_id = $(this).index();
+		var cancel_id = JSON.stringify({id: $(this).index()});
 		console.log(cancel_id);
 		//droppedFiles[cancel_id] = false;
 		//ajaxData.append("id", photo);
@@ -73,8 +73,8 @@ var albumModule = (function() {
 		$.ajax({
 			type: "POST",
 			url: location.href + '/closeUploaderOneImg/',
-			dataType: 'json',
-			data: {"id" : cancel_id},
+			contentType: 'application/json',
+			data: cancel_id,
 			timeout: 1000,
 			cache: false,
 			processData: false,

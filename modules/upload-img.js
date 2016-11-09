@@ -181,17 +181,11 @@ function closeImgUploader(req, res) {
 
 function closeOneImgUploader(req, res) {
 
-  console.log(req.body);
+  let tmpFiles = req.session.uploadFiles;
 
- // console.log(req.session.uploadFiles);
+  tmpFiles.splice(tmpFiles.indexOf(req.body.id), 1);
 
-  tmpFiles = req.session.uploadFiles;
-
-  tmpFiles.splice(tmpFiles.indexOf(req.data), 1);
-
-
-  console.log('clear');
- // console.log(req.session.uploadFiles);
+  req.session.uploadFiles = tmpFiles;
 
   res.end('close');
 }
