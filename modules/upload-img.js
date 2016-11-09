@@ -74,7 +74,7 @@ function uploadImg(req, res) {
 
 }
 
-function imgSave(req, files) {
+function imgSave(req, res, files) {
 
   async.eachSeries(files, function (file, callbackEach) {
 
@@ -160,6 +160,7 @@ function imgSave(req, files) {
   }, function (err, results) {
 
     // Сохранили все картинки
+    res.end();
 
   });
 
