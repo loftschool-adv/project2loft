@@ -24,8 +24,8 @@ route.get('/:album', (req,res) =>{
 
     async.waterfall([
         function(callback){
-          let title = req.url.split('/').pop();
-          req.session.album = title;
+          let title = req.url.split('/');
+          req.session.album = title[1];
 
           //console.log('Имя альбома: ');
           //console.log(title);
