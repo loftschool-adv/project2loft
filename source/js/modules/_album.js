@@ -250,7 +250,6 @@ var funcSlider = function() {
 		})
 		funcSlider();
 	};
-
 	var _setUpListners = function() {
 		$('.btn_edit-photo').on('click', openEditPhoto);
 		$('.btn_album-add').on('click', openUploadImg);

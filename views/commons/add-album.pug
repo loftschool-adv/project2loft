@@ -27,6 +27,8 @@ div.modal-overlay.hide
                     label.btn.btn--clear.label__upload(for='upload-album') Выбрать файл
                     input.btn__upload-album(type='file' id='upload-album' name='addAlbumCover'  multiple  accept='image/*,image/jpeg')
                     span.wrapper-input__text (файл должен быть размером не более 1024 КБ)
+                .wrapper__error
+                    div.popup__error  Сюда вывести ошибку
         div.modal__footer.add-album__footer
             div.modal__buttons.add-album__buttons
                 a.btn.add-album__btn-save(href='#')

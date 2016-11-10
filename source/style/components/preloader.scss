@@ -9,6 +9,7 @@
   height: 100%;
   background: rgba($white, 0.8);
   transition: top 0.3s;
+  top:-100%;
 }
 .preload__container.active{
   top:0;
