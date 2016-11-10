@@ -7,7 +7,7 @@
 
 
 section.section__news
-	div.header-edit-overlay
+	.header-edit-overlay
 	.container
 		h1.main-content__title Новое в мире
 		.news__list
@@ -20,7 +20,6 @@ section.section__news
 							.photo-details
 								.photo-details__side
 									a.photo-details__ava(href="#user")
-
 								.photo-details__main
 									.photo-details__title Название фотографии
 									.photo-details__info.info
@@ -44,6 +43,7 @@ section.section__news
 		.news__button
 			.btn.btn--clear Показать еще
 section.section__album-cards
+	.header-edit-overlay
 	div.btn.btn--light.btn--expand.btn_album.btn_album-main-add
 		svg.btn__icon
 			use(xlink:href='/img/sprite.svg#add')
@@ -54,10 +54,10 @@ section.section__album-cards
 			each album in mainPageData.albums
 				.album-cards__item
 					.album-card
-						a.album-card__head(href="#404" style='background-image: url('+ album.cover +')')
+						a.album-card__head(href="#404")
 							.album-card__info
-								.album-card__title!= album.about
-								.album-card__cnt Количество фотографий #{album.imageNumber}
+								.album-card__title
+								.album-card__cnt Количество фотографий
 
 						.album-card__foot
 							.album-card__foot-part
@@ -66,4 +66,4 @@ section.section__album-cards
 										use(xlink:href='/img/sprite.svg#edit')
 
 							.album-card__foot-part
-								a.album-card__link(href="#404")!= album.name
+								a.album-card__link(href="#404")
