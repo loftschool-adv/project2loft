@@ -113,10 +113,22 @@ let mainPageRender = function(req,res,next){
  		callback();
  	},
  	function(callback){
+ 		// Сортируем вывод альбомов по дате
  		renderObj.albums = findObj.albums.sort(sortBy('-created'))
 
  		// Наполняем альбомы дополнительными данными
- 		async.each(renderObj.albums,(album,callback_2) => {
+ 		async.each(findObj.albums,(album,callback_2) => {
+ 			let index = findObj.albums.indexOf(album);
+ 			renderObj.albums[index].imageCount = 0;
+ 			let counter = 0;
+ 			async.each(findObj.images,(image,callback_3) =>{
+ 				if(album.name == image.album){					
+ 					counter++;			
+ 				}
+ 			})
+ 			renderObj.albums[index].imageCount = counter++;
+
+
  			callback_2();
  		},(err)=>{
  			if(err) throw err;
@@ -125,56 +137,6 @@ let mainPageRender = function(req,res,next){
  		
  		
  	}
- 	/*function(callback){
- 		// Ищем альбома данного пользователя в базе и получаем в отсортированном виде
- 		async.waterfall([
-
- 			function(callback_2){
- 				Album.find({user_id: req.session.user_id},callback_2)
- 			},
- 			function(albums,callback_2){
- 				Image.find({user_id: req.session.user_id},(err,image)=>{
- 					callback_2(null,image,albums)
- 				})
- 			}
-
- 		],(err,albums,image) => {
- 			callback(null,image,albums);
- 	})
- 		
- 	},
- 	function(albums,image,callback){
- 		if(!albums.length){
- 			callback()
- 		}else{
- 			async.each(albums,(album,callback_2) => {
- 			//console.log(dateFormat(album.created, "HH:MM dd.mm.yyyy"))
- 			let newAlbumName = slug(translit.toASCII(album.name));
- 			
- 			renderObj.albums.push({
- 				name: album.name,
- 				date : dateFormat(album.created, "HH:MM dd.mm.yyyy"),
- 				about: album.about,
- 				cover: `/id${req.session.user_id}/${albumsFolder}/${newAlbumName}/${album.cover}`,
- 				time: +album.created,
- 				imageNumber: (function(){
- 					var counter = 0
- 					image.forEach(function(item){
- 						if(item.album == newAlbumName){
- 							counter++;
- 						}
- 					})
- 					return counter;
- 				})()
- 			})
- 			
-	 		},() => {
-	 			callback_2();
-	 		})
-	 		callback();
- 		}
- 	}*/
-
 
 
 
