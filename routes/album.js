@@ -111,6 +111,7 @@ route.get('/:album', (req,res) =>{
 route.post('/:album/addImg/', (req, res) => upload.uploadImg(req, res));
 route.post('/:album/saveImg/', (req, res) => upload.imgSave(req, res, req.session.uploadFiles));
 route.post('/:album/closeUploaderImg/', (req, res) => upload.closeImgUploader(req, res));
+route.post('/:album/closeUploaderOneImg/', (req, res) => upload.closeOneImgUploader(req, res));
 
 
 module.exports = route;

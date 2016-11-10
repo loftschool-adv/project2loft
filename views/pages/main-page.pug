@@ -1,14 +1,14 @@
 extends ../layout
 
 block content
-	-var user = 'Александра Соколова';
-	-var ava = avatar || '../img/album/no_photo.jpg';
-	-var BG = backgroundIamge || '../img/album/no_photo.jpg';
-	-var user = userName || "Пользователь";
-	-var about = userAbout || "";
+	-var avatar = mainPageData.user.avatar || '../img/album/no_photo.jpg';
+	-var BG = mainPageData.user.background || '../img/album/no_photo.jpg';
+	-var user = mainPageData.user.name || "Пользователь";
+	-var about = mainPageData.user.about || "";
 	div.page-container
 		div.page-content
 			.header.header-main(style="background-image: url("+ BG +"), url(../img/album/no_photo.jpg)")
+				include ../commons/preloader.pug
 				.heder_main-content
 					.header__section.section.header__section_main.header__section_main-front
 						.header__part
