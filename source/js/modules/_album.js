@@ -241,6 +241,9 @@ var funcSlider = function() {
 
 
   return {
+  	close: function(){
+  		return closeUpload;
+  	},
     init: function () {
     	_setUpListners();
     },

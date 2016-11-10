@@ -22,7 +22,6 @@ let tmpFolder = config.folder.tmp;
 
 let addAlbum = function(req,res){
 
-	console.log('Получили запрос')
 	findObj = {};
 	resObj = {
 		album : {}
@@ -70,7 +69,7 @@ let addAlbum = function(req,res){
 			},
 			function(callback){
 				// Создаем папку с альбомом
-				let newAlbumName = slug(translit.toASCII(req.body.name));
+				let newAlbumName = slug(translit.toASCII(req.body.name)).toLowerCase();
 				let newAlbumFolder =  albumsPath + newAlbumName + '/';
 				resObj.album.name = newAlbumName;
 				resObj.album.totalPath = newAlbumFolder;
@@ -86,7 +85,6 @@ let addAlbum = function(req,res){
 				  		if(err) throw err;
 				  		async.each(items,(item,callback_3)=>{
 				  			if((item.indexOf('newAlbomCover-') + 1)){
-				  				console.log('фотка = ' + item);
 					  			Jimp.read(tmpPath + item).then((image)=>{
 					  				image.write(resObj.album.totalPath + item,()=>{
 					  					resObj.album.cover = item;
@@ -112,27 +110,27 @@ let addAlbum = function(req,res){
 					}
 
 				],()=>{
-					console.log('Пауза');
 					callback();
 				})
 			},
 			function(callback){
 				// Сохраняем альбомом и обложку
-				console.log("Сохраняем в базу");
 				async.parallel(
 					[
 						function(callback_2){
 							let album = new Album({
-								name : resObj.album.name,
+								name : req.body.name,
 								about: req.body.about,
-								user_id: req.session.user_id
+								user_id: req.session.user_id,
+								originName: resObj.album.name,
+								cover: resObj.album.path + resObj.album.cover
 							})
 							album.save(callback_2);
 						},
 						function(callback_2){
 							let image = new Image({
 				        name: "Обложка альбома",
-				        album: resObj.album.name,
+				        album: req.body.name,
 				        user_id: req.session.user_id,
 				        src: resObj.album.path + resObj.album.cover
 				      });
@@ -148,14 +146,12 @@ let addAlbum = function(req,res){
 		],
 	(err)=>{
 		if(err){
-			console.log(err)
 			res.json({error: err})
 		}else{
-			console.log(resObj)
 			// Генерируем альбом
 			ajaxAlbum = `<div class="album-cards__item">
 						<div class="album-card">
-							<a class="album-card__head" href="#404" style="background-image: url(${resObj.album.path + resObj.album.cover})">
+							<a class="album-card__head" href=/id${req.session.user_id}/${albumsFolder}/${resObj.album.name} style="background-image: url(${resObj.album.path + resObj.album.cover})">
 								<div class="album-card__info">
 									<div class="album-card__title">${req.body.about}</div>
 									<div class="album-card__cnt">Количетво фотографий 1</div>
@@ -170,7 +166,7 @@ let addAlbum = function(req,res){
 									</a>
 								</div>
 								<div class="album-card__foot-part">
-									<a class="album-card__link">${resObj.album.name}</a>
+									<a class="album-card__link" href=/id${req.session.user_id}/${albumsFolder}/${resObj.album.name}>${req.body.name}</a>
 								</div>
 							</div>
 						</div>

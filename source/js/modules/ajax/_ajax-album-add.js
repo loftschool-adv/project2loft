@@ -17,6 +17,9 @@ var ajaxAlbumAddModule = (function() {
   //var albumCoverInput = modalAddAlbum.find('input[name="addAlbumCover"]');
   var loader = 'loader';
   var thisAjax;
+  var closeFun = albumModule.close();
+
+  console.log(closeFun);
 
 
   // Отправляем ajax на addAlbumCover (Превью обложки альбома)
@@ -122,6 +125,11 @@ var ajaxAlbumAddModule = (function() {
             base.clearTmp(id,thisAjax);
             base.changeClass(veiwCover,loader,'del');
             veiwCover.removeAttr('style');
+            closeFun(e);
+
+            // Скролим
+            $('html, body').animate({ scrollTop: $('.album-cards__list').offset().top }, 1000)
+
 
 
           }
