@@ -35,15 +35,15 @@ function uploadImg(req, res) {
 
       tmpFiles.push(file);
 
-      console.log('Картинка загруженна');
+      //console.log('Картинка загруженна');
 
       let _thumb = file.path.split('.');
       let thumb = _thumb[0] + '-small.' +  _thumb[1];
-      console.log(thumb);
+      //console.log(thumb);
 
       Jimp.read(file.path).then(function(image){
 
-        console.log(file.path, '-> resize ->', thumb);
+        //console.log(file.path, '-> resize ->', thumb);
 
         image.resize(380, Jimp.AUTO);
         image.write(thumb);
@@ -62,7 +62,7 @@ function uploadImg(req, res) {
 
 // Close emitted after form parsed
   form.on('close', function() {
-    console.log('Upload completed!');
+    //console.log('Upload completed!');
 
     //imgSave(req, files);
   });
@@ -85,8 +85,8 @@ function imgSave(req, res, files) {
       // 1. Записываем в базу
       function (callback_1) {
 
-        console.log(file.path);
-        console.log('Запись в базу');
+        //console.log(file.path);
+        //console.log('Запись в базу');
 
         // Запись в базу
 
@@ -98,7 +98,7 @@ function imgSave(req, res, files) {
         // Сохраняем картинку в базу
         image.save(function (err, image, affected) {
           if (err) throw err;
-          console.log('Сохранена картинка в базу');
+          //console.log('Сохранена картинка в базу');
           //console.log(image);
           //console.log(affected);
 
@@ -121,7 +121,7 @@ function imgSave(req, res, files) {
         //Ресайз изображений
         Jimp.read(file.path).then(function(image){
 
-          console.log(file.path, '-> resize ->', newPath);
+          //console.log(file.path, '-> resize ->', newPath);
 
           image.resize(1200, Jimp.AUTO);
           image.write(newPath);
@@ -141,7 +141,7 @@ function imgSave(req, res, files) {
         //Ресайз изображений
         Jimp.read(file.path).then(function(image){
 
-          console.log(file.path, '-> resize ->', newPathSmall);
+          //console.log(file.path, '-> resize ->', newPathSmall);
 
           image.resize(380, Jimp.AUTO);
           image.write(newPathSmall);
@@ -173,8 +173,8 @@ function closeImgUploader(req, res) {
 
   req.session.uploadFiles = [];
 
-  console.log('clear');
-  console.log(req.session.uploadFiles);
+  //console.log('clear');
+  //console.log(req.session.uploadFiles);
 
   res.end('close');
 }
