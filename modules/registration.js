@@ -62,9 +62,9 @@ let registration = function(req,res){
     function(user,callback){
       // Создаем папку tmp
       let userFolder = folder + '/id' + user.user_id;
-      async.parallel([
+      async.waterfall([
       	function(callback_2){
-          // Создаем папку пользователя
+          // Создаем папку users
           base.folderGenerator(folder,callback_2);
         },
         function(callback_2){

@@ -126,6 +126,7 @@ var BaseModule = function(){
 		var output = [];
 
 		$.each(elements, function(){
+			
 			if(!$(this).val() && $(this).attr('type') != 'file'){
 					output[0] = 0;
 			}

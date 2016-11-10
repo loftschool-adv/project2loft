@@ -17,6 +17,9 @@ var ajaxAlbumAddModule = (function() {
   //var albumCoverInput = modalAddAlbum.find('input[name="addAlbumCover"]');
   var loader = 'loader';
   var thisAjax;
+  var closeFun = albumModule.close();
+
+  console.log(closeFun);
 
 
   // Отправляем ajax на addAlbumCover (Превью обложки альбома)
@@ -63,47 +66,79 @@ var ajaxAlbumAddModule = (function() {
     e.preventDefault();
     var $thisModal = $(this).closest('.modal__add-album');
     var veiwCover = $thisModal.find('.user-block__photo');
-    var albumName = $thisModal.find('.add-album__name-input').val('');
-    var albumAbout = $thisModal.find('.add-album__textarea').val('')
+    var albumName = $thisModal.find('.add-album__name-input').val();
+    var albumAbout = $thisModal.find('.add-album__textarea').val()
 
     // Добавить прелоадер
-    //$thisModal.find('.preload__container').addClass('active');
+    
 
     if(veiwCover.hasClass(loader)){
       return;
     }
     // Параметры для popup
-    // Вернуть валидацию!
     var errorArray = base.validateForm($thisModal); // Проверяем текущую форму и выдаем массив индексов ошибок
     var $errorContainer = $thisModal.find('.popup__error');
-    if(false/*errorArray.length > 0*/){  // Если в массиве есть ошибки, значит выдаем окно, с номером ошибки
+    if(errorArray.length > 0){  // Если в массиве есть ошибки, значит выдаем окно, с номером ошибки
       errorArray.forEach(function(index){
-        //base.showError(index,$errorContainer, popupTime);
-        //alert(base.errors[index]);
-        //return false;
+        base.showError(index,$errorContainer, popupTime);
+        alert(base.errors[index]);
+        return false;
       });
 
      
 
     }else{ // Если массив пустой, выполняем дальше
+      $thisModal.find('.preload__container').addClass('active');
       var outputData = {
         name: albumName,
         about: albumAbout
       }
 
       $.ajax({
-        url: id + 'editUserData/',
+        url: id + 'addAlbum/',
         type: "POST",
         data: outputData,
         dataType: 'json',
         success: function(res){
           // Выводим данные с сервера
-          console.log(res);
+          if(res.error){
+            alert(res.error);
+            $thisModal.find('.preload__container').removeClass('active');
+            return;
+          }else{
+            $('.album-cards__list').prepend(res.newAlbum);
+            $thisModal.find('.preload__container').removeClass('active');
+            resetReq(e);
+
+
+
+            // очищаем окошко (Желательно перделать)
+
+            var veiwCover = $thisModal.find('.user-block__photo');
+            var cover = $thisModal.find('input[type = "file"]');
+            var labelUpload = $thisModal.find('.label__upload');
+            var albumName = $thisModal.find('.add-album__name-input').val('');
+            var albumAbout = $thisModal.find('.add-album__textarea').val('')
+            
+
+            cover.replaceWith( cover = cover.clone( true ) );
+            base.clearTmp(id,thisAjax);
+            base.changeClass(veiwCover,loader,'del');
+            veiwCover.removeAttr('style');
+            closeFun(e);
+
+            // Скролим
+            $('html, body').animate({ scrollTop: $('.album-cards__list').offset().top }, 1000)
+
+
+
+          }
         }
       });  
     }
   }
 
+  // Очищаем поля 
   var resetReq = function(e){
     e.preventDefault();
     e.stopPropagation();
