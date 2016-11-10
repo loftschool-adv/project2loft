@@ -105,6 +105,25 @@ var ajaxAlbumAddModule = (function() {
           }else{
             $('.album-cards__list').prepend(res.newAlbum);
             $thisModal.find('.preload__container').removeClass('active');
+            resetReq(e);
+
+
+
+            // очищаем окошко (Желательно перделать)
+
+            var veiwCover = $thisModal.find('.user-block__photo');
+            var cover = $thisModal.find('input[type = "file"]');
+            var labelUpload = $thisModal.find('.label__upload');
+            var albumName = $thisModal.find('.add-album__name-input').val('');
+            var albumAbout = $thisModal.find('.add-album__textarea').val('')
+            
+
+            cover.replaceWith( cover = cover.clone( true ) );
+            base.clearTmp(id,thisAjax);
+            base.changeClass(veiwCover,loader,'del');
+            veiwCover.removeAttr('style');
+
+
           }
         }
       });  
