@@ -23,6 +23,9 @@ let schema = new Schema({
   user_id: {
     type: String,
     unique: false,
+  },
+  originName: {
+    type: String,
   }
 });
 

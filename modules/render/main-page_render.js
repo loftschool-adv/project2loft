@@ -27,7 +27,7 @@ let mainPageRender = function(req,res,next){
 	// Формируем супер массив для рендеринга
 	let renderObj = {
 		user: {},
-		albums : []
+		albums : ''
 	}
 
  async.waterfall([
@@ -113,7 +113,17 @@ let mainPageRender = function(req,res,next){
  		callback();
  	},
  	function(callback){
- 		callback();
+ 		renderObj.albums = findObj.albums.sort(sortBy('-created'))
+
+ 		// Наполняем альбомы дополнительными данными
+ 		async.each(renderObj.albums,(album,callback_2) => {
+ 			callback_2();
+ 		},(err)=>{
+ 			if(err) throw err;
+ 			callback();
+ 		})
+ 		
+ 		
  	}
  	/*function(callback){
  		// Ищем альбома данного пользователя в базе и получаем в отсортированном виде
