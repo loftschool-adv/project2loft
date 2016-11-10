@@ -84,7 +84,7 @@ var albumModule = (function() {
 
 		$.ajax({
 			type: "POST",
-			url: location.href + '/closeUploaderOneImg/',
+			url: location.href + 'closeUploaderOneImg/',
 			contentType: 'application/json',
 			data: cancel_id,
 			timeout: 1000,

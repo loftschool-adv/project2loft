@@ -15,36 +15,20 @@ let path = require('path');
 let upload = require('../modules/upload-img.js');
 
 
-// route.get('/:album', (req,res) =>{
-//   let title = req.url.split('/').pop();
-//   console.log(12);
-//   req.session.album = title;
-//   res.render('album',  {
-//     userName: req.session.name
-//   });
-// });
-
-/*route.param('album', function (req, res, next, album) {
-  console.log('Tester');
-  album = 'Tester';
-  next();
-});*/
-
-
 route.get('/:album', (req,res) =>{
   //console.log(req.session.album);
 
-  console.log(req.url);
+  //console.log(req.url);
 
   if (req.url != '/undefined') {
 
     async.waterfall([
         function(callback){
-          let title = req.url.split('/').pop();
-          req.session.album = title;
+          let title = req.url.split('/');
+          req.session.album = title[1];
 
-          console.log('Имя альбома: ');
-          console.log(title);
+          //console.log('Имя альбома: ');
+          //console.log(title);
           callback(null, title);
         },
         // Ищем все изображения в альбоме тестер
@@ -54,19 +38,19 @@ route.get('/:album', (req,res) =>{
         // Получаем путь из каждого изображения
         function(image, callback){
 
-          console.log(image);
+          //console.log(image);
 
           var arr = [];
           if(image[0]){
 
-            console.log('Картинки нашли');
+            //console.log('Картинки нашли');
             //console.log(req.session);
-            console.log(image[0]);
+            //console.log(image[0]);
 
-            console.log('Ищу');
+            //console.log('Ищу');
             image.forEach(function(img){
-              console.log('Итерация');
-              console.log(img);
+              //console.log('Итерация');
+              //console.log(img);
               arr.push(img.src); //.replace('users/')
             });
             callback(null, arr);
@@ -77,8 +61,8 @@ route.get('/:album', (req,res) =>{
         },
         //
         function(src, callback){
-          console.log('генерирую');
-          console.log(src);
+          //console.log('генерирую');
+          //console.log(src);
           //console.log(arr);
           if (src !== null) {
 
@@ -98,12 +82,12 @@ route.get('/:album', (req,res) =>{
 
       //render
       function(err, result){
-        console.log(result);
+        //console.log(result);
       })
   }
 
 
- 
+
 });
 
 // Обращаемся к корню сайта , и рендерим шаблон из ./views/pages/index.pug

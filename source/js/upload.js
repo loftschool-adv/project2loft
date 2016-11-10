@@ -78,7 +78,7 @@ $save.on('click', function () {
 
   $.ajax({
     type: "POST",
-    url: location.href + '/saveImg/',
+    url: location.href + 'saveImg/',
     data: 'ok',
     cache: false,
     contentType: false,
@@ -97,7 +97,7 @@ $closeUploaderImg.on('click', function () {
 
   $.ajax({
     type: "POST",
-    url: location.href + '/closeUploaderImg/',
+    url: location.href + 'closeUploaderImg/',
     data: 'ok',
     cache: false,
     contentType: false,
@@ -123,7 +123,7 @@ function ajaxUploadImg(photos) {
     ajaxData.append("photo", photo);
 
     $.ajax({
-      url: location.href + '/addImg/',
+      url: location.href + 'addImg/',
       type: $form.attr('method'),
       data: ajaxData,
       dataType: 'json',
