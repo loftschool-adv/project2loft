@@ -29,13 +29,19 @@ let changeAvatar = function(req,res){
 				}else{
 					callback();
 				}
-			},function(callback){
+			},
+			function(callback){
+				base.folderGenerator(userPath,callback);
+			},
+			function(callback){
 
 				async.forEach(files,(file)=>{
 					if(file[0].fieldName == "userBackGround"){
 						var fileType = "background-";
 					}else if(file[0].fieldName == "userAvatar"){
 						var fileType = "avatar-";
+					}else if(file[0].fieldName == "newAlbomCover"){
+						var fileType = "newAlbomCover-";
 					}
 					let newFilePath = '/' + fileType + base.passGenerate(4)  + path.extname(file[0].path);
 					Jimp.read(file[0].path).then(function(image){
@@ -63,6 +69,10 @@ let changeAvatar = function(req,res){
 					  					
 				  				})
 				  			}else if((newFileName.indexOf('background-') + 1) && (item.indexOf('background-') + 1)){
+					  				del([userPath + '/' + item, '!' + userPath + newFileName]).then(() => {
+					  					
+				  				})
+				  			}else if((newFileName.indexOf('newAlbomCover-') + 1) && (item.indexOf('newAlbomCover-') + 1)){
 					  				del([userPath + '/' + item, '!' + userPath + newFileName]).then(() => {
 					  					
 				  				})
