@@ -55,7 +55,7 @@ section.section__album-cards
 			each album in mainPageData.albums
 				.album-cards__item
 					.album-card
-						a.album-card__head(href="#404" style='background-image: url('+ album.cover +')')
+						a.album-card__head(href=album.link style='background-image: url('+ album.cover +')')
 							.album-card__info
 								.album-card__title!= album.about
 								.album-card__cnt Количество фотографий #{album.imageCount}
