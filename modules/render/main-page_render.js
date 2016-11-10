@@ -184,9 +184,9 @@ let mainPageRender = function(req,res,next){
  		res.locals.mainPageData = renderObj;
  		res.render('main-page',  { title: 'Главная' })
  })
-}
+};
 
 
 module.exports = function(req,res,next){
 	mainPageRender(req,res,next);
-}
+};
