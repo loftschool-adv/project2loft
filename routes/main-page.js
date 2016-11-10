@@ -40,13 +40,13 @@ route.post('/changePhoto/', (req,res) =>{
 // Реакция на изменение обложки альбома
 route.post('/addAlbumCover/', (req,res) =>{
 	//console.log(req.session);
-	require('../modules/add_new-album_cover.js')(req,res);
+	require('../modules/requests/add_new-album_cover.js')(req,res);
 });
 
 //Добавляем новый альбом
 route.post('/addAlbum/', (req,res) =>{
 	//console.log(req.session);
-	require('../modules/create_album.js')(req,res);
+	require('../modules/requests/create_album.js')(req,res);
 });
 
 // Выход с сайта 

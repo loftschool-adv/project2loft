@@ -23,6 +23,7 @@ div.modal-overlay.hide
                 .wrapper-input__upload
                     .user-block.user-block--sm.user-block__upload
                         .user-block__photo
+                            include preloader-circle
                     label.btn.btn--clear.label__upload(for='upload-album') Выбрать файл
                     input.btn__upload-album(type='file' id='upload-album' name='addAlbumCover'  multiple  accept='image/*,image/jpeg')
                     span.wrapper-input__text (файл должен быть размером не более 1024 КБ)

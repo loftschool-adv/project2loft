@@ -32,8 +32,8 @@ let registration = function(req,res){
         password: req.body.pass,
         email: req.body.email
       });
-      req.session.user_id = user.user_id;
-      req.session.email = user.email;
+     /* req.session.user_id = user.user_id;
+      req.session.email = user.email;*/
       // Сохраняем пользователя
       user.save(callback)
     },
@@ -46,7 +46,10 @@ let registration = function(req,res){
       async.parallel([
         function(callback_2){
           let social = new Social({
-              user_id: user.user_id
+              user_id: user.user_id,
+              email: {
+                link: user.email
+              }
           });
           social.save(callback_2);
         }

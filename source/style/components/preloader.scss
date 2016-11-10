@@ -2,7 +2,7 @@
   position:relative;
 }
 .preload__container{
-  top:-100%;
+  //top:-100%;
   position: absolute;
   z-index: 1010;
   width: 100%;
@@ -26,40 +26,49 @@
   display: inline-block;
   border-radius: 50%;
   background: rgb(0,0,0);
-
+  //transform:scale(0);
+  animation-fill-mode: both;
 }
 
-.preload__loading i:first-child{
-  opacity: 0;
-  animation:preload__loading-ani2 0.445s linear infinite;
-  -o-animation:preload__loading-ani2 0.445s linear infinite;
-  -ms-animation:preload__loading-ani2 0.445s linear infinite;
-  -webkit-animation:preload__loading-ani2 0.445s linear infinite;
-  -moz-animation:preload__loading-ani2 0.445s linear infinite;
-  transform:translate(-45px);
-  -o-transform:translate(-45px);
-  -ms-transform:translate(-45px);
-  -webkit-transform:translate(-45px);
-  -moz-transform:translate(-45px);
+
+
+.preload__loading i:nth-child(1){
+  animation:preload__loading-anin 0.75s  -0.75s  infinite linear;
 }
-.preload__loading i:nth-child(2),
+.preload__loading i:nth-child(2){
+  animation:preload__loading-anin 0.75s  -0.5s infinite linear;
+}
 .preload__loading i:nth-child(3){
-  animation:preload__loading-ani3 0.445s linear infinite;
-  -o-animation:preload__loading-ani3 0.445s linear infinite;
-  -ms-animation:preload__loading-ani3 0.445s linear infinite;
-  -webkit-animation:preload__loading-ani3 0.445s linear infinite;
-  -moz-animation:preload__loading-ani3 0.445s linear infinite;
-}
-.preload__loading i:last-child{
-  animation:preload__loading-ani1 0.445s linear infinite;
-  -o-animation:preload__loading-ani1 0.445s linear infinite;
-  -ms-animation:preload__loading-ani1 0.445s linear infinite;
-  -webkit-animation:preload__loading-ani1 0.445s linear infinite;
-  -moz-animation:preload__loading-ani1 0.445s linear infinite;
+  animation:preload__loading-anin 0.75s  -0.25s infinite linear, preload-scale 0.25s  0.75s infinite linear;
 }
 
 
+@keyframes preload__loading-anin{
 
+  0% {
+    opacity: 0.3;
+    //transform: scale(0);
+
+  }
+  100% {
+    opacity: 1;
+    //transform: scale(1);
+    //background-color: pink;
+  }
+}
+@keyframes preload__scale{
+
+  0% {
+    //opacity: 0.3;
+    transform: scale(0);
+
+  }
+  100% {
+    //opacity: 1;
+    transform: scale(1);
+    //background-color: pink;
+  }
+}
 
 @keyframes preload__loading-ani1{
   100%{

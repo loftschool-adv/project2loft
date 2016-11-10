@@ -10,16 +10,14 @@ let changeSocial = function(req,res){
 	async.waterfall(
 		[
 			function(callback){
-				console.log(req.body);
-				
-				query[req.body.name] = {name: req.body.title, link: req.body.link, title: req.body.name}
-				console.log(query);
 
+				query[req.body.name] = {name: req.body.title, link: req.body.link, title: req.body.name}
 
 				Social.findOneAndUpdate({user_id : req.session.user_id},{
 					$set : query
 				},callback)
-			},
+				
+			}
 
 		],
 		(err)=>{

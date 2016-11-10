@@ -44,6 +44,18 @@ var BaseModule = function(){
 			});
 	}
 
+	this.clearTmp = function(userId,thisAjax){
+    if(thisAjax){
+      thisAjax.abort();
+    }
+    $.ajax({
+      url: userId + 'clearTmp/',
+      type: "POST",
+      data: {clear: 'clearHeader'},
+      dataType: 'json'
+    });
+  }
+
 	this.ajaxDataObj = function(obj,url,method){
 		method = method || 'POST'
 		var data = JSON.stringify(obj);

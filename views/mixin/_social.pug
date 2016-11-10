@@ -1,3 +1,39 @@
+-
+	if(mainPageData){
+		var email = mainPageData.user.email || 'email';
+		var socials = {
+			vk : {
+				link: mainPageData.user.socials.vk.link || "#",
+				title : mainPageData.user.socials.vk.title || 'Вконтакте',
+				value: mainPageData.user.socials.vk.link || "Вконтакте"
+			},
+			fb : {
+				link: mainPageData.user.socials.fb.link || "#",
+				title : mainPageData.user.socials.fb.title || 'Facebook',
+				value: mainPageData.user.socials.fb.link || "Facebook"
+			},
+			tw: {
+				link: mainPageData.user.socials.tw.link || "#",
+				title : mainPageData.user.socials.tw.title || 'Twitter',
+				value: mainPageData.user.socials.tw.link || "Twitter"
+			},
+			google : {
+				link: mainPageData.user.socials.google.link || "#",
+				title : mainPageData.user.socials.google.title || 'Google+',
+				value: mainPageData.user.socials.google.link || "Google+"
+			},
+			email : {
+				link: mainPageData.user.socials.email.link || "#",
+				title : mainPageData.user.socials.email.title || 'Email',
+				value: mainPageData.user.socials.email.link || "Email+"
+			}
+		}
+	}
+	
+
+
+
+
 mixin social(mode)
 
 	if mode == 'edit'
@@ -5,7 +41,10 @@ mixin social(mode)
 			li.social__item
 				.drop.drop--hover.drop--def
 					.drop__trigger
-						a.social__btn(href="#404"  title="Вконтакте")
+						a.social__btn(
+							href=socials.vk.link
+							title=socials.vk.title
+						)
 							svg.social__icon
 								use(xlink:href='/img/sprite.svg#soc_vk')
 					.drop__main.drop__main--md
@@ -13,7 +52,7 @@ mixin social(mode)
 							.form__row
 								input.field.field--bordered.width--full.input__vk(
 									type="text"
-									placeholder="text"
+									value=socials.vk.value
 								)
 							.form__row
 								a.btn.btn--clear.btn__vk.social--save(href="#404")
@@ -24,7 +63,10 @@ mixin social(mode)
 			li.social__item
 				.drop.drop--hover.drop--def
 					.drop__trigger
-						a.social__btn.btn__facebook(href="#404"  title="Facebook")
+						a.social__btn.btn__facebook(
+							href=socials.fb.link
+							title=socials.fb.title
+						)
 							svg.social__icon
 								use(xlink:href='/img/sprite.svg#soc_fb')
 					.drop__main.drop__main--md
@@ -32,7 +74,7 @@ mixin social(mode)
 							.form__row
 								input.field.field--bordered.width--full.input__facebook(
 									type="text"
-									placeholder="text"
+									value=socials.fb.value
 								)
 							.form__row
 								a.btn.btn--clear.social--save(href="#404")
@@ -43,7 +85,10 @@ mixin social(mode)
 			li.social__item
 				.drop.drop--hover.drop--def
 					.drop__trigger
-						a.social__btn.btn__twitter(href="#404"  title="Twitter")
+						a.social__btn.btn__twitter(
+							href=socials.tw.link
+							title=socials.tw.title
+						)
 							svg.social__icon
 								use(xlink:href='/img/sprite.svg#soc_tw')
 					.drop__main.drop__main--md
@@ -51,7 +96,7 @@ mixin social(mode)
 							.form__row
 								input.field.field--bordered.width--full.input__twitter(
 									type="text"
-									placeholder="text"
+									value=socials.tw.value
 								)
 							.form__row
 								a.btn.btn--clear.social--save(href="#404")
@@ -62,7 +107,10 @@ mixin social(mode)
 			li.social__item
 				.drop.drop--hover.drop--def
 					.drop__trigger
-						a.social__btn(href="#404"  title="Google+")
+						a.social__btn(
+							href=socials.google.link
+							title=socials.google.title
+						)
 							svg.social__icon
 								use(xlink:href='/img/sprite.svg#soc_g+')
 					.drop__main.drop__main--md
@@ -70,7 +118,7 @@ mixin social(mode)
 							.form__row
 								input.field.field--bordered.width--full.input__google-plus(
 									type="text"
-									placeholder="text"
+									value=socials.google.value
 								)
 							.form__row
 								a.btn.btn--clear.btn____google-plus.social--save(href="#404")
@@ -89,7 +137,7 @@ mixin social(mode)
 							.form__row
 								input.field.field--bordered.width--full.input__email(
 									type="email"
-									placeholder="email"
+									value=socials.email.value
 								)
 							.form__row
 								a.btn.btn--clear.btn__email.social--save(href="#404")
@@ -100,28 +148,28 @@ mixin social(mode)
 
 
 	else
-		ul.social
+		ul.social.social--veiw
 			li.social__item
-				a.social__btn(href="#404"  title="Вконтакте")
+				a.social__btn.social__vk(href=socials.vk.link  title=socials.vk.title target='_blank')
 					svg.social__icon
 						use(xlink:href='/img/sprite.svg#soc_vk')
 
 			li.social__item
-				a.social__btn(href="#404"  title="Facebook")
+				a.social__btn.social__facebook(href=socials.fb.link  title=socials.fb.title target='_blank')
 					svg.social__icon
 						use(xlink:href='/img/sprite.svg#soc_fb')
 
 			li.social__item
-				a.social__btn(href="#404"  title="Twitter")
+				a.social__btn.social__twitter(href=socials.tw.link  title=socials.tw.title target='_blank')
 					svg.social__icon
 						use(xlink:href='/img/sprite.svg#soc_tw')
 
 			li.social__item
-				a.social__btn(href="#404"  title="Google+")
+				a.social__btn.social__google(href=socials.google.link  title=socials.google.title target='_blank')
 					svg.social__icon
 						use(xlink:href='/img/sprite.svg#soc_g+')
 
 			li.social__item
-				a.social__btn(href="#404"  title="Email")
+				a.social__btn.social__email(href='mailto:' + socials.email.link  title=socials.email.title)
 					svg.social__icon
 						use(xlink:href='/img/sprite.svg#soc_email')

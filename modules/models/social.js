@@ -9,6 +9,16 @@ let schema = new Schema({
     type: Number,
     unique: false,
   },
+  email: {
+     name: {
+      type: String,
+      default: "Email"
+     },
+     link: {
+      type: String,
+      default: "Email",
+     }
+  },
   vk: {
      name: {
       type: String,

@@ -4,6 +4,7 @@ let config = require('../../config.json');
 let User = require('../models/user.js').User;
 let Album = require('../models/album.js').Album;
 let Image = require('../models/image.js').Image;
+let Social = require('../models/social.js').Social;
 let dateFormat = require('dateformat');
 let BaseModule = require('../libs/_base.js');
 let base = new BaseModule;
@@ -43,7 +44,7 @@ let mainPageRender = function(req,res,next){
  		async.waterfall(
  			[
  				function(callback_2){
- 					User.findOne({email: req.session.email},(err,user)=>{
+ 					User.findOne({user_id : req.session.user_id},(err,user)=>{
  						callback_2(null,user)
  					});
  				},
@@ -56,24 +57,59 @@ let mainPageRender = function(req,res,next){
  					Image.find({user_id : req.session.user_id},(err,images)=>{
  						callback_2(null,user,albums,images)
  					});
+ 				},
+ 				function(user,albums,images,callback_2){
+ 					Social.find({user_id : req.session.user_id},(err,socials)=>{
+ 						callback_2(null,user,albums,images,socials)
+ 					});
  				}
 
  			],
- 		(err,user,albums,images)=>{
- 			callback(null,user,albums,images);
+ 		(err,user,albums,images,socials)=>{
+ 			callback(null,user,albums,images,socials);
  		})
  	},
- 	function(user,albums,images,callback){
- 		//Записываем данные из базы в объект
+ 	function(user,albums,images,socials,callback){
+ 		//Записываем данные из базы в объекты(на всякий пожарный)
  		findObj.user = user;
  		findObj.albums = albums;
  		findObj.images = images;
- 		// Записываем данные пользователя в глобальный объект
+ 		findObj.socials = socials;
+ 		// Записываем данные пользователя в глобальный объект для pug файлов
+ 		//console.log(user);
 		renderObj.user.name = findObj.user.name;
 	  renderObj.user.about = findObj.user.about;
-	  renderObj.user.email = req.session.email;
 	  renderObj.user.background = `/id${req.session.user_id}/${commons}/${findObj.user.background}`;
 	  renderObj.user.avatar = `/id${req.session.user_id}/${commons}/${findObj.user.avatar}`;
+		renderObj.user.socials = {};
+		renderObj.user.socials.vk = {
+			link: findObj.socials[0].vk.link,
+	  	title: findObj.socials[0].vk.name
+		};
+		renderObj.user.socials.fb = {
+			link: findObj.socials[0].facebook.link,
+	  	title: findObj.socials[0].facebook.name
+		};
+		renderObj.user.socials.tw = {
+			link: findObj.socials[0].twitter.link,
+	  	title: findObj.socials[0].twitter.name
+		};
+		renderObj.user.socials.google = {
+			link: findObj.socials[0].google.link,
+	  	title: findObj.socials[0].google.name
+		};
+		renderObj.user.socials.email = {
+			link: findObj.socials[0].email.link,
+	  	title: findObj.socials[0].email.name
+		};
+
+		//console.log(renderObj.user.email)
+
+
+		/*{
+	  	
+	  }*/
+	  //
  		callback();
  	},
  	function(callback){

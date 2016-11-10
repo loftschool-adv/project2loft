@@ -1,0 +1,39 @@
+div.modal-container.hide
+    div.modal-overlay
+        div.modal.modal__add-album
+            .wrapper__modal
+                div.modal__header.add-albums__header
+                    div.modal__header-title Добавить альбом
+                    div.modal__header-close
+                        svg.modal__header-svg
+                            use(xlink:href='/img/sprite.svg#close')
+                .wrapper-inputs
+                    .wrapper-input__name
+                        label.add-album__name(for='add-album-name') Название
+                        input.field.add-album__name-input(
+                        type="text"
+                        placeholder=""
+                        id='add-album-name'
+                        )
+                    .wrapper-input__description
+                        label.add-album__description(for='add-album-description') Описание
+                        textarea.field.add-album__textarea(
+                        placeholder=""
+                        id='add-album-description'
+                        )
+                    .wrapper-input__upload
+                        .user-block.user-block--sm.user-block__upload
+                            .user-block__photo
+                        label.btn.btn--clear.label__upload(for='upload-album') Выбрать файл
+                        input.btn__upload-album(type='file' id='upload-album' name='photo'  multiple  accept='image/*,image/jpeg')
+                        span.wrapper-input__text (файл должен быть размером не более 1024 КБ)
+                    span.add-album__error.hide
+            div.modal__footer.add-album__footer
+                div.modal__buttons.add-album__buttons
+                    a.btn.add-album__btn-save(href="#")#upload Сохранить
+                    a.btn.btn--text.add-album__btn-cancel(href="#cancel")
+                        span.btn__text Отменить
+            .preload__container
+                .preload__loading
+                    each i in Array(4)
+                        i

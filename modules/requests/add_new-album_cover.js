@@ -1,9 +1,8 @@
 let async = require('async');
-let User = require('./models/user.js');
 let multiparty = require('multiparty');
-let BaseModule = require('./libs/_base.js');
+let BaseModule = require('../libs/_base.js');
 let base = new BaseModule;
-let config = require('../config.json');
+let config = require('../../config.json');
 let Jimp   = require('jimp');
 let path = require('path');
 
@@ -34,7 +33,7 @@ let addAlbumCover = function(req,res){
 			function(callback){
 				
 				async.forEach(files,(file)=>{
-					let newFilePath = '/'+ base.passGenerate(4) + '-newAlbomCover' + path.extname(file[0].path);
+					let newFilePath = '/'+ 'newAlbomCover-' + base.passGenerate(4)  + path.extname(file[0].path);
 					Jimp.read(file[0].path).then(function(image){
           	image.resize(500, Jimp.AUTO);
 	          image.write(userPath + newFilePath,()=>{
