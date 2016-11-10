@@ -38,15 +38,7 @@ var ajaxHeaderModule = (function() {
 
 
    // Функции
-  /*var setData = function(formData){
-    var inputAvatar = $headrBack.find('input[name="photo"]')[0].files[0];
-    var inputBG = $headrBack.find('input[name="bg"]')[0].files[0];
-  	
-    formData.append("userAvatar",inputAvatar);
-    formData.append("userBackGround",inputBG);
-  	return formData;
 
-  }*/
 
   // Заблокировать выбор файла
   var lockSelFile = function(e){
@@ -164,15 +156,7 @@ var ajaxHeaderModule = (function() {
   	blockPhotoBack.attr('style',frontAvatar);
 
   	//$header.addClass(classCancel);
-    if(thisAjax){
-      thisAjax.abort();
-    }
-    $.ajax({
-      url: id + 'clearTmp/',
-      type: "POST",
-      data: {clear: 'clearHeader'},
-      dataType: 'json'
-    });
+    base.clearTmp(id,thisAjax);
   }
 
 

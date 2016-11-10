@@ -25,6 +25,8 @@ function Base(){
     })
   };
 
+  
+
 
   // Генератор папки. Если папки нет, то создает ее
   this.folderGenerator = function(folder,callback){

@@ -123,9 +123,9 @@ var mainJs = [
   // animation
   path.sourse.folder + '/' + path.sourse.js + '/modules/animation/_login-cover.js',
   path.sourse.folder + '/' + path.sourse.js + '/modules/animation/_header.js',
+  path.sourse.folder + '/' + path.sourse.js + '/modules/animation/_album-add.js',
   path.sourse.folder + '/' + path.sourse.js + '/upload.js',
   //path.sourse.folder + '/' + path.sourse.js + '/oldUploaderObject.js',
-  path.sourse.folder + '/' + path.sourse.js + '/modules/_main-page.js',
   path.sourse.folder + '/' + path.sourse.js + '/modules/_album.js',
   path.sourse.folder + '/' + path.sourse.js + '/modal.js',
   path.sourse.folder + '/' + path.sourse.js + '/slider.js',
@@ -133,6 +133,7 @@ var mainJs = [
   path.sourse.folder + '/' + path.sourse.js + '/modules/ajax/_ajax-login-cover.js',
   path.sourse.folder + '/' + path.sourse.js + '/modules/ajax/_ajax-header.js',
   path.sourse.folder + '/' + path.sourse.js + '/modules/ajax/_ajax-social.js',
+  path.sourse.folder + '/' + path.sourse.js + '/modules/ajax/_ajax-album-add.js',
 
   path.sourse.folder + '/' + path.sourse.js + '/app.js',
 
