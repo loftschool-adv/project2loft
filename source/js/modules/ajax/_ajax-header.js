@@ -108,11 +108,17 @@ var ajaxHeaderModule = (function() {
   var fileInput = $this.find('input[name="bg"]');
   var photo = fileInput[0].files[0];
   if(!photo){
-  	$header.attr('style',headerBgStyle);
+    //var headerBackground = attr('style');
+  	 $header.css({
+        'background-image' : 'url('+ newBackGround +')'
+      });
+     $footer.css({
+        'background-image' : 'url('+ newBackGround +')'
+      });
   	ajaxFlag = false;
   	return;
   }
-  $header.addClass('loader');
+  $header.find('.preload__container').addClass('active')
   formData.append("userBackGround",photo);
   thisAjax = $.ajax({
     url: id + 'changePhoto/',
@@ -121,7 +127,7 @@ var ajaxHeaderModule = (function() {
     processData: false,
     contentType: false,
     success: function(res){
-      $header.removeClass('loader');
+      $header.find('.preload__container').removeClass('active')
       ajaxFlag = false;
       	$header.css({
       		'background-image': 'url('+ res.newCover +')'
@@ -193,7 +199,7 @@ var ajaxHeaderModule = (function() {
         headerFront.find('.user-block__desc').text(res.about);
         $header.find('.preload__container').removeClass('active');
         headerFront.find('.user-block__photo').css({
-          'background-image' : 'url(' + res.avatarFile + ')'
+          'background-image' : 'url(' + res.avatarFile + '), url(../img/album/no_photo.jpg)'
         });
         newBackGround = res.backGroundFile;
         closeEditHeader(e);
