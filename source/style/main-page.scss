@@ -143,7 +143,15 @@
   position:relative;
 }
 
-@media screen and (max-width: 460px){
+@media screen and (max-width: 768px){
+  .header__section_main-back {
+    padding: 40px 5%;
+  }
+  .header__part {
+    padding: 0 5%;
+  }
+}
+@media screen and (max-width: 530px){
   .heder_main-content {
     height: 350px;
   }
@@ -158,6 +166,12 @@
     .form__row {
       text-align: center;
     }
+  }
+  .header__part--zip {
+    padding-left: 0;
+  }
+  .upload {
+    margin:0  auto;
   }
 
   .header__section {
@@ -195,6 +209,9 @@
 
   .header__bottom {
     padding: 10px 2.5%;
+    .search {
+      margin: 0 auto;
+    }
 
     .header__right,
     .search__field{
