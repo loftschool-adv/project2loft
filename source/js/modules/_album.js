@@ -16,9 +16,16 @@ var albumModule = (function() {
 
   // Открыть окно для загрузки изображений
   var openUploadImg = function(){
-		base.changeClass('.modal_add-photo, .modal-overlay','hide','del')
+		base.changeClass('.modal_add-photo, .modal-overlay','hide','del');
 	};
 
+	// Закрыть модальное окно
+  var closeNotification = function(e){
+  	e.preventDefault();
+  	var modal = $(this).closest('.modal');
+		base.changeClass(modal,'hide','add');
+		base.changeClass('.modal-overlay','hide','add');
+	};
 	// Закрыть окно для загрузки изображений
 	var closeUpload = function(e){
 		e.preventDefault();
@@ -30,6 +37,14 @@ var albumModule = (function() {
 		$(".slider__item").remove();
 		$('.slider__view').css('transition' ,'none');
 	};
+
+	// Открыть окно для редактирования фото и отправить ajax при сохранении редактирования
+
+  var openEditAlbum = function(e){
+    // Открыть окно
+    e.preventDefault();
+    base.changeClass('.modal_edit-album, .modal-overlay','hide','del');
+    }
 
 	// Открыть окно для редактирования фото и отправить ajax при сохранении редактирования
 
@@ -253,10 +268,11 @@ var funcSlider = function() {
 	var _setUpListners = function() {
 		$('.btn_edit-photo').on('click', openEditPhoto);
 		$('.btn_album-add').on('click', openUploadImg);
-		$('.modal__header-close').on('click', closeUpload);
+		$('.modal__header-close, .modal__cancelButton ').on('click', closeUpload);
 		$(window).on('scroll', _fixedAdd);
 		$('body').on('click','.img-item',_cancelLoad);
 		$('.loupe').on('click', openSlider);
+		$('.btn-editAlbum').on('click', openEditAlbum);
 	};
 
 

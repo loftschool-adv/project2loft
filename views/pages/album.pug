@@ -4,6 +4,9 @@ block content
 	div.page-container
 		div.page-content
 			header.header-album(style="background: url(../img/album/bg-album.png) top no-repeat; background-size:cover;")
+				include ../commons/preloader.pug
+				.header__error
+					div.popup__error  Сюда вывести ошибку
 				div.header-album__content-cotainer
 					div.header__section.header-album__content.header-album__content_front
 						div.header-album__user-container
@@ -100,8 +103,12 @@ block content
 												use(xlink:href='/img/sprite.svg#edit')
 									.photo-card__foot-part
 										.photo-card__link(href="#404") Название фотографии
-		include ../commons/footer
+		//include ../commons/footer
+
+
+	// Модальные окна
 	div.modal-overlay.hide
+		// Для добавления фотографий
 		div.modal.modal_add-photo.hide
 			form.modal-content(method='post', action='', enctype='multipart/form-data')#upload
 				div.modal__header
@@ -125,8 +132,8 @@ block content
 				.modal-pane
 					.modal-pane__part
 						.btn.modal__save(data-action="close")#save Сохранить
-						.btn.btn--text(data-action="close")
-							span.btn__text.modal__header-close.modal__close-img Отменить
+						.btn.modal__cancelButton.btn--text(data-action="close")
+							span.btn__text.modal__close-img Отменить
 
 		// Для редкатирования картинки
 		div.modal.modal_edit-photo.hide
@@ -152,19 +159,24 @@ block content
 						div.modal__form-row
 							div.popup__error.hide
 			div.modal__footer
-				div.modal__buttons
-					input(type="submit" value = "Сохранить").btn.submit-edit
-					a.btn.btn--text.btn-cancelLoad(href="#cancel")
-						span.btn__text Отменить
-
+				div.modal-pane
+					.modal-pane__part
+						input(type="submit" value = "Сохранить").btn.submit-edit
+						a.btn.btn--text.modal__cancelButton(href="#cancel")
+							span.btn__text Отменить
+					.modal-pane__part
+						a.btn.btn--important
+							svg.btn__icon
+								use(xlink:href='/img/sprite.svg#delete')
+							span.btn__text Удалить
 
 		// Для оповещений
-		div.modal.modal_notification
+		.modal.modal_notification.hide
 			div.modal-content
-				div.modal-notification Все файлы будут загружены. Можно закрыть окно.
+				div.modal-notification-text Все файлы будут загружены. Можно закрыть окно.
 			div.modal__footer
 				div.modal__buttons
-					a.btn.btn--text.btn-cancelLoad(href="#cancel")
+					a.btn.btn--clear.modal__cancelButton(href="#cancel")
 						span.btn__text Закрыть
 
 

@@ -132,6 +132,7 @@ var mainPageModule = (function() {
   	fileUploadBg.on('change',previeUserBackGround);
     fileUploadAvtar.on('change',previeUserAvatar);
   	btnReset.on('click',resetUserData);
+    
   }
   
 
