@@ -9,6 +9,7 @@
 
 @import "components/grid";
 
+@import "components/footer_media";
 @import "components/inputs";
 @import "components/buttons";
 @import "components/social";
@@ -37,7 +38,7 @@
 
 // pages
 @import "album";
-@import "_user";
-@import "_search";
+@import "user";
+@import "search";
 @import "_ui";
 @import "main-page";

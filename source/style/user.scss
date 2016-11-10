@@ -1,0 +1,121 @@
+.user-page__header {
+  padding: 50px 0 0 0;
+  position: relative;
+
+  &::before {
+    position: absolute;
+    content: "";
+    top:0;
+    bottom:0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to right, rgba(110,110,110,.5), transparent);
+  }
+
+  .user-block__name,
+  .user-block__desc {
+    color: #ffffff;
+    text-align: center;
+  }
+  .user-block__social {
+    text-align: center;
+  }
+
+  .btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+  }
+
+  .user-block {
+    margin: 0 0 50px 80px;
+  }
+}
+
+.user__main {
+  padding: 60px 2.5%;
+
+  .title {
+    font-size: 42px;
+    font-family: "Panton";
+    color: rgb(50, 50, 50);
+    font-weight: bold;
+    margin-bottom:40px;
+  }
+
+}
+
+// Блок медиа запросов
+
+@media screen and (max-width: 600px) {
+  .header-user {
+    .header__part--zip {
+      display: none;
+    }
+  }
+  .albums-container {
+    padding: 35px 3%;
+  }
+}
+
+@media screen and (max-width: 500px) {
+
+  //центрация всех блоков, кнопка домой пропадает
+  .header-user {
+    .header__section {
+      padding: 20px 0;
+    }
+
+    .header__part {
+      padding: 0;
+    }
+    .user-block {
+      width: 100%;
+      flex-direction: column;
+      margin-left: 0 !important;
+    }
+    .user-block__name,
+    .user-block__desc {
+      text-align: center;
+    }
+    .user-block__social {
+      display: flex;
+      justify-content: center;
+    }
+    .user-block__photo {
+      width: 55px;
+      height: 55px;
+      margin-bottom: 10px;
+    }
+    .user-block__main {
+      padding: 0 20px;
+    }
+    .header__part--zip {
+      display: none;
+    }
+
+    .header__bottom {
+      padding: 10px 5px;
+    }
+    .search__field {
+      width: auto;
+    }
+    .header__section {
+      display: flex;
+      justify-content: center;
+    }
+    .header__part {
+      margin: 0;
+    }
+  }
+  // альбомы
+  .title-albums {
+    text-align: center;
+  }
+  .albums-container {
+    padding: 35px 2.5%;
+  }
+  .media-card {
+    width: 95vw;
+  }
+}
