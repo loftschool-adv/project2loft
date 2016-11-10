@@ -120,6 +120,9 @@ let mainPageRender = function(req,res,next){
  		async.each(findObj.albums,(album,callback_2) => {
  			let index = findObj.albums.indexOf(album);
  			renderObj.albums[index].imageCount = 0;
+
+ 			renderObj.albums[index].link = `/id${req.session.user_id}/${albumsFolder}/${album.originName}`;
+
  			let counter = 0;
  			async.each(findObj.images,(image,callback_3) =>{
  				if(album.name == image.album){					
@@ -131,6 +134,9 @@ let mainPageRender = function(req,res,next){
 
  			callback_2();
  		},(err)=>{
+ 			//console.log(renderObj.albums);
+ 			//console.log(renderObj.albums[0].link);
+ 			
  			if(err) throw err;
  			callback();
  		})
