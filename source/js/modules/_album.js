@@ -16,7 +16,8 @@ var albumModule = (function() {
 
   // Открыть окно для загрузки изображений
   var openUploadImg = function(){
-		base.changeClass('.modal_add-photo, .modal-overlay','hide','del')
+		base.changeClass('.modal_add-photo, .modal-overlay','hide','del');
+		$('input[type="file"]').replaceWith( $('input[type="file"]') = $('input[type="file"]').clone( true ) );
 	};
 
 	// Закрыть окно для загрузки изображений
