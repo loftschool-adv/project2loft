@@ -32,10 +32,10 @@ let addAlbum = function(req,res){
 				// Сверяем альбом с веденными данными
 				async.each(albums,(album,callback_2)=>{
 					if(album.name == fields.albumName[0]){
+						console.log('Такой альбом уже существует')
 						callback_2('Такой альбом уже существует');
-					}else{
-						callback_2();
 					}
+					callback_2();
 
 				},(err) => {
 					if(err){
@@ -133,16 +133,6 @@ let addAlbum = function(req,res){
 					callback(null,image,album)
 				})
 			},
-
-		/*	function(image,album,callback){
-				
-				Image.find({user_id: req.session.user_id, album: album},() => {})
-					.then((image)=>{
-						 answerObj.images = image.length;
-						 callback();
-						})
-				
-			}*/
 			
 
 
