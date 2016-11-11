@@ -4,10 +4,10 @@ block content
 
 	-
 		var user = albumRenderData.user.name || "Пользователь";
-		var avatar = albumRenderData.user.avatar || "../img/album/no_photo.jpg";
+		var avatar = albumRenderData.user.avatar || "/img/album/no_photo.jpg";
 		var albumName = albumRenderData.album.name || "Альбом";
 		var albumAbout = albumRenderData.album.about || "Описание";
-		var albumCover = albumRenderData.album.cover || "../img/album/no_photo.jpg";
+		var albumCover = albumRenderData.album.cover || "/img/album/no_photo.jpg";
 		var albumImgCount = albumRenderData.album.imagesCount || '1 фотография';
 		var images = albumRenderData.images || [1];
 
@@ -15,8 +15,10 @@ block content
 
 	div.page-container
 		div.page-content
-			header.header-album(style="background: url(" + albumCover +") top no-repeat; background-size:cover;")
+			header.header-album(style="background: url('"+albumCover+"') top no-repeat; background-size:cover;")
 				include ../commons/preloader.pug
+				.header__error
+					div.popup__error  Сюда вывести ошибку
 				div.header-album__content-cotainer
 					div.header__section.header-album__content.header-album__content_front
 						div.header-album__user-container
@@ -92,7 +94,7 @@ block content
 					for image in images
 						.grid__item
 							.photo-card
-								a.photo-card__head(href="#404" style="background-image: url("+ image.src +"), url(/img/album/no_photo.jpg)")
+								a.photo-card__head(href="#404" style="background-image: url("+ image.src +")" )
 									.photo-card__details
 										.info.info--light
 											.info__item
@@ -110,9 +112,15 @@ block content
 											svg.btn__icon
 												use(xlink:href='/img/sprite.svg#edit')
 									.photo-card__foot-part
-										.photo-card__link(href="#404")!= image.name
+
+										.photo-card__link(href="#404") Название фотографии
 		include ../commons/footer
+
+
+	// Модальные окна
+
 	div.modal-overlay.hide
+		// Для добавления фотографий
 		div.modal.modal_add-photo.hide
 			form.modal-content(method='post', action='', enctype='multipart/form-data')#upload
 				div.modal__header
@@ -136,8 +144,8 @@ block content
 				.modal-pane
 					.modal-pane__part
 						.btn.modal__save(data-action="close")#save Сохранить
-						.btn.btn--text(data-action="close")
-							span.btn__text.modal__header-close.modal__close-img Отменить
+						.btn.modal__cancelButton.btn--text(data-action="close")
+							span.btn__text.modal__close-img Отменить
 
 		// Для редкатирования картинки
 		div.modal.modal_edit-photo.hide
@@ -163,11 +171,28 @@ block content
 						div.modal__form-row
 							div.popup__error.hide
 			div.modal__footer
+				div.modal-pane
+					.modal-pane__part
+						input(type="submit" value = "Сохранить").btn.submit-edit
+						a.btn.btn--text.modal__cancelButton(href="#cancel")
+							span.btn__text Отменить
+					.modal-pane__part
+						a.btn.btn--important
+							svg.btn__icon
+								use(xlink:href='/img/sprite.svg#delete')
+							span.btn__text Удалить
+
+		
+			// Для оповещений
+		.modal.modal_notification.hide
+			div.modal-content
+				div.modal-notification-text Все файлы будут загружены. Можно закрыть окно.
+			div.modal__footer
 				div.modal__buttons
-					input(type="submit" value = "Сохранить").btn.submit-edit
-					a.btn.btn--text.btn-cancelLoad(href="#cancel")
-						span.btn__text Отменить
-			//- Модальное окно: slider
+					a.btn.btn--clear.modal__cancelNotif(href="#cancel")
+						span.btn__text Закрыть
+
+			//Модальное окно: slider
 		.modal.modal--slider.hide#slider
 
 			.modal__body
@@ -178,14 +203,7 @@ block content
 								use(xlink:href='/img/sprite.svg#close')
 
 					.slider__view
-						//.slider__item.slider__item--active
-							img.slider__img(scr="../img/album/im1.png"  alt=""  style="width:100%; height: 400px; background: lightBlue;")
-						//.slider__item.slider__item--loading
-							img.slider__img(scr=""  alt=""  style="width:100%; height: 600px; background: lightCoral;")
-						//.slider__item.slider__item--loading
-							img.slider__img(scr=""  alt=""  style="width:100%; height: 400px; background: #123;")
-						//.slider__item.slider__item--loading
-							img.slider__img(scr=""  alt=""  style="width:100%; height: 600px; background: #ccc;")*/
+
 
 					.slider__controls
 						a.slider__control.slider__control--prev(href="#404")

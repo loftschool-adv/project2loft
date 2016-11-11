@@ -190,6 +190,12 @@
   height:100%;
   width:100%;
 }
+.header__section_main-front{
+  left: 50%;
+  width:1800px;
+  transform: translate(-50%);
+
+}
 .header__section{
   max-width:100%;
 }
@@ -290,4 +296,21 @@
       width: 100%;
     }
   }
+}
+// блок с ошибкой
+
+.header__error{
+  position: absolute;
+  top:-100%;
+  left:0;
+  right:0;
+  z-index:10;
+  transition: top 0.5s;
+}
+.header__error.active{
+  top:0;
+}
+.header__error .popup__error{
+  padding-left: 0;
+  text-align: center;
 }

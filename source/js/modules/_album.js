@@ -14,23 +14,47 @@ var albumModule = (function() {
   var loader = 'loader';
 
 
+  // Клик по лайку или комментариям
+ 	var clickLike = function(e){
+ 		e.preventDefault();
+ 	}
+
   // Открыть окно для загрузки изображений
   var openUploadImg = function(){
-		base.changeClass('.modal_add-photo, .modal-overlay','hide','del');
-		$('input[type="file"]').replaceWith( $('input[type="file"]') = $('input[type="file"]').clone( true ) );
+		base.changeClass('.modal_add-photo','hide','del');
+		base.changeClass('.modal-overlay','hide','del');
+		$('input[type="file"]').prop('value', null);
+
 	};
 
+	// Закрыть модальное окно с оповещениями
+  var closeNotification = function(e){
+  	e.preventDefault();
+  	var modal = $(this).closest('.modal');
+		base.changeClass(modal,'hide','add');
+		base.changeClass('.modal-overlay','hide','add');
+	};
 	// Закрыть окно для загрузки изображений
 	var closeUpload = function(e){
 		e.preventDefault();
 		var modal = $(this).closest('.modal');
+		console.log(modal);
 		base.changeClass(modal,'hide','add');
 		base.changeClass('.modal-overlay','hide','add');
 		$(".img-list").empty();
 		$('.modal__load-img').show();
 		$(".slider__item").remove();
 		$('.slider__view').css('transition' ,'none');
+		console.log('done');
 	};
+
+	// Открыть окно для редактирования фото и отправить ajax при сохранении редактирования
+
+  var openEditAlbum = function(e){
+    // Открыть окно
+    e.preventDefault();
+    base.changeClass('.modal_edit-album, .modal-overlay','hide','del');
+    }
 
 	// Открыть окно для редактирования фото и отправить ajax при сохранении редактирования
 
@@ -234,10 +258,10 @@ var funcSlider = function() {
 		// находим все картинки из альбома
 		var images = $('.photo-card__head'),
 				currentImg = $(this).closest('.photo-card__head');
-
+					console.log(currentImg);
 		$('.photo-card__head').each(function(i, img){
 				var url = ($(this).css('background-image').split(',')[0]);
-				var src = url.substr(5, 39 );
+				var src = url.substr(5, url.length-7 );
 				var cont = $('<div/>').addClass('slider__item').appendTo($('.slider__view'));
 
 				var img = $('<img>').addClass('slider__img').appendTo(cont).attr('src',src);
@@ -251,14 +275,16 @@ var funcSlider = function() {
 		})
 		funcSlider();
 	};
-
 	var _setUpListners = function() {
 		$('.btn_edit-photo').on('click', openEditPhoto);
 		$('.btn_album-add').on('click', openUploadImg);
-		$('.modal__header-close').on('click', closeUpload);
+		$('.modal__header-close, .modal__cancelButton ').on('click', closeUpload);
+		$('.modal__cancelNotif').on('click', closeNotification);
 		$(window).on('scroll', _fixedAdd);
 		$('body').on('click','.img-item',_cancelLoad);
 		$('.loupe').on('click', openSlider);
+		$('.btn-editAlbum').on('click', openEditAlbum);
+		$('.info__item').on('click', clickLike);
 	};
 
 

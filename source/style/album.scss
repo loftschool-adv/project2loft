@@ -13,6 +13,7 @@
 	flex-direction: column;
 	box-shadow: inset 100vw 0px 0px 0px rgba(0, 0, 0, 0.5);
 	overflow:hidden;
+	position:relative;
 }
 .header-album__content-cotainer{
 	flex:1;
@@ -80,6 +81,7 @@
 	width:56px;
 	height:56px;
 	margin-right: 20px;
+	overflow:hidden;
 }
 .header-album__user-photo{
 	width:100%;
@@ -224,7 +226,6 @@
 .img-cont{
 	width:135px;
 	height:135px;
-	overflow:hidden;
 	border-radius:5px;
 	//background-color: #FFF;
 	//object-fit: cover;
@@ -232,6 +233,7 @@
 	background-repeat: no-repeat;
 	background-position: center center;
 	background-size: cover;
+	overflow:hidden;
 }
 .img-cont img{
 	display:block;
@@ -348,12 +350,22 @@
 			opacity: 0;
 			transition: opacity .5s;
 		}
-.slider__view{
-	//transition: height 1s;
-}
+
 .photo-card__head:hover .loupe{
 	opacity:0.9;
 }
 .slider__img{
 	width:100%;
+}
+
+// Для оповещений
+
+.modal_notification{
+	min-height:140px;
+	width:280px;
+	text-align: center;
+}
+.modal_notification .modal-content{
+	padding: 30px 20px;
+	font: 600 16px ProximaNova, sans-serif;
 }
