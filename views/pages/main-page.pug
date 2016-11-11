@@ -32,34 +32,34 @@ block content
 											use(xlink:href='/img/sprite.svg#off')
 										span.btn__text Выйти
 					.header__section.section.header__section_main.header__section_main-back
-						.header__part
-							.user-block.user-block--edit
-								.user-block__photo(style="background-image: url("+avatar+"), url(../img/album/no_photo.jpg)")
-									.upload.user-block__photo-edit(title="Выбрать изображение")
-										svg.upload__icon
-											use(xlink:href='/img/sprite.svg#cam')
-										.upload__text Изменить фото
-										input.upload__input(type="file"  name="photo")
+							.header__part
+								.user-block.user-block--edit
+									.user-block__photo(style="background-image: url("+avatar+"), url(../img/album/no_photo.jpg)")
+										.upload.user-block__photo-edit(title="Выбрать изображение")
+											svg.upload__icon
+												use(xlink:href='/img/sprite.svg#cam')
+											.upload__text Изменить фото
+											input.upload__input(type="file"  name="photo")
 
-								.user-block__main
-									.form__row
-										input.field.width--lg(
-											type="text"
-											name="name"
-											value= user
-											placeholder='Имя'
-										)
-									.form__row
-										textarea.field.width--lg(name="desc" placeholder='Обо мне' maxlength= '120')!= about
-									.form__row
-										+social('edit')
+									.user-block__main
+										.form__row
+											input.field.width--lg(
+												type="text"
+												name="name"
+												value= user
+												placeholder='Имя'
+											)
+										.form__row
+											textarea.field.width--lg(name="desc" placeholder='Обо мне' maxlength= '120')!= about
+										.form__row
+											+social('edit')
 
-						.header__part.header__part--zip.header__part--zip_main
-							.upload(title="Выбрать изображение")
-								svg.upload__icon
-									use(xlink:href='/img/sprite.svg#cam')
-								.upload__text Изменить фон
-								input.upload__input(type="file"  name="bg")
+							.header__part.header__part--zip.header__part--zip_main
+								.upload(title="Выбрать изображение")
+									svg.upload__icon
+										use(xlink:href='/img/sprite.svg#cam')
+									.upload__text Изменить фон
+									input.upload__input(type="file"  name="bg")
 
 				.heder_main-bottom
 					.header__section.header__bottom.section.header-edit-bottom

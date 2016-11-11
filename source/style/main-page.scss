@@ -4,7 +4,6 @@
   overflow: hidden;
 }
 
-
 .main-content{
   flex: 1 0 auto;
 
@@ -46,6 +45,10 @@
     font-size: 30px;
     text-align: center;
   }
+
+}
+
+.news__empty-text{
 
 }
 
@@ -120,6 +123,10 @@
     font-size: 30px;
     text-align: center;
   }
+}
+
+.album__empty-text{
+
 }
 
 .album-cards__list{

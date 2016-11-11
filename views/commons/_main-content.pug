@@ -10,6 +10,7 @@ section.section__news
 	.header-edit-overlay
 	.container
 		h1.main-content__title Новое в мире
+		//.news__empty-text Увы, пока что ничего не загружено. Загрузите что-нибудь и станьте первым!
 		.news__list
 			each album in mainPageData.albums
 				.news__item
@@ -51,6 +52,7 @@ section.section__album-cards
 		span.btn__text Добавить
 	.container
 		h2.album-cards__title Мои альбомы
+		//.album__empty-text Альбомы ещё не созданы, создайте альбом с помощью кнопки добавить
 		.album-cards__list
 			each album in mainPageData.albums
 				.album-cards__item
