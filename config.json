@@ -1,8 +1,8 @@
 {
 	"db": {
-		"host": "ds035995.mlab.com",
-		"port": "35995",
-		"name": "dbgallery",
+		"host": "ds147487.mlab.com",
+		"port": "47487",
+		"name": "dbgallery-final",
 		"user": "user",
 		"password": "user"
 	},
