@@ -16,6 +16,7 @@ block content
 	div.page-container
 		div.page-content
 			header.header-album(style="background: url(" + albumCover +") top no-repeat; background-size:cover;")
+				include ../commons/preloader.pug
 				div.header-album__content-cotainer
 					div.header__section.header-album__content.header-album__content_front
 						div.header-album__user-container
@@ -40,7 +41,7 @@ block content
 							div.header-album__user
 								div.header-album__user-avatar
 									img.header-album__user-photo(src=avatar, alt="фото пользователя")  
-								div.header-album__user-name!= albumName       
+								div.header-album__user-name!= user       
 						div.header-album__description
 										div.form__row
 											input.field.field_header-edit(
@@ -62,7 +63,7 @@ block content
 						.header__part.header__right
 							a.btn.btn--text#cancel_edit_header(href="#cancel")
 								span.btn__text Отменить
-							a.btn(href="#ok") Сохранить
+							a.btn.btn--save(href="#ok") Сохранить
 					div.header-album__about-side.header-album__about-side_front.header-bottom-front
 						ul.header-album__about-list
 							li.header-album__about-item #{albumImgCount}

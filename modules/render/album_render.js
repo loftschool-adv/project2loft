@@ -98,7 +98,7 @@ let albumRender = function(req,res){
 			if(err) throw err;
 			res.locals.albumRenderData = renderObj;
 			res.locals.page = 'thisUserAlbum';
-			res.render('album',  { title: findObj.album.name})
+			res.render('album',  { title: findObj.album.originName})
 	})
 
 	

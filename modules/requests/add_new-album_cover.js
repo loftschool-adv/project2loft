@@ -10,7 +10,7 @@ let folder = config.folder.users;
 let tmpFolder = config.folder.tmp;
 
 
-// Добавлене альбомов
+// Добавление альбомов
 let addAlbumCover = function(req,res){
 
 	let form = new multiparty.Form();

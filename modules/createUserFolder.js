@@ -119,7 +119,7 @@ let createAlbums = function(albums,callback_1){
 							// Сравниваем папку с id альбома
 							if(item.replace('id','') == album.user_id){
 								// Если упешно, создаем папку альбома с папке users/id*/albums/
-								let albumDir = folder + '/' + item + '/' + albumFolder + '/' + album.originName;
+								let albumDir = folder + '/' + item + '/' + albumFolder + '/' + album.name;
 								base.folderGenerator(albumDir,callback_4)
 							}else{
 								callback_4();

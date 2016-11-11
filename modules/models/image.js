@@ -34,6 +34,10 @@ let schema = new Schema({
     type: String,
     unique: false,
     required: false
+  },
+  cover: {
+    type: Number,
+    default: 0
   }
 });
 
