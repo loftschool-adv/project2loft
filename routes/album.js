@@ -99,7 +99,17 @@ route.get('/:album', (req,res) =>{
 
 });
 
-// Обращаемся к корню сайта , и рендерим шаблон из ./views/pages/index.pug
+// Реакция на изменение обложки аватарки
+route.post('/:album/changePhoto/', (req,res) =>{
+  //console.log(req.session);
+  require('../modules/requests/change_photo.js')(req,res);
+});
+
+route.post('/:album/editAlbumData/', (req, res) => {
+  require('../modules/requests/edit_album_data.js')(req,res);
+});
+
+
 
 
 

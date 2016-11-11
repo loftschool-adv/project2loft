@@ -10,6 +10,11 @@ let slug = require('slug');
 let path = require('path');
 let Jimp = require('jimp');
 let del = require('del');
+let mongoose = require('mongoose');
+
+let Counter = mongoose.models.IdentityCounter;
+
+
 
 
 
@@ -40,6 +45,19 @@ let addAlbum = function(req,res){
 					
 				}).then((albums)=>{
 					findObj.albums = albums;
+					callback();
+				})
+
+			},
+			function(callback){
+				// Поиск по базе
+
+				Counter.find({model : 'Image'},(err,counter)=>{
+					if (err) throw err;
+					
+				}).then((counter)=>{
+					findObj.imageCounter = counter[0].count + 1;
+					
 					callback();
 				})
 
@@ -85,9 +103,14 @@ let addAlbum = function(req,res){
 				  		if(err) throw err;
 				  		async.each(items,(item,callback_3)=>{
 				  			if((item.indexOf('newAlbomCover-') + 1)){
+
+				  				let fileFormat = item.split(".").pop();
+				  				let newFileName = 'albumCover-'+ base.passGenerate(4) +'-img' + findObj.imageCounter + '.' + fileFormat;
+
+
 					  			Jimp.read(tmpPath + item).then((image)=>{
-					  				image.write(resObj.album.totalPath + item,()=>{
-					  					resObj.album.cover = item;
+					  				image.write(resObj.album.totalPath + newFileName,()=>{
+					  					resObj.album.cover = newFileName;
 					  					callback_2();
 					  				});
 						  			
@@ -132,7 +155,8 @@ let addAlbum = function(req,res){
 				        name: "Обложка альбома",
 				        album: resObj.album.name,
 				        user_id: req.session.user_id,
-				        src: resObj.album.path + resObj.album.cover
+				        src: resObj.album.path + resObj.album.cover,
+				        cover: 1
 				      });
 
 				      image.save(callback_2);

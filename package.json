@@ -23,6 +23,7 @@
     "morgan": "~1.7.0",
     "multer": "^1.2.0",
     "multiparty": "^4.1.2",
+    "mv": "^2.1.1",
     "nodemailer": "^2.6.4",
     "normalize.css": "^5.0.0",
     "pug": "^2.0.0-beta6",
