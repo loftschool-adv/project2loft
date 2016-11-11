@@ -129,7 +129,7 @@ function imgSave(req, res, files) {
 
       },
 
-      // 2. Сохраняем большую картинку
+      // 2. Сохраняем большую картинку __
       function (id, callback_2) {
 
         //console.log(req.session);
