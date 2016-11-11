@@ -3,6 +3,8 @@ var isAdvancedUpload = function() {
   var div = document.createElement('div');
   return (('draggable' in div) || ('ondragstart' in div && 'ondrop' in div)) && 'FormData' in window && 'FileReader' in window;
 }();
+// Объявление библиотеки
+  var base = new BaseModule;
 // Читаем разметку и сохраняем форму
 var $form = $('#upload');
 var $input = $('#file');
@@ -74,8 +76,10 @@ $form.on('submit', function(e) {
   }
 });
 
-$save.on('click', function () {
-
+$save.on('click', function (e) {
+  e.preventDefault();
+  // Здесь добавляется анимация(её нужно где-то снять)
+  $('li .preload__container').addClass('active');
   $.ajax({
     type: "POST",
     url: location.href + 'saveImg/',
@@ -85,12 +89,14 @@ $save.on('click', function () {
     processData: false,
     success: function(data) {
 
+      //$('li .preload__container').removeClass('active');
     },
     error: function() {
       // Log the error, show an alert, whatever works for you
     }
   });
 
+   base.changeClass('.modal_notification','hide','del');
 });
 
 $closeUploaderImg.on('click', function () {
@@ -118,7 +124,14 @@ function ajaxUploadImg(photos) {
     $('.modal__load-img').hide();
     var li = $('<li/>').addClass('img-item').appendTo($('ul#img-list'));
     var ImgCont = $('<div/>').addClass('img-cont').appendTo(li);
-
+    var preCont = $('<div/>').addClass('preload__container').appendTo(ImgCont);
+    var preLoad = $('<div/>').addClass('preload__loading').appendTo(preCont);
+    var i = 0;
+    while (i < 3){ 
+      var preItem = $('<i/>').appendTo(preLoad);
+      i++;
+    }
+    $('li .preload__container').addClass('active');
     var ajaxData = new FormData();
     ajaxData.append("photo", photo);
 
@@ -142,10 +155,12 @@ function ajaxUploadImg(photos) {
 
         var image =$('<img>', {
           src: '/'+src});
-
+        
         // Когда картинка загрузится, ставим её на фон
         image.on("load", function(){
           ImgCont.css('background-image', 'url("/'+src+'")');
+          $('li .preload__container').removeClass('active');
+
         });
 
         ///////////////////////////////////////////

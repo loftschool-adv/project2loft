@@ -13,11 +13,13 @@ var albumModule = (function() {
   var albumCoverInput = $modalAddAlbum.find('input[name="addAlbumCover"]');
   var loader = 'loader';
 
-
+ 	var clickLike = function(e){
+ 		e.preventDefault();
+ 	}
   // Открыть окно для загрузки изображений
   var openUploadImg = function(){
-		base.changeClass('.modal_add-photo, .modal-overlay','hide','del');
-
+		base.changeClass('.modal_add-photo','hide','del');
+		base.changeClass('.modal-overlay','hide','del');
 		$('input[type="file"]').replaceWith( $('input[type="file"]') = $('input[type="file"]').clone( true ) );
 
 	};
@@ -27,18 +29,19 @@ var albumModule = (function() {
   	e.preventDefault();
   	var modal = $(this).closest('.modal');
 		base.changeClass(modal,'hide','add');
-		base.changeClass('.modal-overlay','hide','add');
 	};
 	// Закрыть окно для загрузки изображений
 	var closeUpload = function(e){
 		e.preventDefault();
 		var modal = $(this).closest('.modal');
+		console.log(modal);
 		base.changeClass(modal,'hide','add');
 		base.changeClass('.modal-overlay','hide','add');
 		$(".img-list").empty();
 		$('.modal__load-img').show();
 		$(".slider__item").remove();
 		$('.slider__view').css('transition' ,'none');
+		console.log('done');
 	};
 
 	// Открыть окно для редактирования фото и отправить ajax при сохранении редактирования
@@ -272,10 +275,12 @@ var funcSlider = function() {
 		$('.btn_edit-photo').on('click', openEditPhoto);
 		$('.btn_album-add').on('click', openUploadImg);
 		$('.modal__header-close, .modal__cancelButton ').on('click', closeUpload);
+		$('.modal__cancelNotif').on('click', closeNotification);
 		$(window).on('scroll', _fixedAdd);
 		$('body').on('click','.img-item',_cancelLoad);
 		$('.loupe').on('click', openSlider);
 		$('.btn-editAlbum').on('click', openEditAlbum);
+		$('.info__item').on('click', clickLike);
 	};
 
 
