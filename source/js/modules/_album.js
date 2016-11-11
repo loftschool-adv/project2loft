@@ -251,10 +251,10 @@ var funcSlider = function() {
 		// находим все картинки из альбома
 		var images = $('.photo-card__head'),
 				currentImg = $(this).closest('.photo-card__head');
-
+					console.log(currentImg);
 		$('.photo-card__head').each(function(i, img){
 				var url = ($(this).css('background-image').split(',')[0]);
-				var src = url.substr(5, 39 );
+				var src = url.substr(5, url.length-7 );
 				var cont = $('<div/>').addClass('slider__item').appendTo($('.slider__view'));
 
 				var img = $('<img>').addClass('slider__img').appendTo(cont).attr('src',src);

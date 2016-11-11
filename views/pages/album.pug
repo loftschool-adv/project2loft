@@ -4,10 +4,10 @@ block content
 
 	-
 		var user = albumRenderData.user.name || "Пользователь";
-		var avatar = albumRenderData.user.avatar || "../img/album/no_photo.jpg";
+		var avatar = albumRenderData.user.avatar || "/img/album/no_photo.jpg";
 		var albumName = albumRenderData.album.name || "Альбом";
 		var albumAbout = albumRenderData.album.about || "Описание";
-		var albumCover = albumRenderData.album.cover || "../img/album/no_photo.jpg";
+		var albumCover = albumRenderData.album.cover || "/img/album/no_photo.jpg";
 		var albumImgCount = albumRenderData.album.imagesCount || '1 фотография';
 		var images = albumRenderData.images || [1];
 
@@ -15,7 +15,7 @@ block content
 
 	div.page-container
 		div.page-content
-			header.header-album(style="background: url(../img/album/bg-album.png) top no-repeat; background-size:cover;")
+			header.header-album(style="background: url('"+albumCover+"') top no-repeat; background-size:cover;")
 				include ../commons/preloader.pug
 				.header__error
 					div.popup__error  Сюда вывести ошибку
@@ -94,7 +94,7 @@ block content
 					for image in images
 						.grid__item
 							.photo-card
-								a.photo-card__head(href="#404" style="background-image: url("+ image.src +"), url(/img/album/no_photo.jpg)")
+								a.photo-card__head(href="#404" style="background-image: url("+ image.src +")" )
 									.photo-card__details
 										.info.info--light
 											.info__item
@@ -112,16 +112,13 @@ block content
 											svg.btn__icon
 												use(xlink:href='/img/sprite.svg#edit')
 									.photo-card__foot-part
-<<<<<<< HEAD
+
 										.photo-card__link(href="#404") Название фотографии
-		//include ../commons/footer
+		include ../commons/footer
 
 
 	// Модальные окна
-=======
-										.photo-card__link(href="#404")!= image.name
-		include ../commons/footer
->>>>>>> 3f2ef5f834bc9e5f5058cdf0c645067a7781f73a
+
 	div.modal-overlay.hide
 		// Для добавления фотографий
 		div.modal.modal_add-photo.hide
