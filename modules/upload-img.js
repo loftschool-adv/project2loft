@@ -11,10 +11,20 @@ let server     = require('../server.js');
 let mongoose = require('../modules/libs/mongoose.js');
 let Image = require('../modules/models/image.js').Image;
 
+var albumName;
+var resObj = {
+  image : {
+
+  }
+};
+
+
 //var files = [];
 
 function uploadImg(req, res) {
 
+  albumName = req.url.split('/')[1];
+  
   var tmpFiles = [];
 
   var form = new multiparty.Form();
@@ -83,6 +93,11 @@ function imgSave(req, res, files) {
     async.waterfall([
 
       // 1. Записываем в базу
+      // Пожалуйста перенеси сохранение фотки в самый конец, а то мне пришлось делать
+      // поиск с обналение этой же фотки.
+      // Используй объект вне функций, для записи данных, так тебе не придеться
+      // парится о колбеках - он всегда будет callback и не важно , что функция
+      // возвращает (сколько аргументов и тд). Максмум это запись ошибки в колбек
       function (callback_1) {
 
         //console.log(file.path);
@@ -91,8 +106,9 @@ function imgSave(req, res, files) {
         // Запись в базу
 
         let image = new Image({
-          album: req.session.album,
-          user_id: req.session.user_id
+          album: albumName,
+          user_id: req.session.user_id,
+          name: 'Фотография'
         });
 
         // Сохраняем картинку в базу
@@ -102,6 +118,12 @@ function imgSave(req, res, files) {
           //console.log(image);
           //console.log(affected);
 
+          // Вот смотри, я сохранил id картинки в объект,
+          // после этого мне вообще не нужен callback для передачи image.img_id
+          resObj.image.id = image.img_id;
+
+
+          // ага, вот этот колбек
           callback_1(null, image.img_id);
         });
 
@@ -114,7 +136,7 @@ function imgSave(req, res, files) {
         let type = file.path.split('.').pop();
 
         let newPath = 'users/id' + req.session.user_id + '/albums/'
-          + req.session.album + '/img' + id + '.' + type;
+          + albumName + '/img' + id + '.' + type;
 
 
 
@@ -126,6 +148,13 @@ function imgSave(req, res, files) {
           image.resize(1200, Jimp.AUTO);
           image.write(newPath);
 
+          // А тут я добавляю картинку в переменную, определенную до всех функци,
+          // чтобы не кидать ее по сто раз через колбек
+
+          resObj.image.src = newPath.replace('users','');
+
+          
+
           callback_2(null, type, id);
 
         });
@@ -136,7 +165,7 @@ function imgSave(req, res, files) {
       function (type, id, callback_3) {
 
         let newPathSmall = 'users/id' + req.session.user_id + '/albums/'
-          + req.session.album + '/small-img' + id + '.' + type;
+          + albumName + '/small-img' + id + '.' + type;
 
         //Ресайз изображений
         Jimp.read(file.path).then(function(image){
@@ -151,7 +180,25 @@ function imgSave(req, res, files) {
         });
 
           // Итерация закончена
-      }], function (err) {
+      },
+
+
+       // Мне пришлось поставить сюда еще одну функцию, так как я не знаю как получить
+      // Путь до нового файла, если сохранение фотки стоит до создания файла.
+      function(callback){
+
+        Image.findOneAndUpdate(
+          {user_id: req.session.user_id, img_id: resObj.image.id},
+          {$set: 
+            { src: resObj.image.src }
+          },
+           callback
+        )
+       
+
+      },
+
+      ], function (err) {
 
       callbackEach(null);
 
@@ -169,7 +216,7 @@ function imgSave(req, res, files) {
 
 function closeImgUploader(req, res) {
 
-  console.log(req.session.uploadFiles);
+  //console.log(req.session.uploadFiles);
 
   req.session.uploadFiles = [];
 

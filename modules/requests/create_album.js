@@ -119,10 +119,10 @@ let addAlbum = function(req,res){
 					[
 						function(callback_2){
 							let album = new Album({
-								name : req.body.name,
+								name : resObj.album.name,
 								about: req.body.about,
 								user_id: req.session.user_id,
-								originName: resObj.album.name,
+								originName: req.body.name,
 								cover: resObj.album.path + resObj.album.cover
 							})
 							album.save(callback_2);
@@ -130,7 +130,7 @@ let addAlbum = function(req,res){
 						function(callback_2){
 							let image = new Image({
 				        name: "Обложка альбома",
-				        album: req.body.name,
+				        album: resObj.album.name,
 				        user_id: req.session.user_id,
 				        src: resObj.album.path + resObj.album.cover
 				      });

@@ -1,8 +1,21 @@
--var BG = '../img/album/no_photo.jpg';
+- 
+	var background;
+	switch(page){
+		case 'thisUser':
+				background = mainPageData.user.background
+				break;
+		case 'thisUserAlbum':
+				background = albumRenderData.album.cover
+				break;
+	}
+
+
+
 // -var BG = mainPageData.user.background || '../img/album/no_photo.jpg';
 
 
-footer.footer(style="background-image: url(" + BG + "), url(../img/album/no_photo.jpg)")
+
+footer.footer(style="background-image: url(" + background + "), url(../img/album/no_photo.jpg)")
 	.footer__in.section
 		.footer__part.footer__desc.
 			Перед вами сервис, который поможет вам организовать свои фотографии в альбомы и поделиться со всем миром!
