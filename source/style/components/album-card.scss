@@ -75,6 +75,7 @@
 			font-weight: 600;
 			transition: color .5s;
 			text-overflow: ellipsis;
+			overflow: hidden;
 
 			&:hover {
 				color: $blue;
