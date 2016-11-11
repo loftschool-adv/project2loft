@@ -20,7 +20,7 @@ var albumModule = (function() {
   var openUploadImg = function(){
 		base.changeClass('.modal_add-photo','hide','del');
 		base.changeClass('.modal-overlay','hide','del');
-		$('input[type="file"]').replaceWith( $('input[type="file"]') = $('input[type="file"]').clone( true ) );
+		$('input[type="file"]').prop('value', null);
 
 	};
 
