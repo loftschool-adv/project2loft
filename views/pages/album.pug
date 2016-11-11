@@ -23,8 +23,8 @@ block content
 					div.header__section.header-album__content.header-album__content_front
 						div.header-album__user-container
 							div.header-album__user
-								div.header-album__user-avatar
-									img.header-album__user-photo(src=avatar, alt="фото пользователя")
+								div.header-album__user-avatar(style="background: url('"+avatar+"') top no-repeat; background-size:cover;")
+									//img.header-album__user-photo(src=avatar, alt="фото пользователя")
 								div.header-album__user-name!= user 
 						div.header-album__buttons
 							div.btn.btn--light.btn--expand.btn_album
@@ -41,8 +41,8 @@ block content
 					div.header-album__content.header-album__content_back
 						div.header-album__user-container
 							div.header-album__user
-								div.header-album__user-avatar
-									img.header-album__user-photo(src=avatar, alt="фото пользователя")  
+								div.header-album__user-avatar(style="background: url('"+avatar+"') top no-repeat; background-size:cover;")
+									//img.header-album__user-photo(src=avatar, alt="фото пользователя")  
 								div.header-album__user-name!= user       
 						div.header-album__description
 										div.form__row
