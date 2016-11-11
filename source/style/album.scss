@@ -84,7 +84,8 @@
 	overflow:hidden;
 }
 .header-album__user-photo{
-	width:100%;
+	max-width:100%;
+	display: block;
 }
 .header-album__user-name{
 	font-family: Panton, sans-serif;
