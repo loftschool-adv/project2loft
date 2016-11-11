@@ -22,6 +22,10 @@ li .preload__container{
 li .preload__container i{
   width:10px;
   height:10px;
+  margin-right: 2px;
+}
+li .preload__container i:last-child{
+  margin-right: 0;
 }
 li .preload__container.active{
   display:block;
