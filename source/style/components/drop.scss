@@ -8,11 +8,13 @@
 	}
 
 	.drop__main {
-		display: none;
 		position: absolute;
 		z-index: -100;
 		left: 50%;  top: 100%;
+		opacity: 0;
+		visibility: hidden;
 		transform: translateX(-50%);
+		transition: opacity .5s;
 	}
 
 	.drop__main--md {
@@ -22,7 +24,8 @@
 
 .drop--hover {
 	&:hover .drop__main {
-		display: block;
+		opacity: 1;
+		visibility: visible;
 		z-index: 1000;
 	}
 }
@@ -39,7 +42,9 @@
 /* на белом фоне + треугольник */
 .drop--def {
 	&:hover .drop__trigger:before {
-		display: block;
+		z-index: 10;
+		opacity: 1;
+		visibility: visible;
 	}
 }
 
@@ -48,8 +53,8 @@
 
 		&:before {
 			content: '';
-			display: none;
 			position: absolute;
+			z-index: -10;
 			top: 100%;
 			left: 0;  right: 0;
 			width:  0;
@@ -58,6 +63,9 @@
 			border: 5px solid transparent;
 			border-top: none;
 			border-bottom: 7px solid #fff;
+			opacity: 0;
+			visibility: hidden;
+			transition: opacity .5s;
 		}
 	}
 
