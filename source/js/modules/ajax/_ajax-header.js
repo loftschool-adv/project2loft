@@ -6,12 +6,13 @@ var ajaxHeaderModule = (function() {
   var base = new BaseModule;
 
   // Общие
-  var $header = $('.header-main');
+  var $headerMain = $('.header-main');
+  var $headerAlbum = $('.header-album');
   var $footer = $('.footer');
-  var id = window.location.pathname;
+  var urlPath = window.location.pathname;
   var closeEditHeader = headerModule.closeEditHeader();
-  var headerFront = $header.find('.header__section_main-front');
-  var headerBack = $header.find('.header__section_main-back');
+  var headerFront = $headerMain.find('.header__section_main-front');
+  var headerBack = $headerMain.find('.header__section_main-back');
   var ajaxFlag = false;
   var thisAjax;
 
@@ -20,10 +21,15 @@ var ajaxHeaderModule = (function() {
 
 
   // Кнопки
-  var saveBtn = $header.find('.btn--save');
-  var uploadAvatar = $header.find('.user-block__photo-edit');
-  var uploadBg = $header.find('.header__part--zip_main .upload');
-  var cancelBtn = $header.find('#cancel_edit_header');
+  var saveBtn = $headerMain.find('.btn--save');
+  var uploadAvatar = $headerMain.find('.user-block__photo-edit');
+  var uploadBg = $headerMain.find('.header__part--zip_main .upload');
+  var uploadBgAlbum = $headerAlbum.find('.upload');
+  var cancelBtn = $headerMain.find('#cancel_edit_header');
+
+  var saveBtnAlbum = $headerAlbum.find('.btn--save');
+
+
 
   //Классы
 
@@ -31,7 +37,7 @@ var ajaxHeaderModule = (function() {
 
    // Дефолные стили
 
-  var headerBgStyle = $header.attr('style');
+  var headerBgStyle = $headerMain.attr('style');
   var footerBgStyle = $footer.attr('style');
 
 
@@ -60,7 +66,6 @@ var ajaxHeaderModule = (function() {
   	var blockPhoto = $this.closest('.user-block__photo');
   	var fileInput = $this.find('input[name="photo"]');
   	var photo = fileInput[0].files[0];
-    console.log(photo);
   	if(!photo){
   		ajaxFlag = false;
       var frontAvatar = headerFront.find('.user-block__photo').attr('style');
@@ -72,7 +77,7 @@ var ajaxHeaderModule = (function() {
   	formData.append("userAvatar",photo);
 
   	thisAjax = $.ajax({
-      url: id + 'changePhoto/',
+      url: urlPath + 'changePhoto/',
       type: "POST",
       data: formData,
       processData: false,
@@ -90,18 +95,19 @@ var ajaxHeaderModule = (function() {
   }
 
   // Превью бекраунда
-  var changeBackGround = function(){
+  var changeBackGround = function(btn,header){
   if(ajaxFlag){
   	return;
   }
   ajaxFlag = true;
   var formData = new FormData();
-  var $this = $(this);
+  var $this = btn;
   var fileInput = $this.find('input[name="bg"]');
   var photo = fileInput[0].files[0];
+  var background = '';
   if(!photo){
     //var headerBackground = attr('style');
-  	 $header.css({
+  	 header.css({
         'background-image' : 'url('+ newBackGround +')'
       });
      $footer.css({
@@ -110,18 +116,25 @@ var ajaxHeaderModule = (function() {
   	ajaxFlag = false;
   	return;
   }
-  $header.find('.preload__container').addClass('active')
-  formData.append("userBackGround",photo);
+
+  if(header == $headerAlbum){
+    background = "newAlbomCover";
+  }else if(header == $headerMain){
+    background = "userBackGround";
+  }
+
+  header.find('.preload__container').addClass('active');
+  formData.append(background,photo);
   thisAjax = $.ajax({
-    url: id + 'changePhoto/',
+    url: urlPath + 'changePhoto/',
     type: "POST",
     data: formData,
     processData: false,
     contentType: false,
     success: function(res){
-      $header.find('.preload__container').removeClass('active')
+      header.find('.preload__container').removeClass('active')
       ajaxFlag = false;
-      	$header.css({
+      	header.css({
       		'background-image': 'url('+ res.newCover +')'
       	})
         $footer.css({
@@ -138,25 +151,24 @@ var ajaxHeaderModule = (function() {
   	var blockPhotoBack = headerBack.find('.user-block__photo');
     var frontAvatar = headerFront.find('.user-block__photo').attr('style');
     if(newBackGround){
-      $header.css({
+      $headerMain.css({
         'background-image' : 'url('+ newBackGround +')'
       })
       $footer.css({
         'background-image' : 'url('+ newBackGround +')'
       })
     }else{
-      $header.attr('style',headerBgStyle);
+      $headerMain.attr('style',headerBgStyle);
       $footer.attr('style',headerBgStyle)
     }    
   	ajaxFlag = false;
-  	$header.removeClass('loader');
+  	$headerMain.removeClass('loader');
   	
   	blockPhotoBack.removeClass('loader');
-    console.log(frontAvatar);
   	blockPhotoBack.attr('style',frontAvatar);
 
-  	//$header.addClass(classCancel);
-    base.clearTmp(id,thisAjax);
+  	//$headerMain.addClass(classCancel);
+    base.clearTmp(urlPath,thisAjax);
   }
 
 
@@ -164,16 +176,16 @@ var ajaxHeaderModule = (function() {
   // Отправляем запрос на editUserData
   var requestToServer = function(e){
   e.preventDefault();
-  var $headrBack = $header.find('.header__section_main-back');
+  var $headrBack = $headerMain.find('.header__section_main-back');
   var inputName = $headrBack.find('input[name="name"]');
   var inputAbout = $headrBack.find('textarea[name = "desc"]');
   var outputData = {
     userName: inputName.val(),
     userAbout: inputAbout.val()
   }
-  $header.find('.preload__container').addClass('active')
+  $headerMain.find('.preload__container').addClass('active')
   $.ajax({
-      url: id + 'editUserData/',
+      url: urlPath + 'editUserData/',
       type: "POST",
       data: outputData,
       dataType: 'json',
@@ -181,7 +193,7 @@ var ajaxHeaderModule = (function() {
         // Выводим данные с сервера
         headerFront.find('.user-block__name').text(res.name);
         headerFront.find('.user-block__desc').text(res.about);
-        $header.find('.preload__container').removeClass('active');
+        $headerMain.find('.preload__container').removeClass('active');
         headerFront.find('.user-block__photo').css({
           'background-image' : 'url(' + res.avatarFile + '), url(../img/album/no_photo.jpg)'
         });
@@ -191,13 +203,61 @@ var ajaxHeaderModule = (function() {
     });
   }
 
+
+  // Отправляем запрос на editUserAlbumData
+
+  var requestAlbumToServer = function(e){
+    e.preventDefault();
+
+    var headerFrontAlbum = $headerAlbum.find('.header-album__content_front');
+    var headerBackAlbum = $headerAlbum.find('.header-album__content_back');
+    var inputName = headerBackAlbum.find('input[type="text"]');
+    var inputAbout = headerBackAlbum.find('textarea[name = "desc"]');
+    var outputData = {
+      albumName: inputName.val(),
+      albumAbout: inputAbout.val()
+    }
+    $headerAlbum.find('.preload__container').addClass('active');
+     $.ajax({
+      url: urlPath + 'editAlbumData/',
+      type: "POST",
+      data: outputData,
+      dataType: 'json',
+      success: function(res){
+        // Выводим данные с сервера
+        headerFrontAlbum.find('.header-album__title-description').text(res.album.originName);
+        headerFrontAlbum.find('.header-album__text-description').text(res.album.about);
+        $headerAlbum.find('.preload__container').removeClass('active');
+        newBackGround = res.backGroundFile;
+        console.log(res.album.name);
+        var urlArr = urlPath.split('/');
+
+        var newUrl = '/' + urlArr[1] + '/' + urlArr[2] + '/' + res.album.name + '/'
+        console.log(newUrl)
+        history.pushState('', '', newUrl);
+        closeEditHeader(e);
+      }
+    });
+
+  }
+
   var _setUplistner = function(){
   	uploadAvatar.on('change',changeAvatar);
-  	uploadBg.on('change',changeBackGround);
+  	uploadBg.on('change',function(e){
+      e.preventDefault();
+      changeBackGround($(this),$headerMain);
+    });
+    uploadBgAlbum.on('change',function(e){
+      e.preventDefault();
+      changeBackGround($(this),$headerAlbum);
+    });
   	cancelBtn.on('click',resetPreview);
   	uploadBg.on('click',lockSelFile);
   	uploadAvatar.find('input').on('click',lockSelFile);
   	saveBtn.on('click',requestToServer);
+
+    saveBtnAlbum.on('click',requestAlbumToServer)
+
   }
 
 
