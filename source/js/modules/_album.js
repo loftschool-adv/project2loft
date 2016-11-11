@@ -13,9 +13,12 @@ var albumModule = (function() {
   var albumCoverInput = $modalAddAlbum.find('input[name="addAlbumCover"]');
   var loader = 'loader';
 
+
+  // Клик по лайку или комментариям
  	var clickLike = function(e){
  		e.preventDefault();
  	}
+
   // Открыть окно для загрузки изображений
   var openUploadImg = function(){
 		base.changeClass('.modal_add-photo','hide','del');
@@ -24,11 +27,12 @@ var albumModule = (function() {
 
 	};
 
-	// Закрыть модальное окно
+	// Закрыть модальное окно с оповещениями
   var closeNotification = function(e){
   	e.preventDefault();
   	var modal = $(this).closest('.modal');
 		base.changeClass(modal,'hide','add');
+		base.changeClass('.modal-overlay','hide','add');
 	};
 	// Закрыть окно для загрузки изображений
 	var closeUpload = function(e){

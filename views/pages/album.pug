@@ -132,14 +132,6 @@ block content
 					span.modal__title-title Название
 					span.modal__title-text Как я провёл лето
 				.modal__load-container
-					// Для оповещений
-					.modal.modal_notification.hide
-						div.modal-content
-							div.modal-notification-text Все файлы будут загружены. Можно закрыть окно.
-						div.modal__footer
-							div.modal__buttons
-								a.btn.btn--clear.modal__cancelNotif(href="#cancel")
-									span.btn__text Закрыть
 					.upload.modal__load-img(title="Выбрать изображение")
 						svg.upload__icon
 							use(xlink:href='/img/sprite.svg#cam')
@@ -191,7 +183,14 @@ block content
 							span.btn__text Удалить
 
 		
-
+			// Для оповещений
+		.modal.modal_notification.hide
+			div.modal-content
+				div.modal-notification-text Все файлы будут загружены. Можно закрыть окно.
+			div.modal__footer
+				div.modal__buttons
+					a.btn.btn--clear.modal__cancelNotif(href="#cancel")
+						span.btn__text Закрыть
 
 			//Модальное окно: slider
 		.modal.modal--slider.hide#slider

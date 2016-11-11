@@ -226,7 +226,6 @@
 .img-cont{
 	width:135px;
 	height:135px;
-	overflow:hidden;
 	border-radius:5px;
 	//background-color: #FFF;
 	//object-fit: cover;
@@ -365,11 +364,6 @@
 	min-height:140px;
 	width:280px;
 	text-align: center;
-	z-index:1100;
-	position: absolute;
-	top:50%;
-	left:50%;
-	transform:translate(-50%, -50%);
 }
 .modal_notification .modal-content{
 	padding: 30px 20px;

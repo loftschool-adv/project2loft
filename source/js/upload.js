@@ -78,8 +78,12 @@ $form.on('submit', function(e) {
 
 $save.on('click', function (e) {
   e.preventDefault();
-  // Здесь добавляется анимация(её нужно где-то снять)
-  $('li .preload__container').addClass('active');
+  //закрыли большое окно
+  $('.modal_add-photo .modal__header-close').click();
+
+  // открыли маленькое
+  base.changeClass('.modal-overlay, .modal_notification ','hide','del');
+
   $.ajax({
     type: "POST",
     url: location.href + 'saveImg/',
@@ -95,8 +99,7 @@ $save.on('click', function (e) {
       // Log the error, show an alert, whatever works for you
     }
   });
-
-   base.changeClass('.modal_notification','hide','del');
+    
 });
 
 $closeUploaderImg.on('click', function () {
@@ -131,7 +134,7 @@ function ajaxUploadImg(photos) {
       var preItem = $('<i/>').appendTo(preLoad);
       i++;
     }
-    $('li .preload__container').addClass('active');
+    preCont.addClass('active');
     var ajaxData = new FormData();
     ajaxData.append("photo", photo);
 
@@ -159,7 +162,7 @@ function ajaxUploadImg(photos) {
         // Когда картинка загрузится, ставим её на фон
         image.on("load", function(){
           ImgCont.css('background-image', 'url("/'+src+'")');
-          $('li .preload__container').removeClass('active');
+          preCont.removeClass('active');
 
         });
 
