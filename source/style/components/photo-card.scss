@@ -41,22 +41,31 @@
 		padding: 10px 20px;
 		background: #F6F6F6;
 		color: $textColor;
+		white-space: nowrap;
 	}
 
 		.photo-card__foot-part {
+
 			&:last-child {
 				margin-left: auto;
+				overflow: hidden;
 			}
 		}
 
 
 			.photo-card__link-album {
+				display: flex;
 				color: rgba($textColor, .8);
 				font-weight: 600;
 				transition: color .5s;
 
 				&:hover {
 					color: $blue;
+				}
+
+				.link__text {
+					overflow: hidden;
+					text-overflow: ellipsis;
 				}
 			}
 

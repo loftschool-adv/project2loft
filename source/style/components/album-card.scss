@@ -55,18 +55,26 @@
 		padding: 15px 20px;
 		background: #fff;
 		color: $textColor;
+		white-space: nowrap;
+		overflow: hidden;
 	}
 
 		.album-card__foot-part {
+			margin-right: 10px;
+
 			&:last-child {
 				margin-left: auto;
+				margin-right: 0;
+				overflow: hidden;
 			}
 		}
 
 		.album-card__link {
+			display: block;
 			color: inherit;
 			font-weight: 600;
 			transition: color .5s;
+			text-overflow: ellipsis;
 
 			&:hover {
 				color: $blue;
