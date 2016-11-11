@@ -49,9 +49,10 @@ block content
 											type="text"
 											name="name"
 											value= user
+											placeholder='Имя'
 										)
 									.form__row
-										textarea.field.width--lg(name="desc")!= about
+										textarea.field.width--lg(name="desc" placeholder='Обо мне' maxlength= '120')!= about
 									.form__row
 										+social('edit')
 

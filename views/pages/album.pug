@@ -1,6 +1,18 @@
 extends ../layout
 
 block content
+
+	-
+		var user = albumRenderData.user.name || "Пользователь";
+		var avatar = albumRenderData.user.avatar || "../img/album/no_photo.jpg";
+		var albumName = albumRenderData.album.name || "Альбом";
+		var albumAbout = albumRenderData.album.about || "Описание";
+		var albumCover = albumRenderData.album.cover || "../img/album/no_photo.jpg";
+		var albumImgCount = albumRenderData.album.imagesCount || '1 фотография';
+		var images = albumRenderData.images || [1];
+
+
+
 	div.page-container
 		div.page-content
 			header.header-album(style="background: url(../img/album/bg-album.png) top no-repeat; background-size:cover;")
@@ -12,36 +24,35 @@ block content
 						div.header-album__user-container
 							div.header-album__user
 								div.header-album__user-avatar
-									img.header-album__user-photo(src="../img/album/album-user.png", alt="фото пользователя")
-								div.header-album__user-name Антон Черепов 
+									img.header-album__user-photo(src=avatar, alt="фото пользователя")
+								div.header-album__user-name!= user 
 						div.header-album__buttons
 							div.btn.btn--light.btn--expand.btn_album
 								svg.btn__icon
 									use(xlink:href='/img/sprite.svg#home')
-								span.btn__text На главную
+								a.btn__text(href='/' title='Главаня страница') На главную
 							div.btn.btn--light.btn--expand.btn_album.btn_edit-header
 								svg.btn__icon
 									use(xlink:href='/img/sprite.svg#edit')
 								span.btn__text Редактировать            
 						div.header-album__description
-							div.header-album__title-description Лесные прогулки
-							div.header-album__text-description   Фотографии природы леса, енотов и оленей. Как прекрасно сойти на дальней станции и пройтись по полю босиком. И чтобы никто не беспокоил бродить влюблённым в тишину. Запах мёда, лесных оленей и енотов будоражит нутро.
+							div.header-album__title-description!= albumName
+							div.header-album__text-description!= albumAbout
 					div.header-album__content.header-album__content_back
 						div.header-album__user-container
 							div.header-album__user
 								div.header-album__user-avatar
-									img.header-album__user-photo(src="../img/album/album-user.png", alt="фото пользователя")  
-								div.header-album__user-name Антон Черепов        
+									img.header-album__user-photo(src=avatar, alt="фото пользователя")  
+								div.header-album__user-name!= user       
 						div.header-album__description
 										div.form__row
 											input.field.field_header-edit(
 												type="text"
-												name="nameAlbum"
-												value="Лесные прогулки"
+												name= albumName
+												value= albumName
 												)
 										div.form__row
-											textarea.field.field_header-edit(name="desc").
-												Фотографии природы леса, енотов и оленей. Как прекрасно сойти на дальней станции и пройтись по полю босиком. И чтобы никто не беспокоил бродить влюблённым в тишину. Запах мёда, лесных оленей и енотов будоражит нутро.	
+											textarea.field.field_header-edit(name="desc")!= albumAbout	
 						.upload__header-edit
 							.upload(title="Выбрать изображение")
 								svg.upload__icon
@@ -54,10 +65,10 @@ block content
 						.header__part.header__right
 							a.btn.btn--text#cancel_edit_header(href="#cancel")
 								span.btn__text Отменить
-							a.btn(href="#ok") Сохранить
+							a.btn.btn--save(href="#ok") Сохранить
 					div.header-album__about-side.header-album__about-side_front.header-bottom-front
 						ul.header-album__about-list
-							li.header-album__about-item 18 фотографий
+							li.header-album__about-item #{albumImgCount}
 							li.header-album__about-item 12 лайков
 							li.header-album__about-item 4 комментария
 					div.header-album__about-side.header-album__about-side_back.hide
@@ -65,14 +76,14 @@ block content
 							div.header-album__user-container.header-album__user_fix
 								div.header-album__user
 									div.header-album__user-avatar
-										img.header-album__user-photo(src="../img/album/album-user.png", alt="фото пользователя")
-									div.header-album__user-name Антон Черепов
-							div.header-album__title-description Лесные прогулки
+										img.header-album__user-photo(src=avatar, alt="фото пользователя")
+									div.header-album__user-name!= user 
+							div.header-album__title-description!= albumName
 							div.header-album__buttons.header-album__buttons_fix
 								div.btn.btn--light.btn--expand.btn_album
 									svg.btn__icon
 										use(xlink:href='/img/sprite.svg#home')
-									span.btn__text На главную          
+									a.btn__text(href='/' title='Главаня страница') На главную         
 			div.album-cards
 				div.header-edit-overlay
 				div.btn.btn--light.btn--expand.btn_album.btn_album-add
@@ -80,11 +91,10 @@ block content
 						use(xlink:href='/img/sprite.svg#add')
 					span.btn__text Добавить
 				.grid.grid--lg
-					- var imgs = ["im1", "im2", "im3", "im4", "im5", "im6", "im7"];
-					for im in imgs
+					for image in images
 						.grid__item
 							.photo-card
-								a.photo-card__head(href="#404" style="background-image: url(/img/album/"+im+".png), url(/img/album/no_photo.jpg)")
+								a.photo-card__head(href="#404" style="background-image: url("+ image.src +"), url(/img/album/no_photo.jpg)")
 									.photo-card__details
 										.info.info--light
 											.info__item
@@ -102,11 +112,16 @@ block content
 											svg.btn__icon
 												use(xlink:href='/img/sprite.svg#edit')
 									.photo-card__foot-part
+<<<<<<< HEAD
 										.photo-card__link(href="#404") Название фотографии
 		//include ../commons/footer
 
 
 	// Модальные окна
+=======
+										.photo-card__link(href="#404")!= image.name
+		include ../commons/footer
+>>>>>>> 3f2ef5f834bc9e5f5058cdf0c645067a7781f73a
 	div.modal-overlay.hide
 		// Для добавления фотографий
 		div.modal.modal_add-photo.hide

@@ -15,12 +15,21 @@ let path = require('path');
 let upload = require('../modules/upload-img.js');
 
 
+
+
+route.get('/', (req, res) => {
+  // при заходе на albums перезагружаем страницу на главную
+ require('../modules/render/middleware.js')(req,res);
+});
+
+
 route.get('/:album', (req,res) =>{
   //console.log(req.session.album);
-
+  require('../modules/render/album_render.js')(req,res);
   //console.log(req.url);
 
-  if (req.url != '/undefined') {
+
+  /*if (req.url != '/undefined') {
 
     async.waterfall([
         function(callback){
@@ -84,13 +93,25 @@ route.get('/:album', (req,res) =>{
       function(err, result){
         //console.log(result);
       })
-  }
+  }*/
 
 
 
 });
 
-// Обращаемся к корню сайта , и рендерим шаблон из ./views/pages/index.pug
+// Реакция на изменение обложки аватарки
+route.post('/:album/changePhoto/', (req,res) =>{
+  //console.log(req.session);
+  require('../modules/requests/change_photo.js')(req,res);
+});
+
+route.post('/:album/editAlbumData/', (req, res) => {
+  require('../modules/requests/edit_album_data.js')(req,res);
+});
+
+
+
+
 
 route.post('/:album/addImg/', (req, res) => upload.uploadImg(req, res));
 route.post('/:album/saveImg/', (req, res) => upload.imgSave(req, res, req.session.uploadFiles));

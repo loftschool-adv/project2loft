@@ -121,7 +121,7 @@ let mainPageRender = function(req,res,next){
  			let index = findObj.albums.indexOf(album);
  			renderObj.albums[index].imageCount = 0;
 
- 			renderObj.albums[index].link = `/id${req.session.user_id}/${albumsFolder}/${album.originName}`;
+ 			renderObj.albums[index].link = `/id${req.session.user_id}/${albumsFolder}/${album.name}`;
 
  			let counter = 0;
  			async.each(findObj.images,(image,callback_3) =>{
@@ -150,6 +150,7 @@ let mainPageRender = function(req,res,next){
  		if(err) throw err;
  		// Если все окей отображаем, страницу пользователя
  		res.locals.mainPageData = renderObj;
+ 		res.locals.page = 'thisUser';
  		res.render('main-page',  { title: 'Главная' })
  })
 };
